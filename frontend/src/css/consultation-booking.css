@@ -1,0 +1,461 @@
+.consultation-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgba(8, 12, 10, 0.72);
+  backdrop-filter: blur(8px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 220ms ease;
+}
+
+.consultation-modal-overlay.is-open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.consultation-modal {
+  width: min(100%, 560px);
+  border: 1px solid rgba(255,255,255,0.16);
+  border-radius: 24px;
+  background: linear-gradient(145deg, rgba(246,245,241,0.98), rgba(233,239,232,0.98));
+  color: var(--ink, #14181B);
+  box-shadow: 0 24px 80px rgba(8, 12, 10, 0.28);
+  overflow: hidden;
+  transform: translateY(16px) scale(0.97);
+  transition: transform 240ms ease;
+}
+
+.consultation-modal-overlay.is-open .consultation-modal {
+  transform: translateY(0) scale(1);
+}
+
+.consultation-modal__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 24px 24px 16px;
+}
+
+.consultation-modal__title {
+  font-family: 'Newsreader', serif;
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--ink, #14181B);
+}
+
+.consultation-modal__close {
+  border: 0;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(20, 24, 27, 0.08);
+  color: var(--ink, #14181B);
+  cursor: pointer;
+  transition: transform 160ms ease, background 160ms ease;
+}
+
+.consultation-modal__close:hover,
+.consultation-modal__close:focus-visible {
+  transform: translateY(-1px);
+  background: rgba(20, 24, 27, 0.14);
+}
+
+.consultation-modal__body {
+  padding: 0 24px 24px;
+}
+
+.consultation-modal__eyebrow {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--teal, #1E7F76);
+  margin-bottom: 10px;
+}
+
+.consultation-modal__text {
+  font-size: 15px;
+  line-height: 1.7;
+  color: rgba(20, 24, 27, 0.86);
+}
+
+.consultation-modal__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.consultation-modal__actions .cta-button,
+.consultation-modal__actions .button-secondary {
+  margin-top: 0;
+}
+
+.button-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(20, 24, 27, 0.16);
+  background: transparent;
+  color: var(--ink, #14181B);
+  font-weight: 600;
+  font-size: 14.5px;
+  padding: 13px 22px;
+  border-radius: 999px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: transform 160ms ease, background 160ms ease, border-color 160ms ease;
+}
+
+.button-secondary:hover,
+.button-secondary:focus-visible {
+  transform: translateY(-1px);
+  background: rgba(20, 24, 27, 0.06);
+  border-color: rgba(20, 24, 27, 0.28);
+}
+
+body.modal-open {
+  overflow: hidden;
+}
+
+.consultation-booking-section {
+  padding: 36px 0 20px;
+}
+
+.consultation-booking-shell {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: 24px;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 44px;
+  align-items: start;
+}
+
+.consultation-booking-copy {
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 24px;
+  background: rgba(255,255,255,0.03);
+  padding: 34px;
+}
+
+.consultation-booking-copy h2 {
+  font-family: 'Newsreader', serif;
+  font-size: 30px;
+  font-weight: 500;
+  color: #fff;
+  margin-bottom: 12px;
+}
+
+.consultation-booking-copy p {
+  font-size: 15px;
+  line-height: 1.75;
+  color: #C7CCC1;
+  max-width: 60ch;
+}
+
+.consultation-booking-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.consultation-booking-actions .cta-button {
+  margin-top: 0;
+}
+
+.consultation-booking-card {
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 24px;
+  background: linear-gradient(135deg, rgba(31, 127, 118, 0.18), rgba(201, 151, 95, 0.16));
+  padding: 28px;
+}
+
+.consultation-chip {
+  display: inline-block;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #7FCFC4;
+  margin-bottom: 16px;
+}
+
+.consultation-booking-card h3 {
+  font-family: 'Newsreader', serif;
+  font-size: 24px;
+  color: #fff;
+  margin-bottom: 10px;
+}
+
+.consultation-booking-card p {
+  font-size: 14px;
+  line-height: 1.7;
+  color: #D7DAD1;
+  margin-bottom: 18px;
+}
+
+.consultation-benefits {
+  list-style: none;
+  display: grid;
+  gap: 10px;
+}
+
+.consultation-benefits li {
+  font-size: 13.5px;
+  color: #C7CCC1;
+  padding-left: 16px;
+  position: relative;
+}
+
+.consultation-benefits li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: #7FCFC4;
+}
+
+.consultation-form-card,
+.consultation-confirmation {
+  max-width: 1180px;
+  margin: 24px auto 0;
+  padding: 0 44px;
+}
+
+.consultation-form-card {
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 24px;
+  background: rgba(255,255,255,0.03);
+  padding: 34px;
+  transition: opacity 220ms ease, transform 220ms ease;
+}
+
+.consultation-form-card.is-hidden {
+  display: none;
+}
+
+.consultation-form { display: grid; gap: 22px; }
+
+.consultation-form__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.field label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #D7DAD1;
+}
+
+.field input,
+.field select,
+.field textarea {
+  width: 100%;
+  border: 1px solid rgba(255,255,255,0.16);
+  border-radius: 14px;
+  background: rgba(20,24,27,0.65);
+  color: #fff;
+  font: inherit;
+  padding: 13px 14px;
+  transition: border-color 160ms ease, box-shadow 160ms ease, background 160ms ease;
+}
+
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+  outline: none;
+  border-color: #7FCFC4;
+  box-shadow: 0 0 0 3px rgba(127, 207, 196, 0.2);
+}
+
+.field textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.field.invalid input,
+.field.invalid select,
+.field.invalid textarea {
+  border-color: #ff7a7a;
+  box-shadow: 0 0 0 3px rgba(255, 122, 122, 0.18);
+}
+
+.validation-message {
+  min-height: 18px;
+  font-size: 12px;
+  color: #ffb4b4;
+}
+
+.time-slot-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.time-slot {
+  border: 1px solid rgba(255,255,255,0.16);
+  background: rgba(20,24,27,0.6);
+  color: #fff;
+  border-radius: 999px;
+  padding: 10px 14px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 160ms ease, border-color 160ms ease, background 160ms ease;
+}
+
+.time-slot:hover,
+.time-slot:focus-visible {
+  transform: translateY(-1px);
+  border-color: #7FCFC4;
+}
+
+.time-slot.is-active {
+  background: #fff;
+  color: var(--ink, #14181B);
+  border-color: #fff;
+}
+
+.time-slot-group.invalid .time-slot {
+  border-color: #ff7a7a;
+}
+
+.form-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  margin-top: 8px;
+}
+
+.form-actions .cta-button {
+  margin-top: 0;
+}
+
+.form-actions .button-secondary {
+  padding: 13px 18px;
+}
+
+.submit-button.is-loading {
+  opacity: 0.9;
+  cursor: wait;
+}
+
+.submit-button__spinner {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 2px solid rgba(20,24,27,0.25);
+  border-top-color: currentColor;
+  display: inline-block;
+  margin-right: 8px;
+  animation: spin 0.8s linear infinite;
+}
+
+.consultation-confirmation {
+  display: none;
+  border: 1px solid rgba(127,207,196,0.25);
+  border-radius: 24px;
+  background: linear-gradient(135deg, rgba(30,127,118,0.16), rgba(255,255,255,0.03));
+  padding: 34px;
+}
+
+.consultation-confirmation.is-visible {
+  display: block;
+}
+
+.confirmation-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(127,207,196,0.2);
+  color: #7FCFC4;
+  font-size: 28px;
+  margin-bottom: 16px;
+}
+
+.consultation-confirmation h3 {
+  font-family: 'Newsreader', serif;
+  font-size: 24px;
+  color: #fff;
+  margin-bottom: 10px;
+}
+
+.consultation-confirmation p {
+  font-size: 15px;
+  line-height: 1.75;
+  color: #D7DAD1;
+}
+
+.confirmation-summary {
+  margin-top: 20px;
+  padding: 16px 18px;
+  border-radius: 16px;
+  background: rgba(20,24,27,0.55);
+  color: #fff;
+}
+
+.confirmation-summary strong { color: #7FCFC4; }
+
+.confirmation-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 22px;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@media (max-width: 900px) {
+  .consultation-booking-shell,
+  .consultation-form-card,
+  .consultation-confirmation {
+    padding: 0 24px;
+  }
+
+  .consultation-booking-shell {
+    grid-template-columns: 1fr;
+  }
+
+  .consultation-form__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 560px) {
+  .consultation-modal-overlay { padding: 16px; }
+  .consultation-modal__header,
+  .consultation-modal__body,
+  .consultation-booking-copy,
+  .consultation-booking-card,
+  .consultation-form-card,
+  .consultation-confirmation { padding: 24px; }
+  .consultation-booking-shell { padding: 0 20px; }
+  .consultation-form-card,
+  .consultation-confirmation { padding: 24px; }
+  .consultation-modal__actions,
+  .consultation-booking-actions,
+  .confirmation-actions,
+  .form-actions { flex-direction: column; align-items: stretch; }
+  .button-secondary,
+  .cta-button { width: 100%; justify-content: center; }
+}

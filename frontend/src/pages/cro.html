@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MedNova Clinical Development — Feasibility to Study Close-Out Across West Africa</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1F2A1E;
+    --ink-soft:#3E4B3A;
+    --paper:#FFFFFF;
+    --paper-raised:#F5F6F2;
+    --moss:#3F6B3A;
+    --moss-deep:#2A4A26;
+    --amber:#C97A2B;
+    --line:#D8DACF;
+    --grey:#666F5C;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--paper); color:var(--ink); font-family:'IBM Plex Sans', sans-serif; line-height:1.55; -webkit-font-smoothing:antialiased;}
+  .wrap{max-width:1120px; margin:0 auto; padding:0 32px;}
+  a{color:inherit;}
+
+  header{position:sticky; top:0; z-index:50; background:rgba(245,246,242,0.9); backdrop-filter:blur(8px); border-bottom:1px solid var(--line);}
+  nav{display:flex; align-items:center; justify-content:space-between; padding:18px 0;}
+  .brand{display:flex; align-items:baseline; gap:10px; text-decoration:none; color:inherit;}
+  .brand-mark{font-family:'IBM Plex Mono', monospace; font-size:12px; letter-spacing:0.14em; background:var(--ink); color:var(--paper); padding:3px 7px; border-radius:3px;}
+  .brand-name{font-family:'Newsreader', serif; font-size:20px; font-weight:600;}
+  .brand-name .sub{font-family:'IBM Plex Mono', monospace; font-size:11px; color:var(--moss-deep); letter-spacing:0.06em; display:block; margin-top:1px;}
+  .navlinks{display:flex; gap:32px; font-size:14px; font-weight:500;}
+  .navlinks a{text-decoration:none; color:var(--ink-soft); transition:color .15s;}
+  .navlinks a:hover{color:var(--moss-deep);}
+  .nav-cta{font-size:13px; font-weight:600; padding:9px 18px; background:var(--ink); color:var(--paper); border-radius:3px; text-decoration:none; white-space:nowrap;}
+
+  .hero{position:relative; overflow:hidden; padding:88px 0 64px; border-bottom:1px solid var(--line);}
+  .hero-grid{display:grid; grid-template-columns:1.15fr 0.85fr; gap:56px; align-items:center;}
+  .eyebrow{font-family:'IBM Plex Mono', monospace; font-size:12px; letter-spacing:0.12em; text-transform:uppercase; color:var(--moss-deep); margin-bottom:18px; display:flex; align-items:center; gap:10px;}
+  .eyebrow::before{content:""; width:22px; height:1px; background:var(--moss);}
+  h1{font-family:'Newsreader', serif; font-size:50px; line-height:1.08; font-weight:500; letter-spacing:-0.01em; max-width:12ch;}
+  h1 em{font-style:italic; color:var(--moss-deep); font-weight:500;}
+  .hero-sub{margin-top:22px; font-size:17px; color:var(--grey); max-width:46ch;}
+  .hero-actions{margin-top:32px; display:flex; gap:14px; flex-wrap:wrap;}
+  .btn-primary{background:var(--moss-deep); color:#fff; padding:13px 24px; border-radius:3px; text-decoration:none; font-weight:600; font-size:14.5px; transition:background .15s; border:none; cursor:pointer;}
+
+  /* ---------- Readiness Checker ---------- */
+  .rc-box{max-width:640px; background:var(--paper-raised); border:1px solid var(--line); border-radius:10px; padding:36px 40px; position:relative; overflow:hidden;}
+  .rc-progress{height:4px; background:var(--line); border-radius:2px; margin-bottom:28px; overflow:hidden;}
+  .rc-progress-bar{height:100%; width:0%; background:var(--moss); transition:width .3s ease;}
+  .rc-step{display:none;}
+  .rc-step.active{display:block; animation:rcFade .25s ease;}
+  @keyframes rcFade{from{opacity:0; transform:translateY(4px);} to{opacity:1; transform:translateY(0);}}
+  .rc-label{display:block; font-family:'Newsreader', serif; font-size:19px; font-weight:600; color:var(--ink); margin-bottom:18px;}
+  .rc-options{display:flex; flex-direction:column; gap:10px;}
+  .rc-opt{
+    text-align:left; font-family:'IBM Plex Sans', sans-serif; font-size:14.5px; color:var(--ink-soft);
+    background:#fff; border:1px solid var(--line); padding:14px 18px; border-radius:6px; cursor:pointer;
+    transition:border-color .15s, background .15s;
+  }
+  .rc-opt:hover{border-color:var(--moss); background:rgba(63,107,58,0.04);}
+  .rc-result-header{display:flex; align-items:baseline; gap:14px; margin-bottom:6px;}
+  .rc-score{font-family:'Newsreader', serif; font-size:52px; font-weight:600; color:var(--moss-deep);}
+  .rc-score-label{font-family:'IBM Plex Mono', monospace; font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:var(--grey);}
+  .rc-result-tier{font-size:15px; font-weight:600; color:var(--ink); margin-bottom:20px;}
+  .rc-result-list{list-style:none; display:flex; flex-direction:column; gap:12px; margin-bottom:26px;}
+  .rc-result-list li{font-size:13.8px; color:var(--ink-soft); padding-left:18px; position:relative; line-height:1.55;}
+  .rc-result-list li::before{content:"–"; position:absolute; left:0; color:var(--amber);}
+  .rc-result-actions{display:flex; align-items:center; gap:18px; flex-wrap:wrap;}
+  .rc-restart{background:none; border:none; font-size:13.5px; color:var(--grey); text-decoration:underline; cursor:pointer;}
+  @media (max-width:640px){
+    .rc-box{padding:26px 22px;}
+  }
+  .btn-primary:hover{background:var(--ink);}
+  .btn-ghost{border:1px solid var(--ink); color:var(--ink); padding:12px 23px; border-radius:3px; text-decoration:none; font-weight:600; font-size:14.5px;}
+
+  .map{position:relative; height:280px; background:var(--paper-raised); border:1px solid var(--line); border-radius:4px; display:flex; align-items:center; justify-content:center; overflow:hidden;}
+  .map svg{width:100%; height:100%;}
+  .map-label{position:absolute; top:14px; left:16px; font-family:'IBM Plex Mono', monospace; font-size:10.5px; color:var(--grey); letter-spacing:0.06em;}
+  .map-tag{position:absolute; bottom:16px; right:16px; font-family:'IBM Plex Mono', monospace; font-size:10.5px; color:var(--moss-deep); background:rgba(63,107,58,0.1); border:1px solid rgba(63,107,58,0.35); padding:4px 9px; border-radius:3px;}
+
+  /* ---------- hero lifecycle snapshot ---------- */
+  .lifecycle-card{height:auto; min-height:280px; align-items:stretch; justify-content:flex-start; padding:48px 28px 56px; overflow:visible;}
+  .lc-track{width:100%; display:flex; flex-direction:column;}
+  .lc-step{display:flex; gap:14px; position:relative; padding-bottom:26px;}
+  .lc-step.last{padding-bottom:0;}
+  .lc-node{
+    width:26px; height:26px; border-radius:50%; background:var(--moss-deep); color:#fff; flex-shrink:0;
+    display:flex; align-items:center; justify-content:center; position:relative; z-index:1;
+    font-family:'IBM Plex Mono', monospace; font-size:11px; font-weight:600;
+  }
+  .lc-node.final{background:var(--amber);}
+  .lc-rule{position:absolute; left:12.5px; top:26px; bottom:0; width:1px; background:var(--line);}
+  .lc-copy{padding-top:2px;}
+  .lc-copy strong{display:block; font-family:'Newsreader', serif; font-size:15px; font-weight:600; color:var(--ink);}
+  .lc-copy span{display:block; margin-top:3px; font-size:12px; color:var(--grey);}
+
+  section{padding:76px 0;}
+  .section-head{max-width:640px; margin-bottom:44px;}
+  .section-head .eyebrow{margin-bottom:14px;}
+  h2{font-family:'Newsreader', serif; font-weight:500; font-size:34px; letter-spacing:-0.01em; margin-bottom:14px;}
+  .section-head p{color:var(--grey); font-size:16px;}
+
+  .service-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:1px; background:var(--line); border:1px solid var(--line); border-radius:6px; overflow:hidden;}
+  .service-card{background:#fff; padding:32px;}
+  .service-card .num{font-family:'IBM Plex Mono', monospace; font-size:11px; color:var(--moss-deep); margin-bottom:12px; display:block;}
+  .service-card h4{font-family:'Newsreader',serif; font-size:21px; font-weight:600; margin-bottom:10px;}
+  .service-card p{font-size:14.5px; color:var(--grey); line-height:1.65;}
+
+  /* ---------- pathway diagram ---------- */
+  .pathway-band{padding:64px 0; border-bottom:1px solid var(--line); background:var(--paper-raised);}
+  .pathway-track{display:flex; align-items:flex-start; justify-content:center; gap:4px; flex-wrap:wrap;}
+  .pathway-step{display:flex; flex-direction:column; align-items:center; text-align:center; width:118px;}
+  .pathway-step .node{
+    width:44px; height:44px; border-radius:50%; background:var(--moss-deep); color:#fff;
+    display:flex; align-items:center; justify-content:center;
+    font-family:'IBM Plex Mono', monospace; font-size:15px; font-weight:600;
+    box-shadow:0 3px 0 rgba(42,74,38,0.25);
+  }
+  .pathway-step .node.final{background:var(--amber); box-shadow:0 3px 0 rgba(201,122,43,0.3);}
+  .pathway-step .label{margin-top:14px; font-family:'Newsreader', serif; font-size:14.5px; font-weight:600; color:var(--ink);}
+  .pathway-step .sub{margin-top:3px; font-family:'IBM Plex Mono', monospace; font-size:10px; letter-spacing:0.04em; color:var(--grey);}
+  .pathway-arrow{width:22px; height:16px; flex-shrink:0; fill:var(--moss); opacity:0.55; margin-top:14px;}
+
+  /* ---------- lifecycle phase accordions ---------- */
+  .phase-accordion{display:flex; flex-direction:column; gap:10px;}
+
+  /* ---------- technology note ---------- */
+  .tech-note{
+    display:flex; align-items:flex-start; gap:10px;
+    font-size:13px; color:var(--grey); line-height:1.6;
+    border-left:2px solid var(--moss-deep); padding:2px 0 2px 14px; margin-bottom:36px; max-width:64ch;
+  }
+  .phase-group{
+    border:1px solid var(--line); border-radius:8px; background:#fff; overflow:hidden;
+  }
+  .phase-group[open]{background:#fff;}
+  .phase-title{
+    display:flex; align-items:center; gap:12px; padding:14px 20px;
+    cursor:pointer; list-style:none; user-select:none;
+  }
+  .phase-title::-webkit-details-marker{display:none;}
+  .phase-title:hover{background:var(--paper-raised);}
+  .phase-title .ph-num{
+    display:flex; align-items:center; justify-content:center; gap:8px;
+    font-family:'IBM Plex Mono', monospace; font-size:10.5px; color:#fff;
+    background:var(--moss); padding:4px 12px 4px 8px;
+    clip-path:polygon(0 0, 100% 50%, 0 100%, 12% 50%);
+  }
+  .phase-title h3{font-family:'Newsreader', serif; font-size:16.5px; font-weight:600; flex:1;}
+  .phase-title .chev{
+    width:0; height:0; flex-shrink:0;
+    border-left:5px solid transparent; border-right:5px solid transparent; border-top:6px solid var(--grey);
+    transition:transform .2s ease;
+  }
+  .phase-group[open] .phase-title .chev{transform:rotate(180deg);}
+  .phase-items{
+    display:grid; grid-template-columns:repeat(4,1fr); gap:10px;
+    padding:0 20px 20px;
+  }
+  .phase-item{background:var(--paper); border:1px solid var(--line); border-radius:6px; overflow:hidden;}
+  .phase-item summary{
+    padding:12px 14px; font-size:13px; color:var(--ink-soft); cursor:pointer;
+    list-style:none; display:flex; align-items:center; gap:8px; user-select:none;
+  }
+  .phase-item summary::-webkit-details-marker{display:none;}
+  .phase-item summary:hover{background:rgba(0,0,0,0.03);}
+  .phase-item .ichev{
+    margin-left:auto; width:0; height:0; flex-shrink:0;
+    border-left:4px solid transparent; border-right:4px solid transparent; border-top:5px solid var(--grey);
+    transition:transform .2s ease;
+  }
+  .phase-item[open] .ichev{transform:rotate(180deg);}
+  .phase-item p{padding:0 14px 14px; font-size:12.5px; line-height:1.55; color:var(--grey);}
+  .phase-item.featured{border-color:var(--moss); background:rgba(63,107,58,0.06); position:relative;}
+  .phase-item.featured summary{font-weight:600; color:var(--moss-deep);}
+  .phase-item.featured::before{
+    content:""; position:absolute; top:-6px; left:14px; width:10px; height:10px;
+    background:var(--moss); border-radius:50%; border:2px solid var(--paper); z-index:1;
+  }
+
+  /* ---------- spotlight phase (Study Start-Up) ---------- */
+  .phase-group.spotlight{background:var(--ink); border-color:var(--ink); position:relative; overflow:hidden;}
+  .phase-group.spotlight::after{
+    content:""; position:absolute; top:-40px; right:-40px; width:160px; height:160px;
+    border-radius:50%; background:radial-gradient(circle, rgba(63,107,58,0.55), transparent 70%); pointer-events:none;
+  }
+  .phase-group.spotlight .phase-title:hover{background:rgba(255,255,255,0.05);}
+  .phase-group.spotlight .phase-title h3{color:#fff;}
+  .phase-group.spotlight .phase-title .chev{border-top-color:#AEB89E;}
+  .phase-group.spotlight .ph-num{background:var(--amber);}
+  .phase-group.spotlight .phase-items{position:relative; z-index:1;}
+  .phase-group.spotlight .phase-item{
+    background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.14);
+  }
+  .phase-group.spotlight .phase-item summary{color:#EFF1E9;}
+  .phase-group.spotlight .phase-item summary:hover{background:rgba(255,255,255,0.06);}
+  .phase-group.spotlight .phase-item p{color:#C3C9B8;}
+  .phase-group.spotlight .phase-item .ichev{border-top-color:#AEB89E;}
+  .phase-group.spotlight .phase-item .tri{
+    width:0; height:0; flex-shrink:0;
+    border-top:5px solid transparent; border-bottom:5px solid transparent; border-left:8px solid var(--amber);
+  }
+
+  /* ---------- why cards ---------- */
+  .why-card-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:20px;}
+  .why-card{background:#fff; border:1px solid var(--line); border-radius:8px; padding:26px;}
+  .why-card .idx{
+    width:30px; height:30px; border-radius:50%; background:var(--paper-raised); border:1px solid var(--line);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'IBM Plex Mono', monospace; font-size:11px; color:var(--amber); margin-bottom:14px;
+  }
+  .why-card h4{font-family:'Newsreader', serif; font-size:17px; font-weight:600; margin-bottom:8px;}
+  .why-card p{font-size:13.5px; color:var(--grey); line-height:1.6;}
+
+  /* ---------- industries ---------- */
+  .industry-row{display:flex; flex-wrap:wrap; gap:10px;}
+  .industry-chip{font-size:13.5px; color:var(--ink-soft); background:#fff; border:1px solid var(--line); padding:10px 18px; border-radius:4px;}
+
+  /* ---------- insights ---------- */
+  .insights-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:20px;}
+  .insight-card{background:#fff; border:1px solid var(--line); border-radius:8px; padding:26px; position:relative;}
+  .insight-card .topic{font-family:'IBM Plex Mono', monospace; font-size:10.5px; letter-spacing:0.08em; text-transform:uppercase; color:var(--moss-deep);}
+  .insight-card h4{font-family:'Newsreader', serif; font-size:18px; font-weight:600; margin:10px 0 8px;}
+  .insight-card p{font-size:13px; color:var(--grey); line-height:1.55;}
+  .insight-card .soon{
+    display:inline-block; margin-top:16px; font-family:'IBM Plex Mono', monospace; font-size:10px; letter-spacing:0.06em;
+    color:var(--amber); border:1px solid rgba(201,122,43,0.35); background:rgba(201,122,43,0.08); padding:4px 10px; border-radius:20px;
+    text-decoration:none; transition:background .15s;
+  }
+  .insight-card .soon:hover{background:rgba(201,122,43,0.16);}
+
+  /* ---------- therapeutic areas (placeholder) ---------- */
+  .ta-placeholder{
+    border:1px dashed var(--line); border-radius:8px; padding:30px; text-align:center;
+    color:var(--grey); font-size:14px; background:var(--paper-raised);
+  }
+
+  .why-band{padding:0 0 76px; border-bottom:1px solid var(--line);}
+  .why-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:24px;}
+  .why-item{display:flex; gap:12px; align-items:flex-start;}
+  .why-mark{color:var(--amber); font-family:'IBM Plex Mono', monospace; font-size:15px; flex-shrink:0; margin-top:1px;}
+  .why-item p{font-size:14px; color:var(--ink-soft); line-height:1.55;}
+
+  .audience-grid{display:grid; grid-template-columns:1fr 1fr; gap:24px;}
+  .audience-card{background:#fff; border:1px solid var(--line); border-radius:8px; padding:36px; position:relative; overflow:hidden;}
+  .audience-card::before{content:""; position:absolute; top:0; left:0; width:4px; height:100%; background:var(--moss);}
+  .audience-kicker{font-family:'IBM Plex Mono', monospace; font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:var(--moss-deep);}
+  .audience-card h4{font-family:'Newsreader',serif; font-size:23px; font-weight:600; margin:12px 0 12px;}
+  .audience-card p{font-size:14.5px; color:var(--grey); line-height:1.6;}
+  .audience-link{display:inline-block; margin-top:20px; font-size:14px; font-weight:600; color:var(--moss-deep);}
+
+  .stage-band{background:#fff; border:1px solid var(--line); border-radius:8px; padding:36px;}
+  .stage-list{display:grid; grid-template-columns:repeat(4,1fr); gap:0;}
+  .stage{padding:0 20px; position:relative;}
+  .stage:not(:first-child){border-left:1px solid var(--line);}
+  .stage .idx{font-family:'IBM Plex Mono', monospace; font-size:11px; color:var(--amber); margin-bottom:10px; display:block;}
+  .stage h5{font-family:'Newsreader',serif; font-size:16px; font-weight:600; margin-bottom:8px;}
+  .stage p{font-size:13px; color:var(--grey);}
+
+  .about{background:var(--ink); color:var(--paper); border-radius:8px; padding:52px; display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:center;}
+  .about h2{color:#fff;}
+  .about .eyebrow{color:#B7D6AE;}
+  .about .eyebrow::before{background:#B7D6AE;}
+  .about p{color:#D3D9C8; font-size:15.5px; margin-top:14px;}
+  .cred-list{display:flex; flex-direction:column; gap:18px;}
+  .cred-item{border-left:2px solid var(--moss); padding-left:16px;}
+  .cred-item strong{display:block; font-size:15px; font-weight:600; color:#fff;}
+  .cred-item span{font-size:13.5px; color:#AEB89E;}
+
+  .cta-band{text-align:center; padding:80px 0; border-top:1px solid var(--line);}
+  .cta-band h2{margin-bottom:12px;}
+  .cta-band p{color:var(--grey); max-width:44ch; margin:0 auto 30px;}
+  .cta-row{display:flex; gap:14px; justify-content:center; flex-wrap:wrap;}
+
+  .contact-form{max-width:640px; margin:0 auto; text-align:left; background:#fff; border:1px solid var(--line); border-radius:8px; padding:32px;}
+  .form-row{margin-bottom:18px;}
+  .form-row.two{display:grid; grid-template-columns:1fr 1fr; gap:18px;}
+  .field label{display:block; font-size:12.5px; font-weight:600; color:var(--ink-soft); margin-bottom:6px; letter-spacing:0.02em;}
+  .field input, .field select, .field textarea{width:100%; font-family:'IBM Plex Sans', sans-serif; font-size:14.5px; color:var(--ink); border:1px solid var(--line); border-radius:4px; padding:10px 12px; background:var(--paper); transition:border-color .15s;}
+  .field input:focus, .field select:focus, .field textarea:focus{outline:none; border-color:var(--moss); background:#fff;}
+  .field textarea{resize:vertical; font-family:'IBM Plex Sans', sans-serif;}
+  .form-status{margin-top:14px; font-size:13.5px;}
+  .form-status.success{color:var(--moss-deep);}
+  .form-status.error{color:#B23A2E;}
+
+  footer{border-top:1px solid var(--line); padding:28px 0; font-size:13px; color:var(--grey); display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px;}
+
+  @media (max-width:860px){
+    .hero-grid{grid-template-columns:1fr;}
+    h1{font-size:36px;}
+    .navlinks{display:none;}
+    .service-grid{grid-template-columns:1fr;}
+    .why-grid{grid-template-columns:1fr 1fr; gap:20px;}
+    .audience-grid{grid-template-columns:1fr;}
+    .stage-list{grid-template-columns:1fr; gap:20px;}
+    .stage:not(:first-child){border-left:none; border-top:1px solid var(--line); padding-top:20px;}
+    .about{grid-template-columns:1fr; padding:32px;}
+    .form-row.two{grid-template-columns:1fr;}
+    .pathway-track{flex-direction:column; align-items:flex-start;}
+    .pathway-arrow{width:16px; height:22px; transform:rotate(90deg); margin:0 0 0 14px;}
+    .phase-items{grid-template-columns:1fr 1fr;}
+    .why-card-grid{grid-template-columns:1fr 1fr;}
+    .insights-grid{grid-template-columns:1fr;}
+  }
+  @media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto;} }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <nav>
+      <a class="brand" href="index.html">
+        <span class="brand-mark">MN·CD</span>
+        <span class="brand-name">Clinical Development
+          <span class="sub">A service line of MedNova Lifesciences</span>
+        </span>
+      </a>
+      <div class="navlinks">
+        <a href="#pathway">Our Approach</a>
+        <a href="#services">Services</a>
+        <a href="#why">Why MedNova</a>
+        <a href="#industries">Industries</a>
+        <a href="#insights">Insights</a>
+        <a href="regulatory.html">Regulatory Affairs</a>
+        <a href="pv.html">Pharmacovigilance</a>
+        <a href="capability-statement.html">Capability Statement</a>
+      </div>
+      <a class="nav-cta" href="#contact">Talk to us</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow">Clinical Development</div>
+      <h1>Planning a clinical study <em>in Africa?</em></h1>
+      <p class="hero-sub">MedNova provides integrated clinical development services — from feasibility and regulatory planning through study close-out — to help sponsors execute with confidence across Nigeria and West Africa.</p>
+      <div class="hero-actions">
+        <a class="btn-primary" href="#contact">Start a conversation</a>
+        <a class="btn-ghost" href="#services">View services</a>
+      </div>
+    </div>
+    <div class="map lifecycle-card">
+      <span class="map-label">STUDY LIFECYCLE</span>
+      <div class="lc-track">
+        <div class="lc-step">
+          <span class="lc-node">1</span>
+          <div class="lc-rule"></div>
+          <div class="lc-copy"><strong>Feasibility &amp; Readiness</strong><span>Is the site, region, and protocol a fit?</span></div>
+        </div>
+        <div class="lc-step">
+          <span class="lc-node">2</span>
+          <div class="lc-rule"></div>
+          <div class="lc-copy"><strong>Regulatory &amp; Start-Up</strong><span>Regulatory approval, ethics, site activation</span></div>
+        </div>
+        <div class="lc-step">
+          <span class="lc-node">3</span>
+          <div class="lc-rule"></div>
+          <div class="lc-copy"><strong>Clinical Operations</strong><span>Monitoring, recruitment, data</span></div>
+        </div>
+        <div class="lc-step last">
+          <span class="lc-node final">4</span>
+          <div class="lc-copy"><strong>Close-Out</strong><span>Database lock, inspection-ready</span></div>
+        </div>
+      </div>
+      <span class="map-tag">● One team, every stage</span>
+    </div>
+  </div>
+</section>
+
+<section id="pathway" class="pathway-band">
+  <div class="wrap">
+    <div class="section-head" style="margin-bottom:36px;">
+      <div class="eyebrow">Our Approach</div>
+      <h2>Discovery through close-out, one workflow</h2>
+      <p>Every engagement moves through the same sequence — visible to the sponsor at every stage.</p>
+    </div>
+    <div class="pathway-track">
+      <div class="pathway-step"><span class="node">1</span><span class="label">Feasibility</span><span class="sub">Before day one</span></div>
+      <svg class="pathway-arrow" viewBox="0 0 24 16"><polygon points="0,0 24,8 0,16"/></svg>
+      <div class="pathway-step"><span class="node">2</span><span class="label">Trial Readiness</span><span class="sub">Before day one</span></div>
+      <svg class="pathway-arrow" viewBox="0 0 24 16"><polygon points="0,0 24,8 0,16"/></svg>
+      <div class="pathway-step"><span class="node">3</span><span class="label">Regulatory Approval</span><span class="sub">Regulatory &amp; ethics</span></div>
+      <svg class="pathway-arrow" viewBox="0 0 24 16"><polygon points="0,0 24,8 0,16"/></svg>
+      <div class="pathway-step"><span class="node">4</span><span class="label">Site Activation</span><span class="sub">Study start-up</span></div>
+      <svg class="pathway-arrow" viewBox="0 0 24 16"><polygon points="0,0 24,8 0,16"/></svg>
+      <div class="pathway-step"><span class="node">5</span><span class="label">Clinical Operations</span><span class="sub">During the trial</span></div>
+      <svg class="pathway-arrow" viewBox="0 0 24 16"><polygon points="0,0 24,8 0,16"/></svg>
+      <div class="pathway-step"><span class="node">6</span><span class="label">Monitoring</span><span class="sub">During the trial</span></div>
+      <svg class="pathway-arrow" viewBox="0 0 24 16"><polygon points="0,0 24,8 0,16"/></svg>
+      <div class="pathway-step"><span class="node final">7</span><span class="label">Close-Out</span><span class="sub">Database lock</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="why" class="why-band">
+  <div class="wrap">
+    <div class="why-grid">
+      <div class="why-item"><span class="why-mark">→</span><p>We know how Nigeria's health systems actually work — not just how they look on paper.</p></div>
+      <div class="why-item"><span class="why-mark">→</span><p>Participant dignity and safety are the starting point of a study design, not a compliance afterthought.</p></div>
+      <div class="why-item"><span class="why-mark">→</span><p>Built to flex from a single-site pilot to a multi-country program without re-inventing the approach.</p></div>
+      <div class="why-item"><span class="why-mark">→</span><p>Local footing means faster site activation and fewer surprises at the approval stage.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="services">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">What we do</div>
+      <h2>The way sponsors manage programs</h2>
+      <p>Not a list of departments — the actual phases a clinical development program moves through, from first feasibility question to database lock.</p>
+    </div>
+
+    <p class="tech-note">Technology enabled — we use proprietary digital tools to support feasibility assessment and trial execution, with every output reviewed by our clinical team.</p>
+
+    <div class="phase-accordion">
+      <details class="phase-group" open>
+        <summary class="phase-title"><span class="ph-num">Phase 1</span><h3>Before the Trial</h3><span class="chev"></span></summary>
+        <div class="phase-items">
+          <details class="phase-item"><summary>Feasibility<span class="ichev"></span></summary><p>Assessing whether a protocol can realistically run at a given site or in a given region — patient population, competing studies, and investigator capacity — before a sponsor commits resources to it.</p></details>
+          <details class="phase-item"><summary>Site Selection<span class="ichev"></span></summary><p>Evaluating candidate sites against the protocol's actual requirements — staffing, equipment, patient volume, and track record — not just what's on a capability questionnaire.</p></details>
+          <details class="phase-item featured"><summary>Trial Readiness<span class="ichev"></span></summary><p>A structured assessment of whether a site, region, and regulatory pathway are actually ready to support a protocol — feasibility grounded in the realities of the site, not just the paper submission.</p></details>
+          <details class="phase-item"><summary>Regulatory Strategy<span class="ichev"></span></summary><p>Mapping the approval pathway through relevant regulatory authorities and ethics committees early, so submission timing is built into the study plan rather than discovered midway through it.</p></details>
+        </div>
+      </details>
+
+      <details class="phase-group spotlight">
+        <summary class="phase-title"><span class="ph-num">Phase 2</span><h3>Study Start-Up</h3><span class="chev"></span></summary>
+        <div class="phase-items">
+          <details class="phase-item"><summary><span class="tri"></span>Site Activation<span class="ichev"></span></summary><p>Moving a qualified site from selection to first-patient-in — contracting, training, and readiness checks completed against an activation timeline built around the actual site.</p></details>
+          <details class="phase-item"><summary><span class="tri"></span>Contracts<span class="ichev"></span></summary><p>Site and vendor agreements negotiated and executed in step with activation timelines, so contracting doesn't become the bottleneck holding up a ready site.</p></details>
+          <details class="phase-item"><summary><span class="tri"></span>Vendor Management<span class="ichev"></span></summary><p>Coordinating laboratory, logistics, and other third-party vendors so their timelines stay aligned with the site's own start-up schedule.</p></details>
+          <details class="phase-item"><summary><span class="tri"></span>Laboratory Planning<span class="ichev"></span></summary><p>Central and local laboratory testing coordinated alongside sourcing, storage, and cold-chain logistics — including import handling for studies bringing product into Nigeria.</p></details>
+        </div>
+      </details>
+
+      <details class="phase-group">
+        <summary class="phase-title"><span class="ph-num">Phase 3</span><h3>During the Trial</h3><span class="chev"></span></summary>
+        <div class="phase-items">
+          <details class="phase-item"><summary>Clinical Operations<span class="ichev"></span></summary><p>Day-to-day management of site performance, timelines, and budget against a single project plan — one team holding both the site-level and study-level view.</p></details>
+          <details class="phase-item"><summary>Monitoring<span class="ichev"></span></summary><p>Routine and close-out monitoring, source data verification, and CAPA follow-through, tracked consistently across every site in the study.</p></details>
+          <details class="phase-item"><summary>Recruitment<span class="ichev"></span></summary><p>Recruitment and retention built around the actual population and geography in front of us — informed consent logistics and retention approaches that account for travel distance and community trust-building.</p></details>
+          <details class="phase-item"><summary>Data Management<span class="ichev"></span></summary><p>EDC setup, data cleaning, and query resolution built into how data moves from site to database — quality checked at the source, not after the fact.</p></details>
+        </div>
+      </details>
+
+      <details class="phase-group">
+        <summary class="phase-title"><span class="ph-num">Phase 4</span><h3>Study Close-Out</h3><span class="chev"></span></summary>
+        <div class="phase-items">
+          <details class="phase-item"><summary>Database Lock<span class="ichev"></span></summary><p>Final data cleaning, query resolution, and sign-off coordinated across sites to bring the database to lock on schedule.</p></details>
+          <details class="phase-item"><summary>Close-Out Visits<span class="ichev"></span></summary><p>Site close-out conducted with the same rigor as activation — reconciling records, resolving outstanding queries, and confirming regulatory documentation is complete.</p></details>
+          <details class="phase-item"><summary>Inspection Readiness<span class="ichev"></span></summary><p>Site files and trial documentation maintained in a state ready for sponsor audit or regulatory inspection at any point — not assembled after a close-out notice arrives.</p></details>
+          <details class="phase-item"><summary>Clinical Study Support<span class="ichev"></span></summary><p>Ongoing support through reporting and publication-stage requests, including data queries that arise after a site has formally closed.</p></details>
+        </div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<section id="why-mednova">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Why MedNova Clinical Development</div>
+      <h2>What sponsors are actually choosing</h2>
+    </div>
+    <div class="why-card-grid">
+      <div class="why-card"><span class="idx">01</span><h4>Local operational expertise</h4><p>Direct familiarity with Nigeria's site landscape and health systems — not a template applied from elsewhere.</p></div>
+      <div class="why-card"><span class="idx">02</span><h4>Faster study start-up</h4><p>Site activation timelines built around the actual site and its regulatory pathway, not a generic template.</p></div>
+      <div class="why-card"><span class="idx">03</span><h4>Integrated regulatory support</h4><p>Regulatory strategy runs alongside operations at every phase — not handled separately, and not just at submission.</p></div>
+      <div class="why-card"><span class="idx">04</span><h4>Quality-first execution</h4><p>GCP compliance and audit readiness built into how the work happens, rather than checked after the fact.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="industries">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Industries We Support</div>
+      <h2>Built for sponsors across the development landscape</h2>
+    </div>
+    <div class="industry-row">
+      <span class="industry-chip">Pharmaceutical Companies</span>
+      <span class="industry-chip">Biotechnology Companies</span>
+      <span class="industry-chip">Medical Device Companies</span>
+      <span class="industry-chip">Vaccine Developers</span>
+      <span class="industry-chip">CROs</span>
+      <span class="industry-chip">NGOs</span>
+      <span class="industry-chip">Government Agencies</span>
+      <span class="industry-chip">Academic Research</span>
+    </div>
+  </div>
+</section>
+
+<section id="insights">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Insights</div>
+      <h2>Perspective from the field</h2>
+      <p>Writing on African clinical development, regulatory strategy, and trial readiness — drawn from the work itself, not general commentary.</p>
+    </div>
+    <div class="insights-grid">
+      <div class="insight-card">
+        <span class="topic">African Clinical Development</span>
+        <h4>What sponsors get wrong about running trials in West Africa</h4>
+        <p>On the gap between template planning and what site-level execution actually requires.</p>
+        <span class="soon">Coming soon</span>
+      </div>
+      <div class="insight-card">
+        <span class="topic">Regulatory Strategy</span>
+        <h4>Navigating regional regulatory and ethics review</h4>
+        <p>A practical look at sequencing regulatory and ethics submissions against a real study timeline.</p>
+        <span class="soon">Coming soon</span>
+      </div>
+      <div class="insight-card">
+        <span class="topic">Trial Readiness</span>
+        <h4>What "site-ready" actually means</h4>
+        <p>Why feasibility on paper and feasibility on the ground are two different assessments.</p>
+        <span class="soon">Coming soon</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="wrap">
+    <div class="about">
+      <div>
+        <div class="eyebrow">About the team</div>
+        <h2>Built for sponsors expanding into Africa</h2>
+        <p>MedNova Clinical Development is led by a team with hands-on clinical operations and regulatory experience, applied directly to running programs in Nigeria and West Africa — local expertise, regulatory knowledge, and operational execution, held together by one accountable team.</p>
+      </div>
+      <div class="cred-list">
+        <div class="cred-item"><strong>Lagos-based, region-focused</strong><span>Operating from Nigeria, built for regional trial execution</span></div>
+        <div class="cred-item"><strong>Locally grounded</strong><span>Direct familiarity with Nigeria's regulatory and site landscape</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="try-it">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Free Self-Assessment</div>
+      <h2>Trial Site Feasibility Readiness Checker</h2>
+      <p>Answer six questions to get an instant readiness score for your planned study in Nigeria or West Africa — a real assessment tool, not a demo.</p>
+    </div>
+
+    <div class="rc-box" id="rcBox">
+      <div class="rc-progress"><div class="rc-progress-bar" id="rcProgressBar"></div></div>
+
+      <div class="rc-step active" data-step="1">
+        <label class="rc-label">Therapeutic area</label>
+        <div class="rc-options" data-field="area">
+          <button class="rc-opt" data-value="2">Infectious Disease / Vaccines</button>
+          <button class="rc-opt" data-value="2">Women's Health</button>
+          <button class="rc-opt" data-value="1">Cardiometabolic</button>
+          <button class="rc-opt" data-value="1">Oncology</button>
+          <button class="rc-opt" data-value="0">Rare Disease</button>
+          <button class="rc-opt" data-value="1">Medical Device</button>
+        </div>
+      </div>
+
+      <div class="rc-step" data-step="2">
+        <label class="rc-label">Trial phase</label>
+        <div class="rc-options" data-field="phase">
+          <button class="rc-opt" data-value="2">Phase II</button>
+          <button class="rc-opt" data-value="2">Phase III</button>
+          <button class="rc-opt" data-value="1">Phase IV</button>
+          <button class="rc-opt" data-value="0">Phase I</button>
+        </div>
+      </div>
+
+      <div class="rc-step" data-step="3">
+        <label class="rc-label">Target enrollment size</label>
+        <div class="rc-options" data-field="enrollment">
+          <button class="rc-opt" data-value="2">Under 50 participants</button>
+          <button class="rc-opt" data-value="1">50–200 participants</button>
+          <button class="rc-opt" data-value="0">Over 200 participants</button>
+        </div>
+      </div>
+
+      <div class="rc-step" data-step="4">
+        <label class="rc-label">Geographic scope</label>
+        <div class="rc-options" data-field="scope">
+          <button class="rc-opt" data-value="2">Single site, Lagos</button>
+          <button class="rc-opt" data-value="1">Multiple sites, one country</button>
+          <button class="rc-opt" data-value="0">Multi-country West Africa</button>
+        </div>
+      </div>
+
+      <div class="rc-step" data-step="5">
+        <label class="rc-label">Sponsor's prior experience in Nigeria/West Africa</label>
+        <div class="rc-options" data-field="experience">
+          <button class="rc-opt" data-value="2">Yes, prior studies here</button>
+          <button class="rc-opt" data-value="0">No, this would be first</button>
+        </div>
+      </div>
+
+      <div class="rc-step" data-step="6">
+        <label class="rc-label">Regulatory submission status</label>
+        <div class="rc-options" data-field="regulatory">
+          <button class="rc-opt" data-value="2">Already prepared or submitted</button>
+          <button class="rc-opt" data-value="1">In progress</button>
+          <button class="rc-opt" data-value="0">Not started</button>
+        </div>
+      </div>
+
+      <div class="rc-step" data-step="results">
+        <div class="rc-result-header">
+          <span class="rc-score" id="rcScore">–</span>
+          <span class="rc-score-label" id="rcScoreLabel">Readiness Score</span>
+        </div>
+        <div class="rc-result-tier" id="rcTier"></div>
+        <ul class="rc-result-list" id="rcConsiderations"></ul>
+        <div class="rc-result-actions">
+          <a class="btn-primary" href="#contact">Discuss this with our team</a>
+          <button class="rc-restart" id="rcRestart">Start over</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-band" id="contact">
+  <div class="wrap">
+    <h2>Let's talk about your trial</h2>
+    <p>Whether you're scoping site feasibility or ready to activate — we'd like to hear what you're working on.</p>
+
+    <form id="contactForm" class="contact-form">
+      <input type="hidden" name="access_key" value="YOUR_WEB3FORMS_ACCESS_KEY">
+      <input type="hidden" name="subject" value="New inquiry — MedNova Clinical Development">
+      <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off">
+
+      <div class="form-row two">
+        <div class="field"><label for="name">Name</label><input type="text" id="name" name="name" required placeholder="Jane Doe"></div>
+        <div class="field"><label for="email">Email</label><input type="email" id="email" name="email" required placeholder="jane@company.com"></div>
+      </div>
+      <div class="form-row two">
+        <div class="field"><label for="organization">Organization</label><input type="text" id="organization" name="organization" placeholder="Company or institution name"></div>
+        <div class="field"><label for="inquiry">Type of inquiry</label>
+          <select id="inquiry" name="Type of inquiry">
+            <option value="Clinical Trial">Clinical Trial</option>
+            <option value="Feasibility Assessment">Feasibility Assessment</option>
+            <option value="Trial Readiness">Trial Readiness</option>
+            <option value="Regulatory Support">Regulatory Support</option>
+            <option value="Partnership">Partnership</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row two">
+        <div class="field"><label for="stage">Trial stage</label>
+          <select id="stage" name="Trial stage">
+            <option value="Planning / feasibility">Planning / feasibility</option>
+            <option value="Active / enrolling">Active / enrolling</option>
+            <option value="Close-out / reporting">Close-out / reporting</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="field"><label for="message">What are you working on?</label><textarea id="message" name="message" rows="4" required placeholder="Tell us about your trial or program..."></textarea></div>
+      </div>
+      <div class="cta-row" style="justify-content:flex-start;">
+        <button type="submit" class="btn-primary" id="submitBtn">Send message</button>
+        <a class="btn-ghost" href="index.html">MedNova Lifesciences home</a>
+      </div>
+      <p id="formStatus" class="form-status"></p>
+    </form>
+  </div>
+</section>
+
+<script>
+  const form = document.getElementById('contactForm');
+  const statusEl = document.getElementById('formStatus');
+  const btn = document.getElementById('submitBtn');
+  form.addEventListener('submit', async function(e){
+    e.preventDefault();
+    btn.disabled = true; btn.textContent = 'Sending...';
+    statusEl.textContent = ''; statusEl.className = 'form-status';
+    const formData = new FormData(form);
+    const object = Object.fromEntries(formData);
+    try {
+      const res = await fetch('/api/forms/clinical', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({
+          formType: 'clinical',
+          name: object.name,
+          email: object.email,
+          organization: object.organization,
+          inquiryType: object['Type of inquiry'],
+          trialStage: object['Trial stage'],
+          projectDescription: object.message
+        })
+      });
+      const result = await res.json().catch(() => ({}));
+      if (result.success) {
+        statusEl.textContent = "Thanks — we'll be in touch shortly.";
+        statusEl.className = 'form-status success';
+        form.reset();
+      } else { throw new Error(result.message || 'Something went wrong'); }
+    } catch (err) {
+      statusEl.textContent = "Couldn't send right now — please email info@mednovalife.com directly.";
+      statusEl.className = 'form-status error';
+    } finally {
+      btn.disabled = false; btn.textContent = 'Send message';
+    }
+  });
+</script>
+
+<footer>
+  <div class="wrap" style="display:flex; justify-content:space-between; width:100%; flex-wrap:wrap; gap:10px;">
+    <span>© 2026 MedNova Lifesciences | Lagos, Nigeria</span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  const answers = {};
+  const steps = ['1','2','3','4','5','6','results'];
+  let currentIndex = 0;
+
+  const box = document.getElementById('rcBox');
+  const progressBar = document.getElementById('rcProgressBar');
+  const restartBtn = document.getElementById('rcRestart');
+
+  function showStep(index){
+    box.querySelectorAll('.rc-step').forEach(s => s.classList.remove('active'));
+    const stepEl = box.querySelector('[data-step="' + steps[index] + '"]');
+    if (stepEl) stepEl.classList.add('active');
+    progressBar.style.width = Math.round((index / (steps.length - 1)) * 100) + '%';
+  }
+
+  box.querySelectorAll('.rc-opt').forEach(btn => {
+    btn.addEventListener('click', function(){
+      const field = this.closest('.rc-options').dataset.field;
+      answers[field] = parseInt(this.dataset.value, 10);
+      currentIndex++;
+      if (steps[currentIndex] === 'results') {
+        renderResults();
+      }
+      showStep(currentIndex);
+    });
+  });
+
+  function renderResults(){
+    const total = Object.values(answers).reduce((a, b) => a + b, 0);
+    const maxScore = 12; // 6 questions, max 2 points each
+    const pct = Math.round((total / maxScore) * 100);
+
+    document.getElementById('rcScore').textContent = pct + '%';
+
+    let tier, considerations = [];
+
+    if (pct >= 75) {
+      tier = 'Strong readiness — well-positioned to move toward site activation.';
+    } else if (pct >= 45) {
+      tier = 'Developing readiness — several factors need attention before start-up.';
+    } else {
+      tier = 'Early-stage planning — feasibility work should come before a timeline is set.';
+    }
+
+    if (answers.area <= 1) considerations.push('This therapeutic area typically requires more specialized site capability — factor in longer site identification time.');
+    if (answers.phase === 0) considerations.push('Phase I studies in this region often need additional site capacity verification for early-phase monitoring requirements.');
+    if (answers.enrollment === 0) considerations.push('Large enrollment targets usually require a multi-site strategy — single-site feasibility alone won\'t be sufficient.');
+    if (answers.scope === 0) considerations.push('Multi-country scope means coordinating separate regulatory and ethics timelines across jurisdictions — build this into your critical path early.');
+    if (answers.experience === 0) considerations.push('First-time studies in this region benefit from a dedicated local feasibility assessment before protocol finalization.');
+    if (answers.regulatory === 0) considerations.push('Regulatory submission hasn\'t started — this is usually the long pole in the timeline and should begin in parallel with site feasibility, not after it.');
+
+    if (considerations.length === 0) {
+      considerations.push('No major flags from this initial self-assessment — a full feasibility review would confirm site-level specifics.');
+    }
+
+    document.getElementById('rcTier').textContent = tier;
+    const list = document.getElementById('rcConsiderations');
+    list.innerHTML = '';
+    considerations.forEach(c => {
+      const li = document.createElement('li');
+      li.textContent = c;
+      list.appendChild(li);
+    });
+  }
+
+  restartBtn.addEventListener('click', function(){
+    Object.keys(answers).forEach(k => delete answers[k]);
+    currentIndex = 0;
+    showStep(0);
+  });
+
+  showStep(0);
+})();
+</script>
+
+</body>
+</html>

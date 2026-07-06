@@ -1,0 +1,10 @@
+{
+  "name": "mednova-frontend",
+  "version": "1.0.0",
+  "description": "MedNova Lifesciences frontend",
+  "private": true,
+  "scripts": {
+    "start": "echo 'Frontend is served by the backend server'",
+    "dev": "echo 'Frontend is served by the backend server'"
+  }
+}

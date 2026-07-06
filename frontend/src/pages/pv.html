@@ -1,0 +1,1387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MedNova Pharmacovigilance | Drug Safety Services Across Africa</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#12233F;
+    --ink-soft:#2C4467;
+    --paper:#F4F6F5;
+    --paper-raised:#EAEEEC;
+    --teal:#1E7F76;
+    --teal-deep:#12564F;
+    --amber:#C97A2B;
+    --line:#D3DBD8;
+    --grey:#5B6B72;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'IBM Plex Sans', sans-serif;
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1120px; margin:0 auto; padding:0 32px;}
+  a{color:inherit;}
+
+  /* -------- Nav -------- */
+  header{
+    position:sticky; top:0; z-index:50;
+    background:rgba(244,246,245,0.9);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  nav{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:18px 0;
+  }
+  .brand{
+    display:flex; align-items:baseline; gap:10px;
+  }
+  .brand-mark{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px; letter-spacing:0.14em;
+    background:var(--ink); color:var(--paper);
+    padding:3px 7px; border-radius:3px;
+  }
+  .brand-name{
+    font-family:'Newsreader', serif;
+    font-size:20px; font-weight:600;
+  }
+  .brand-name .sub{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px; color:var(--teal-deep);
+    letter-spacing:0.06em; display:block; margin-top:1px;
+  }
+  .navlinks{display:flex; gap:32px; font-size:14px; font-weight:500;}
+  .navlinks a{text-decoration:none; color:var(--ink-soft); transition:color .15s;}
+  .navlinks a:hover{color:var(--teal-deep);}
+  .nav-cta{
+    font-size:13px; font-weight:600; padding:9px 18px;
+    background:var(--ink); color:var(--paper); border-radius:3px;
+    text-decoration:none; white-space:nowrap;
+  }
+
+  /* -------- Hero -------- */
+  .hero{
+    position:relative; overflow:hidden;
+    padding:88px 0 64px;
+    border-bottom:1px solid var(--line);
+  }
+  .hero-grid{
+    display:grid; grid-template-columns:1.15fr 0.85fr; gap:56px; align-items:center;
+  }
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px; letter-spacing:0.12em; text-transform:uppercase;
+    color:var(--teal-deep); margin-bottom:18px; display:flex; align-items:center; gap:10px;
+  }
+  .eyebrow::before{content:""; width:22px; height:1px; background:var(--teal);}
+  h1{
+    font-family:'Newsreader', serif;
+    font-size:37px; line-height:1.22; font-weight:500;
+    letter-spacing:-0.01em;
+    max-width:19ch;
+  }
+  h1 em{font-style:italic; color:var(--teal-deep); font-weight:500;}
+  .hero-sub{
+    margin-top:22px; font-size:17px; color:var(--grey); max-width:46ch;
+  }
+  .hero-actions{margin-top:32px; display:flex; gap:14px; flex-wrap:wrap;}
+  .btn-primary{
+    background:var(--teal-deep); color:#fff; padding:13px 24px; border-radius:3px;
+    text-decoration:none; font-weight:600; font-size:14.5px;
+    transition:background .15s;
+  }
+  .btn-primary:hover{background:var(--ink);}
+
+  /* ---------- Readiness Checker ---------- */
+  .rc-box{max-width:640px; background:var(--paper-raised); border:1px solid var(--line); border-radius:10px; padding:36px 40px; position:relative; overflow:hidden;}
+  .rc-progress{height:4px; background:var(--line); border-radius:2px; margin-bottom:28px; overflow:hidden;}
+  .rc-progress-bar{height:100%; width:0%; background:var(--teal); transition:width .3s ease;}
+  .rc-step{display:none;}
+  .rc-step.active{display:block; animation:rcFade .25s ease;}
+  @keyframes rcFade{from{opacity:0; transform:translateY(4px);} to{opacity:1; transform:translateY(0);}}
+  .rc-label{display:block; font-family:'Newsreader', serif; font-size:19px; font-weight:600; color:var(--ink); margin-bottom:18px;}
+  .rc-options{display:flex; flex-direction:column; gap:10px;}
+  .rc-opt{
+    text-align:left; font-family:'IBM Plex Sans', sans-serif; font-size:14.5px; color:var(--ink-soft);
+    background:#fff; border:1px solid var(--line); padding:14px 18px; border-radius:6px; cursor:pointer;
+    transition:border-color .15s, background .15s;
+  }
+  .rc-opt:hover{border-color:var(--teal); background:rgba(30,127,118,0.05);}
+  .rc-result-header{display:flex; align-items:baseline; gap:14px; margin-bottom:6px;}
+  .rc-score{font-family:'Newsreader', serif; font-size:52px; font-weight:600; color:var(--teal-deep);}
+  .rc-score-label{font-family:'IBM Plex Mono', monospace; font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:var(--grey);}
+  .rc-result-tier{font-size:15px; font-weight:600; color:var(--ink); margin-bottom:20px;}
+  .rc-result-list{list-style:none; display:flex; flex-direction:column; gap:12px; margin-bottom:26px;}
+  .rc-result-list li{font-size:13.8px; color:var(--ink-soft); padding-left:18px; position:relative; line-height:1.55;}
+  .rc-result-list li::before{content:"–"; position:absolute; left:0; color:var(--amber);}
+  .rc-result-actions{display:flex; align-items:center; gap:18px; flex-wrap:wrap;}
+  .rc-restart{background:none; border:none; font-size:13.5px; color:var(--grey); text-decoration:underline; cursor:pointer;}
+  @media (max-width:640px){
+    .rc-box{padding:26px 22px;}
+  }
+  .btn-ghost{
+    border:1px solid var(--ink); color:var(--ink); padding:12px 23px; border-radius:3px;
+    text-decoration:none; font-weight:600; font-size:14.5px;
+  }
+  .signal{
+    position:relative;
+    background:#fff; border:1px solid var(--line); border-radius:12px;
+    box-shadow:0 12px 32px rgba(18,35,63,0.06);
+    padding:22px 22px 18px;
+    display:flex; flex-direction:column; gap:14px;
+  }
+  .signal-head{display:flex; align-items:center; justify-content:space-between;}
+  .signal-label{
+    font-family:'IBM Plex Mono', monospace; font-size:11px; color:var(--grey);
+    letter-spacing:0.06em; text-transform:uppercase;
+  }
+  .signal-tag{
+    display:inline-flex; align-items:center; gap:6px;
+    font-family:'IBM Plex Mono', monospace; font-size:10.5px; color:var(--amber);
+    background:rgba(201,122,43,0.1); border:1px solid rgba(201,122,43,0.3);
+    padding:5px 10px; border-radius:20px;
+  }
+  .pulse-dot{
+    width:6px; height:6px; border-radius:50%; background:var(--amber);
+    animation:pulseDot 1.8s ease-in-out infinite;
+  }
+  @keyframes pulseDot{
+    0%,100%{opacity:1; transform:scale(1);}
+    50%{opacity:0.4; transform:scale(1.4);}
+  }
+
+  /* -------- Lifecycle track -------- */
+  .lifecycle-track{position:relative; padding-left:22px;}
+  .lifecycle-track::before{
+    content:""; position:absolute; left:5px; top:6px; bottom:6px; width:1px;
+    background:var(--line);
+  }
+  .lc-stage{position:relative; padding-bottom:20px;}
+  .lc-stage:last-child{padding-bottom:0;}
+  .lc-marker{
+    position:absolute; left:-22px; top:3px;
+    width:11px; height:11px; border-radius:50%;
+    background:#fff; border:2px solid var(--line);
+  }
+  .lc-stage.active .lc-marker{
+    border-color:var(--teal-deep); background:var(--teal-deep);
+    box-shadow:0 0 0 4px rgba(30,127,118,0.15);
+  }
+  .lc-content h5{font-size:14px; font-weight:600; color:var(--ink); margin-bottom:2px;}
+  .lc-content p{font-size:12px; color:var(--grey);}
+  .lc-stage.active .lc-content h5{color:var(--teal-deep);}
+
+  @media (prefers-reduced-motion: reduce){
+    .pulse-dot{animation:none;}
+  }
+
+  /* -------- Strip stats -------- */
+  .strip{
+    border-bottom:1px solid var(--line);
+    padding:30px 0;
+  }
+  .strip-grid{
+    display:grid; grid-template-columns:repeat(3,1fr); gap:32px;
+  }
+  .strip-item{font-size:14.5px; color:var(--ink-soft);}
+  .strip-item strong{display:block; font-family:'Newsreader',serif; font-size:26px; color:var(--ink); font-weight:600; margin-bottom:4px;}
+
+  /* -------- Section shell -------- */
+  section{padding:76px 0;}
+  .section-head{max-width:640px; margin-bottom:44px;}
+  .section-head .eyebrow{margin-bottom:14px;}
+  h2{
+    font-family:'Newsreader', serif; font-weight:500;
+    font-size:34px; letter-spacing:-0.01em; margin-bottom:14px;
+  }
+  .section-head p{color:var(--grey); font-size:16px;}
+
+  /* -------- Tracks -------- */
+  .tracks{display:grid; grid-template-columns:1fr 1fr; gap:0; border:1px solid var(--line); border-radius:6px; overflow:hidden;}
+  .track{padding:36px; background:#fff;}
+  .track + .track{border-left:1px solid var(--line);}
+  .track-head{display:flex; align-items:center; gap:10px; margin-bottom:6px;}
+  .track-dot{width:9px; height:9px; border-radius:50%;}
+  .track-dot.a{background:var(--teal);}
+  .track-dot.b{background:var(--amber);}
+  .track-kicker{font-family:'IBM Plex Mono', monospace; font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:var(--grey);}
+  .track h3{font-family:'Newsreader',serif; font-size:23px; font-weight:600; margin-bottom:10px;}
+  .track-desc{color:var(--grey); font-size:14.5px; margin-bottom:26px;}
+  /* -------- Trust strip -------- */
+  .trust-strip{
+    border-bottom:1px solid var(--line); padding:24px 0;
+    display:flex; align-items:center; gap:20px; flex-wrap:wrap;
+  }
+  .trust-label{
+    font-family:'IBM Plex Mono', monospace; font-size:11px; letter-spacing:0.1em; text-transform:uppercase;
+    color:var(--grey); flex-shrink:0;
+  }
+
+  /* -------- Frameworks strip -------- */
+  .frameworks-strip{border-bottom:1px solid var(--line); padding:20px 0;}
+  .frameworks-list{display:flex; align-items:center; justify-content:center; gap:12px; flex-wrap:wrap;}
+  .framework-pill{
+    font-family:'IBM Plex Mono', monospace; font-size:11.5px; color:var(--teal-deep);
+    background:rgba(30,127,118,0.07); border:1px solid rgba(30,127,118,0.25);
+    padding:6px 14px; border-radius:16px;
+  }
+
+  /* -------- Mission band -------- */
+  .mission-text{
+    font-family:'Newsreader', serif; font-style:italic; font-weight:400;
+    font-size:20px; line-height:1.5; color:var(--ink-soft); max-width:800px; margin:0 auto; text-align:center;
+  }
+
+  /* -------- Circular service wheel -------- */
+
+  /* -------- QPPV banner (below hero) -------- */
+  .qppv-banner{background:var(--ink); border-top:3px solid var(--amber, #B27E3F);}
+  .qppv-banner .wrap{display:flex; align-items:center; gap:32px; padding-top:28px; padding-bottom:28px; flex-wrap:wrap;}
+  .qppv-banner h3{font-family:'Newsreader',serif; font-size:21px; font-weight:500; color:#fff; letter-spacing:-0.01em; margin-bottom:6px;}
+  .qppv-banner p{font-size:13.5px; line-height:1.6; color:#AEB8B4; max-width:58ch;}
+  .qppv-banner .qb-copy{flex:1; min-width:260px;}
+  .qppv-banner .btn-primary{flex-shrink:0;}
+
+  /* -------- Regulatory Affairs cross-sell -------- */
+  .ra-band{background:var(--paper-raised); border-top:1px solid var(--line); border-bottom:1px solid var(--line);}
+  .ra-pills{display:flex; flex-wrap:wrap; gap:10px; margin:22px 0 28px;}
+  .ra-pill{
+    font-size:13px; color:var(--ink); background:#fff; border:1px solid var(--line);
+    padding:8px 16px; border-radius:20px;
+  }
+  .ra-actions{display:flex; gap:18px; align-items:center; flex-wrap:wrap;}
+  .ra-actions .btn-ghost-link{font-size:13.5px; color:var(--teal-deep); text-decoration:underline; text-underline-offset:3px;}
+
+  /* -------- Checklist standalone section -------- */
+  .checklist-section .dl-card{margin-top:0;}
+
+  /* -------- Collapsible blocks -------- */
+  .pv-collapse{border:1px solid var(--line); border-radius:8px; overflow:hidden; background:#fff;}
+  .pv-collapse-toggle{
+    width:100%; display:flex; justify-content:space-between; align-items:center; gap:12px;
+    padding:15px 18px; background:var(--paper-raised); border:none; text-align:left;
+    font-family:inherit; font-size:14px; font-weight:600; color:var(--ink); cursor:pointer;
+  }
+  .pv-collapse-toggle .chev{color:var(--teal-deep); transition:transform .25s; flex-shrink:0;}
+  .pv-collapse.open .pv-collapse-toggle .chev{transform:rotate(180deg);}
+  .pv-collapse-body{max-height:0; overflow:hidden; transition:max-height .4s ease;}
+  .pv-collapse.open .pv-collapse-body{max-height:3000px;}
+  .pv-collapse-inner{padding:18px;}
+  .services-collapse{display:none; margin-top:8px;}
+  .services-collapse .service-fallback-grid{display:grid;}
+  @media (max-width:900px){ .services-collapse{display:block;} }
+
+  /* -------- Technology note -------- */
+  .tech-note{
+    display:flex; align-items:flex-start; gap:10px;
+    font-size:13px; color:var(--grey); line-height:1.6;
+    border-left:2px solid var(--teal-deep); padding:2px 0 2px 14px; margin-bottom:36px; max-width:64ch;
+  }
+
+  /* -------- Checklist download (lead magnet) -------- */
+  .dl-card{
+    margin-top:44px; border:1px solid var(--line); border-radius:10px;
+    padding:30px 32px; background:#fff;
+    display:grid; grid-template-columns:1.2fr 1fr; gap:36px; align-items:center;
+  }
+  .dl-card h3{font-size:19px; font-weight:600; letter-spacing:-0.01em; margin-bottom:8px;}
+  .dl-card .dl-tag{
+    display:inline-block; font-size:11px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase;
+    color:var(--amber, #B27E3F); margin-bottom:10px;
+  }
+  .dl-card p{font-size:13.5px; line-height:1.65; color:var(--grey);}
+  .dl-form{display:grid; grid-template-columns:1fr; gap:10px;}
+  .dl-form input{
+    width:100%; padding:11px 14px; font-size:14px; font-family:inherit;
+    border:1px solid var(--line); border-radius:6px; background:#fff; color:var(--ink);
+  }
+  .dl-form input:focus{outline:none; border-color:var(--teal-deep);}
+  .dl-form button{
+    padding:12px 14px; font-size:14px; font-weight:600; font-family:inherit;
+    background:var(--teal-deep); color:#fff; border:none; border-radius:6px; cursor:pointer;
+  }
+  .dl-form button:hover{filter:brightness(1.08);}
+  .dl-form .dl-fine{font-size:11.5px; color:var(--grey);}
+  .dl-status{font-size:13px; margin-top:4px;}
+  @media (max-width:820px){ .dl-card{grid-template-columns:1fr; gap:22px; padding:26px 22px;} }
+
+  /* -------- Outsourced QPPV (retainer) -------- */
+  .qppv-band{background:var(--paper-raised); border-top:1px solid var(--line); border-bottom:1px solid var(--line);}
+  .qppv-head{max-width:66ch;}
+  .qppv-head h2{margin-bottom:14px;}
+  .qppv-head .btn-primary{margin-top:4px;}
+  .qppv-head .lede{color:var(--ink-soft); font-size:15px; line-height:1.7; margin-bottom:18px;}
+  .qppv-head .fine, .qppv-collapse .fine{color:var(--grey); font-size:13.5px; line-height:1.65; margin-bottom:26px;}
+  .qppv-retainer-tag{
+    display:inline-flex; align-items:center; gap:8px; margin-bottom:18px;
+    font-size:12px; font-weight:600; letter-spacing:0.08em; text-transform:uppercase;
+    color:var(--teal-deep); background:rgba(30,127,118,0.1); border:1px solid rgba(30,127,118,0.25);
+    padding:6px 14px; border-radius:20px;
+  }
+  .qppv-list{list-style:none; margin:0; padding:0; display:grid; grid-template-columns:1fr; gap:0;}
+  .qppv-list li{
+    display:flex; align-items:baseline; gap:14px; padding:15px 4px;
+    border-bottom:1px solid var(--line); font-size:14.5px; color:var(--ink);
+  }
+  .qppv-list li:first-child{border-top:1px solid var(--line);}
+  .qppv-list li strong{font-weight:600; min-width:0;}
+  .qppv-list li span{color:var(--grey); font-size:13px; margin-left:auto; text-align:right;}
+  .qppv-collapse{margin-top:26px;}
+  .qppv-collapse .fine{margin-bottom:14px;}
+  @media (max-width:820px){
+    .qppv-list li span{display:none;}
+  }
+
+  .wheel-wrap{display:flex; justify-content:center; padding:20px 0 10px;}
+  .wheel-stage{
+    position:relative; width:600px; height:600px; max-width:100%;
+    --radius:230px;
+  }
+  .wheel-rings{position:absolute; inset:0; width:100%; height:100%; pointer-events:none;}
+  .wheel-rings circle{fill:none; stroke:var(--line); stroke-width:1;}
+
+  .wheel-hub{
+    position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+    width:290px; height:290px; border-radius:50%;
+    background:#fff; border:1px solid var(--line);
+    box-shadow:0 8px 30px rgba(18,35,63,0.08);
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    text-align:center; padding:28px;
+  }
+  .hub-eyebrow{
+    font-family:'IBM Plex Mono', monospace; font-size:11px; letter-spacing:0.06em;
+    color:var(--teal-deep); margin-bottom:10px; font-weight:600;
+  }
+  .hub-desc{font-size:13px; color:var(--grey); margin-bottom:14px; line-height:1.45;}
+  .hub-list{list-style:none; font-size:11.5px; color:var(--ink-soft); line-height:1.7; text-align:left;}
+  .hub-list li{padding-left:12px; position:relative;}
+  .hub-list li::before{content:"–"; position:absolute; left:0; color:var(--teal);}
+
+  .wheel-node{
+    position:absolute; top:50%; left:50%;
+    transform:rotate(var(--angle)) translate(var(--radius)) rotate(calc(-1 * var(--angle)));
+    margin:-34px 0 0 -74px;
+    width:148px; padding:10px 14px;
+    background:#fff; border:1px solid var(--line); border-radius:24px;
+    cursor:pointer; text-align:left;
+    display:flex; align-items:center; gap:8px;
+    transition:border-color .15s, background .15s, box-shadow .15s;
+    font-family:'IBM Plex Sans', sans-serif;
+  }
+  .wheel-node:hover{border-color:var(--teal);}
+  .wheel-node.active{
+    background:var(--teal-deep); border-color:var(--teal-deep);
+    box-shadow:0 6px 18px rgba(18,86,79,0.25);
+  }
+  .wn-num{
+    font-family:'IBM Plex Mono', monospace; font-size:10px; color:var(--teal-deep);
+    background:var(--paper-raised); border-radius:50%; width:22px; height:22px;
+    display:flex; align-items:center; justify-content:center; flex-shrink:0;
+  }
+  .wheel-node.active .wn-num{background:rgba(255,255,255,0.2); color:#fff;}
+  .wn-label{font-size:12.5px; font-weight:500; color:var(--ink); line-height:1.25;}
+  .wheel-node.active .wn-label{color:#fff;}
+
+  .service-fallback-grid{display:none; grid-template-columns:1fr; gap:1px; background:var(--line); border:1px solid var(--line); border-radius:6px; overflow:hidden;}
+  .one-service-note{
+    margin-top:20px; text-align:center; font-size:14px; color:var(--grey);
+    background:var(--paper-raised); border:1px solid var(--line); border-radius:8px; padding:16px 20px;
+  }
+  .one-service-note strong{color:var(--ink); font-weight:600;}
+
+  /* -------- Outsource circles -------- */
+  .outsource-circles{display:flex; justify-content:center; flex-wrap:wrap; gap:36px 28px;}
+  .oc-item{display:flex; flex-direction:column; align-items:center; text-align:center; width:130px;}
+  .oc-badge{
+    width:64px; height:64px; border-radius:50%;
+    background:#fff; border:1.5px solid var(--teal-deep);
+    display:flex; align-items:center; justify-content:center;
+    font-size:22px; font-weight:700; color:var(--teal-deep);
+    box-shadow:0 6px 16px rgba(18,86,79,0.1);
+    margin-bottom:12px; transition:background .2s, color .2s;
+  }
+  .oc-item:hover .oc-badge{background:var(--teal-deep); color:#fff;}
+  .oc-label{font-size:13.5px; font-weight:500; color:var(--ink); line-height:1.4;}
+
+  /* -------- Service detail grid (mobile fallback) -------- */
+  .service-detail-grid{display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--line); border:1px solid var(--line); border-radius:6px; overflow:hidden;}
+  .sd-card{background:#fff; padding:30px;}
+  .sd-card h4{font-family:'Newsreader',serif; font-size:20px; font-weight:600; margin-bottom:6px;}
+  .sd-note{font-size:13px; color:var(--amber); margin-bottom:12px; font-style:italic;}
+  .sd-desc{font-size:13.5px; color:var(--ink-soft); margin-bottom:14px; line-height:1.5;}
+  .sd-card ul{list-style:none; display:grid; grid-template-columns:1fr 1fr; gap:6px 14px;}
+  .sd-card li{font-size:13.5px; color:var(--grey); padding-left:14px; position:relative;}
+  .sd-card li::before{content:"–"; position:absolute; left:0; color:var(--teal);}
+
+  /* -------- Why PV band -------- */
+  .why-pv{background:var(--ink); color:#fff; border-radius:8px; padding:52px;}
+  .why-pv .eyebrow{color:#8FD6CC;}
+  .why-pv .eyebrow::before{background:#8FD6CC;}
+  .why-pv h2{color:#fff; font-size:30px;}
+  .why-pv > .wrap-inner > p.lead{color:#C4CEDB; font-size:15.5px; max-width:62ch; margin-top:14px; margin-bottom:30px;}
+  .why-pv-grid{display:grid; grid-template-columns:repeat(5,1fr); gap:18px;}
+  .why-pv-item{border-top:2px solid var(--teal); padding-top:12px; font-size:13.5px; color:#D6DCE8; line-height:1.5;}
+
+  /* -------- Industries -------- */
+  .industries-grid{display:flex; flex-wrap:wrap; gap:12px;}
+  .industry-pill{
+    border:1px solid var(--line); border-radius:24px; padding:10px 20px;
+    font-size:13.5px; font-weight:500; color:var(--ink-soft); background:#fff;
+  }
+
+  .service-list{list-style:none; display:flex; flex-direction:column; gap:0;}
+  .service-list li{
+    padding:16px 0; border-top:1px solid var(--line);
+    display:grid; grid-template-columns:28px 1fr; gap:14px;
+  }
+  .service-list li:first-child{border-top:none; padding-top:0;}
+  .service-list .num{
+    font-family:'IBM Plex Mono', monospace; font-size:11px; color:var(--grey); padding-top:3px;
+  }
+  .service-list h4{font-size:15px; font-weight:600; margin-bottom:4px;}
+  .service-list p{font-size:13.8px; color:var(--grey); line-height:1.5;}
+
+  /* -------- Approach -------- */
+  .approach-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:24px;}
+  .approach-card{
+    background:#fff; border:1px solid var(--line); border-radius:6px; padding:26px;
+  }
+  .approach-card .mark{
+    font-family:'IBM Plex Mono', monospace; font-size:12px; color:var(--teal-deep);
+    margin-bottom:14px; display:inline-block;
+  }
+  .approach-card h4{font-family:'Newsreader',serif; font-size:19px; font-weight:600; margin-bottom:8px;}
+  .approach-card p{font-size:14px; color:var(--grey);}
+
+  /* -------- Package path -------- */
+  .pkg-path{display:flex; align-items:stretch; gap:0;}
+  .pkg-connector{
+    display:flex; align-items:center; justify-content:center;
+    color:var(--line); font-size:20px; flex-shrink:0; width:36px;
+  }
+  .pkg-path-card{
+    flex:1; background:#fff; border:1px solid var(--line); border-radius:10px; padding:28px;
+    display:flex; flex-direction:column;
+  }
+  .pkg-path-card.featured{
+    border-color:var(--teal-deep); box-shadow:0 10px 30px rgba(18,86,79,0.12);
+    transform:translateY(-8px);
+  }
+  .pkg-scope{display:flex; gap:5px; margin-bottom:14px;}
+  .scope-dot{width:16px; height:5px; border-radius:3px; background:var(--line);}
+  .scope-dot.on{background:var(--teal-deep);}
+
+  /* -------- Packages (card content, shared) -------- */
+  .package-kicker{
+    font-family:'IBM Plex Mono', monospace; font-size:10.5px; letter-spacing:0.08em; text-transform:uppercase;
+    color:var(--teal-deep);
+  }
+  .pkg-path-card h4{font-family:'Newsreader',serif; font-size:19px; font-weight:600; margin:10px 0 6px; line-height:1.25;}
+  .package-sub{font-size:13px; color:var(--grey); margin-bottom:16px;}
+  .pkg-path-card ul{list-style:none; display:flex; flex-direction:column; gap:8px;}
+  .pkg-path-card li{font-size:13px; color:var(--ink-soft); padding-left:16px; position:relative;}
+  .pkg-path-card li::before{content:"–"; position:absolute; left:0; color:var(--teal);}
+  .package-best{
+    margin-top:16px; padding-top:16px; border-top:1px solid var(--line);
+    font-size:12.5px; color:var(--grey); line-height:1.5;
+  }
+  .package-best strong{color:var(--ink); font-weight:600;}
+
+  /* -------- Commitments -------- */
+  .commitment-item{
+    display:flex; align-items:center; gap:10px;
+    background:#fff; border:1px solid var(--line); border-radius:24px;
+    padding:12px 20px; font-size:13.5px; font-weight:500; color:var(--ink);
+  }
+  .commitment-check{
+    color:var(--teal-deep); font-weight:700; font-size:13px;
+    width:20px; height:20px; border-radius:50%; background:rgba(30,127,118,0.1);
+    display:flex; align-items:center; justify-content:center; flex-shrink:0;
+  }
+
+  /* -------- Process flow -------- */
+  .process-step{
+    display:flex; flex-direction:column; align-items:center; gap:8px; text-align:center; flex:1; min-width:100px;
+  }
+  .process-num{
+    font-family:'IBM Plex Mono', monospace; font-size:13px; color:var(--teal-deep);
+    width:40px; height:40px; border-radius:50%; border:1.5px solid var(--teal-deep);
+    display:flex; align-items:center; justify-content:center; font-weight:600;
+  }
+
+  /* -------- Why Africa context -------- */
+  .context-bridge{
+    font-family:'Newsreader',serif; font-style:italic; font-size:18px; color:var(--teal-deep);
+    text-align:center; max-width:720px; margin:0 auto; line-height:1.5;
+  }
+
+  /* -------- Supported label -------- */
+  .supported-label{
+    display:block; font-family:'IBM Plex Mono', monospace; font-size:11px; letter-spacing:0.08em; text-transform:uppercase;
+    color:#8FD6CC; margin:26px 0 14px;
+  }
+
+  /* -------- Comparison table -------- */
+  .compare-table{border:1px solid var(--line); border-radius:10px; overflow:hidden; background:#fff;}
+  .compare-row{display:grid; grid-template-columns:1fr 1.3fr 1.3fr;}
+  .compare-row + .compare-row{border-top:1px solid var(--line);}
+  .compare-cell{padding:16px 20px; font-size:14px; color:var(--ink-soft); display:flex; align-items:center;}
+  .compare-label{font-weight:600; color:var(--ink); font-size:13px;}
+  .compare-head .compare-cell{
+    font-family:'IBM Plex Mono', monospace; font-size:11px; letter-spacing:0.06em; text-transform:uppercase;
+    color:var(--grey); font-weight:600; padding-top:14px; padding-bottom:14px;
+  }
+  .compare-highlight{background:rgba(30,127,118,0.06); color:var(--teal-deep); font-weight:600;}
+  .compare-head .compare-highlight{color:var(--teal-deep); background:rgba(30,127,118,0.1);}
+
+  /* -------- Industries split -------- */
+  .industries-split{display:grid; grid-template-columns:1fr 1fr; gap:32px;}
+  .industry-group-label{
+    display:block; font-family:'IBM Plex Mono', monospace; font-size:11px; letter-spacing:0.08em; text-transform:uppercase;
+    color:var(--teal-deep); margin-bottom:14px;
+  }
+
+  /* -------- About / credibility -------- */
+  .about{
+    background:var(--ink); color:var(--paper); border-radius:8px;
+    padding:52px; display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:center;
+  }
+  .about h2{color:#fff;}
+  .about .eyebrow{color:#8FD6CC;}
+  .about .eyebrow::before{background:#8FD6CC;}
+  .about p{color:#C4CEDB; font-size:15.5px; margin-top:14px;}
+
+  /* -------- Related services -------- */
+  .related-band{
+    background:var(--paper-raised); border:1px solid var(--line); border-radius:10px;
+    padding:28px 34px; display:flex; align-items:center; justify-content:space-between; gap:24px; flex-wrap:wrap;
+  }
+  .related-head h3{font-family:'Newsreader',serif; font-size:18px; font-weight:600; margin-top:6px;}
+  .related-list{display:flex; align-items:center; gap:10px; flex-wrap:wrap;}
+  .related-item{
+    font-size:13.5px; font-weight:600; color:var(--teal-deep); text-decoration:none;
+    border-bottom:1px solid transparent; transition:border-color .15s;
+  }
+  .related-item:hover{border-color:var(--teal-deep);}
+  .related-sep{color:var(--line);}
+
+  /* -------- CTA -------- */
+  .cta-band{
+    text-align:center; padding:80px 0; border-top:1px solid var(--line);
+  }
+  .cta-band h2{margin-bottom:12px;}
+  .cta-band p{color:var(--grey); max-width:44ch; margin:0 auto 30px;}
+  .cta-row{display:flex; gap:14px; justify-content:center; flex-wrap:wrap;}
+
+  .contact-form{
+    max-width:640px; margin:0 auto; text-align:left;
+    background:#fff; border:1px solid var(--line); border-radius:8px; padding:32px;
+  }
+  .form-row{margin-bottom:18px;}
+  .form-row.two{display:grid; grid-template-columns:1fr 1fr; gap:18px;}
+  .field label{
+    display:block; font-size:12.5px; font-weight:600; color:var(--ink-soft);
+    margin-bottom:6px; letter-spacing:0.02em;
+  }
+  .field input, .field select, .field textarea{
+    width:100%; font-family:'IBM Plex Sans', sans-serif; font-size:14.5px; color:var(--ink);
+    border:1px solid var(--line); border-radius:4px; padding:10px 12px;
+    background:var(--paper); transition:border-color .15s;
+  }
+  .field input:focus, .field select:focus, .field textarea:focus{
+    outline:none; border-color:var(--teal); background:#fff;
+  }
+  .field textarea{resize:vertical; font-family:'IBM Plex Sans', sans-serif;}
+  .contact-form .btn-primary{border:none; cursor:pointer;}
+  .contact-form .btn-primary:disabled{opacity:0.6; cursor:not-allowed;}
+  .form-status{margin-top:14px; font-size:13.5px;}
+  .form-status.success{color:var(--teal-deep);}
+  .form-status.error{color:#B23A2E;}
+
+  @media (max-width:640px){
+    .form-row.two{grid-template-columns:1fr;}
+    .contact-form{padding:22px;}
+  }
+
+  footer{
+    border-top:1px solid var(--line); padding:28px 0; font-size:13px; color:var(--grey);
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px;
+  }
+
+  @media (max-width:860px){
+    .hero-grid{grid-template-columns:1fr;}
+    h1{font-size:30px; max-width:none;}
+    .navlinks{display:none;}
+    .tracks{grid-template-columns:1fr;}
+    .track + .track{border-left:none; border-top:1px solid var(--line);}
+    .strip-grid{grid-template-columns:1fr; gap:18px;}
+    .approach-grid{grid-template-columns:1fr;}
+    .about{grid-template-columns:1fr; padding:32px;}
+    .service-detail-grid{grid-template-columns:1fr;}
+    .sd-card ul{grid-template-columns:1fr;}
+    .why-pv{padding:32px;}
+    .why-pv-grid{grid-template-columns:1fr 1fr; gap:16px;}
+    .wheel-wrap{display:none;}
+    .outsource-circles{gap:24px 16px;}
+    .oc-item{width:100px;}
+    .oc-badge{width:52px; height:52px; font-size:18px;}
+    .pkg-path{flex-direction:column; gap:16px;}
+    .pkg-connector{transform:rotate(90deg); width:auto; height:20px; margin:-6px 0;}
+    .pkg-path-card.featured{transform:none;}
+    .industries-split{grid-template-columns:1fr; gap:24px;}
+    .compare-row{grid-template-columns:1fr 1fr; font-size:12.5px;}
+    .compare-label{display:none;}
+    .compare-head .compare-cell:first-child{display:none;}
+    .compare-cell{padding:12px 14px;}
+    .frameworks-list{gap:8px;}
+    .framework-pill{font-size:10.5px; padding:5px 11px;}
+    .related-band{flex-direction:column; align-items:flex-start; padding:24px;}
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <nav>
+      <div class="brand">
+        <a href="index.html" style="text-decoration:none; display:flex; align-items:baseline; gap:10px; color:inherit;">
+        <span class="brand-mark">MN·PV</span>
+        <span class="brand-name">MedNova Pharmacovigilance
+          <span class="sub">A service line of MedNova Lifesciences</span>
+        </span>
+        </a>
+      </div>
+      <div class="navlinks">
+        <a href="#qppv">QPPV</a>
+        <a href="#regulatory">Regulatory</a>
+        <a href="#services">Services</a>
+        <a href="#packages">Packages</a>
+        <a href="regulatory.html">Regulatory Affairs</a>
+        <a href="cro.html">Clinical Development</a>
+        <a href="capability-statement.html">Capability Statement</a>
+      </div>
+      <a class="nav-cta" href="#contact">Talk to us</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow">Pharmacovigilance &amp; Regulatory Affairs</div>
+      <h1>Protecting Patients. <em>Delivering Drug Safety Across Africa.</em></h1>
+      <p class="hero-sub">Local representation, inspection readiness, and faster approvals — for pharmaceutical, biotech, vaccine, and medical device companies in Nigeria and West Africa.</p>
+      <div class="hero-actions">
+        <a class="btn-primary" href="#contact">Start a conversation</a>
+        <a class="btn-ghost" href="#services">View services</a>
+      </div>
+    </div>
+    <div class="signal">
+      <div class="signal-head">
+        <span class="signal-label">Product Lifecycle Coverage</span>
+        <span class="signal-tag"><span class="pulse-dot"></span>Trial to post-marketing</span>
+      </div>
+      <div class="lifecycle-track">
+        <div class="lc-stage">
+          <div class="lc-marker"></div>
+          <div class="lc-content"><h5>Preclinical &amp; Start-up</h5><p>PV system setup &amp; SOPs</p></div>
+        </div>
+        <div class="lc-stage">
+          <div class="lc-marker"></div>
+          <div class="lc-content"><h5>Clinical Trials</h5><p>SAE / SUSAR reporting</p></div>
+        </div>
+        <div class="lc-stage">
+          <div class="lc-marker"></div>
+          <div class="lc-content"><h5>Regulatory Submission</h5><p>Safety documentation &amp; regulatory filing</p></div>
+        </div>
+        <div class="lc-stage">
+          <div class="lc-marker"></div>
+          <div class="lc-content"><h5>Market Launch</h5><p>Local QPPV representation</p></div>
+        </div>
+        <div class="lc-stage active">
+          <div class="lc-marker"></div>
+          <div class="lc-content"><h5>Post-Marketing</h5><p>Signal detection &amp; PSUR / PBRER</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="qppv-banner">
+  <div class="wrap">
+    <div class="qb-copy">
+      <h3>Need a Local QPPV in Nigeria?</h3>
+      <p>MedNova provides outsourced QPPV services for Marketing Authorization Holders, helping companies meet NAFDAC requirements while maintaining continuous pharmacovigilance compliance.</p>
+    </div>
+    <a class="btn-primary" href="#contact">Request a Proposal</a>
+  </div>
+</section>
+
+
+<section class="frameworks-strip">
+  <div class="wrap">
+    <div class="frameworks-list">
+      <span class="framework-pill">ICH Guidelines</span>
+      <span class="framework-pill">Good Pharmacovigilance Practices (GVP)</span>
+      <span class="framework-pill">Clinical Trial Safety</span>
+      <span class="framework-pill">Post-Marketing Surveillance</span>
+    </div>
+  </div>
+</section>
+
+<section id="approach">
+  <div class="wrap">
+    <div class="why-pv">
+      <div class="wrap-inner">
+        <div class="eyebrow">Why MedNova</div>
+        <h2>Global standards. Local implementation.</h2>
+        <p class="lead">Most pharmacovigilance providers understand global regulations. Few understand local implementation. MedNova combines both — international standards, delivered with the operational knowledge to work through fragmented reporting systems, evolving regulations, multiple languages, and varied care settings.</p>
+        <span class="supported-label">Supported across</span>
+        <div class="why-pv-grid">
+          <div class="why-pv-item">Clinical Trials</div>
+          <div class="why-pv-item">Marketed Products</div>
+          <div class="why-pv-item">Vaccines</div>
+          <div class="why-pv-item">Medical Devices</div>
+          <div class="why-pv-item">Public Health Programs</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="qppv" class="qppv-band">
+  <div class="wrap">
+    <div class="qppv-head">
+      <div class="eyebrow">Ongoing partnership</div>
+      <span class="qppv-retainer-tag">Retainer engagement</span>
+      <h2>Outsourced QPPV Services</h2>
+      <p class="fine"><strong>This is now a regulatory obligation.</strong> Under NAFDAC's QPPV guidelines (effective October 2024), every Marketing Authorization Holder must maintain a resident QPPV in Nigeria — permanently, continuously, and with backup provisions in place. MedNova provides exactly this.</p>
+      <a class="btn-primary" href="#contact">Request a QPPV proposal</a>
+    </div>
+
+    <div class="pv-collapse qppv-collapse">
+      <button class="pv-collapse-toggle" type="button">What's included in a QPPV retainer <span class="chev">&#9662;</span></button>
+      <div class="pv-collapse-body"><div class="pv-collapse-inner">
+        <p class="fine">For Marketing Authorization Holders, this is the obligation that never closes: a responsible safety contact, current aggregate reports, and continuous surveillance. MedNova carries it as a monthly retainer, so your compliance position holds between submissions — not just at them.</p>
+        <ul class="qppv-list">
+          <li><strong>Local Safety Officer</strong><span>Named, in-country</span></li>
+          <li><strong>Local Contact Person for Pharmacovigilance</strong><span>Regulatory point of contact</span></li>
+          <li><strong>QPPV support</strong><span>Standing responsibility</span></li>
+          <li><strong>Aggregate reporting</strong><span>PSUR / PBRER cycles</span></li>
+          <li><strong>Signal detection</strong><span>Continuous review</span></li>
+          <li><strong>Literature monitoring</strong><span>Weekly surveillance</span></li>
+        </ul>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<section id="regulatory" class="ra-band">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Beyond safety</div>
+      <h2>Regulatory Affairs</h2>
+      <p>Bringing products to market in Nigeria — and keeping them there. QPPV clients get one partner for both safety and registration.</p>
+    </div>
+    <div class="ra-pills">
+      <span class="ra-pill">Drug registration</span>
+      <span class="ra-pill">Food registration</span>
+      <span class="ra-pill">Medical devices</span>
+      <span class="ra-pill">Cosmetics</span>
+      <span class="ra-pill">Import permits</span>
+      <span class="ra-pill">Renewals</span>
+      <span class="ra-pill">Variations</span>
+      <span class="ra-pill">MAH services</span>
+    </div>
+    <div class="ra-actions">
+      <a class="btn-primary" href="#contact">Request a Regulatory Consultation</a>
+      <a class="btn-ghost-link" href="regulatory.html">Explore regulatory services →</a>
+    </div>
+  </div>
+</section>
+
+
+<section id="services">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">What we do</div>
+      <h2>Pharmacovigilance, at full depth</h2>
+      <p>Six core disciplines — from a single case report to a national regulatory system.</p>
+    </div>
+
+    <p class="tech-note">Technology enabled — we use proprietary digital tools to support safety operations, with every output checked and finalized by trained safety staff before use.</p>
+
+    <div class="wheel-wrap">
+      <div class="wheel-stage" id="wheelStage" role="tablist" aria-label="Pharmacovigilance service areas">
+        <svg class="wheel-rings" viewBox="0 0 600 600"><circle cx="300" cy="300" r="298" /><circle cx="300" cy="300" r="230" /></svg>
+
+        <div class="wheel-hub" id="wheelHub" role="tabpanel" aria-live="polite">
+          <span class="hub-eyebrow" id="hubEyebrow">01 — Case Processing &amp; Reporting</span>
+          <p class="hub-desc" id="hubDesc">Individual and aggregate safety reporting handled to global submission standards.</p>
+          <ul class="hub-list" id="hubList">
+            <li>ICSR intake &amp; triage</li><li>MedDRA / WHO-DD coding</li><li>Narrative writing</li>
+            <li>E2B(R3) submissions</li><li>PSUR / PBRER / DSUR</li><li>SUSAR &amp; PADER reporting</li>
+          </ul>
+        </div>
+
+        <button class="wheel-node active" data-index="0" id="wheel-tab-0" role="tab" aria-selected="true" aria-controls="wheelHub" tabindex="0" style="--angle:-90deg"><span class="wn-num">01</span><span class="wn-label">Case Processing &amp; Reporting</span></button>
+        <button class="wheel-node" data-index="1" id="wheel-tab-1" role="tab" aria-selected="false" aria-controls="wheelHub" tabindex="-1" style="--angle:-30deg"><span class="wn-num">02</span><span class="wn-label">Signal &amp; Risk Management</span></button>
+        <button class="wheel-node" data-index="2" id="wheel-tab-2" role="tab" aria-selected="false" aria-controls="wheelHub" tabindex="-1" style="--angle:30deg"><span class="wn-num">03</span><span class="wn-label">Clinical Trial Safety</span></button>
+        <button class="wheel-node" data-index="3" id="wheel-tab-3" role="tab" aria-selected="false" aria-controls="wheelHub" tabindex="-1" style="--angle:90deg"><span class="wn-num">04</span><span class="wn-label">Regulatory &amp; System Support</span></button>
+        <button class="wheel-node" data-index="4" id="wheel-tab-4" role="tab" aria-selected="false" aria-controls="wheelHub" tabindex="-1" style="--angle:150deg"><span class="wn-num">05</span><span class="wn-label">Surveillance &amp; Medical Info</span></button>
+        <button class="wheel-node" data-index="5" id="wheel-tab-5" role="tab" aria-selected="false" aria-controls="wheelHub" tabindex="-1" style="--angle:210deg"><span class="wn-num">06</span><span class="wn-label">Training &amp; Capability</span></button>
+      </div>
+    </div>
+
+    <div class="pv-collapse services-collapse">
+      <button class="pv-collapse-toggle" type="button">Browse all six service areas <span class="chev">&#9662;</span></button>
+      <div class="pv-collapse-body"><div class="pv-collapse-inner">
+      <div class="service-fallback-grid">
+      <div class="sd-card">
+        <h4>Case Processing &amp; Reporting</h4>
+        <p class="sd-desc">Individual and aggregate safety reporting handled to global submission standards.</p>
+        <ul>
+          <li>ICSR intake &amp; triage</li><li>MedDRA / WHO-DD coding</li><li>Narrative writing</li>
+          <li>E2B(R3) submissions</li><li>PSUR / PBRER / DSUR</li><li>SUSAR &amp; PADER reporting</li>
+        </ul>
+      </div>
+      <div class="sd-card">
+        <h4>Signal &amp; Risk Management</h4>
+        <p class="sd-desc">Turning safety data into decisions, not just reports.</p>
+        <ul>
+          <li>Signal detection &amp; validation</li><li>Benefit-risk evaluation</li>
+          <li>Risk Management Plans (RMP)</li><li>Risk minimization activities</li>
+          <li>Safety communication plans</li><li>Safety trend analysis</li>
+        </ul>
+      </div>
+      <div class="sd-card">
+        <h4>Clinical Trial Safety</h4>
+        <p class="sd-desc">Integrated directly with MedNova Clinical Research.</p>
+        <ul>
+          <li>SAE &amp; SUSAR management</li><li>Investigator safety reporting</li>
+          <li>Medical review coordination</li><li>Safety database management</li>
+          <li>Safety reconciliation</li><li>DSMB support</li>
+        </ul>
+      </div>
+      <div class="sd-card">
+        <h4>Regulatory &amp; System Support</h4>
+        <p class="sd-desc">Local QPPV representation and full PV system build-out.</p>
+        <ul>
+          <li>Local QPPV contact</li><li>Regulatory PV support</li><li>Inspection readiness</li>
+          <li>PV system setup &amp; SOPs</li><li>CAPA management</li><li>Vendor qualification</li>
+        </ul>
+      </div>
+      <div class="sd-card">
+        <h4>Surveillance &amp; Medical Information</h4>
+        <p class="sd-desc">Continuous monitoring beyond the case report.</p>
+        <ul>
+          <li>Weekly literature surveillance</li><li>Signal identification</li>
+          <li>Medical information responses</li><li>Adverse event &amp; complaint intake</li>
+        </ul>
+      </div>
+      <div class="sd-card">
+        <h4>Training &amp; Capability Building</h4>
+        <p class="sd-desc">Building safety competency inside your organization, not just around it.</p>
+        <ul>
+          <li>Good Pharmacovigilance Practice (GVP)</li><li>ICH E2 guidelines</li>
+          <li>Regional PV regulations</li><li>Sponsor &amp; site training</li>
+        </ul>
+      </div>
+    </div>
+      </div></div>
+    </div>
+
+    <div class="one-service-note">
+      <strong>Need only one service?</strong> We provide standalone support or complete pharmacovigilance operations.
+    </div>
+  </div>
+</section>
+
+<script>
+  const serviceData = [
+    { title: "Case Processing & Reporting", desc: "Individual and aggregate safety reporting handled to global submission standards.", items: ["ICSR intake & triage", "MedDRA / WHO-DD coding", "Narrative writing", "E2B(R3) submissions", "PSUR / PBRER / DSUR", "SUSAR & PADER reporting"] },
+    { title: "Signal & Risk Management", desc: "Turning safety data into decisions, not just reports.", items: ["Signal detection & validation", "Benefit-risk evaluation", "Risk Management Plans (RMP)", "Risk minimization activities", "Safety communication plans", "Safety trend analysis"] },
+    { title: "Clinical Trial Safety", desc: "Integrated directly with MedNova Clinical Research.", items: ["SAE & SUSAR management", "Investigator safety reporting", "Medical review coordination", "Safety database management", "Safety reconciliation", "DSMB support"] },
+    { title: "Regulatory & System Support", desc: "Local QPPV representation and full PV system build-out.", items: ["Local QPPV contact", "Regulatory PV support", "Inspection readiness", "PV system setup & SOPs", "CAPA management", "Vendor qualification"] },
+    { title: "Surveillance & Medical Information", desc: "Continuous monitoring beyond the case report.", items: ["Weekly literature surveillance", "Signal identification", "Medical information responses", "Adverse event & complaint intake"] },
+    { title: "Training & Capability Building", desc: "Building safety competency inside your organization, not just around it.", items: ["Good Pharmacovigilance Practice (GVP)", "ICH E2 guidelines", "Regional PV regulations", "Sponsor & site training"] }
+  ];
+
+  const wheelNodes = document.querySelectorAll('.wheel-node');
+  const hubEyebrow = document.getElementById('hubEyebrow');
+  const hubDesc = document.getElementById('hubDesc');
+  const hubList = document.getElementById('hubList');
+
+  function selectWheel(idx, focus) {
+    const data = serviceData[idx];
+    wheelNodes.forEach((n, i) => {
+      const on = i === idx;
+      n.classList.toggle('active', on);
+      n.setAttribute('aria-selected', on ? 'true' : 'false');
+      n.setAttribute('tabindex', on ? '0' : '-1');
+    });
+    hubEyebrow.textContent = String(idx + 1).padStart(2, '0') + ' — ' + data.title;
+    hubDesc.textContent = data.desc;
+    hubList.innerHTML = data.items.map(i => '<li>' + i + '</li>').join('');
+    if (focus) wheelNodes[idx].focus();
+  }
+  wheelNodes.forEach(node => {
+    node.addEventListener('click', () => selectWheel(parseInt(node.dataset.index, 10), false));
+    node.addEventListener('keydown', (e) => {
+      const n = wheelNodes.length;
+      const idx = parseInt(node.dataset.index, 10);
+      if (e.key === 'ArrowRight' || e.key === 'ArrowDown') { e.preventDefault(); selectWheel((idx + 1) % n, true); }
+      else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { e.preventDefault(); selectWheel((idx - 1 + n) % n, true); }
+      else if (e.key === 'Home') { e.preventDefault(); selectWheel(0, true); }
+      else if (e.key === 'End') { e.preventDefault(); selectWheel(n - 1, true); }
+    });
+  });
+</script>
+
+<section id="packages">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">How we engage</div>
+      <h2>Packaged for how sponsors actually buy</h2>
+      <p>Three ways to work with MedNova.</p>
+    </div>
+
+    <div class="pkg-path">
+      <div class="pkg-path-card">
+        <div class="pkg-scope"><span class="scope-dot on"></span><span class="scope-dot"></span><span class="scope-dot"></span></div>
+        <span class="package-kicker">For market entry</span>
+        <h4>Market Entry Pharmacovigilance</h4>
+        <p class="package-sub">For companies entering the Nigerian market.</p>
+        <ul>
+          <li>Local PV setup</li>
+          <li>SOP development</li>
+          <li>Regulatory support</li>
+          <li>Initial compliance review</li>
+        </ul>
+        <p class="package-best"><strong>Best for:</strong> Companies launching products in Nigeria.</p>
+      </div>
+
+      <div class="pkg-connector"><span>→</span></div>
+
+      <div class="pkg-path-card featured">
+        <div class="pkg-scope"><span class="scope-dot on"></span><span class="scope-dot on"></span><span class="scope-dot"></span></div>
+        <span class="package-kicker">For active trials</span>
+        <h4>Clinical Development Safety</h4>
+        <p class="package-sub">For sponsors running studies.</p>
+        <ul>
+          <li>SAE / SUSAR reporting</li>
+          <li>Safety reconciliation</li>
+          <li>Investigator reporting</li>
+          <li>Medical review coordination</li>
+        </ul>
+        <p class="package-best"><strong>Best for:</strong> Sponsors running Phase II–IV clinical studies.</p>
+      </div>
+
+      <div class="pkg-connector"><span>→</span></div>
+
+      <div class="pkg-path-card">
+        <div class="pkg-scope"><span class="scope-dot on"></span><span class="scope-dot on"></span><span class="scope-dot on"></span></div>
+        <span class="package-kicker">For complete coverage</span>
+        <h4>Managed Drug Safety Operations</h4>
+        <p class="package-sub">For organizations that want MedNova to run drug safety end to end.</p>
+        <ul>
+          <li>End-to-end case processing</li>
+          <li>Aggregate reporting</li>
+          <li>Signal detection</li>
+          <li>Literature surveillance</li>
+          <li>Regulatory submissions</li>
+          <li>Ongoing compliance support</li>
+        </ul>
+        <p class="package-best"><strong>Best for:</strong> Organizations ready to fully outsource pharmacovigilance.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="industries">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Who we serve</div>
+      <h2>Industries we work with</h2>
+      <p>Drug safety obligations look different across these groups — the underlying discipline doesn't.</p>
+    </div>
+    <div class="industries-split">
+      <div class="industry-group">
+        <span class="industry-group-label">Commercial</span>
+        <div class="industries-grid">
+          <span class="industry-pill">Pharma</span>
+          <span class="industry-pill">Biotech</span>
+          <span class="industry-pill">Device</span>
+          <span class="industry-pill">CRO</span>
+        </div>
+      </div>
+      <div class="industry-group">
+        <span class="industry-group-label">Public Health</span>
+        <div class="industries-grid">
+          <span class="industry-pill">Public Health</span>
+          <span class="industry-pill">WHO Programs</span>
+          <span class="industry-pill">Ministries</span>
+          <span class="industry-pill">NGOs</span>
+          <span class="industry-pill">Donors</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="checklist-section" id="checklist-dl">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Free resource</div>
+      <h2>Download the QPPV Compliance Checklist</h2>
+    </div>
+    <div class="dl-card" id="checklist">
+      <div>
+        <span class="dl-tag">Free download</span>
+        <h3>NAFDAC QPPV Compliance Checklist</h3>
+        <p>A practical self-assessment guide for Marketing Authorization Holders — 10 sections covering governance, safety reporting, signal detection, and inspection readiness against current NAFDAC expectations.</p>
+      </div>
+      <form class="dl-form" id="dlForm">
+        <input type="hidden" name="access_key" value="YOUR_WEB3FORMS_ACCESS_KEY">
+        <input type="hidden" name="subject" value="Checklist download — QPPV lead">
+        <input type="checkbox" name="botcheck" style="display:none">
+        <input type="text" name="name" required placeholder="Your name">
+        <input type="email" name="email" required placeholder="Work email">
+        <button type="submit">Get the checklist</button>
+        <span class="dl-fine">We'll email occasional pharmacovigilance updates. No spam, unsubscribe anytime.</span>
+        <span class="dl-status" id="dlStatus"></span>
+      </form>
+    </div>
+  </div>
+</section>
+
+<section id="try-it">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Free Self-Assessment</div>
+      <h2>QPPV Compliance Readiness Checker</h2>
+      <p>Answer six questions to get an instant readiness score against NAFDAC's QPPV requirements — a real assessment tool, not a demo.</p>
+    </div>
+
+    <div class="rc-box" id="rcBox">
+      <div class="rc-progress"><div class="rc-progress-bar" id="rcProgressBar"></div></div>
+
+      <div class="rc-step active" data-step="1">
+        <label class="rc-label">Local QPPV representation</label>
+        <div class="rc-options" data-field="qppv">
+          <button class="rc-opt" data-value="2">Permanent, resident QPPV in place</button>
+          <button class="rc-opt" data-value="1">QPPV in place with coverage gaps</button>
+          <button class="rc-opt" data-value="0">No local QPPV yet</button>
+        </div>
+      </div>
+
+      <div class="rc-step" data-step="2">
+        <label class="rc-label">Backup / deputy QPPV provisions</label>
+        <div class="rc-options" data-field="backup">
+          <button class="rc-opt" data-value="2">Backup provisions formally in place</button>
+          <button class="rc-opt" data-value="1">Planned but not documented</button>
+          <button class="rc-opt" data-value="0">Not addressed</button>
+        </div>
+      </div>
+
+      <div class="rc-step" data-step="3">
+        <label class="rc-label">Documented PV SOPs</label>
+        <div class="rc-options" data-field="sops">
+          <button class="rc-opt" data-value="2">Complete and current</button>
+          <button class="rc-opt" data-value="1">Partial or outdated</button>
+          <button class="rc-opt" data-value="0">None yet</button>
+        </div>
+      </div>
+
+      <div class="rc-step" data-step="4">
+        <label class="rc-label">Case processing capability</label>
+        <div class="rc-options" data-field="caseproc">
+          <button class="rc-opt" data-value="2">Established in-house or outsourced team</button>
+          <button class="rc-opt" data-value="1">Partial or informal process</button>
+          <button class="rc-opt" data-value="0">Not established</button>
+        </div>
+      </div>
+
+      <div class="rc-step" data-step="5">
+        <label class="rc-label">Signal detection process</label>
+        <div class="rc-options" data-field="signal">
+          <button class="rc-opt" data-value="2">Established and documented</button>
+          <button class="rc-opt" data-value="1">Ad hoc</button>
+          <button class="rc-opt" data-value="0">None in place</button>
+        </div>
+      </div>
+
+      <div class="rc-step" data-step="6">
+        <label class="rc-label">Product status in Nigeria</label>
+        <div class="rc-options" data-field="status">
+          <button class="rc-opt" data-value="2">Not yet launched — planning ahead</button>
+          <button class="rc-opt" data-value="1">Launched under 1 year</button>
+          <button class="rc-opt" data-value="0">Launched over 1 year without a full PV system</button>
+        </div>
+      </div>
+
+      <div class="rc-step" data-step="results">
+        <div class="rc-result-header">
+          <span class="rc-score" id="rcScore">–</span>
+          <span class="rc-score-label" id="rcScoreLabel">Readiness Score</span>
+        </div>
+        <div class="rc-result-tier" id="rcTier"></div>
+        <ul class="rc-result-list" id="rcConsiderations"></ul>
+        <div class="rc-result-actions">
+          <a class="btn-primary" href="#contact">Discuss this with our team</a>
+          <button class="rc-restart" id="rcRestart">Start over</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-band" id="contact">
+  <div class="wrap">
+    <h2>Need Pharmacovigilance Support?</h2>
+    <p>Whether you need full-service case processing, clinical trial safety oversight, or local pharmacovigilance support in Nigeria, MedNova provides scalable solutions tailored to your program.</p>
+
+    <form id="contactForm" class="contact-form">
+      <input type="hidden" name="access_key" value="YOUR_WEB3FORMS_ACCESS_KEY">
+      <input type="hidden" name="subject" value="New inquiry — MedNova Pharmacovigilance">
+      <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off">
+
+      <div class="form-row two">
+        <div class="field">
+          <label for="name">Name</label>
+          <input type="text" id="name" name="name" required placeholder="Jane Doe">
+        </div>
+        <div class="field">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required placeholder="jane@company.com">
+        </div>
+      </div>
+
+      <div class="form-row two">
+        <div class="field">
+          <label for="organization">Organization</label>
+          <input type="text" id="organization" name="organization" placeholder="Company or agency name">
+        </div>
+        <div class="field">
+          <label for="track">I am a</label>
+          <select id="track" name="I am a">
+            <option value="Sponsor">Sponsor — pharma / biotech</option>
+            <option value="Regulator">Regulator / government</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="field">
+          <label for="message">What are you working on?</label>
+          <textarea id="message" name="message" rows="4" required placeholder="Tell us a bit about your product, program, or need..."></textarea>
+        </div>
+      </div>
+
+      <div class="cta-row" style="justify-content:flex-start;">
+        <button type="submit" class="btn-primary" id="submitBtn">Request a PV Assessment</button>
+        <a class="btn-ghost" href="index.html">MedNova Lifesciences home</a>
+      </div>
+      <p id="formStatus" class="form-status"></p>
+    </form>
+  </div>
+</section>
+
+<script>
+  document.querySelectorAll('.pv-collapse-toggle').forEach(btn => {
+    btn.addEventListener('click', () => btn.closest('.pv-collapse').classList.toggle('open'));
+  });
+
+  const dlForm = document.getElementById('dlForm');
+  const dlStatus = document.getElementById('dlStatus');
+  const PDF_PATH = 'downloads/MedNova-NAFDAC-QPPV-Compliance-Checklist.pdf';
+  if (dlForm) dlForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const formData = new FormData(dlForm);
+    const name = formData.get('name')?.toString().trim() || '';
+    const email = formData.get('email')?.toString().trim() || '';
+
+    if (!name || !email) {
+      dlStatus.style.color = 'var(--grey)';
+      dlStatus.textContent = 'Please enter your name and email.';
+      return;
+    }
+
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      dlStatus.style.color = 'var(--grey)';
+      dlStatus.textContent = 'Please enter a valid email address.';
+      return;
+    }
+
+    dlStatus.style.color = 'var(--grey)';
+    dlStatus.textContent = 'Preparing your download…';
+    try {
+      const response = await fetch('/api/forms/compliance', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({ formType: 'compliance', name, email })
+      });
+      const result = await response.json().catch(() => ({}));
+      if (!response.ok || !result.success) {
+        throw new Error(result.message || 'Unable to submit your request right now.');
+      }
+      dlStatus.style.color = 'var(--teal-deep)';
+      dlStatus.innerHTML = 'Your download is starting. If it doesn\'t, <a href="' + PDF_PATH + '" style="text-decoration:underline">click here</a>.';
+      const a = document.createElement('a');
+      a.href = PDF_PATH; a.download = '';
+      document.body.appendChild(a); a.click(); a.remove();
+      dlForm.querySelector('button').textContent = 'Downloaded ✓';
+    } catch (err) {
+      dlStatus.style.color = 'var(--grey)';
+      dlStatus.textContent = err.message || 'We couldn\'t process your request right now. Please try again shortly.';
+    }
+  });
+
+  const form = document.getElementById('contactForm');
+  const statusEl = document.getElementById('formStatus');
+  const btn = document.getElementById('submitBtn');
+
+  form.addEventListener('submit', async function(e){
+    e.preventDefault();
+    btn.disabled = true;
+    btn.textContent = 'Sending...';
+    statusEl.textContent = '';
+    statusEl.className = 'form-status';
+
+    const formData = new FormData(form);
+    const object = Object.fromEntries(formData);
+    const json = JSON.stringify(object);
+
+    try {
+      const res = await fetch('/api/forms/pharmacovigilance', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({
+          formType: 'pharmacovigilance',
+          name: object.name,
+          email: object.email,
+          organization: object.organization,
+          role: object['I am a'],
+          projectDescription: object.message
+        })
+      });
+      const result = await res.json().catch(() => ({}));
+      if (result.success) {
+        statusEl.textContent = "Thanks — we'll be in touch shortly.";
+        statusEl.className = 'form-status success';
+        form.reset();
+      } else {
+        throw new Error(result.message || 'Something went wrong');
+      }
+    } catch (err) {
+      statusEl.textContent = "Couldn't send right now — please email info@mednovalife.com directly.";
+      statusEl.className = 'form-status error';
+    } finally {
+      btn.disabled = false;
+      btn.textContent = 'Request a PV Assessment';
+    }
+  });
+</script>
+
+<footer>
+  <div class="wrap" style="display:flex; justify-content:space-between; width:100%; flex-wrap:wrap; gap:10px;">
+    <span>© 2026 MedNova Lifesciences. Pharmacovigilance service line.</span>
+    <span>Lagos, Nigeria</span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  const answers = {};
+  const steps = ['1','2','3','4','5','6','results'];
+  let currentIndex = 0;
+
+  const box = document.getElementById('rcBox');
+  const progressBar = document.getElementById('rcProgressBar');
+  const restartBtn = document.getElementById('rcRestart');
+
+  function showStep(index){
+    box.querySelectorAll('.rc-step').forEach(s => s.classList.remove('active'));
+    const stepEl = box.querySelector('[data-step="' + steps[index] + '"]');
+    if (stepEl) stepEl.classList.add('active');
+    progressBar.style.width = Math.round((index / (steps.length - 1)) * 100) + '%';
+  }
+
+  box.querySelectorAll('.rc-opt').forEach(btn => {
+    btn.addEventListener('click', function(){
+      const field = this.closest('.rc-options').dataset.field;
+      answers[field] = parseInt(this.dataset.value, 10);
+      currentIndex++;
+      if (steps[currentIndex] === 'results') {
+        renderResults();
+      }
+      showStep(currentIndex);
+    });
+  });
+
+  function renderResults(){
+    const total = Object.values(answers).reduce((a, b) => a + b, 0);
+    const maxScore = 12;
+    const pct = Math.round((total / maxScore) * 100);
+
+    document.getElementById('rcScore').textContent = pct + '%';
+
+    let tier, considerations = [];
+
+    if (pct >= 75) {
+      tier = 'Strong readiness — well-positioned against NAFDAC QPPV requirements.';
+    } else if (pct >= 45) {
+      tier = 'Developing readiness — several gaps need attention before an inspection.';
+    } else {
+      tier = 'Early-stage planning — core PV infrastructure should be established first.';
+    }
+
+    if (answers.qppv <= 1) considerations.push('Under NAFDAC\'s QPPV guidelines (effective October 2024), a permanent, continuous, locally resident QPPV is a regulatory obligation, not an option — this is usually the highest-priority gap to close.');
+    if (answers.backup === 0) considerations.push('Backup and deputy provisions are required alongside the primary QPPV — undocumented coverage gaps are a common inspection finding.');
+    if (answers.sops <= 1) considerations.push('Outdated or missing SOPs are one of the first things reviewed in a compliance audit — this is worth prioritizing even before case volume increases.');
+    if (answers.caseproc === 0) considerations.push('Without an established case processing pathway, adverse event reports risk missing regulatory reporting timelines.');
+    if (answers.signal === 0) considerations.push('No signal detection process in place means safety trends could go unnoticed until they become reportable events — worth establishing even at low case volumes.');
+    if (answers.status === 0) considerations.push('Planning PV infrastructure before launch is the ideal sequence — this puts you ahead of most Marketing Authorization Holders in this region.');
+
+    if (considerations.length === 0) {
+      considerations.push('No major flags from this initial self-assessment — a full compliance review would confirm inspection-specific details.');
+    }
+
+    document.getElementById('rcTier').textContent = tier;
+    const list = document.getElementById('rcConsiderations');
+    list.innerHTML = '';
+    considerations.forEach(c => {
+      const li = document.createElement('li');
+      li.textContent = c;
+      list.appendChild(li);
+    });
+  }
+
+  restartBtn.addEventListener('click', function(){
+    Object.keys(answers).forEach(k => delete answers[k]);
+    currentIndex = 0;
+    showStep(0);
+  });
+
+  showStep(0);
+})();
+</script>
+
+</body>
+</html>

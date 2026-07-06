@@ -1,0 +1,14 @@
+node_modules/
+.env
+.env.local
+.env.production
+.env.development
+backend/.env
+backend/.env.local
+backend/.env.production
+backend/.env.development
+dist/
+build/
+coverage/
+.vscode/settings.json
+*.log

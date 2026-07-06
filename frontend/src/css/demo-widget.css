@@ -1,0 +1,27 @@
+.demo-box{
+  margin-top:24px; margin-bottom:24px; border:1px solid var(--line); border-radius:10px; padding:28px 32px;
+  background:var(--paper-raised, rgba(255,255,255,0.03));
+}
+.demo-label{
+  display:inline-block; font-family:'IBM Plex Mono', monospace; font-size:11px; letter-spacing:0.08em; text-transform:uppercase;
+  color:var(--teal, var(--moss)); margin-bottom:16px;
+}
+.demo-questions{display:flex; flex-wrap:wrap; gap:10px; margin-bottom:16px;}
+.demo-q-btn{
+  font-family:'IBM Plex Sans', sans-serif; font-size:13px; color:var(--ink-soft, var(--ink));
+  background:#fff; border:1px solid var(--line); padding:9px 15px; border-radius:20px; cursor:pointer;
+  transition:background .15s, border-color .15s;
+}
+.demo-q-btn:hover{background:var(--paper-raised, #f0f0f0);}
+.demo-q-btn.active{background:var(--ink); color:#fff; border-color:var(--ink); font-weight:600;}
+.demo-q-btn:disabled{opacity:0.6; cursor:not-allowed;}
+.demo-output{font-size:14px; color:var(--ink-soft, var(--ink)); line-height:1.7; min-height:56px; white-space:pre-wrap; margin-bottom:12px;}
+.demo-note{font-size:11.5px; color:var(--grey); font-style:italic;}
+
+/* Dark-theme override for index.html */
+body[data-theme="dark"] .demo-box{background:rgba(255,255,255,0.04);}
+body[data-theme="dark"] .demo-q-btn{background:rgba(255,255,255,0.06); color:#D7DAD1; border-color:var(--line);}
+body[data-theme="dark"] .demo-q-btn:hover{background:rgba(255,255,255,0.12);}
+body[data-theme="dark"] .demo-q-btn.active{background:#fff; color:var(--ink); border-color:#fff;}
+body[data-theme="dark"] .demo-output{color:#C7CCC1;}
+body[data-theme="dark"] .demo-note{color:#8A9186;}
