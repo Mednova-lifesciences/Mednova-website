@@ -83,7 +83,7 @@ cd ..
 npm start
 ```
 
-Open http://localhost:3000 — all five pages and all five interactive tools will work (the three checkers work regardless of the API key; the two AI demos need it).
+Open the local frontend and backend entry points for development — all five pages and all five interactive tools will work (the three checkers work regardless of the API key; the two AI demos need it).
 
 ## Development
 

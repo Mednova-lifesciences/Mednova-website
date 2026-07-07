@@ -107,6 +107,7 @@
     </section>
   </main>
 
+  <script src="/config.js"></script>
   <script>
     (function () {
       const form = document.getElementById('complianceForm');
@@ -120,7 +121,7 @@
 
         status.textContent = 'Sending your request...';
         try {
-          const response = await fetch('/api/forms/compliance', {
+          const response = await fetch(window.getApiUrl('/api/forms/compliance'), {
             method: 'POST',
             headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
             body: JSON.stringify({ formType: 'compliance', name, email })

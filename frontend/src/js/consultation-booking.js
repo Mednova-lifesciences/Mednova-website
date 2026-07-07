@@ -223,7 +223,7 @@
   }
 
   async function submitConsultationRequest(values) {
-    const response = await fetch('/api/forms/consultation', {
+    const response = await fetch(window.getApiUrl('/api/forms/consultation'), {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
       body: JSON.stringify({

@@ -13,5 +13,7 @@ export const {
   FROM_EMAIL,
   CONSULTATION_EMAIL,
   ANTHROPIC_API_KEY,
+  FRONTEND_URL,
+  API_BASE_URL,
   PORT
 } = process.env;

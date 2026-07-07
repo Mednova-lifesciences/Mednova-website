@@ -616,6 +616,7 @@
   </div>
 </section>
 
+<script src="/config.js"></script>
 <script>
   const form = document.getElementById('contactForm');
   const statusEl = document.getElementById('formStatus');
@@ -627,7 +628,7 @@
     const formData = new FormData(form);
     const object = Object.fromEntries(formData);
     try {
-      const res = await fetch('/api/forms/regulatory', {
+      const res = await fetch(window.getApiUrl('/api/forms/regulatory'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
         body: JSON.stringify({

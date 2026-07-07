@@ -17,7 +17,7 @@
     demoButtons.forEach((b) => (b.disabled = true));
     demoOutput.textContent = 'Thinking...';
     try {
-      const res = await fetch('/api/assistant', {
+      const res = await fetch(window.getApiUrl('/api/assistant'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ question, context })
