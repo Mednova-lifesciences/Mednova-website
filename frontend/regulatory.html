@@ -52,8 +52,8 @@
 
   header{position:sticky; top:0; z-index:50; background:rgba(245,246,242,0.9); backdrop-filter:blur(8px); border-bottom:1px solid var(--line);}
   nav{display:flex; align-items:center; justify-content:space-between; padding:18px 0;}
-  .brand{display:flex; align-items:baseline; gap:10px; text-decoration:none; color:inherit;}
-  .brand-mark{font-family:'IBM Plex Mono', monospace; font-size:12px; letter-spacing:0.14em; background:var(--ink); color:var(--paper); padding:3px 7px; border-radius:3px;}
+  .brand{display:flex; align-items:center; gap:10px; text-decoration:none; color:inherit;}
+  .brand-mark{display:block; height:34px; width:auto; object-fit:contain; padding:0; border-radius:0; background:none;}
   .brand-name{font-family:'Newsreader', serif; font-size:20px; font-weight:600;}
   .brand-name .sub{font-family:'IBM Plex Mono', monospace; font-size:11px; color:var(--moss-deep); letter-spacing:0.06em; display:block; margin-top:1px;}
   .navlinks{display:flex; gap:32px; font-size:14px; font-weight:500;}
@@ -351,7 +351,7 @@
   <div class="wrap">
     <nav>
       <a class="brand" href="index.html">
-        <span class="brand-mark">MN·RA</span>
+        <img class="brand-mark" src="/public/images/image.png" alt="MedNova Lifesciences logo">
         <span class="brand-name">Regulatory Affairs
           <span class="sub">A service line of MedNova Lifesciences</span>
         </span>

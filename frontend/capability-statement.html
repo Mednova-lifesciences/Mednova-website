@@ -53,8 +53,8 @@
 
   header{position:sticky; top:0; z-index:50; background:rgba(255,255,255,0.92); backdrop-filter:blur(8px); border-bottom:1px solid var(--line);}
   nav{display:flex; align-items:center; justify-content:space-between; padding:18px 0;}
-  .brand{display:flex; align-items:baseline; gap:10px; text-decoration:none; color:inherit;}
-  .brand-mark{font-family:'IBM Plex Mono', monospace; font-size:12px; letter-spacing:0.14em; background:var(--ink); color:#fff; padding:3px 7px; border-radius:3px;}
+  .brand{display:flex; align-items:center; gap:10px; text-decoration:none; color:inherit;}
+  .brand-mark{display:block; height:34px; width:auto; object-fit:contain; padding:0; border-radius:0; background:none;}
   .brand-name{font-family:'Newsreader', serif; font-size:19px; font-weight:600;}
   .navlinks{display:flex; gap:26px; font-size:14px; font-weight:500;}
   .navlinks a{text-decoration:none; color:var(--ink-soft); transition:color .15s;}
@@ -169,7 +169,7 @@
   <div class="wrap">
     <nav>
       <a class="brand" href="index.html">
-        <span class="brand-mark">MN</span>
+        <img class="brand-mark" src="/public/images/image.png" alt="MedNova Lifesciences logo">
         <span class="brand-name">MedNova Lifesciences</span>
       </a>
       <div class="navlinks">

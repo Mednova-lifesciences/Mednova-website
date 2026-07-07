@@ -69,13 +69,11 @@
     padding:18px 0;
   }
   .brand{
-    display:flex; align-items:baseline; gap:10px;
+    display:flex; align-items:center; gap:10px;
   }
   .brand-mark{
-    font-family:'IBM Plex Mono', monospace;
-    font-size:12px; letter-spacing:0.14em;
-    background:var(--ink); color:var(--paper);
-    padding:3px 7px; border-radius:3px;
+    display:block; height:34px; width:auto; object-fit:contain;
+    padding:0; border-radius:0; background:none;
   }
   .brand-name{
     font-family:'Newsreader', serif;
@@ -694,8 +692,8 @@
   <div class="wrap">
     <nav>
       <div class="brand">
-        <a href="index.html" style="text-decoration:none; display:flex; align-items:baseline; gap:10px; color:inherit;">
-        <span class="brand-mark">MN·PV</span>
+        <a href="index.html" style="text-decoration:none; display:flex; align-items:center; gap:10px; color:inherit;">
+        <img class="brand-mark" src="/public/images/image.png" alt="MedNova Lifesciences logo">
         <span class="brand-name">MedNova Pharmacovigilance
           <span class="sub">A service line of MedNova Lifesciences</span>
         </span>

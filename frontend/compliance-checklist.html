@@ -50,7 +50,7 @@
     header { background: var(--paper); border-bottom: 1px solid var(--line); }
     nav { display: flex; align-items: center; justify-content: space-between; max-width: 1200px; margin: 0 auto; padding: 20px; gap: 20px; }
     .brand { display: flex; align-items: center; gap: 10px; font-weight: 700; }
-    .brand-mark { display: inline-flex; width: 40px; height: 40px; align-items: center; justify-content: center; border-radius: 999px; background: var(--moss); color: var(--paper); font-size: 14px; }
+    .brand-mark { display: block; height: 38px; width: auto; object-fit: contain; padding: 0; border-radius: 0; background: none; }
     .navlinks { display: flex; flex-wrap: wrap; gap: 16px; color: var(--ink-soft); }
     .navlinks a:hover { color: var(--moss); }
     .cta { display: inline-flex; align-items: center; justify-content: center; padding: 12px 18px; border-radius: 999px; background: var(--moss); color: var(--paper); font-weight: 600; }
@@ -85,7 +85,7 @@
   <header>
     <nav>
       <a class="brand" href="index.html">
-        <span class="brand-mark">MN</span>
+        <img class="brand-mark" src="/public/images/image.png" alt="MedNova Lifesciences logo">
         <span>MedNova Lifesciences</span>
       </a>
       <div class="navlinks">
