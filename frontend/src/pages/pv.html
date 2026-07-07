@@ -58,15 +58,19 @@
   a{color:inherit;}
 
   /* -------- Nav -------- */
-  header{
-    position:sticky; top:0; z-index:50;
+  .site-header{
+    width:100%; position:sticky; top:0; z-index:50;
     background:rgba(244,246,245,0.9);
     backdrop-filter:blur(8px);
     border-bottom:1px solid var(--line);
   }
-  nav{
+  .site-header__inner{
+    width:100%; display:flex; align-items:center; justify-content:space-between;
+    padding:18px 0;
+  }
+  .site-nav{
     display:flex; align-items:center; justify-content:space-between;
-    padding:18px 20px; max-width:100%; margin:0;
+    width:100%; padding:0; max-width:none; margin:0;
   }
   .brand{
     display:flex; align-items:center; gap:10px; flex-shrink:0;
@@ -93,13 +97,13 @@
     text-decoration:none; white-space:nowrap; flex-shrink:0;
   }
   @media (max-width:768px){
-    nav{padding:14px 20px;}
+    .site-header__inner{padding:14px 0;}
     .navlinks{display:none;}
     .brand-name{font-size:18px;}
     .nav-cta{padding:8px 14px; font-size:12.5px;}
   }
   @media (max-width:480px){
-    nav{padding:12px 16px;}
+    .site-header__inner{padding:12px 0;}
     .brand-mark{height:28px;}
     .brand-name{font-size:16px;}
   }
@@ -699,9 +703,9 @@
 </head>
 <body>
 
-<header>
-  <div class="wrap">
-    <nav>
+<header class="site-header">
+  <div class="site-header__inner">
+    <nav class="site-nav">
       <div class="brand">
         <a href="index.html" style="text-decoration:none; display:flex; align-items:center; gap:10px; color:inherit;">
         <img class="brand-mark" src="/public/images/image.png" alt="MedNova Lifesciences logo">
