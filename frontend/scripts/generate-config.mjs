@@ -4,7 +4,7 @@ import { fileURLToPath } from 'url';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const outputPath = path.join(__dirname, '..', 'config.js');
+const outputPath = path.join(__dirname, '..', 'public', 'config.js');
 
 const apiBaseUrl = process.env.API_BASE_URL || process.env.VITE_API_BASE_URL || '';
 const frontendUrl = process.env.FRONTEND_URL || '';

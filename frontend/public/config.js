@@ -1,6 +1,6 @@
 (function () {
-  const apiBaseUrl = '';
-  const frontendUrl = '';
+  const apiBaseUrl = "https://mednova-website.onrender.com";
+  const frontendUrl = "https://mednova-website-backend-e14x-peji3cgxi-mednova.vercel.app";
 
   window.MEDNOVA_CONFIG = {
     apiBaseUrl,
