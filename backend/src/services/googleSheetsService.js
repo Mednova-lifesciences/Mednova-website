@@ -137,6 +137,8 @@ export async function sendToGoogleSheets(formData) {
   const timeoutId = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
 
   try {
+    console.log('[GoogleSheets] Sending payload to Apps Script:', payload);
+
     const response = await fetch(GOOGLE_SCRIPT_URL, {
       method: 'POST',
       headers: {
@@ -149,13 +151,19 @@ export async function sendToGoogleSheets(formData) {
 
     const text = await response.text();
     let parsedResponse = null;
+    const contentType = response.headers.get('content-type') || '';
+    const looksLikeHtmlError = /text\/html|application\/xhtml\+xml/i.test(contentType) || /<!doctype html|<html/i.test(text);
+
     try {
       parsedResponse = text ? JSON.parse(text) : null;
     } catch {
       parsedResponse = null;
     }
 
-    if (!response.ok) {
+    console.log('[GoogleSheets] Apps Script status:', response.status);
+    console.log('[GoogleSheets] Apps Script response body:', text);
+
+    if (!response.ok || looksLikeHtmlError) {
       const message = parsedResponse?.message || parsedResponse?.error || text || 'Google Sheets submission failed.';
       const error = new Error(message);
       error.statusCode = response.status;
