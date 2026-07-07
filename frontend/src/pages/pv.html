@@ -66,10 +66,10 @@
   }
   nav{
     display:flex; align-items:center; justify-content:space-between;
-    padding:18px 0;
+    padding:18px 32px; max-width:100%; margin:0;
   }
   .brand{
-    display:flex; align-items:center; gap:10px;
+    display:flex; align-items:center; gap:10px; flex-shrink:0;
   }
   .brand-mark{
     display:block; height:34px; width:auto; object-fit:contain;
@@ -84,13 +84,24 @@
     font-size:11px; color:var(--teal-deep);
     letter-spacing:0.06em; display:block; margin-top:1px;
   }
-  .navlinks{display:flex; gap:32px; font-size:14px; font-weight:500;}
+  .navlinks{display:flex; gap:32px; font-size:14px; font-weight:500; margin:0 auto;}
   .navlinks a{text-decoration:none; color:var(--ink-soft); transition:color .15s;}
   .navlinks a:hover{color:var(--teal-deep);}
   .nav-cta{
     font-size:13px; font-weight:600; padding:9px 18px;
     background:var(--ink); color:var(--paper); border-radius:3px;
-    text-decoration:none; white-space:nowrap;
+    text-decoration:none; white-space:nowrap; flex-shrink:0;
+  }
+  @media (max-width:768px){
+    nav{padding:14px 20px;}
+    .navlinks{display:none;}
+    .brand-name{font-size:18px;}
+    .nav-cta{padding:8px 14px; font-size:12.5px;}
+  }
+  @media (max-width:480px){
+    nav{padding:12px 16px;}
+    .brand-mark{height:28px;}
+    .brand-name{font-size:16px;}
   }
 
   /* -------- Hero -------- */

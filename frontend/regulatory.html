@@ -51,15 +51,26 @@
   a{color:inherit;}
 
   header{position:sticky; top:0; z-index:50; background:rgba(245,246,242,0.9); backdrop-filter:blur(8px); border-bottom:1px solid var(--line);}
-  nav{display:flex; align-items:center; justify-content:space-between; padding:18px 0;}
-  .brand{display:flex; align-items:center; gap:10px; text-decoration:none; color:inherit;}
+  nav{display:flex; align-items:center; justify-content:space-between; padding:18px 32px; max-width:100%; margin:0;}
+  .brand{display:flex; align-items:center; gap:10px; text-decoration:none; color:inherit; flex-shrink:0;}
   .brand-mark{display:block; height:34px; width:auto; object-fit:contain; padding:0; border-radius:0; background:none;}
   .brand-name{font-family:'Newsreader', serif; font-size:20px; font-weight:600;}
   .brand-name .sub{font-family:'IBM Plex Mono', monospace; font-size:11px; color:var(--moss-deep); letter-spacing:0.06em; display:block; margin-top:1px;}
-  .navlinks{display:flex; gap:32px; font-size:14px; font-weight:500;}
+  .navlinks{display:flex; gap:32px; font-size:14px; font-weight:500; margin:0 auto;}
   .navlinks a{text-decoration:none; color:var(--ink-soft); transition:color .15s;}
   .navlinks a:hover{color:var(--moss-deep);}
-  .nav-cta{font-size:13px; font-weight:600; padding:9px 18px; background:var(--ink); color:var(--paper); border-radius:3px; text-decoration:none; white-space:nowrap;}
+  .nav-cta{font-size:13px; font-weight:600; padding:9px 18px; background:var(--ink); color:var(--paper); border-radius:3px; text-decoration:none; white-space:nowrap; flex-shrink:0;}
+  @media (max-width:768px){
+    nav{padding:14px 20px;}
+    .navlinks{display:none;}
+    .brand-name{font-size:18px;}
+    .nav-cta{padding:8px 14px; font-size:12.5px;}
+  }
+  @media (max-width:480px){
+    nav{padding:12px 16px;}
+    .brand-mark{height:28px;}
+    .brand-name{font-size:16px;}
+  }
 
   .hero{position:relative; overflow:hidden; padding:88px 0 64px; border-bottom:1px solid var(--line);}
   .hero-grid{display:grid; grid-template-columns:1.15fr 0.85fr; gap:56px; align-items:center;}
