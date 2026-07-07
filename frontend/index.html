@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MedNova Lifesciences — Regulatory Affairs, Clinical Development &amp; Drug Safety Partner for Africa</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#14181B;
+    --ink-2:#191F1B;
+    --paper:#F6F5F1;
+    --moss:#3F6B3A;
+    --teal:#1E7F76;
+    --amber:#C9975F;
+    --line:#2B322D;
+    --grey:#8A9186;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{background:var(--ink); color:var(--paper); font-family:'IBM Plex Sans', sans-serif; -webkit-font-smoothing:antialiased;}
+  a{color:inherit; text-decoration:none;}
+
+  section{max-width:1080px; margin:0 auto; padding:0 44px;}
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace; font-size:12px; letter-spacing:0.14em; text-transform:uppercase;
+    color:#8FA98A; margin-bottom:16px;
+  }
+
+  /* ---------- header ---------- */
+  .topline{display:flex; align-items:center; justify-content:space-between; padding:26px 44px;}
+  .brand{display:flex; align-items:baseline; gap:10px;}
+  .brand-mark{font-family:'IBM Plex Mono', monospace; font-size:12px; letter-spacing:0.14em; background:var(--paper); color:var(--ink); padding:3px 7px; border-radius:3px;}
+  .brand-name{font-family:'Newsreader', serif; font-size:19px; font-weight:600; color:var(--paper);}
+  .topline .tag{font-family:'IBM Plex Mono', monospace; font-size:11.5px; color:#9BA39A; letter-spacing:0.06em;}
+
+  /* ---------- hero ---------- */
+  .hero{text-align:center; max-width:760px; padding-top:40px; padding-bottom:8px;}
+  .hero h1{
+    font-family:'Newsreader', serif; font-weight:500; font-size:42px; line-height:1.16;
+    letter-spacing:-0.01em; color:#fff;
+  }
+  .hero .promise{
+    margin-top:22px; font-size:16.5px; line-height:1.7; color:#C7CCC1; max-width:60ch; margin-left:auto; margin-right:auto;
+  }
+
+  /* ---------- why africa / why mednova (twin narrative) ---------- */
+  .narrative{margin-top:80px;}
+  .narrative-grid{
+    display:grid; grid-template-columns:1fr 1fr; gap:56px;
+    border-top:1px solid var(--line); padding-top:44px;
+  }
+  .narrative h3{font-family:'Newsreader', serif; font-weight:500; font-size:21px; color:#fff; margin-bottom:12px;}
+  .narrative p{font-size:14px; line-height:1.65; color:#AEB4A9;}
+
+  /* ---------- connector above split ---------- */
+  .connector{
+    max-width:1080px; margin:70px auto 0; padding:0 44px;
+    display:flex; align-items:center; gap:18px;
+  }
+  .connector .rule{flex:1; height:1px; background:var(--line);}
+  .connector .label{
+    font-family:'IBM Plex Mono', monospace; font-size:11.5px; letter-spacing:0.1em; text-transform:uppercase;
+    color:#7FCFC4; white-space:nowrap;
+  }
+
+  /* ---------- split ---------- */
+  .split{display:grid; grid-template-columns:1fr 1fr 1fr; margin-top:0;}
+  .panel{position:relative; display:flex; flex-direction:column; justify-content:flex-end; padding:44px 36px; overflow:hidden; min-height:380px;}
+  .panel.reg{background:linear-gradient(160deg, #3A2E17 0%, #1F1707 100%);}
+  .panel.cro{background:linear-gradient(160deg, #24361F 0%, #16210F 100%);}
+  .panel.pv{background:linear-gradient(160deg, #123330 0%, #0B1F1D 100%);}
+  .panel-motif{position:absolute; inset:0; z-index:0;}
+  .panel-motif svg{width:100%; height:100%;}
+  .panel-inner{position:relative; z-index:2;}
+  .panel-kicker{
+    font-family:'IBM Plex Mono', monospace; font-size:12px; letter-spacing:0.14em; text-transform:uppercase;
+    margin-bottom:16px; display:flex; align-items:center; gap:10px;
+  }
+  .panel.reg .panel-kicker{color:#E3B67F;}
+  .panel.cro .panel-kicker{color:#9FCB96;}
+  .panel.pv .panel-kicker{color:#7FCFC4;}
+  .panel-kicker::before{content:""; width:22px; height:1px; background:currentColor;}
+  .panel h2{font-family:'Newsreader', serif; font-weight:500; font-size:28px; line-height:1.1; color:#fff; max-width:12ch;}
+  .panel p{margin-top:14px; font-size:14px; line-height:1.55; color:#C7CCC1; max-width:32ch;}
+  .panel .service-list{list-style:none; margin-top:16px; display:flex; flex-direction:column; gap:6px;}
+  .panel .service-list li{font-size:12.5px; color:#AEB4A9; padding-left:13px; position:relative; line-height:1.5;}
+  .panel .service-list li::before{content:"–"; position:absolute; left:0; color:#8A9186;}
+  .panel .enter{
+    margin-top:28px; display:inline-flex; align-items:center; gap:10px;
+    font-size:14.5px; font-weight:600; color:#fff;
+    border-bottom:1px solid rgba(255,255,255,0.35); padding-bottom:4px; width:fit-content;
+    transition:gap .2s, border-color .2s;
+  }
+  .panel:hover .enter{gap:16px; border-color:#fff;}
+  .panel .arrow{transition:transform .2s; display:inline-block;}
+  .panel:hover .arrow{transform:translateX(3px);}
+
+  /* ---------- support strip (beneath split) ---------- */
+  .support{
+    border-top:1px solid var(--line); border-bottom:1px solid var(--line);
+    padding:40px 44px; text-align:center;
+  }
+  .support .lead{
+    font-family:'IBM Plex Mono', monospace; font-size:12px; letter-spacing:0.1em; text-transform:uppercase;
+    color:#8A9186; margin-bottom:20px;
+  }
+  .support-list{display:flex; flex-wrap:wrap; justify-content:center; gap:12px; max-width:760px; margin:0 auto;}
+  .support-chip{
+    font-size:13.5px; color:#D7DAD1; border:1px solid var(--line); padding:10px 20px; border-radius:20px;
+  }
+
+  /* ---------- final cta ---------- */
+  .final-cta{padding-top:96px; padding-bottom:70px; text-align:center;}
+  .final-cta h2{font-family:'Newsreader', serif; font-weight:500; font-size:32px; color:#fff; max-width:22ch; margin:0 auto;}
+
+  /* ---------- technology strip ---------- */
+  .tech-strip{padding-top:88px; padding-bottom:10px;}
+  .tech-strip-inner{
+    display:grid; grid-template-columns:1fr 220px; gap:48px; align-items:center;
+    border:1px solid var(--line); border-radius:10px; padding:40px 44px;
+    background:rgba(255,255,255,0.03);
+  }
+  .tech-strip h2{font-family:'Newsreader', serif; font-weight:500; font-size:26px; color:#fff; letter-spacing:-0.01em; margin-bottom:12px;}
+  .tech-strip p{font-size:14.5px; line-height:1.7; color:#AEB4A9; max-width:62ch;}
+  .tech-strip-link{
+    margin-top:22px; display:inline-flex; align-items:center; gap:10px;
+    font-size:14px; font-weight:600; color:#fff;
+    border-bottom:1px solid rgba(255,255,255,0.35); padding-bottom:4px;
+    transition:gap .2s, border-color .2s;
+  }
+  .tech-strip-link:hover{gap:16px; border-color:#fff;}
+  .tech-strip-motif svg{width:100%; height:auto; display:block;}
+  @media (max-width:700px){
+    .tech-strip-inner{grid-template-columns:1fr; gap:28px; padding:32px 28px;}
+    .tech-strip-motif{max-width:200px;}
+  }
+
+  .cta-button{
+    display:inline-flex; align-items:center; gap:10px; margin-top:28px;
+    background:#fff; color:var(--ink); font-weight:600; font-size:14.5px;
+    padding:15px 28px; border-radius:3px; transition:transform .2s;
+  }
+  .cta-button:hover{transform:translateY(-2px);}
+  .cta-alt{margin-top:18px; font-size:13px; color:#8A9186;}
+  .cta-alt a{color:#D7DAD1; border-bottom:1px solid var(--line); padding-bottom:1px;}
+  .cta-alt a:hover{color:#fff;}
+
+  /* ---------- footer ---------- */
+  footer{border-top:1px solid var(--line); padding:44px 44px 34px; margin-top:20px;}
+  .footer-inner{max-width:1080px; margin:0 auto; display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:24px;}
+  .footer-brand{font-family:'Newsreader', serif; font-size:16px; color:#D7DAD1;}
+  .footer-links{display:flex; flex-wrap:wrap; gap:22px 28px;}
+  .footer-links a{font-size:13px; color:#AEB4A9; transition:color .15s;}
+  .footer-links a:hover{color:#fff;}
+  .footer-copy{max-width:1080px; margin:26px auto 0; font-size:12px; color:#6F766A; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:14px;}
+  .footer-social{display:flex; gap:16px;}
+  .footer-social a{
+    width:32px; height:32px; border:1px solid var(--line); border-radius:50%;
+    display:flex; align-items:center; justify-content:center; color:#AEB4A9; transition:color .15s, border-color .15s;
+  }
+  .footer-social a:hover{color:#fff; border-color:#7FCFC4;}
+  .footer-social svg{width:15px; height:15px; fill:currentColor;}
+
+  @media (max-width:900px){
+    .narrative-grid{grid-template-columns:1fr; gap:34px;}
+    .split{grid-template-columns:1fr;}
+  }
+  @media (min-width:901px) and (max-width:1100px){
+    .panel h2{font-size:24px;}
+  }
+  @media (max-width:560px){
+    .hero h1{font-size:30px;}
+    .footer-inner{flex-direction:column;}
+  }
+</style>
+<link rel="stylesheet" href="./public/css/demo-widget.css">
+<link rel="stylesheet" href="./public/css/consultation-booking.css">
+</head>
+<body data-theme="dark">
+
+<div class="topline">
+  <div class="brand">
+    <span class="brand-mark">MN</span>
+    <span class="brand-name">MedNova Lifesciences</span>
+  </div>
+  <span class="tag">Lagos, Nigeria</span>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <h1>Your Regulatory &amp; Clinical Development Partner for Nigeria and Africa</h1>
+  <p class="promise">Helping pharmaceutical, biotechnology, medical device, and nutraceutical companies navigate regulatory approvals, clinical development, and post-market safety — as one integrated partner rather than three separate vendors.</p>
+</section>
+
+<!-- WHY AFRICA / WHY MEDNOVA -->
+<section class="narrative">
+  <div class="narrative-grid">
+    <div>
+      <div class="eyebrow">Why Africa</div>
+      <h3>Research in Africa is changing.</h3>
+      <p>Africa has become one of the world's fastest-growing regions for clinical development — growing research capacity, increasing regulatory maturity, and expanding investigator networks. MedNova helps sponsors turn that opportunity into successful programs.</p>
+    </div>
+    <div>
+      <div class="eyebrow">Why MedNova</div>
+      <h3>Integrated across the product lifecycle.</h3>
+      <p>Registration, trial operations, and drug safety, built to work together rather than change hands between vendors — so a product's journey from market authorization through post-market safety runs through one partner.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONNECTOR -->
+<div class="connector" aria-hidden="true">
+  <span class="rule"></span>
+  <span class="label">Regulatory Affairs · Clinical Development · Pharmacovigilance</span>
+  <span class="rule"></span>
+</div>
+
+<!-- SPLIT -->
+<div class="split">
+  <a class="panel reg" href="regulatory.html">
+    <div class="panel-motif">
+      <svg viewBox="0 0 500 500" preserveAspectRatio="xMidYMid slice">
+        <g stroke="#C9975F" stroke-width="1" opacity="0.35">
+          <rect x="150" y="90" width="70" height="90" rx="4" fill="none"/>
+          <rect x="260" y="140" width="70" height="90" rx="4" fill="none"/>
+          <rect x="90" y="230" width="70" height="90" rx="4" fill="none"/>
+          <path d="M185,180 L295,140 M185,180 L125,230" fill="none" stroke-dasharray="3 5"/>
+        </g>
+      </svg>
+    </div>
+    <div class="panel-inner">
+      <div class="panel-kicker">Regulatory Affairs</div>
+      <h2>Regulatory Affairs</h2>
+      <p>Product registration and market access across Nigeria and Africa.</p>
+      <ul class="service-list">
+        <li>Product registration</li>
+        <li>NAFDAC submissions</li>
+        <li>Import permits</li>
+        <li>Lifecycle management</li>
+      </ul>
+      <span class="enter">Explore Regulatory Affairs <span class="arrow">→</span></span>
+    </div>
+  </a>
+
+  <a class="panel cro" href="cro.html">
+    <div class="panel-motif">
+      <svg viewBox="0 0 500 500" preserveAspectRatio="xMidYMid slice">
+        <g stroke="#3F6B3A" stroke-width="1" opacity="0.35">
+          <circle cx="120" cy="140" r="4" fill="#3F6B3A"/>
+          <circle cx="260" cy="90" r="3" fill="#3F6B3A"/>
+          <circle cx="340" cy="200" r="5" fill="#3F6B3A"/>
+          <circle cx="400" cy="120" r="3" fill="#3F6B3A"/>
+          <circle cx="180" cy="230" r="3" fill="#3F6B3A"/>
+          <path d="M120,140 L260,90 L340,200 L400,120" fill="none" stroke-dasharray="3 5"/>
+          <path d="M120,140 L180,230 L340,200" fill="none" stroke-dasharray="3 5"/>
+        </g>
+      </svg>
+    </div>
+    <div class="panel-inner">
+      <div class="panel-kicker">Clinical Development</div>
+      <h2>Clinical Development</h2>
+      <p>From feasibility and study start-up to clinical operations and close-out.</p>
+      <ul class="service-list">
+        <li>Trial start-up</li>
+        <li>Site feasibility</li>
+        <li>Monitoring</li>
+        <li>Project management</li>
+      </ul>
+      <span class="enter">Explore Clinical Development <span class="arrow">→</span></span>
+    </div>
+  </a>
+
+  <a class="panel pv" href="pv.html">
+    <div class="panel-motif">
+      <svg viewBox="0 0 500 500" preserveAspectRatio="xMidYMid slice">
+        <g stroke="#1E7F76" stroke-width="1.5" opacity="0.4" fill="none">
+          <path d="M0,340 L60,335 L110,342 L160,310 L210,318 L260,255 L310,270 L360,190 L410,215 L460,150 L500,175"/>
+        </g>
+        <circle cx="360" cy="190" r="5" fill="#C97A2B" opacity="0.7"/>
+      </svg>
+    </div>
+    <div class="panel-inner">
+      <div class="panel-kicker">Drug Safety</div>
+      <h2>Pharmacovigilance</h2>
+      <p>Protecting patients through clinical trial and post-marketing safety.</p>
+      <ul class="service-list">
+        <li>Local QPPV</li>
+        <li>Case processing</li>
+        <li>Aggregate reports</li>
+        <li>Risk management</li>
+      </ul>
+      <span class="enter">Explore Pharmacovigilance <span class="arrow">→</span></span>
+    </div>
+  </a>
+</div>
+
+<!-- SUPPORT STRIP -->
+<div class="support">
+  <div class="lead">Every engagement is supported by</div>
+  <div class="support-list">
+    <span class="support-chip">Regulatory Intelligence &amp; Medical Writing</span>
+    <span class="support-chip">Quality Management</span>
+    <span class="support-chip">Local Market Expertise</span>
+    <span class="support-chip">ICH-GCP</span>
+    <span class="support-chip">Good Pharmacovigilance Practice</span>
+  </div>
+</div>
+
+<!-- TECHNOLOGY ENABLED -->
+<section class="tech-strip" id="technology">
+  <div class="tech-strip-inner">
+    <div class="tech-strip-copy">
+      <div class="eyebrow">Technology Enabled</div>
+      <h2>Digital tools behind every engagement</h2>
+      <p>We use proprietary digital tools to improve regulatory workflows, pharmacovigilance operations, and clinical trial execution — with a qualified team member reviewing every output.</p>
+      <a class="tech-strip-link" href="mailto:contact@mednovalife.com">Ask how this applies to your program <span class="arrow">→</span></a>
+    </div>
+    <div class="tech-strip-motif" aria-hidden="true">
+      <svg viewBox="0 0 220 140" fill="none">
+        <g stroke="#1E7F76" stroke-width="1" opacity="0.55">
+          <rect x="10" y="20" width="54" height="34" rx="4"/>
+          <rect x="10" y="86" width="54" height="34" rx="4"/>
+          <rect x="156" y="53" width="54" height="34" rx="4"/>
+          <path d="M64,37 C100,37 110,70 156,70" stroke-dasharray="3 5"/>
+          <path d="M64,103 C100,103 110,70 156,70" stroke-dasharray="3 5"/>
+        </g>
+        <circle cx="156" cy="70" r="3" fill="#C9975F"/>
+      </svg>
+    </div>
+  </div>
+
+  <div class="demo-box" id="demoBox">
+    <span class="demo-label">Reasoning preview — live</span>
+    <div class="demo-questions" id="demoQuestions">
+      <button class="demo-q-btn" data-q="What should I consider for site feasibility for a Phase 3 hypertension trial in Lagos?">Site feasibility for a Phase 3 trial</button>
+      <button class="demo-q-btn" data-q="What typically delays regulatory submissions in West Africa?">What delays regulatory submissions?</button>
+      <button class="demo-q-btn" data-q="What should a sponsor look for in a pharmacovigilance partner in Nigeria?">Choosing a PV partner in Nigeria</button>
+    </div>
+    <div class="demo-output" id="demoOutput">Select a question above to see a live response.</div>
+    <p class="demo-note">A genuine, working preview of the reasoning behind our process — not connected to any client's real site, case, or regulatory data, and not a substitute for a full assessment by our team.</p>
+  </div>
+</section>
+
+<!-- CONSULTATION BOOKING -->
+<div class="consultation-modal-overlay" id="consultationModal" aria-hidden="true">
+  <div class="consultation-modal" role="dialog" aria-modal="true" aria-labelledby="consultationModalTitle">
+    <div class="consultation-modal__header">
+      <div>
+        <div class="consultation-modal__eyebrow">Consultation booking</div>
+        <h2 class="consultation-modal__title" id="consultationModalTitle">Want to book a consultation?</h2>
+      </div>
+      <button class="consultation-modal__close" type="button" aria-label="Close dialog" data-close-modal>×</button>
+    </div>
+    <div class="consultation-modal__body">
+      <p class="consultation-modal__text">Speak with one of our specialists to discuss your Clinical Development, Pharmacovigilance, or Regulatory requirements.</p>
+      <div class="consultation-modal__actions">
+        <button class="cta-button" type="button" data-open-consultation>Book Consultation</button>
+        <button class="button-secondary" type="button" data-close-modal>Maybe Later</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="consultation-booking-section" id="book-consultation">
+  <div class="consultation-booking-shell">
+    <div class="consultation-booking-copy">
+      <div class="eyebrow">Consultation Booking</div>
+      <h2>Book a Consultation</h2>
+      <p>Schedule a consultation with one of our specialists. Select your preferred service, date, and time, and our team will confirm your appointment.</p>
+      <div class="consultation-booking-actions">
+        <button class="cta-button" type="button" data-open-consultation>Book Consultation</button>
+        <a class="button-secondary" href="mailto:contact@mednovalife.com?subject=Proposal%20request%20%E2%80%94%20MedNova%20Lifesciences">Request a proposal</a>
+      </div>
+    </div>
+    <div class="consultation-booking-card">
+      <span class="consultation-chip">Trusted partnership</span>
+      <h3>Professional support for complex programs</h3>
+      <p>Our team works closely with sponsors, CROs, and product teams across Africa to simplify regulatory, clinical, and safety planning.</p>
+      <ul class="consultation-benefits">
+        <li>Clear guidance for your next milestone</li>
+        <li>Flexible consultation planning</li>
+        <li>Practical next-step recommendations</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="consultation-form-card is-hidden" id="consultationFormCard">
+    <form class="consultation-form" id="consultationForm" novalidate>
+      <div class="consultation-form__grid">
+        <div class="field">
+          <label for="consultationName">Full Name *</label>
+          <input id="consultationName" name="fullName" type="text" required>
+          <p class="validation-message" id="fullNameError" role="alert"></p>
+        </div>
+        <div class="field">
+          <label for="consultationEmail">Email Address *</label>
+          <input id="consultationEmail" name="email" type="email" required>
+          <p class="validation-message" id="emailError" role="alert"></p>
+        </div>
+        <div class="field">
+          <label for="consultationPhone">Phone Number *</label>
+          <input id="consultationPhone" name="phone" type="tel" required>
+          <p class="validation-message" id="phoneError" role="alert"></p>
+        </div>
+        <div class="field">
+          <label for="consultationOrganization">Organization / Company *</label>
+          <input id="consultationOrganization" name="organization" type="text" required>
+          <p class="validation-message" id="organizationError" role="alert"></p>
+        </div>
+        <div class="field">
+          <label for="consultationJobTitle">Job Title (Optional)</label>
+          <input id="consultationJobTitle" name="jobTitle" type="text">
+        </div>
+        <div class="field">
+          <label for="consultationGender">Gender</label>
+          <select id="consultationGender" name="gender">
+            <option value="">Prefer not to say</option>
+            <option value="Female">Female</option>
+            <option value="Male">Male</option>
+            <option value="Non-binary">Non-binary</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="consultationCountry">Country</label>
+          <input id="consultationCountry" name="country" type="text">
+        </div>
+        <div class="field">
+          <label for="consultationService">Preferred Service *</label>
+          <select id="consultationService" name="service" required>
+            <option value="">Select a service</option>
+            <option value="Clinical Development">Clinical Development</option>
+            <option value="Pharmacovigilance">Pharmacovigilance</option>
+            <option value="Regulatory Services">Regulatory Services</option>
+            <option value="General Consultation">General Consultation</option>
+          </select>
+          <p class="validation-message" id="serviceError" role="alert"></p>
+        </div>
+        <div class="field">
+          <label for="consultationDate">Preferred Consultation Date *</label>
+          <input id="consultationDate" name="date" type="date" required>
+          <p class="validation-message" id="dateError" role="alert"></p>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Preferred Consultation Time *</label>
+        <div class="time-slot-group" role="group" aria-label="Preferred consultation time">
+          <button class="time-slot" type="button" data-time="10:00 AM">10:00 AM</button>
+          <button class="time-slot" type="button" data-time="11:00 AM">11:00 AM</button>
+          <button class="time-slot" type="button" data-time="12:00 PM">12:00 PM</button>
+          <button class="time-slot" type="button" data-time="1:00 PM">1:00 PM</button>
+          <button class="time-slot" type="button" data-time="2:00 PM">2:00 PM</button>
+          <button class="time-slot" type="button" data-time="3:00 PM">3:00 PM</button>
+          <button class="time-slot" type="button" data-time="4:00 PM">4:00 PM</button>
+          <button class="time-slot" type="button" data-time="5:00 PM">5:00 PM</button>
+        </div>
+        <p class="validation-message" id="timeError" role="alert"></p>
+      </div>
+
+      <div class="field">
+        <label for="consultationReason">Reason for Consultation *</label>
+        <textarea id="consultationReason" name="reason" placeholder="Briefly describe what you would like to discuss." required></textarea>
+        <p class="validation-message" id="reasonError" role="alert"></p>
+      </div>
+
+      <div class="field">
+        <label for="consultationNotes">Additional Notes (Optional)</label>
+        <textarea id="consultationNotes" name="notes" placeholder="Add any additional context for the team."></textarea>
+      </div>
+
+      <div class="form-actions">
+        <button class="cta-button submit-button" type="submit" id="consultationSubmit">Submit Consultation Request</button>
+        <button class="button-secondary" type="button" data-open-consultation>Review booking details</button>
+      </div>
+    </form>
+  </div>
+
+  <div class="consultation-confirmation" id="consultationConfirmation" aria-live="polite">
+    <div class="confirmation-icon" aria-hidden="true">✓</div>
+    <h3>Consultation Request Submitted</h3>
+    <p>Thank you for choosing MedNova Lifesciences. Your consultation request has been received successfully. Our team will review your request and contact you shortly to confirm your appointment.</p>
+    <div class="confirmation-summary">
+      <div><strong>Name:</strong> <span id="confirmationName"></span></div>
+      <div><strong>Preferred Service:</strong> <span id="confirmationService"></span></div>
+      <div><strong>Selected Date:</strong> <span id="confirmationDate"></span></div>
+      <div><strong>Selected Time:</strong> <span id="confirmationTime"></span></div>
+      <div><strong>Email Address:</strong> <span id="confirmationEmail"></span></div>
+    </div>
+    <div class="confirmation-actions">
+      <button class="cta-button" type="button" id="bookAnotherConsultation">Book Another Consultation</button>
+      <button class="button-secondary" type="button" id="returnHome">Return to Homepage</button>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">MedNova Lifesciences</div>
+    <div class="footer-links">
+      <a href="regulatory.html">Regulatory Affairs</a>
+      <a href="cro.html">Clinical Development</a>
+      <a href="pv.html">Pharmacovigilance</a>
+      <a href="capability-statement.html">Capability Statement</a>
+      <a href="compliance-checklist.html">Compliance Checklist</a>
+      <a href="index.html#technology">Technology</a>
+      <a href="index.html#hero">About</a>
+      <a href="cro.html#contact">Contact</a>
+    </div>
+  </div>
+  <div class="footer-copy">
+    <span>© 2026 MedNova Lifesciences. Lagos, Nigeria.</span>
+    <div class="footer-social">
+      <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.38-1.85 3.61 0 4.28 2.38 4.28 5.47v6.27zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45z"/></svg></a>
+      <a href="https://x.com/MedNovaLif3669" target="_blank" rel="noopener" aria-label="X (Twitter)"><svg viewBox="0 0 24 24"><path d="M18.9 2H22l-7.6 8.7L23.3 22H16.6l-5.2-6.8L5.4 22H2.3l8.1-9.3L1.7 2h6.9l4.7 6.2L18.9 2zm-1.2 18h1.7L7.4 4H5.6l12.1 16z"/></svg></a>
+      <a href="https://instagram.com/Mednovalifesciences" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 8.8a3.2 3.2 0 1 0 0 6.4 3.2 3.2 0 0 0 0-6.4zm0 5.3a2.1 2.1 0 1 1 0-4.2 2.1 2.1 0 0 1 0 4.2zm4.6-5.5a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0zM12 2c-2.72 0-3.06.01-4.13.06-1.06.05-1.79.22-2.43.47a4.9 4.9 0 0 0-1.77 1.15 4.9 4.9 0 0 0-1.15 1.77c-.25.64-.42 1.37-.47 2.43C2 8.94 2 9.28 2 12s.01 3.06.06 4.13c.05 1.06.22 1.79.47 2.43.26.66.6 1.22 1.15 1.77.55.55 1.11.9 1.77 1.15.64.25 1.37.42 2.43.47C8.94 22 9.28 22 12 22s3.06-.01 4.13-.06c1.06-.05 1.79-.22 2.43-.47a4.9 4.9 0 0 0 1.77-1.15 4.9 4.9 0 0 0 1.15-1.77c.25-.64.42-1.37.47-2.43.05-1.07.06-1.41.06-4.13s-.01-3.06-.06-4.13c-.05-1.06-.22-1.79-.47-2.43a4.9 4.9 0 0 0-1.15-1.77 4.9 4.9 0 0 0-1.77-1.15c-.64-.25-1.37-.42-2.43-.47C15.06 2.01 14.72 2 12 2zm0 1.8c2.67 0 2.99.01 4.04.06.98.04 1.51.21 1.86.34.47.18.8.4 1.15.75.35.35.57.68.75 1.15.13.35.3.88.34 1.86.05 1.05.06 1.37.06 4.04s-.01 2.99-.06 4.04c-.04.98-.21 1.51-.34 1.86-.18.47-.4.8-.75 1.15-.35.35-.68.57-1.15.75-.35.13-.88.3-1.86.34-1.05.05-1.37.06-4.04.06s-2.99-.01-4.04-.06c-.98-.04-1.51-.21-1.86-.34a3.1 3.1 0 0 1-1.15-.75 3.1 3.1 0 0 1-.75-1.15c-.13-.35-.3-.88-.34-1.86-.05-1.05-.06-1.37-.06-4.04s.01-2.99.06-4.04c.04-.98.21-1.51.34-1.86.18-.47.4-.8.75-1.15.35-.35.68-.57 1.15-.75.35-.13.88-.3 1.86-.34C9.01 3.81 9.33 3.8 12 3.8z"/></svg></a>
+    </div>
+  </div>
+</footer>
+
+
+
+<script>window.DEMO_CONTEXT = 'general';</script>
+<script src="./public/js/demo-widget.js"></script>
+<script src="./public/js/consultation-booking.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Compliance Checklist | MedNova Lifesciences</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./public/css/demo-widget.css">
+  <style>
+    :root {
+      --ink: #1f2a1e;
+      --ink-soft: #3e4b3a;
+      --paper: #ffffff;
+      --paper-raised: #f5f6f2;
+      --moss: #3f6b3a;
+      --moss-deep: #2a4a26;
+      --line: #d8dacf;
+      --amber: #c97a2b;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: 'IBM Plex Sans', Arial, sans-serif; color: var(--ink); background: var(--paper-raised); }
+    a { color: inherit; text-decoration: none; }
+    header { background: var(--paper); border-bottom: 1px solid var(--line); }
+    nav { display: flex; align-items: center; justify-content: space-between; max-width: 1200px; margin: 0 auto; padding: 20px; gap: 20px; }
+    .brand { display: flex; align-items: center; gap: 10px; font-weight: 700; }
+    .brand-mark { display: inline-flex; width: 40px; height: 40px; align-items: center; justify-content: center; border-radius: 999px; background: var(--moss); color: var(--paper); font-size: 14px; }
+    .navlinks { display: flex; flex-wrap: wrap; gap: 16px; color: var(--ink-soft); }
+    .navlinks a:hover { color: var(--moss); }
+    .cta { display: inline-flex; align-items: center; justify-content: center; padding: 12px 18px; border-radius: 999px; background: var(--moss); color: var(--paper); font-weight: 600; }
+    main { max-width: 1200px; margin: 0 auto; padding: 48px 20px 80px; }
+    .hero { display: grid; grid-template-columns: 1.4fr 0.9fr; gap: 24px; align-items: start; }
+    .hero-card, .info-card { background: var(--paper); border: 1px solid var(--line); border-radius: 24px; padding: 28px; box-shadow: 0 12px 30px rgba(31, 42, 30, 0.06); }
+    .eyebrow { display: inline-flex; padding: 8px 12px; border-radius: 999px; background: rgba(63, 107, 58, 0.12); color: var(--moss); font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 12px; }
+    h1 { font-family: 'Newsreader', Georgia, serif; font-size: 40px; margin: 0 0 14px; line-height: 1.1; }
+    p { color: var(--ink-soft); line-height: 1.7; }
+    .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 24px; }
+    .btn-primary { display: inline-flex; align-items: center; justify-content: center; padding: 12px 18px; border-radius: 999px; background: var(--moss); color: var(--paper); font-weight: 600; }
+    .btn-ghost { display: inline-flex; align-items: center; justify-content: center; padding: 12px 18px; border-radius: 999px; border: 1px solid var(--line); color: var(--ink); font-weight: 600; }
+    form { display: grid; gap: 12px; margin-top: 16px; }
+    input { padding: 12px 14px; border: 1px solid var(--line); border-radius: 12px; font: inherit; }
+    button { border: 0; cursor: pointer; font: inherit; }
+    .status { min-height: 24px; font-size: 14px; color: var(--moss-deep); }
+    .info-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; margin-top: 24px; }
+    .info-card ul { padding-left: 18px; color: var(--ink-soft); }
+    @media (max-width: 860px) { .hero { grid-template-columns: 1fr; } .info-grid { grid-template-columns: 1fr; } nav { flex-direction: column; align-items: flex-start; } }
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <a class="brand" href="index.html">
+        <span class="brand-mark">MN</span>
+        <span>MedNova Lifesciences</span>
+      </a>
+      <div class="navlinks">
+        <a href="regulatory.html">Regulatory Affairs</a>
+        <a href="cro.html">Clinical Development</a>
+        <a href="pv.html">Pharmacovigilance</a>
+        <a href="capability-statement.html">Capability Statement</a>
+      </div>
+      <a class="cta" href="index.html#book-consultation">Book a consultation</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-card">
+        <div class="eyebrow">Free resource</div>
+        <h1>QPPV Compliance Checklist</h1>
+        <p>Use this practical checklist to review governance, safety reporting, signal detection, and inspection readiness against current NAFDAC expectations.</p>
+        <div class="actions">
+          <a class="btn-primary" href="./public/downloads/MedNova-NAFDAC-QPPV-Compliance-Checklist.pdf">Download checklist PDF</a>
+          <a class="btn-ghost" href="pv.html#try-it">Try the readiness checker</a>
+        </div>
+      </div>
+      <div class="hero-card">
+        <h2>Get the checklist by email</h2>
+        <p>Share your details and we’ll send you the PDF and relevant updates.</p>
+        <form id="complianceForm">
+          <input id="name" name="name" type="text" placeholder="Your name" required>
+          <input id="email" name="email" type="email" placeholder="Work email" required>
+          <button class="btn-primary" type="submit">Send me the checklist</button>
+          <div class="status" id="formStatus">We will only use this to send the resource and related updates.</div>
+        </form>
+      </div>
+    </section>
+
+    <section class="info-grid">
+      <div class="info-card">
+        <h3>What it covers</h3>
+        <ul>
+          <li>Qualified Person for Pharmacovigilance responsibilities</li>
+          <li>Local representation and escalation paths</li>
+          <li>Safety reporting and case handling capability</li>
+          <li>Documentation and inspection readiness</li>
+        </ul>
+      </div>
+      <div class="info-card">
+        <h3>Who it helps</h3>
+        <ul>
+          <li>Marketing authorization holders planning entry into Nigeria</li>
+          <li>Regional teams preparing for a QPPV review</li>
+          <li>Companies that need a practical self-assessment before a deeper compliance engagement</li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    (function () {
+      const form = document.getElementById('complianceForm');
+      const status = document.getElementById('formStatus');
+      if (!form || !status) return;
+
+      form.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        const name = document.getElementById('name').value.trim();
+        const email = document.getElementById('email').value.trim();
+
+        status.textContent = 'Sending your request...';
+        try {
+          const response = await fetch('/api/forms/compliance', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+            body: JSON.stringify({ formType: 'compliance', name, email })
+          });
+          const result = await response.json().catch(() => ({}));
+          if (!response.ok || !result.success) {
+            throw new Error(result.message || 'Unable to send your request right now.');
+          }
+          status.textContent = 'Request received. Your download will begin shortly.';
+          window.location.href = './public/downloads/MedNova-NAFDAC-QPPV-Compliance-Checklist.pdf';
+        } catch (error) {
+          status.textContent = error.message || 'Something went wrong. Please try again.';
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
