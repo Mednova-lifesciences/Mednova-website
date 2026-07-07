@@ -6,6 +6,6 @@
   "scripts": {
     "start": "echo 'Frontend is served by the backend server'",
     "dev": "echo 'Frontend is served by the backend server'",
-    "build": "node ./scripts/generate-config.mjs"
+    "build": "echo 'No build required for static frontend'"
   }
 }
