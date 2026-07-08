@@ -56,10 +56,13 @@
   /* ---------- header ---------- */
   .topline{width:100%; display:flex; align-items:center; justify-content:space-between; padding:26px 0;}
   .topline-inner{width:100%; display:flex; align-items:center; justify-content:space-between; gap:24px;}
-  .brand{display:flex; align-items:center; gap:10px;}
+  .brand{display:flex; align-items:center; gap:10px; color:var(--paper); text-decoration:none; flex-shrink:0;}
+  .brand:hover .brand-name,
+  .brand:focus-visible .brand-name{color:#fff;}
+  .brand:focus-visible{outline:2px solid #7FCFC4; outline-offset:4px; border-radius:8px;}
   .brand-mark{height:34px; width:auto; display:block; object-fit:contain; padding:0; border-radius:0; background:none;}
   .brand-name{font-family:'Newsreader', serif; font-size:19px; font-weight:600; color:var(--paper); line-height:1.2; margin:0;}
-  .topline-nav{display:flex; align-items:center; gap:24px; flex-wrap:wrap;}
+  .topline-nav{display:flex; align-items:center; gap:20px; flex-wrap:nowrap; white-space:nowrap;}
   .topline-nav a{font-size:13.5px; color:#D7DAD1; transition:color .15s;}
   .topline-nav a:hover{color:#fff;}
   .topline .tag{font-family:'IBM Plex Mono', monospace; font-size:11.5px; color:#9BA39A; letter-spacing:0.06em;}
@@ -245,10 +248,10 @@
 
 <div class="topline">
   <div class="topline-inner">
-    <div class="brand">
+    <a class="brand" href="/" aria-label="MedNova Lifesciences home">
       <img class="brand-mark" src="/public/images/index1.png" alt="MedNova Lifesciences logo">
       <span class="brand-name">MedNova Lifesciences</span>
-    </div>
+    </a>
     <nav class="topline-nav">
       <a href="regulatory.html">Regulatory Affairs</a>
       <a href="cro.html">Clinical Development</a>
