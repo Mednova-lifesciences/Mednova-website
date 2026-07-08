@@ -10,56 +10,7 @@ html {
 }
 
 body {
-  margin: 0;
-  min-height: 100vh;
   overflow-x: hidden;
-  font-family: "Segoe UI", Roboto, Arial, sans-serif;
-  line-height: 1.6;
-  background: radial-gradient(circle at top left, rgba(30, 127, 118, 0.22), transparent 24%), #07130f;
-  color: #f6f0e8;
-}
-
-body[data-theme="dark"] {
-  color: #f6f0e8;
-}
-
-.page-shell {
-  max-width: 920px;
-  margin: 0 auto;
-  padding: 64px 20px 88px;
-}
-
-.page-shell h1 {
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(2rem, 3vw, 2.7rem);
-  line-height: 1.15;
-  margin-bottom: 16px;
-  color: #ffffff;
-}
-
-.page-shell p,
-.page-shell li {
-  font-size: 1rem;
-  color: rgba(246, 240, 232, 0.9);
-}
-
-.page-shell a {
-  color: #7fcfc4;
-  text-decoration: none;
-}
-
-.page-shell a:hover,
-.page-shell a:focus-visible {
-  text-decoration: underline;
-}
-
-.page-shell ul {
-  padding-left: 20px;
-  margin: 16px 0 0;
-}
-
-.page-shell li + li {
-  margin-top: 8px;
 }
 
 body.nav-open {
