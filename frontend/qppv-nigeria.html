@@ -50,10 +50,10 @@
   .wrap{max-width:1120px; margin:0 auto; padding:0 32px;}
   a{color:inherit;}
   .site-header{width:100%; position:sticky; top:0; z-index:50; background:rgba(245,246,242,0.9); backdrop-filter:blur(8px); border-bottom:1px solid var(--line);}
-  .site-header__inner{width:100%; display:flex; align-items:center; justify-content:space-between; padding:18px 0;}
+  .site-header__inner{width:100%; display:flex; align-items:center; justify-content:space-between; padding:18px 24px;}
   .site-nav{display:flex; align-items:center; justify-content:space-between; width:100%; padding:0; max-width:none; margin:0;}
   .brand{display:flex; align-items:center; gap:10px; text-decoration:none; color:inherit; flex-shrink:0;}
-  .brand-mark{display:block; height:34px; width:auto; object-fit:contain; padding:0; border-radius:0; background:none;}
+  .brand-mark{display:block; height:auto; width:min(320px, 70vw); max-width:320px; object-fit:contain; padding:0; border-radius:0; background:none;}
   .brand-name{font-family:'Newsreader', serif; font-size:20px; font-weight:600;}
   .navlinks{display:flex; gap:32px; font-size:14px; font-weight:500;}
   .navlinks a{text-decoration:none; color:var(--ink-soft); transition:color .15s;}
@@ -85,18 +85,30 @@
   .cta-band h2{font-family:'Newsreader', serif; font-size:28px; font-weight:600; margin-bottom:10px;}
   .cta-band p{font-size:16px; color:var(--grey); margin-bottom:18px;}
   .cta-actions{display:flex; flex-wrap:wrap; gap:12px;}
-  .btn-primary{background:var(--moss-deep); color:#fff; padding:13px 24px; border-radius:3px; text-decoration:none; font-weight:600; font-size:14.5px; transition:background .15s; border:none; cursor:pointer; display:inline-block;}
-  .btn-primary:hover{background:var(--ink);} 
+  .btn-primary,
+  .btn-primary:visited{background:var(--moss-deep); color:#fff; padding:13px 24px; border-radius:3px; text-decoration:none; font-weight:600; font-size:14.5px; transition:background .15s; border:none; cursor:pointer; display:inline-block;}
+  .btn-primary:hover{background:var(--ink); color:#fff;} 
   .btn-ghost{border:1px solid var(--ink); color:var(--ink); padding:12px 23px; border-radius:3px; text-decoration:none; font-weight:600; font-size:14.5px; display:inline-block;}
   footer{padding:24px 0 40px; color:var(--grey); font-size:14px; border-top:1px solid var(--line); margin-top:24px;}
+  body.article-page .site-header__inner{padding:18px 24px;}
+  body.article-page .site-nav{justify-content:flex-start;}
+  body.article-page .navlinks,
+  body.article-page .nav-cta,
+  body.article-page .site-nav__toggle{display:none !important;}
+  body.article-page .brand{margin-right:auto;}
+  body.article-page .brand-mark{width:min(320px, 72vw); max-width:320px;}
   @media (max-width:640px){
     .article-card{padding:26px 22px 30px;}
     .article-card h1{font-size:32px;}
     .cta-band{padding:24px 20px;}
+    .site-header__inner{padding:14px 16px;}
+    .brand-mark{width:min(220px, 78vw); max-width:220px;}
+    body.article-page .site-header__inner{padding:14px 16px;}
+    body.article-page .brand-mark{width:min(220px, 78vw); max-width:220px;}
   }
 </style>
 </head>
-<body>
+<body class="article-page">
 <header class="site-header">
   <div class="site-header__inner">
     <nav class="site-nav">
