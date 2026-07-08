@@ -14,6 +14,7 @@
   const openButtons = document.querySelectorAll('[data-open-consultation]');
   const timeButtons = Array.from(document.querySelectorAll('.time-slot'));
   const timeGroup = document.querySelector('.time-slot-group');
+  const fieldWrappers = Array.from(document.querySelectorAll('.field'));
   const dateInput = document.getElementById('consultationDate');
   const firstNameInput = document.getElementById('consultationName');
   const summaryFields = {
@@ -54,9 +55,11 @@
   }
 
   function openModal() {
-    modal.classList.add('is-open');
-    modal.setAttribute('aria-hidden', 'false');
-    document.body.classList.add('modal-open');
+    window.requestAnimationFrame(() => {
+      modal.classList.add('is-open');
+      modal.setAttribute('aria-hidden', 'false');
+      document.body.classList.add('modal-open');
+    });
   }
 
   function closeModal() {
@@ -85,7 +88,7 @@
     Object.entries(validationMessages).forEach(([key, el]) => {
       if (el) el.textContent = '';
     });
-    document.querySelectorAll('.field').forEach((field) => field.classList.remove('invalid'));
+    fieldWrappers.forEach((field) => field.classList.remove('invalid'));
     if (timeGroup) timeGroup.classList.remove('invalid');
   }
 
