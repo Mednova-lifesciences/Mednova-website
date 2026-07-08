@@ -54,7 +54,8 @@
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Newsreader:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root{
     --ink:#12233F;
@@ -731,7 +732,10 @@
     <nav class="site-nav">
       <div class="brand">
         <a href="index.html" style="text-decoration:none; display:flex; align-items:center; gap:10px; color:inherit;">
-        <img class="brand-mark" src="/public/images/image.png" alt="MedNova Lifesciences logo">
+        <picture>
+          <source type="image/webp" srcset="/public/images/image.webp">
+          <img class="brand-mark" src="/public/images/image.png" alt="MedNova Lifesciences logo" decoding="async">
+        </picture>
         </a>
       </div>
       <div class="navlinks">
@@ -1275,7 +1279,7 @@
   </div>
 </section>
 
-<script src="/config.js"></script>
+<script defer src="/config.js"></script>
 <script>
   document.querySelectorAll('.pv-collapse-toggle').forEach(btn => {
     btn.addEventListener('click', () => btn.closest('.pv-collapse').classList.toggle('open'));
@@ -1456,6 +1460,6 @@
 })();
 </script>
 
-  <script src="/public/js/site-nav.js"></script>
+  <script defer src="/public/js/site-nav.js"></script>
 </body>
 </html>

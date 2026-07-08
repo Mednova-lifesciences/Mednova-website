@@ -69,7 +69,9 @@
 }
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Newsreader:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root{
     --ink:#14181B;
@@ -284,15 +286,21 @@
 <div class="topline">
   <div class="topline-inner">
     <div class="brand">
-      <img class="brand-mark" src="/public/images/index1.png" alt="MedNova Lifesciences logo">
+      <picture>
+        <source type="image/webp" srcset="/public/images/index1.webp">
+        <img class="brand-mark" src="/public/images/index1.png" alt="MedNova Lifesciences logo" decoding="async">
+      </picture>
       <span class="brand-name">MedNova Lifesciences</span>
     </div>
     <nav class="topline-nav">
+      <a href="/">Home</a>
+      <a href="/about/">About</a>
+      <a href="/services/">Services</a>
       <a href="regulatory.html">Regulatory Affairs</a>
       <a href="cro.html">Clinical Development</a>
       <a href="pv.html">Pharmacovigilance</a>
+      <a href="/contact/">Contact</a>
       <a href="capability-statement.html">Capability Statement</a>
-      <a href="#hero">About</a>
     </nav>
   <button class="site-nav__toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="site-nav-drawer">
     <span></span>
