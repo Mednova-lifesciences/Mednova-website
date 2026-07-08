@@ -1,0 +1,24 @@
+{
+  "version": 2,
+  "builds": [
+    { "src": "frontend/index.html", "use": "@vercel/static" },
+    { "src": "frontend/*.html", "use": "@vercel/static" },
+    { "src": "frontend/**/*.html", "use": "@vercel/static" },
+    { "src": "frontend/public/**", "use": "@vercel/static" },
+    { "src": "public/**", "use": "@vercel/static" }
+  ],
+  "routes": [
+    { "src": "^/robots\\.txt$", "dest": "/public/robots.txt" },
+    { "src": "^/sitemap\\.xml$", "dest": "/public/sitemap.xml" },
+    { "src": "^/$", "dest": "/frontend/index.html" },
+    { "src": "^/about/?$", "dest": "/frontend/about/index.html" },
+    { "src": "^/contact/?$", "dest": "/frontend/contact/index.html" },
+    { "src": "^/services/?$", "dest": "/frontend/services/index.html" },
+    { "src": "^/capability-statement\\.html$", "dest": "/frontend/capability-statement.html" },
+    { "src": "^/compliance-checklist\\.html$", "dest": "/frontend/compliance-checklist.html" },
+    { "src": "^/cro\\.html$", "dest": "/frontend/cro.html" },
+    { "src": "^/pv\\.html$", "dest": "/frontend/pv.html" },
+    { "src": "^/regulatory\\.html$", "dest": "/frontend/regulatory.html" },
+    { "src": "^/(.+)$", "dest": "/frontend/$1" }
+  ]
+}
