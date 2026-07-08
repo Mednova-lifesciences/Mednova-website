@@ -53,13 +53,146 @@
     ]
   }
   </script>
-  <link rel="stylesheet" href="/public/css/site-responsive.css">
+  <link rel="stylesheet" href="/public/css/contact.css">
 </head>
 <body data-theme="dark">
   <main class="page-shell">
-    <h1>Contact MedNova Lifesciences</h1>
-    <p>Email: <a href="mailto:info@mednovalife.com">info@mednovalife.com</a></p>
-    <p><a href="/">Return to the homepage</a> · <a href="/services/">View our services</a> · <a href="/about/">Learn about MedNova</a></p>
+    <section class="hero">
+      <p class="eyebrow">Contact MedNova Lifesciences</p>
+      <h1>Reach our team for regulatory, PV, and clinical support.</h1>
+      <p>Whether you are preparing for a submission, strengthening pharmacovigilance operations, or planning a clinical program, our team is ready to help you move forward with clarity.</p>
+    </section>
+
+    <section class="contact-grid">
+      <div class="info-card">
+        <h2>Company information</h2>
+        <div class="info-list">
+          <div class="info-item">
+            <div class="info-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4h4l2 5-2.5 1.5a11 11 0 0 0 4.5 4.5L14 13l5 2v4a2 2 0 0 1-2 2h-2A15 15 0 0 1 3 6V4a2 2 0 0 1 2-2h4z"></path></svg>
+            </div>
+            <div>
+              <strong>Phone</strong>
+              <span><a href="tel:+2349110225555">+234 9110225555</a></span>
+            </div>
+          </div>
+          <div class="info-item">
+            <div class="info-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z"></path><path d="m4 7 8 6 8-6"></path></svg>
+            </div>
+            <div>
+              <strong>Email</strong>
+              <span><a href="mailto:info@mednovalife.com">info@mednovalife.com</a></span>
+            </div>
+          </div>
+          <div class="info-item">
+            <div class="info-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s6-5.4 6-10a6 6 0 1 0-12 0c0 4.6 6 10 6 10Z"></path><circle cx="12" cy="11" r="2.5"></circle></svg>
+            </div>
+            <div>
+              <strong>Office</strong>
+              <span>Lagos, Nigeria</span>
+            </div>
+          </div>
+          <div class="info-item">
+            <div class="info-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"></rect><path d="M16 2v4"></path><path d="M8 2v4"></path><path d="M3 10h18"></path></svg>
+            </div>
+            <div>
+              <strong>Business hours</strong>
+              <span>Monday–Friday, 8:00 AM–6:00 PM WAT</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-card">
+        <form id="contactForm" novalidate>
+          <div class="field">
+            <label for="name">Full name</label>
+            <input id="name" name="name" type="text" placeholder="Your name" required>
+          </div>
+          <div class="field">
+            <label for="email">Email address</label>
+            <input id="email" name="email" type="email" placeholder="you@company.com" required>
+          </div>
+          <div class="field">
+            <label for="company">Organization</label>
+            <input id="company" name="company" type="text" placeholder="Company or institution">
+          </div>
+          <div class="field">
+            <label for="message">How can we help?</label>
+            <textarea id="message" name="message" placeholder="Tell us about your program, timeline, or area of need" required></textarea>
+          </div>
+          <button class="button" type="submit">Send inquiry</button>
+          <div class="form-status" id="contactFormStatus" role="status" aria-live="polite"></div>
+        </form>
+      </div>
+    </section>
+
+    <section class="why-card">
+      <h2>Why contact us</h2>
+      <p>We respond to new inquiries with a thoughtful, executive-level approach and help clients move from initial questions to practical planning quickly.</p>
+    </section>
   </main>
+
+  <script>
+    const contactForm = document.getElementById('contactForm');
+    const contactFormStatus = document.getElementById('contactFormStatus');
+
+    if (contactForm && contactFormStatus) {
+      contactForm.addEventListener('submit', async (event) => {
+        event.preventDefault();
+
+        if (!contactForm.reportValidity()) {
+          return;
+        }
+
+        const submitButton = contactForm.querySelector('button[type="submit"]');
+        const originalLabel = submitButton ? submitButton.textContent : 'Send inquiry';
+
+        if (submitButton) {
+          submitButton.disabled = true;
+          submitButton.textContent = 'Sending…';
+        }
+
+        contactFormStatus.className = 'form-status';
+        contactFormStatus.textContent = 'Sending your inquiry…';
+
+        try {
+          const response = await fetch('/api/forms/regulatory', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              name: contactForm.elements.name.value.trim(),
+              email: contactForm.elements.email.value.trim(),
+              organization: contactForm.elements.company.value.trim(),
+              inquiryType: 'General inquiry',
+              productCategory: 'General',
+              projectDescription: contactForm.elements.message.value.trim()
+            })
+          });
+
+          const result = await response.json().catch(() => ({}));
+
+          if (!response.ok) {
+            throw new Error(result.message || 'We could not send your inquiry right now.');
+          }
+
+          contactFormStatus.className = 'form-status success';
+          contactFormStatus.textContent = result.message || 'Thank you. Your inquiry has been received.';
+          contactForm.reset();
+        } catch (error) {
+          contactFormStatus.className = 'form-status error';
+          contactFormStatus.textContent = error.message || 'We could not send your inquiry right now. Please contact us directly by email.';
+        } finally {
+          if (submitButton) {
+            submitButton.disabled = false;
+            submitButton.textContent = originalLabel;
+          }
+        }
+      });
+    }
+  </script>
 </body>
 </html>
