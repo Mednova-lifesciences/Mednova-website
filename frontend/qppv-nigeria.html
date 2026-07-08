@@ -53,7 +53,7 @@
   .site-header__inner{width:100%; display:flex; align-items:center; justify-content:space-between; padding:18px 24px;}
   .site-nav{display:flex; align-items:center; justify-content:space-between; width:100%; padding:0; max-width:none; margin:0;}
   .brand{display:flex; align-items:center; gap:10px; text-decoration:none; color:inherit; flex-shrink:0;}
-  .brand-mark{display:block; height:auto; width:min(320px, 70vw); max-width:320px; object-fit:contain; padding:0; border-radius:0; background:none;}
+  .brand-mark{display:block; height:auto; width:min(220px, 60vw); max-width:220px; object-fit:contain; padding:0; border-radius:0; background:none;}
   .brand-name{font-family:'Newsreader', serif; font-size:20px; font-weight:600;}
   .navlinks{display:flex; gap:32px; font-size:14px; font-weight:500;}
   .navlinks a{text-decoration:none; color:var(--ink-soft); transition:color .15s;}
@@ -71,6 +71,7 @@
   .eyebrow{font-family:'IBM Plex Mono', monospace; font-size:12px; letter-spacing:0.12em; text-transform:uppercase; color:var(--moss-deep); margin-bottom:18px; display:flex; align-items:center; gap:10px;}
   .eyebrow::before{content:""; width:22px; height:1px; background:var(--moss);}
   h1{font-family:'Newsreader', serif; font-size:48px; line-height:1.08; font-weight:500; letter-spacing:-0.01em; max-width:12ch; margin-bottom:16px;}
+  .hero h1{font-size:38px; line-height:1.16; max-width:10.5ch; margin-bottom:18px;}
   .hero-sub{font-size:17px; color:var(--grey); max-width:52ch;}
   .article-shell{padding:56px 0 72px;}
   .article-card{background:var(--paper); border:1px solid var(--line); border-radius:10px; padding:40px 40px 48px; box-shadow:0 1px 0 rgba(0,0,0,0.02);}
@@ -96,15 +97,16 @@
   body.article-page .nav-cta,
   body.article-page .site-nav__toggle{display:none !important;}
   body.article-page .brand{margin-right:auto;}
-  body.article-page .brand-mark{width:min(320px, 72vw); max-width:320px;}
+  body.article-page .brand-mark{width:min(220px, 72vw); max-width:220px;}
   @media (max-width:640px){
     .article-card{padding:26px 22px 30px;}
     .article-card h1{font-size:32px;}
     .cta-band{padding:24px 20px;}
     .site-header__inner{padding:14px 16px;}
-    .brand-mark{width:min(220px, 78vw); max-width:220px;}
+    .brand-mark{width:min(180px, 76vw); max-width:180px;}
     body.article-page .site-header__inner{padding:14px 16px;}
-    body.article-page .brand-mark{width:min(220px, 78vw); max-width:220px;}
+    body.article-page .brand-mark{width:min(180px, 76vw); max-width:180px;}
+    .hero h1{font-size:30px; line-height:1.18; max-width:10ch;}
   }
 </style>
 </head>
@@ -133,10 +135,7 @@
 <section class="hero">
   <div class="wrap">
     <div class="eyebrow">Insights</div>
-    <h1>Why foreign pharmaceutical companies need local QPPV support in Nigeria</h1>
-    <p class="hero-sub">Registration is only the beginning of a company’s safety responsibility in Nigeria. For foreign manufacturers, MAHs, importers, and distributors, local QPPV and pharmacovigilance support is increasingly important for safe, compliant market presence.</p>
-  </div>
-</section>
+    <h1>Why foreign pharmaceutical companies<br>need local QPPV support in Nigeria</h1>
 
 <main class="article-shell">
   <div class="wrap">
