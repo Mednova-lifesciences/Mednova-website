@@ -1,23 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-70L73W3SD6"></script>
+<meta charset="UTF-8">
+<!-- Google Analytics is intentionally delayed until the page is idle or the user begins interacting to preserve the initial render path while keeping analytics enabled. -->
 <script>
   window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-70L73W3SD6');
+  function gtag(){window.dataLayer.push(arguments);}
+  function loadAnalytics() {
+    if (window.__mednovaAnalyticsLoaded) return;
+    window.__mednovaAnalyticsLoaded = true;
+    const script = document.createElement('script');
+    script.async = true;
+    script.src = 'https://www.googletagmanager.com/gtag/js?id=G-70L73W3SD6';
+    script.setAttribute('data-analytics', 'true');
+    document.head.appendChild(script);
+    gtag('js', new Date());
+    gtag('config', 'G-70L73W3SD6');
+  }
+  function scheduleAnalytics() {
+    if (window.__mednovaAnalyticsScheduled) return;
+    window.__mednovaAnalyticsScheduled = true;
+    const loadLater = () => {
+      if (document.hidden) return;
+      window.setTimeout(loadAnalytics, 10000);
+    };
+    if ('requestIdleCallback' in window) {
+      window.requestIdleCallback(loadLater, { timeout: 12000 });
+    } else {
+      window.setTimeout(loadLater, 3000);
+    }
+  }
+  window.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'visible') scheduleAnalytics();
+  }, { once: true });
+  window.addEventListener('pointerdown', scheduleAnalytics, { once: true, passive: true });
+  window.addEventListener('keydown', scheduleAnalytics, { once: true });
+  window.addEventListener('scroll', scheduleAnalytics, { once: true, passive: true });
 </script>
-<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="MedNova Lifesciences delivers regulatory affairs, pharmacovigilance, and clinical development support for life sciences organizations in Nigeria and Africa.">
 <meta name="theme-color" content="#0f3d2e">
 <link rel="canonical" href="https://mednovalife.com/">
-  <link rel="icon" href="/favicon.ico" sizes="any">
-  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" href="/public/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="16x16" href="/public/favicon-16x16.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/public/favicon-32x32.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/public/apple-touch-icon.png">
 <link rel="manifest" href="/public/site.webmanifest">
 <meta name="robots" content="index,follow">
 <meta property="og:title" content="MedNova Lifesciences | Regulatory & PV Services in Africa">
@@ -68,11 +95,7 @@
   ]
 }
 </script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preload" as="image" href="/public/images/index1.webp" imagesrcset="/public/images/index1.webp" imagesizes="34px" fetchpriority="high">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" media="print" onload="this.media='all'">
-<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap"></noscript>
+
 <style>
   :root{
     --ink:#14181B;
@@ -85,12 +108,12 @@
     --grey:#8A9186;
   }
   *{box-sizing:border-box; margin:0; padding:0;}
-  body{background:var(--ink); color:var(--paper); font-family:'IBM Plex Sans', sans-serif; -webkit-font-smoothing:antialiased;}
+  body{background:var(--ink); color:var(--paper); font-family:'IBM Plex Sans', 'Segoe UI', Roboto, Arial, sans-serif; -webkit-font-smoothing:antialiased;}
   a{color:inherit; text-decoration:none;}
 
   section{max-width:1080px; margin:0 auto; padding:0 44px;}
   .eyebrow{
-    font-family:'IBM Plex Mono', monospace; font-size:12px; letter-spacing:0.14em; text-transform:uppercase;
+    font-family:'IBM Plex Mono', 'SFMono-Regular', Consolas, 'Liberation Mono', monospace; font-size:12px; letter-spacing:0.14em; text-transform:uppercase;
     color:#8FA98A; margin-bottom:16px;
   }
 
@@ -102,16 +125,16 @@
   .brand:focus-visible .brand-name{color:#fff;}
   .brand:focus-visible{outline:2px solid #7FCFC4; outline-offset:4px; border-radius:8px;}
   .brand-mark{height:34px; width:auto; display:block; object-fit:contain; padding:0; border-radius:0; background:none;}
-  .brand-name{font-family:'Newsreader', serif; font-size:19px; font-weight:600; color:var(--paper); line-height:1.2; margin:0;}
+  .brand-name{font-family:'Newsreader', 'Iowan Old Style', 'Palatino Linotype', 'Book Antiqua', Georgia, serif; font-size:19px; font-weight:600; color:var(--paper); line-height:1.2; margin:0;}
   .topline-nav{display:flex; align-items:center; gap:20px; flex-wrap:nowrap; white-space:nowrap;}
   .topline-nav a{font-size:13.5px; color:#D7DAD1; transition:color .15s;}
   .topline-nav a:hover{color:#fff;}
-  .topline .tag{font-family:'IBM Plex Mono', monospace; font-size:11.5px; color:#9BA39A; letter-spacing:0.06em;}
+  .topline .tag{font-family:'IBM Plex Mono', 'SFMono-Regular', Consolas, 'Liberation Mono', monospace; font-size:11.5px; color:#9BA39A; letter-spacing:0.06em;}
 
   /* ---------- hero ---------- */
   .hero{text-align:center; max-width:760px; padding-top:40px; padding-bottom:8px;}
   .hero h1{
-    font-family:'Newsreader', serif; font-weight:500; font-size:42px; line-height:1.16;
+    font-family:'Newsreader', 'Iowan Old Style', 'Palatino Linotype', 'Book Antiqua', Georgia, serif; font-weight:500; font-size:42px; line-height:1.16;
     letter-spacing:-0.01em; color:#fff;
   }
   .hero .promise{
@@ -124,7 +147,7 @@
     display:grid; grid-template-columns:1fr 1fr; gap:56px;
     border-top:1px solid var(--line); padding-top:44px;
   }
-  .narrative h2, .narrative h3{font-family:'Newsreader', serif; font-weight:500; font-size:21px; color:#fff; margin-bottom:12px;}
+  .narrative h2, .narrative h3{font-family:'Newsreader', 'Iowan Old Style', 'Palatino Linotype', 'Book Antiqua', Georgia, serif; font-weight:500; font-size:21px; color:#fff; margin-bottom:12px;}
   .narrative p{font-size:14px; line-height:1.65; color:#AEB4A9;}
 
   /* ---------- connector above split ---------- */
@@ -134,7 +157,7 @@
   }
   .connector .rule{flex:1; height:1px; background:var(--line);}
   .connector .label{
-    font-family:'IBM Plex Mono', monospace; font-size:11.5px; letter-spacing:0.1em; text-transform:uppercase;
+    font-family:'IBM Plex Mono', 'SFMono-Regular', Consolas, 'Liberation Mono', monospace; font-size:11.5px; letter-spacing:0.1em; text-transform:uppercase;
     color:#7FCFC4; white-space:nowrap;
   }
 
@@ -148,14 +171,14 @@
   .panel-motif svg{width:100%; height:100%;}
   .panel-inner{position:relative; z-index:2;}
   .panel-kicker{
-    font-family:'IBM Plex Mono', monospace; font-size:12px; letter-spacing:0.14em; text-transform:uppercase;
+    font-family:'IBM Plex Mono', 'SFMono-Regular', Consolas, 'Liberation Mono', monospace; font-size:12px; letter-spacing:0.14em; text-transform:uppercase;
     margin-bottom:16px; display:flex; align-items:center; gap:10px;
   }
   .panel.reg .panel-kicker{color:#E3B67F;}
   .panel.cro .panel-kicker{color:#9FCB96;}
   .panel.pv .panel-kicker{color:#7FCFC4;}
   .panel-kicker::before{content:""; width:22px; height:1px; background:currentColor;}
-  .panel h2{font-family:'Newsreader', serif; font-weight:500; font-size:28px; line-height:1.1; color:#fff; max-width:12ch;}
+  .panel h2{font-family:'Newsreader', 'Iowan Old Style', 'Palatino Linotype', 'Book Antiqua', Georgia, serif; font-weight:500; font-size:28px; line-height:1.1; color:#fff; max-width:12ch;}
   .panel p{margin-top:14px; font-size:14px; line-height:1.55; color:#C7CCC1; max-width:32ch;}
   .panel .service-list{list-style:none; margin-top:16px; display:flex; flex-direction:column; gap:6px;}
   .panel .service-list li{font-size:12.5px; color:#AEB4A9; padding-left:13px; position:relative; line-height:1.5;}
@@ -176,7 +199,7 @@
     padding:40px 44px; text-align:center;
   }
   .support .lead{
-    font-family:'IBM Plex Mono', monospace; font-size:12px; letter-spacing:0.1em; text-transform:uppercase;
+    font-family:'IBM Plex Mono', 'SFMono-Regular', Consolas, 'Liberation Mono', monospace; font-size:12px; letter-spacing:0.1em; text-transform:uppercase;
     color:#8A9186; margin-bottom:20px;
   }
   .support-list{display:flex; flex-wrap:wrap; justify-content:center; gap:12px; max-width:760px; margin:0 auto;}
@@ -186,7 +209,7 @@
 
   /* ---------- final cta ---------- */
   .final-cta{padding-top:96px; padding-bottom:70px; text-align:center;}
-  .final-cta h2{font-family:'Newsreader', serif; font-weight:500; font-size:32px; color:#fff; max-width:22ch; margin:0 auto;}
+  .final-cta h2{font-family:'Newsreader', 'Iowan Old Style', 'Palatino Linotype', 'Book Antiqua', Georgia, serif; font-weight:500; font-size:32px; color:#fff; max-width:22ch; margin:0 auto;}
 
   /* ---------- technology strip ---------- */
   .tech-strip{padding-top:88px; padding-bottom:10px;}
@@ -195,7 +218,7 @@
     border:1px solid var(--line); border-radius:10px; padding:40px 44px;
     background:rgba(255,255,255,0.03);
   }
-  .tech-strip h2{font-family:'Newsreader', serif; font-weight:500; font-size:26px; color:#fff; letter-spacing:-0.01em; margin-bottom:12px;}
+  .tech-strip h2{font-family:'Newsreader', 'Iowan Old Style', 'Palatino Linotype', 'Book Antiqua', Georgia, serif; font-weight:500; font-size:26px; color:#fff; letter-spacing:-0.01em; margin-bottom:12px;}
   .tech-strip p{font-size:14.5px; line-height:1.7; color:#AEB4A9; max-width:62ch;}
   .tech-strip-link{
     margin-top:22px; display:inline-flex; align-items:center; gap:10px;
@@ -220,18 +243,40 @@
   .cta-alt a{color:#D7DAD1; border-bottom:1px solid var(--line); padding-bottom:1px;}
   .cta-alt a:hover{color:#fff;}
 
+  .skip-link{
+    position:absolute; left:16px; top:-48px; z-index:1200;
+    padding:10px 14px; border-radius:999px; background:#fff; color:#14181b;
+    font-weight:700; text-decoration:none;
+  }
+  .skip-link:focus{top:16px; outline:2px solid #7FCFC4; outline-offset:4px;}
+
+  .support, .tech-strip, .consultation-booking-section, footer{
+    content-visibility:auto;
+    contain-intrinsic-size:800px 1400px;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *, *::before, *::after{
+      animation-duration:0.01ms !important;
+      animation-iteration-count:1 !important;
+      transition-duration:0.01ms !important;
+      scroll-behavior:auto !important;
+    }
+  }
+
   /* ---------- footer ---------- */
   footer{border-top:1px solid var(--line); padding:44px 44px 34px; margin-top:20px;}
   .footer-inner{max-width:1080px; margin:0 auto; display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:24px;}
-  .footer-brand{font-family:'Newsreader', serif; font-size:16px; color:#D7DAD1;}
+  .footer-brand{font-family:'Newsreader', 'Iowan Old Style', 'Palatino Linotype', 'Book Antiqua', Georgia, serif; font-size:16px; color:#F0F3EC;}
   .footer-links{display:flex; flex-wrap:wrap; gap:22px 28px;}
-  .footer-links a{font-size:13px; color:#AEB4A9; transition:color .15s;}
+  .footer-links a{font-size:13px; color:#D4DAD0; transition:color .15s;}
   .footer-links a:hover{color:#fff;}
-  .footer-copy{max-width:1080px; margin:26px auto 0; font-size:12px; color:#6F766A; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:14px;}
+  .footer-copy{max-width:1080px; margin:26px auto 0; font-size:12px; color:#E8EEE3; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:14px;}
   .footer-social{display:flex; gap:16px;}
   .footer-social a{
     width:32px; height:32px; border:1px solid var(--line); border-radius:50%;
-    display:flex; align-items:center; justify-content:center; color:#AEB4A9; transition:color .15s, border-color .15s;
+    display:flex; align-items:center; justify-content:center; color:#D4DAD0; transition:color .15s, border-color .15s;
   }
   .footer-social a:hover{color:#fff; border-color:#7FCFC4;}
   .footer-social svg{width:15px; height:15px; fill:currentColor;}
@@ -248,10 +293,76 @@
     .footer-inner{flex-direction:column;}
   }
 </style>
-<link rel="stylesheet" href="/public/css/demo-widget.css" media="print" onload="this.media='all'">
-<link rel="stylesheet" href="/public/css/consultation-booking.css" media="print" onload="this.media='all'">
-<noscript><link rel="stylesheet" href="/public/css/demo-widget.css"></noscript>
-<noscript><link rel="stylesheet" href="/public/css/consultation-booking.css"></noscript>
+<script>
+  (function () {
+    function loadLazyAssets() {
+      if (!document.head) return;
+
+      if (!document.getElementById('mednova-demo-css')) {
+        const demoCss = document.createElement('link');
+        demoCss.id = 'mednova-demo-css';
+        demoCss.rel = 'stylesheet';
+        demoCss.href = '/public/css/demo-widget.css';
+        document.head.appendChild(demoCss);
+      }
+
+      if (!document.getElementById('mednova-booking-css')) {
+        const bookingCss = document.createElement('link');
+        bookingCss.id = 'mednova-booking-css';
+        bookingCss.rel = 'stylesheet';
+        bookingCss.href = '/public/css/consultation-booking.css';
+        document.head.appendChild(bookingCss);
+      }
+
+      if (!document.getElementById('mednova-demo-js')) {
+        const demoJs = document.createElement('script');
+        demoJs.id = 'mednova-demo-js';
+        demoJs.src = '/public/js/demo-widget.js';
+        demoJs.defer = true;
+        document.body.appendChild(demoJs);
+      }
+
+      if (!document.getElementById('mednova-booking-js')) {
+        const bookingJs = document.createElement('script');
+        bookingJs.id = 'mednova-booking-js';
+        bookingJs.src = '/public/js/consultation-booking.js';
+        bookingJs.defer = true;
+        document.body.appendChild(bookingJs);
+      }
+
+      if (!document.getElementById('mednova-nav-js')) {
+        const navJs = document.createElement('script');
+        navJs.id = 'mednova-nav-js';
+        navJs.src = '/public/js/site-nav.js';
+        navJs.defer = true;
+        document.body.appendChild(navJs);
+      }
+    }
+
+    function scheduleAssets() {
+      if (window.__mednovaAssetsScheduled) return;
+      window.__mednovaAssetsScheduled = true;
+      if ('requestIdleCallback' in window) {
+        window.requestIdleCallback(loadLazyAssets, { timeout: 3000 });
+      } else {
+        window.setTimeout(loadLazyAssets, 1800);
+      }
+    }
+
+    function initialize() {
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', scheduleAssets, { once: true });
+        return;
+      }
+      scheduleAssets();
+    }
+
+    window.addEventListener('scroll', scheduleAssets, { once: true, passive: true });
+    window.addEventListener('pointerdown', scheduleAssets, { once: true, passive: true });
+    window.addEventListener('keydown', scheduleAssets, { once: true });
+    initialize();
+  })();
+</script>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -531,6 +642,7 @@
   </style>
 </head>
 <body data-theme="dark">
+<a class="skip-link" href="#content">Skip to content</a>
 
 <div class="topline">
   <div class="topline-inner">
@@ -558,6 +670,7 @@
   </div>
 </div>
 
+<main id="content">
 <!-- HERO -->
 <section class="hero">
   <h1>Your Regulatory and Clinical Development Partner for Nigeria and Africa</h1>
@@ -714,8 +827,8 @@
 </section>
 
 <!-- CONSULTATION BOOKING -->
-<div class="consultation-modal-overlay" id="consultationModal" aria-hidden="true">
-  <div class="consultation-modal" role="dialog" aria-modal="true" aria-labelledby="consultationModalTitle">
+<div class="consultation-modal-overlay" id="consultationModal" aria-hidden="true" inert>
+  <div class="consultation-modal" role="dialog" aria-modal="true" aria-labelledby="consultationModalTitle" aria-describedby="consultationModalDescription">
     <div class="consultation-modal__header">
       <div>
         <div class="consultation-modal__eyebrow">Consultation booking</div>
@@ -724,7 +837,7 @@
       <button class="consultation-modal__close" type="button" aria-label="Close dialog" data-close-modal>×</button>
     </div>
     <div class="consultation-modal__body">
-      <p class="consultation-modal__text">Speak with one of our specialists to discuss your Clinical Development, Pharmacovigilance, or Regulatory requirements.</p>
+      <p class="consultation-modal__text" id="consultationModalDescription">Speak with one of our specialists to discuss your Clinical Development, Pharmacovigilance, or Regulatory requirements.</p>
       <div class="consultation-modal__actions">
         <button class="cta-button" type="button" data-open-consultation>Book Consultation</button>
         <button class="button-secondary" type="button" data-close-modal>Maybe Later</button>
@@ -884,14 +997,11 @@
     </div>
   </div>
 </footer>
+</main>
 
 
 
 <script defer src="/config.js"></script>
 <script>window.DEMO_CONTEXT = 'general';</script>
-<script defer src="/public/js/demo-widget.js"></script>
-<script defer src="/public/js/consultation-booking.js"></script>
-
-  <script defer src="/public/js/site-nav.js"></script>
 </body>
 </html>
