@@ -4,7 +4,7 @@
 }
 .demo-label{
   display:inline-block; font-family:'IBM Plex Mono', monospace; font-size:11px; letter-spacing:0.08em; text-transform:uppercase;
-  color:var(--teal, var(--moss)); margin-bottom:16px;
+  color:#9FE8E0; margin-bottom:16px;
 }
 .demo-questions{display:flex; flex-wrap:wrap; gap:10px; margin-bottom:16px;}
 .demo-q-btn{
