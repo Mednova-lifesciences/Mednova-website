@@ -3,7 +3,7 @@
 <head>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-70L73W3SD6"></script>
-<script>
+<script nonce="mednova-inline-2026">
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
@@ -694,13 +694,21 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "Organization",
+  "@type": "LocalBusiness",
   "name": "MedNova Lifesciences",
   "url": "https://mednovalife.com",
-  "logo": "https://mednovalife.com/public/images/image.webp"
+  "logo": "https://mednovalife.com/public/images/image.webp",
+  "telephone": "+2349110225555",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "17 Aje Road",
+    "addressLocality": "Yaba",
+    "addressCountry": "NG"
+  }
 }
 </script>
-  <link rel="stylesheet" href="/public/css/site-responsive.css">
+  <link rel="stylesheet" href="/public/css/breadcrumbs.min.css">
+  <link rel="stylesheet" href="/public/css/site-responsive.min.css">
 </head>
 <body>
 
@@ -708,7 +716,7 @@
   <div class="site-header__inner">
     <nav class="site-nav">
       <div class="brand">
-        <a href="index.html" style="text-decoration:none; display:flex; align-items:center; gap:10px; color:inherit;">
+        <a href="/" style="text-decoration:none; display:flex; align-items:center; gap:10px; color:inherit;">
         <picture>
           <source type="image/webp" srcset="/public/images/image-68.webp">
           <img class="brand-mark" src="/public/images/image.png" alt="MedNova Lifesciences logo" width="34" height="34" decoding="async" fetchpriority="high">
@@ -732,6 +740,10 @@
   </button>
   </div>
 </header>
+
+<div class="wrap">
+  <div data-breadcrumbs></div>
+</div>
 
 <section class="hero">
   <div class="wrap hero-grid">
@@ -965,7 +977,7 @@
   </div>
 </section>
 
-<script>
+<script nonce="mednova-inline-2026">
   const serviceData = [
     { title: "Case Processing & Reporting", desc: "Individual and aggregate safety reporting handled to global submission standards.", items: ["ICSR intake & triage", "MedDRA / WHO-DD coding", "Narrative writing", "E2B(R3) submissions", "PSUR / PBRER / DSUR", "SUSAR & PADER reporting"] },
     { title: "Signal & Risk Management", desc: "Turning safety data into decisions, not just reports.", items: ["Signal detection & validation", "Benefit-risk evaluation", "Risk Management Plans (RMP)", "Risk minimization activities", "Safety communication plans", "Safety trend analysis"] },
@@ -1249,7 +1261,7 @@
 
       <div class="cta-row" style="justify-content:flex-start;">
         <button type="submit" class="btn-primary" id="submitBtn">Request a PV Assessment</button>
-        <a class="btn-ghost" href="index.html">MedNova Lifesciences home</a>
+        <a class="btn-ghost" href="/">MedNova Lifesciences home</a>
       </div>
       <p id="formStatus" class="form-status"></p>
     </form>
@@ -1257,7 +1269,7 @@
 </section>
 
 <script src="/config.js"></script>
-<script>
+<script nonce="mednova-inline-2026">
   document.querySelectorAll('.pv-collapse-toggle').forEach(btn => {
     btn.addEventListener('click', () => btn.closest('.pv-collapse').classList.toggle('open'));
   });
@@ -1360,7 +1372,7 @@
   </div>
 </footer>
 
-<script>
+<script nonce="mednova-inline-2026">
 (function(){
   const answers = {};
   const steps = ['1','2','3','4','5','6','results'];
@@ -1437,6 +1449,7 @@
 })();
 </script>
 
-  <script src="/public/js/site-nav.js"></script>
+  <script defer src="/public/js/breadcrumbs.min.js"></script>
+  <script src="/public/js/site-nav.min.js"></script>
 </body>
 </html>

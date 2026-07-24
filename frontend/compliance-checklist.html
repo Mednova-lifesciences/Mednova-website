@@ -2,7 +2,7 @@
 <html lang="en">
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-70L73W3SD6"></script>
-<script>
+<script nonce="mednova-inline-2026">
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
@@ -36,11 +36,18 @@
     "@context": "https://schema.org",
     "@graph": [
       {
-        "@type": "MedicalBusiness",
+        "@type": "LocalBusiness",
         "@id": "https://mednovalife.com/#medicalbusiness",
         "name": "MedNova Lifesciences",
-        "url": "https://mednovalife.com/",
-        "description": "Pharmacovigilance and compliance support for life sciences organizations operating in Africa."
+        "url": "https://mednovalife.com",
+        "description": "Pharmacovigilance and compliance support for life sciences organizations operating in Africa.",
+        "telephone": "+2349110225555",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "17 Aje Road",
+          "addressLocality": "Yaba",
+          "addressCountry": "NG"
+        }
       },
       {
         "@type": "Service",
@@ -56,7 +63,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Newsreader:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
   <link href="https://fonts.googleapis.com/css2?family=Newsreader:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./public/css/demo-widget.css">
+  <link rel="stylesheet" href="./public/css/demo-widget.min.css">
   <style>
     :root {
       --ink: #1f2a1e;
@@ -107,13 +114,14 @@
   "logo": "https://mednovalife.com/public/images/image.webp"
 }
 </script>
-  <link rel="stylesheet" href="/public/css/site-responsive.css">
+  <link rel="stylesheet" href="/public/css/site-responsive.min.css">
+  <link rel="stylesheet" href="/public/css/breadcrumbs.min.css">
 </head>
 <body>
   <header class="site-header">
     <div class="site-header__inner">
       <nav class="site-nav">
-        <a class="brand" href="index.html">
+        <a class="brand" href="/">
           <picture>
             <source type="image/webp" srcset="/public/images/image.webp">
             <picture>
@@ -128,7 +136,7 @@
           <a href="pv.html">Pharmacovigilance</a>
           <a href="capability-statement.html">Capability Statement</a>
         </div>
-        <a class="cta" href="index.html#book-consultation">Book a consultation</a>
+        <a class="cta" href="/#book-consultation">Book a consultation</a>
       </nav>
   <button class="site-nav__toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="site-nav-drawer">
     <span></span>
@@ -140,10 +148,11 @@
 
   <main>
     <section class="hero">
+      <div class="wrap" data-breadcrumbs></div>
       <div class="hero-card">
         <div class="eyebrow">Free resource</div>
         <h1>QPPV Compliance Checklist</h1>
-        <p>Use this practical checklist to review governance, safety reporting, signal detection, and inspection readiness against current NAFDAC expectations.</p>
+        <p>Use this practical checklist to review governance, safety reporting, signal detection, and inspection readiness against current NAFDAC expectations. Ask about how our <a href="/training-consulting.html">training and consulting</a> team can help you apply the checklist in practice, and explore glossary guidance for <a href="/resources/glossary/good-pharmacovigilance-practice.html">Good Pharmacovigilance Practice</a>, <a href="/resources/glossary/risk-management-plan.html">Risk Management Plan</a>, and <a href="/resources/glossary/adverse-drug-reaction.html">adverse drug reactions</a>.</p>
         <div class="actions">
           <a class="btn-primary" href="./public/downloads/MedNova-NAFDAC-QPPV-Compliance-Checklist.pdf">Download checklist PDF</a>
           <a class="btn-ghost" href="pv.html#try-it">Try the readiness checker</a>
@@ -180,10 +189,88 @@
         </ul>
       </div>
     </section>
+
+    <section class="content-block">
+      <div class="wrap">
+        <article>
+          <h2>The purpose of compliance readiness</h2>
+          <p>Compliance readiness is the process of validating that the systems, roles, and documentation needed to manage pharmacovigilance are in place before a product is marketed or a new country launch begins. It is purpose-built to help organizations avoid regulatory gaps, unnecessary work, and last-minute responses to audit requests.</p>
+          <p>For life sciences organizations operating in Nigeria and other African markets, readiness means more than having a policy. It means verifying that safety reporting pathways, case management capacity, and local representation are aligned with both global standards and local expectations.</p>
+
+          <h2>Why pharmaceutical companies need it</h2>
+          <p>Pharmaceutical companies need compliance readiness because regulatory authorities are increasingly focused on how well systems work in practice, not simply whether paperwork has been filed. A readiness review helps companies identify weaknesses in their process before they become a compliance risk.</p>
+          <p>When a company can demonstrate operational consistency around safety reporting, quality oversight, and escalation, it is better positioned for faster market access and smoother regulatory interactions. That is especially important when working with NAFDAC, where expectations for local oversight and safety governance remain high.</p>
+
+          <h2>Benefits of a structured checklist</h2>
+          <ul>
+            <li>Creates a clear view of responsibilities for QPPV, local safety staff, and the business team.</li>
+            <li>Identifies gaps in case intake, triage, documentation, and reporting before inspection.</li>
+            <li>Supports better coordination between pharmacovigilance, regulatory affairs, and commercial functions.</li>
+            <li>Improves the likelihood that submissions and incident reports are ready on schedule.</li>
+          </ul>
+
+          <h2>How to use this checklist</h2>
+          <p>Use the checklist as a structured framework for review meetings, handover sessions, and operational readiness assessments. It should be applied early in the lifecycle so the organization has time to strengthen governance, define roles, and document critical processes.</p>
+          <p>For each checklist item, confirm that a responsible owner is assigned, evidence is available, and the team can describe how the process will function during routine operations and in a compliance review.</p>
+
+          <h2>Checklist explanation</h2>
+          <p>The checklist is designed to help you assess four fundamental areas: governance, safety reporting, documentation, and inspection readiness. Governance covers both the QPPV role and the local escalation path. Safety reporting covers case processing, signal review, and communication pathways. Documentation covers procedures, logbooks, and training records. Inspection readiness covers how the organization prepares for regulatory review.</p>
+
+          <h2>When this matters most</h2>
+          <p>Compliance readiness is especially valuable in the months before a new registration, a major submission, or a planned product launch. It is also useful when a company is onboarding a new pharmacovigilance partner, changing a contract research organization, or expanding into a new market.</p>
+          <p>When readiness is reviewed early, it becomes a competitive advantage rather than a reactive burden.</p>
+
+          <h2>Common audit findings</h2>
+          <ul>
+            <li>Unclear or incomplete QPPV governance and local representation.</li>
+            <li>Insufficient documentation of safety reporting workflows and case processing responsibilities.</li>
+            <li>Missing or outdated training records for staff responsible for adverse event intake.</li>
+            <li>Weak escalation pathways between pharmacovigilance, medical writing, and regulatory teams.</li>
+            <li>Inspection evidence that is separated from the operational process rather than linked to live case management.</li>
+          </ul>
+
+          <h2>Best practices</h2>
+          <ul>
+            <li>Keep a current pharmacovigilance governance chart that identifies the QPPV and local safety contacts.</li>
+            <li>Document case intake, triage, and reporting procedures in a way that can be followed by new staff and inspectors alike.</li>
+            <li>Align your SOPs with NAFDAC expectations and global guidance such as Good Pharmacovigilance Practice.</li>
+            <li>Run sample case reviews to test the end-to-end safety reporting process and correct gaps before they become a compliance issue.</li>
+            <li>Maintain an inspection-ready evidence package that includes training records, safety reports, and a clear escalation path.</li>
+          </ul>
+
+          <p>The checklist helps teams move from abstract compliance goals to practical, auditable preparation. If you want to validate your readiness with experienced local support, <a href="/contact/">contact MedNova Lifesciences</a> and we will help you translate the checklist into a focused action plan.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="content-block">
+      <div class="wrap">
+        <h2>Frequently asked questions</h2>
+        <article>
+          <h3>Who should use this checklist?</h3>
+          <p>Pharmaceutical companies, contract safety partners, regulatory teams, and local affiliates preparing for NAFDAC review, QPPV appointment, or market launch should use this checklist.</p>
+
+          <h3>Does this checklist replace a full audit?</h3>
+          <p>No. It is intended as a practical readiness review. A full compliance audit should follow this checklist to validate systems in greater depth.</p>
+
+          <h3>How does MedNova support checklist follow-up?</h3>
+          <p>We help translate checklist findings into corrective actions, process improvements, and documentation updates to close gaps before a regulatory inspection.</p>
+
+          <h3>What are common pharmacovigilance readiness gaps?</h3>
+          <p>Common gaps include unclear case intake, incomplete QPPV procedures, missing source documents, and weak oversight of local reporting responsibilities.</p>
+
+          <h3>What does inspection readiness involve?</h3>
+          <p>Inspection readiness means being able to demonstrate policies, training, safety records, and escalation paths clearly and consistently during a regulatory review.</p>
+
+          <h3>How can I get expert help?</h3>
+          <p><a href="/contact/">Contact MedNova</a> to turn checklist findings into a practical improvement plan and to prepare for submissions, audits, or expansions in regulated African markets.</p>
+        </article>
+      </div>
+    </section>
   </main>
 
   <script defer src="/config.js"></script>
-  <script>
+  <script nonce="mednova-inline-2026">
     (function () {
       const form = document.getElementById('complianceForm');
       const status = document.getElementById('formStatus');
@@ -213,6 +300,6 @@
       });
     })();
   </script>
-  <script defer src="/public/js/site-nav.js"></script>
+  <script defer src="/public/js/site-nav.min.js"></script>
 </body>
 </html>

@@ -1,4 +1,7 @@
 User-agent: *
 Allow: /
+Disallow: /src/
+Disallow: /src/pages/
+Disallow: /test/
 
 Sitemap: https://mednovalife.com/sitemap.xml

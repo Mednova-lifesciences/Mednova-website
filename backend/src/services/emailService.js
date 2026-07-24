@@ -177,7 +177,7 @@ export async function sendConsultationNotificationEmail(formData) {
     subject,
     html,
     text,
-    replyTo: CONSULTATION_EMAIL
+    replyTo: formData.email || CONSULTATION_EMAIL
   });
 }
 

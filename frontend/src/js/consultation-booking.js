@@ -56,12 +56,16 @@
   function openModal() {
     modal.classList.add('is-open');
     modal.setAttribute('aria-hidden', 'false');
+    modal.removeAttribute('hidden');
+    modal.removeAttribute('inert');
     document.body.classList.add('modal-open');
   }
 
   function closeModal() {
     modal.classList.remove('is-open');
     modal.setAttribute('aria-hidden', 'true');
+    modal.setAttribute('hidden', '');
+    modal.setAttribute('inert', '');
     document.body.classList.remove('modal-open');
     sessionStorage.setItem(modalDismissedKey, 'true');
   }

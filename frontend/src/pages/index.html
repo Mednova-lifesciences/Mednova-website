@@ -3,7 +3,7 @@
 <head>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-70L73W3SD6"></script>
-<script>
+<script nonce="mednova-inline-2026">
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
@@ -187,7 +187,7 @@
   .footer-links{display:flex; flex-wrap:wrap; gap:22px 28px;}
   .footer-links a{font-size:13px; color:#AEB4A9; transition:color .15s;}
   .footer-links a:hover{color:#fff;}
-  .footer-copy{max-width:1080px; margin:26px auto 0; font-size:12px; color:#6F766A; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:14px;}
+  .footer-copy{max-width:1080px; margin:26px auto 0; font-size:12px; color:#dce4d8; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:14px;}
   .footer-social{display:flex; gap:16px;}
   .footer-social a{
     width:32px; height:32px; border:1px solid var(--line); border-radius:50%;
@@ -208,15 +208,22 @@
     .footer-inner{flex-direction:column;}
   }
 </style>
-<link rel="stylesheet" href="/css/demo-widget.css">
-<link rel="stylesheet" href="/css/consultation-booking.css">
+<link rel="stylesheet" href="/css/demo-widget.min.css">
+<link rel="stylesheet" href="/css/consultation-booking.min.css">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "Organization",
+  "@type": "LocalBusiness",
   "name": "MedNova Lifesciences",
   "url": "https://mednovalife.com",
-  "logo": "https://mednovalife.com/public/images/image.webp"
+  "logo": "https://mednovalife.com/public/images/image.webp",
+  "telephone": "+2349110225555",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "17 Aje Road",
+    "addressLocality": "Yaba",
+    "addressCountry": "NG"
+  }
 }
 </script>
 <script type="application/ld+json">
@@ -244,14 +251,17 @@
 }
 </script>
   <link rel="preload" as="image" href="/public/images/index1.webp" imagesrcset="/public/images/index1.webp" imagesizes="34px" fetchpriority="high">
-  <link rel="stylesheet" href="/public/css/site-responsive.css">
+  <link rel="stylesheet" href="/public/css/breadcrumbs.min.css">
+  <link rel="stylesheet" href="/public/css/site-responsive.min.css">
 </head>
 <body data-theme="dark">
+
+<div data-breadcrumbs></div>
 
 <div class="topline">
   <div class="topline-inner">
     <a class="brand" href="/" aria-label="MedNova Lifesciences home">
-      <img class="brand-mark" src="/public/images/index1-68.webp" alt="MedNova Lifesciences logo" width="34" height="34" decoding="async" fetchpriority="high">
+      <img class="brand-mark" src="/public/images/index1.webp" alt="MedNova Lifesciences logo" width="34" height="34" decoding="async" fetchpriority="high">
       <span class="brand-name">MedNova Lifesciences</span>
     </a>
     <nav class="topline-nav">
@@ -425,7 +435,7 @@
 </section>
 
 <!-- CONSULTATION BOOKING -->
-<div class="consultation-modal-overlay" id="consultationModal" aria-hidden="true">
+<div class="consultation-modal-overlay" id="consultationModal" aria-hidden="true" inert hidden>
   <div class="consultation-modal" role="dialog" aria-modal="true" aria-labelledby="consultationModalTitle">
     <div class="consultation-modal__header">
       <div>
@@ -577,6 +587,8 @@
   </div>
 </section>
 
+
+<section><div class="wrap"><div class="callout"><strong>Practical next step:</strong> For teams that want to turn this guidance into action, MedNova offers <a href="/training-consulting.html">training and consulting</a> and a downloadable <a href="/public/downloads/MedNova-NAFDAC-QPPV-Compliance-Checklist.pdf">checklist PDF</a> that help connect regulatory readiness, safety, and documentation practices.</div></div></section>
 <footer id="footer">
   <div class="footer-inner">
     <div class="footer-brand">MedNova Lifesciences</div>
@@ -599,10 +611,11 @@
 
 
 <script src="/config.js"></script>
-<script>window.DEMO_CONTEXT = 'general';</script>
-<script src="/js/demo-widget.js"></script>
-<script src="/js/consultation-booking.js"></script>
+<script nonce="mednova-inline-2026">window.DEMO_CONTEXT = 'general';</script>
+<script src="/js/demo-widget.min.js"></script>
+<script src="/js/consultation-booking.min.js"></script>
 
-  <script src="/public/js/site-nav.js"></script>
+  <script defer src="/public/js/breadcrumbs.min.js"></script>
+  <script src="/public/js/site-nav.min.js"></script>
 </body>
 </html>

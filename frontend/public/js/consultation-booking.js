@@ -1,11 +1,14 @@
 (function () {
   const modal = document.getElementById('consultationModal');
+  const modalDialog = modal?.querySelector('.consultation-modal');
   const bookingSection = document.getElementById('book-consultation');
   const form = document.getElementById('consultationForm');
   const confirmationCard = document.getElementById('consultationConfirmation');
   const formCard = document.getElementById('consultationFormCard');
   const submitButton = document.getElementById('consultationSubmit');
   const modalDismissedKey = 'mednova-consultation-modal-dismissed';
+  let lastFocusedElement = null;
+  let focusableElements = [];
 
   if (!modal || !bookingSection || !form || !confirmationCard || !formCard || !submitButton) {
     return;
@@ -54,18 +57,48 @@
     dateInput.min = `${yyyy}-${mm}-${dd}`;
   }
 
+  function getFocusableElements() {
+    if (!modalDialog) return [];
+    return Array.from(modalDialog.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])')).filter((element) => {
+      const style = window.getComputedStyle(element);
+      return !element.hasAttribute('disabled') && style.display !== 'none' && style.visibility !== 'hidden';
+    });
+  }
+
+  function focusFirstModalElement() {
+    focusableElements = getFocusableElements();
+    if (focusableElements.length) {
+      focusableElements[0].focus();
+    }
+  }
+
+  function setModalState(isOpen) {
+    modal.classList.toggle('is-open', isOpen);
+    modal.setAttribute('aria-hidden', String(!isOpen));
+    document.body.classList.toggle('modal-open', isOpen);
+
+    if (isOpen) {
+      modal.removeAttribute('hidden');
+      modal.removeAttribute('inert');
+      lastFocusedElement = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+      window.requestAnimationFrame(() => focusFirstModalElement());
+    } else {
+      modal.setAttribute('hidden', '');
+      modal.setAttribute('inert', '');
+      if (lastFocusedElement && typeof lastFocusedElement.focus === 'function') {
+        window.setTimeout(() => lastFocusedElement.focus(), 0);
+      }
+    }
+  }
+
   function openModal() {
     window.requestAnimationFrame(() => {
-      modal.classList.add('is-open');
-      modal.setAttribute('aria-hidden', 'false');
-      document.body.classList.add('modal-open');
+      setModalState(true);
     });
   }
 
   function closeModal() {
-    modal.classList.remove('is-open');
-    modal.setAttribute('aria-hidden', 'true');
-    document.body.classList.remove('modal-open');
+    setModalState(false);
     sessionStorage.setItem(modalDismissedKey, 'true');
   }
 
@@ -75,13 +108,14 @@
   }
 
   function scrollToBooking() {
-    bookingSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    bookingSection.scrollIntoView({ behavior: prefersReducedMotion ? 'auto' : 'smooth', block: 'start' });
     setTimeout(() => {
       revealBookingForm();
       if (firstNameInput) {
         firstNameInput.focus({ preventScroll: true });
       }
-    }, 420);
+    }, prefersReducedMotion ? 0 : 420);
   }
 
   function resetValidation() {
@@ -214,7 +248,8 @@
     formCard.classList.add('is-hidden');
     confirmationCard.classList.add('is-visible');
     populateSummary(values);
-    confirmationCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    confirmationCard.scrollIntoView({ behavior: prefersReducedMotion ? 'auto' : 'smooth', block: 'start' });
   }
 
   function resetForm() {
@@ -269,8 +304,30 @@
   });
 
   document.addEventListener('keydown', (event) => {
-    if (event.key === 'Escape' && modal.classList.contains('is-open')) {
+    if (!modal.classList.contains('is-open')) return;
+
+    if (event.key === 'Escape') {
+      event.preventDefault();
       closeModal();
+      return;
+    }
+
+    if (event.key === 'Tab') {
+      focusableElements = getFocusableElements();
+      if (!focusableElements.length) {
+        event.preventDefault();
+        return;
+      }
+
+      const first = focusableElements[0];
+      const last = focusableElements[focusableElements.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
     }
   });
 

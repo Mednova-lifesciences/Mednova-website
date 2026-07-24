@@ -3,7 +3,7 @@
 <head>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-70L73W3SD6"></script>
-<script>
+<script nonce="mednova-inline-2026">
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
@@ -198,13 +198,14 @@
 }
 </script>
   <link rel="stylesheet" href="/public/css/site-responsive.css">
+  <link rel="stylesheet" href="/public/css/breadcrumbs.css">
 </head>
 <body>
 
 <header class="site-header">
   <div class="site-header__inner">
     <nav class="site-nav">
-      <a class="brand" href="index.html">
+      <a class="brand" href="/">
         <picture>
           <source type="image/webp" srcset="/public/images/image.webp">
           <picture>
@@ -229,7 +230,9 @@
   </div>
 </header>
 
-<div class="wrap">
+<main>
+  <div data-breadcrumbs></div>
+  <div class="wrap">
 
   <section class="cover">
     <div class="cover-top">
@@ -238,6 +241,7 @@
         <h1>Capability Statement</h1>
         <p class="tagline">Your Regulatory &amp; Clinical Development Partner for Nigeria and Africa</p>
         <p class="subline">Integrated regulatory affairs, clinical development, and drug safety services supporting sponsors across Nigeria and West Africa.</p>
+        <p class="intro-copy">MedNova helps sponsors use practical tools such as the NAFDAC <a href="/compliance-checklist.html">QPPV Compliance Checklist</a>, the downloadable <a href="/public/downloads/MedNova-NAFDAC-QPPV-Compliance-Checklist.pdf">checklist PDF</a>, and targeted <a href="/training-consulting.html">training and consulting</a> to align regulatory, clinical, and pharmacovigilance readiness. We also draw on glossary guidance for <a href="/resources/glossary/medical-information.html">Medical Information</a>, <a href="/resources/glossary/medical-writing.html">Medical Writing</a>, <a href="/resources/glossary/good-pharmacovigilance-practice.html">Good Pharmacovigilance Practice</a>, and <a href="/resources/glossary/risk-management-plan.html">Risk Management Plans</a>.</p>
       </div>
       <div class="cover-contact">
         <div><a href="mailto:info@mednovalife.com">info@mednovalife.com</a></div>
@@ -385,18 +389,17 @@
   </section>
 
 </div>
+</main>
 
 <footer class="page-footer">
   <div class="wrap" style="display:flex; justify-content:space-between; width:100%; flex-wrap:wrap; gap:10px;">
     <span>© 2026 MedNova Lifesciences | Lagos, Nigeria</span>
-    <a href="index.html">Back to home</a>
-  </div>
-</footer>
-
+    <a href="/">Back to home</a>
 <script defer src="/config.js"></script>
-<script>window.DEMO_CONTEXT = 'general';</script>
+<script nonce="mednova-inline-2026">window.DEMO_CONTEXT = 'general';</script>
 <script src="./public/js/demo-widget.js"></script>
 
   <script defer src="/public/js/site-nav.js"></script>
+  <script defer src="/public/js/breadcrumbs.js"></script>
 </body>
 </html>

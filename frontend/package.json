@@ -6,6 +6,11 @@
   "scripts": {
     "start": "echo 'Frontend is served by the backend server'",
     "dev": "echo 'Frontend is served by the backend server'",
-    "build": "echo 'No build required for static frontend'"
+    "build": "node scripts/minify-assets.js",
+    "test": "node test/accessibility-structure.test.js && node test/glossary-links.test.js"
+  },
+  "devDependencies": {
+    "clean-css": "^5.3.3",
+    "terser": "^5.49.0"
   }
 }

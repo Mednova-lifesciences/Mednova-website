@@ -3,7 +3,7 @@
 <head>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-70L73W3SD6"></script>
-<script>
+<script nonce="mednova-inline-2026">
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
@@ -163,7 +163,7 @@
     .pillar-grid{grid-template-columns:1fr;}
   }
 </style>
-<link rel="stylesheet" href="/css/demo-widget.css">
+<link rel="stylesheet" href="/css/demo-widget.min.css">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -173,14 +173,15 @@
   "logo": "https://mednovalife.com/public/images/image.webp"
 }
 </script>
-  <link rel="stylesheet" href="/public/css/site-responsive.css">
+  <link rel="stylesheet" href="/public/css/breadcrumbs.min.css">
+  <link rel="stylesheet" href="/public/css/site-responsive.min.css">
 </head>
 <body>
 
 <header class="site-header">
   <div class="site-header__inner">
     <nav class="site-nav">
-      <a class="brand" href="index.html">
+      <a class="brand" href="/">
         <picture>
           <source type="image/webp" srcset="/public/images/image-68.webp">
           <img class="brand-mark" src="/public/images/image.png" alt="MedNova Lifesciences logo" width="34" height="34" decoding="async" fetchpriority="high">
@@ -202,6 +203,7 @@
 </header>
 
 <div class="wrap">
+  <div data-breadcrumbs></div>
 
   <section class="cover">
     <div class="cover-top">
@@ -358,17 +360,18 @@
 
 </div>
 
+
+<section><div class="wrap"><div class="callout"><strong>Practical next step:</strong> For teams that want to turn this guidance into action, MedNova offers <a href="/training-consulting.html">training and consulting</a> and a downloadable <a href="/public/downloads/MedNova-NAFDAC-QPPV-Compliance-Checklist.pdf">checklist PDF</a> that help connect regulatory readiness, safety, and documentation practices.</div></div></section>
 <footer class="page-footer">
   <div class="wrap" style="display:flex; justify-content:space-between; width:100%; flex-wrap:wrap; gap:10px;">
     <span>© 2026 MedNova Lifesciences | Lagos, Nigeria</span>
-    <a href="index.html">Back to home</a>
-  </div>
-</footer>
+      <a href="/">Back to home</a>
 
 <script src="/config.js"></script>
-<script>window.DEMO_CONTEXT = 'general';</script>
-<script src="/js/demo-widget.js"></script>
+<script nonce="mednova-inline-2026">window.DEMO_CONTEXT = 'general';</script>
+<script src="/js/demo-widget.min.js"></script>
 
-  <script src="/public/js/site-nav.js"></script>
+  <script defer src="/public/js/breadcrumbs.min.js"></script>
+  <script src="/public/js/site-nav.min.js"></script>
 </body>
 </html>

@@ -1,0 +1,44 @@
+# MedNova Lifesciences
+
+Official website:
+https://mednovalife.com
+
+Organization:
+MedNova Lifesciences
+
+Description:
+MedNova Lifesciences is a regulatory affairs, pharmacovigilance, clinical development (CRO), medical information, medical writing, and life sciences consulting company serving pharmaceutical, biotechnology, medical device, diagnostics, and healthcare organizations across Nigeria and West Africa.
+
+Primary services:
+
+- Regulatory Affairs
+- Pharmacovigilance
+- Clinical Development
+- Medical Information
+- Medical Writing
+- Regulatory Intelligence
+- Training & Consulting
+
+Primary resources:
+
+https://mednovalife.com/resources/
+
+Glossary:
+
+https://mednovalife.com/resources/glossary/
+
+Contact:
+
+https://mednovalife.com/contact/
+
+Preferred canonical:
+
+https://mednovalife.com/
+
+Sitemap:
+
+https://mednovalife.com/sitemap.xml
+
+Robots:
+
+https://mednovalife.com/robots.txt
