@@ -1,10 +1,36 @@
 {
   "version": 2,
+  "builds": [
+    {
+      "src": "config.js",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "index.html",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "*.html",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "**/*.html",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "llms.txt",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "public/**",
+      "use": "@vercel/static"
+    }
+  ],
   "routes": [
     {
       "src": "/(.*)",
       "headers": {
-        "Content-Security-Policy": "default-src 'self'; script-src 'self' 'sha256-/Tlvvvxn2iUhX+t4lv3fFIHR7tjQCyq9clQEey1CL5dQ=' 'sha256-txzKIgcJ9BqYySfj9TSWSRkCttxveSDy4PvnVFdR2L4=' 'sha256-WRdybh67I1v/QDuxugKEHtYbxppp2HCAPwnZ1krBLjo=' https://www.googletagmanager.com https://www.google-analytics.com; style-src 'self' 'sha256-PSkdupMqe+cMAIswiiLd8l1TyhSMqesROy2AWTnvXgY=' 'sha256-XehZ0WgtTQoQiYiNZsJQmjpOGrdc3QBl4WZi8rbMOLQ=' https://fonts.googleapis.com; img-src 'self' data: https: blob:; font-src 'self' https://fonts.gstatic.com data:; connect-src 'self' https://www.google-analytics.com https://www.googletagmanager.com https://analytics.google.com https://stats.g.doubleclick.net https://www.google.com https://*.vercel.app; object-src 'none'; base-uri 'self'; frame-ancestors 'none'; form-action 'self' https:; upgrade-insecure-requests; block-all-mixed-content",
+        "Content-Security-Policy": "default-src 'self'; script-src 'self' 'nonce-mednova-inline-2026' https://www.googletagmanager.com https://www.google-analytics.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https: blob:; font-src 'self' https://fonts.gstatic.com data:; connect-src 'self' https://mednova-website.onrender.com https://www.google-analytics.com https://www.googletagmanager.com https://analytics.google.com https://stats.g.doubleclick.net https://www.google.com https://*.vercel.app; object-src 'none'; base-uri 'self'; frame-ancestors 'none'; form-action 'self' https:; upgrade-insecure-requests; block-all-mixed-content",
         "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
         "X-Frame-Options": "DENY",
         "X-Content-Type-Options": "nosniff",
@@ -20,12 +46,120 @@
       "dest": "/public/robots.txt"
     },
     {
+      "src": "^/llms\\.txt$",
+      "dest": "/llms.txt"
+    },
+    {
       "src": "^/sitemap\\.xml$",
       "dest": "/public/sitemap.xml"
     },
     {
       "src": "^/$",
       "dest": "/index.html"
+    },
+    {
+      "src": "^/index\\.html$",
+      "dest": "/",
+      "status": 301
+    },
+    {
+      "src": "^/(about|contact|services)/index\\.html$",
+      "dest": "/$1/",
+      "status": 301
+    },
+    {
+      "src": "^/src/pages/index\\.html$",
+      "dest": "/",
+      "status": 301
+    },
+    {
+      "src": "^/src/pages/(cro|pv|regulatory|capability-statement|compliance-checklist|qppv-nigeria)\\.html$",
+      "dest": "/$1.html",
+      "status": 301
+    },
+    {      "src": "^/about/index\\.html$",
+      "dest": "/about/",
+      "status": 301
+    },
+    {
+      "src": "^/contact/index\\.html$",
+      "dest": "/contact/",
+      "status": 301
+    },
+    {
+      "src": "^/services/index\\.html$",
+      "dest": "/services/",
+      "status": 301
+    },
+    {
+
+      "src": "^/src/pages/cro\\.html$",
+      "dest": "/cro.html",
+      "status": 301
+    },
+    {
+      "src": "^/src/pages/pv\\.html$",
+      "dest": "/pv.html",
+      "status": 301
+    },
+    {
+      "src": "^/src/pages/regulatory\\.html$",
+      "dest": "/regulatory.html",
+      "status": 301
+    },
+    {
+      "src": "^/src/pages/capability-statement\\.html$",
+      "dest": "/capability-statement.html",
+      "status": 301
+    },
+    {
+      "src": "^/src/pages/compliance-checklist\\.html$",
+      "dest": "/compliance-checklist.html",
+      "status": 301
+    },
+    {
+      "src": "^/src/pages/qppv-nigeria\\.html$",
+      "dest": "/qppv-nigeria.html",
+      "status": 301
+    },
+    {      "src": "^/careers/?$",
+      "dest": "/about/",
+      "status": 301
+    },
+    {
+      "src": "^/participants/?$",
+      "dest": "/cro.html",
+      "status": 301
+    },
+    {
+      "src": "^/medical-writing/?$",
+      "dest": "/cro.html",
+      "status": 301
+    },
+    {
+      "src": "^/clinical-trial-operations/?$",
+      "dest": "/cro.html",
+      "status": 301
+    },
+    {
+      "src": "^/pharmacovigilance-drug-safety/?$",
+      "dest": "/pv.html",
+      "status": 301
+    },
+    {
+      "src": "^/regulatory-affairs-nafdac-navigation/?$",
+      "dest": "/regulatory.html",
+      "status": 301
+    },
+    {
+      "src": "^/outbreak-emergency-research/?$",
+      "dest": "/cro.html",
+      "status": 301
+    },
+    {
+      "src": "^/contact-us/?$",
+      "dest": "/contact/",
+      "status": 301
     },
     {
       "src": "^/about/?$",

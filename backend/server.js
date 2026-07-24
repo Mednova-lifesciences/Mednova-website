@@ -12,6 +12,11 @@ import formsRoutes from './src/routes/forms.routes.js';
 import { RATE_LIMIT_CONFIG } from './src/config/api.config.js';
 
 const FRONTEND_URL = process.env.FRONTEND_URL?.replace(/\/$/, '');
+const FRONTEND_ALLOWED_ORIGINS = [
+  FRONTEND_URL,
+  'https://mednovalife.com',
+  'https://www.mednovalife.com'
+].filter(Boolean);
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -22,7 +27,7 @@ const PORT = process.env.PORT || 3000;
 app.use((req, res, next) => {
   const origin = req.headers.origin;
 
-  if (origin && FRONTEND_URL && origin === FRONTEND_URL) {
+  if (origin && FRONTEND_ALLOWED_ORIGINS.includes(origin)) {
     res.setHeader('Access-Control-Allow-Origin', origin);
     res.setHeader('Vary', 'Origin');
     res.setHeader('Access-Control-Allow-Methods', 'GET,POST,OPTIONS');
@@ -51,11 +56,26 @@ app.use('/downloads', express.static(path.join(__dirname, '../frontend/public/do
 app.use('/css', express.static(path.join(__dirname, '../frontend/src/css')));
 app.use('/js', express.static(path.join(__dirname, '../frontend/src/js')));
 
+// Serve llms.txt at the website root when the backend is used directly.
+app.get('/llms.txt', (_req, res) => {
+  res.type('text/plain');
+  res.sendFile(path.join(__dirname, '../llms.txt'));
+});
+
 // Rate limit the AI endpoint — a public text/button feature hitting a paid
 // API is a real cost risk if left unprotected.
 const assistantLimiter = rateLimit(RATE_LIMIT_CONFIG);
 
-app.use('/api/forms', formsRoutes);
+// Rate limit form submissions to reduce spam and abuse.
+const formLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 30,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { error: 'Too many form submissions. Please try again in a few minutes.' }
+});
+
+app.use('/api/forms', formLimiter, formsRoutes);
 app.post('/api/assistant', assistantLimiter, handleAssistantRequest);
 app.get('/api/health', (_req, res) => res.json({ ok: true }));
 
