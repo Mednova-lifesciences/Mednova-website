@@ -1,4 +1,8 @@
 (function () {
+  document.querySelectorAll('.btn-print').forEach((button) => {
+    button.addEventListener('click', () => window.print());
+  });
+
   const toggleButtons = Array.from(document.querySelectorAll('.site-nav__toggle'));
   if (!toggleButtons.length) return;
 
