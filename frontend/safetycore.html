@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MedNova SafetyCore — Enterprise Pharmacovigilance Platform | MedNova Lifesciences</title>
+<meta name="description" content="MedNova SafetyCore is an ICH E2B(R3)-compliant pharmacovigilance platform for sponsors and MAHs operating in Nigeria and West Africa.">
+<meta name="theme-color" content="#0f3d2e">
+<link rel="canonical" href="https://mednovalife.com/safetycore.html">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="manifest" href="/public/site.webmanifest">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta property="og:title" content="MedNova SafetyCore — Pharmacovigilance Platform for Nigeria & West Africa">
+<meta property="og:description" content="MedNova SafetyCore is an ICH E2B(R3)-compliant pharmacovigilance platform for sponsors, MAHs and safety teams focused on Nigerian and West African markets.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://mednovalife.com/safetycore.html">
+<meta property="og:image" content="https://mednovalife.com/public/images/image.webp">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="MedNova SafetyCore — Pharmacovigilance Platform for Nigeria & West Africa">
+<meta name="twitter:description" content="An enterprise-grade pharmacovigilance platform designed for African regulatory realities, with ICH E2B(R3) compliance and local NAFDAC readiness.">
+<meta name="twitter:image" content="https://mednovalife.com/public/images/image.webp">
+<!--
+  DRAFT — copy only, not published. Name pending: "MedNova SafetyCore" used below;
+  alternates "MedNovaVigi" / "MedNova Sentinel" — swap the two brand-name occurrences
+  (title tag + .brand-name / hero eyebrow) if a different name is chosen.
+  Built to reuse MedNova's existing design system (fonts, color tokens, header,
+  cta-button, footer) from index.html so it drops straight into the site.
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#14181B;
+    --ink-2:#191F1B;
+    --paper:#F6F5F1;
+    --moss:#3F6B3A;
+    --teal:#1E7F76;
+    --amber:#C9975F;
+    --line:#2B322D;
+    --grey:#8A9186;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{background:var(--ink); color:var(--paper); font-family:'IBM Plex Sans', sans-serif; -webkit-font-smoothing:antialiased;}
+  a{color:inherit; text-decoration:none;}
+
+  section{max-width:1080px; margin:0 auto; padding:0 44px;}
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace; font-size:12px; letter-spacing:0.14em; text-transform:uppercase;
+    color:#8FA98A; margin-bottom:16px;
+  }
+  .eyebrow.teal{color:#7FCFC4;}
+
+  /* ---------- header ---------- */
+  .topline{display:flex; align-items:center; justify-content:space-between; padding:26px 44px;}
+  .brand{display:flex; align-items:baseline; gap:10px;}
+  .brand-mark{font-family:'IBM Plex Mono', monospace; font-size:12px; letter-spacing:0.14em; background:var(--paper); color:var(--ink); padding:3px 7px; border-radius:3px;}
+  .brand-name{font-family:'Newsreader', serif; font-size:19px; font-weight:600; color:var(--paper);}
+  .topline .tag{font-family:'IBM Plex Mono', monospace; font-size:11.5px; color:#9BA39A; letter-spacing:0.06em;}
+  .breadcrumb{display:flex; align-items:center; gap:8px; padding:0 44px; margin-top:-6px; margin-bottom:6px;}
+  .breadcrumb a{font-size:12.5px; color:#8A9186; transition:color .15s;}
+  .breadcrumb a:hover{color:#fff;}
+  .breadcrumb span{font-size:12.5px; color:#4E544A;}
+
+  /* ---------- hero ---------- */
+  .hero{text-align:center; max-width:760px; padding-top:36px; padding-bottom:8px;}
+  .hero h1{
+    font-family:'Newsreader', serif; font-weight:500; font-size:40px; line-height:1.18;
+    letter-spacing:-0.01em; color:#fff;
+  }
+  .hero .promise{
+    margin-top:22px; font-size:16.5px; line-height:1.7; color:#C7CCC1; max-width:64ch; margin-left:auto; margin-right:auto;
+  }
+  .hero .cta-button{margin-top:30px;}
+
+  /* ---------- product info spec table ---------- */
+  .spec{margin-top:64px;}
+  .spec-table{
+    border:1px solid var(--line); border-radius:10px; background:rgba(255,255,255,0.03);
+    padding:8px 44px; margin-top:20px;
+  }
+  .spec-row{
+    display:grid; grid-template-columns:180px 1fr; gap:24px; padding:18px 0;
+    border-bottom:1px solid var(--line);
+  }
+  .spec-row:last-child{border-bottom:none;}
+  .spec-label{
+    font-family:'IBM Plex Mono', monospace; font-size:12px; letter-spacing:0.08em; text-transform:uppercase;
+    color:#7FCFC4;
+  }
+  .spec-value{font-size:14.5px; line-height:1.6; color:#C7CCC1;}
+
+  /* ---------- narrative-style two-col intro reused for capabilities/why headers ---------- */
+  .section-head{border-top:1px solid var(--line); padding-top:44px; margin-top:90px;}
+  .section-head h2{font-family:'Newsreader', serif; font-weight:500; font-size:28px; color:#fff; max-width:26ch;}
+  .section-head p{margin-top:14px; font-size:14.5px; line-height:1.65; color:#AEB4A9; max-width:60ch;}
+
+  /* ---------- capabilities grid ---------- */
+  .cap-grid{
+    display:grid; grid-template-columns:1fr 1fr; gap:1px; margin-top:40px;
+    border-top:1px solid var(--line); border-left:1px solid var(--line);
+    background:var(--line);
+  }
+  .cap-card{
+    border-right:1px solid var(--line); border-bottom:1px solid var(--line);
+    padding:30px 34px; background:var(--ink);
+  }
+  .cap-card h4{font-family:'Newsreader', serif; font-weight:500; font-size:17px; color:#fff; margin-bottom:8px;}
+  .cap-card p{font-size:13.5px; line-height:1.6; color:#AEB4A9;}
+
+  /* ---------- why us numbered list ---------- */
+  .why-grid{
+    display:grid; grid-template-columns:1fr 1fr; gap:40px 56px;
+    margin-top:40px;
+  }
+  .why-item{display:flex; gap:18px;}
+  .why-num{
+    font-family:'IBM Plex Mono', monospace; font-size:13px; color:#7FCFC4; padding-top:3px; flex-shrink:0;
+  }
+  .why-item h4{font-family:'Newsreader', serif; font-weight:500; font-size:18px; color:#fff; margin-bottom:8px;}
+  .why-item p{font-size:13.5px; line-height:1.6; color:#AEB4A9;}
+
+  /* ---------- getting started steps ---------- */
+  .steps-grid{
+    display:grid; grid-template-columns:1fr 1fr 1fr; gap:1px; margin-top:40px;
+    border-top:1px solid var(--line); border-left:1px solid var(--line);
+    background:var(--line);
+  }
+  .step{
+    border-right:1px solid var(--line); border-bottom:1px solid var(--line);
+    padding:34px 30px; background:var(--ink);
+  }
+  .step-num{font-family:'IBM Plex Mono', monospace; font-size:12px; color:#7FCFC4; letter-spacing:0.1em;}
+  .step h4{font-family:'Newsreader', serif; font-weight:500; font-size:17px; color:#fff; margin:12px 0 8px;}
+  .step p{font-size:13.5px; line-height:1.6; color:#AEB4A9;}
+
+  /* ---------- final cta ---------- */
+  .final-cta{padding-top:96px; padding-bottom:70px; text-align:center;}
+  .final-cta h2{font-family:'Newsreader', serif; font-weight:500; font-size:32px; color:#fff; max-width:22ch; margin:0 auto;}
+
+  .cta-button{
+    display:inline-flex; align-items:center; gap:10px; margin-top:28px;
+    background:#fff; color:var(--ink); font-weight:600; font-size:14.5px;
+    padding:15px 28px; border-radius:3px; transition:transform .2s;
+  }
+  .cta-button:hover{transform:translateY(-2px);}
+  .cta-alt{margin-top:18px; font-size:13px; color:#8A9186;}
+  .cta-alt a{color:#D7DAD1; border-bottom:1px solid var(--line); padding-bottom:1px;}
+  .cta-alt a:hover{color:#fff;}
+  .contact-section{max-width:1080px; margin:56px auto 0; padding:0 44px;}
+  .contact-form{display:grid; gap:18px; margin-top:24px;}
+  .contact-form .form-row{display:grid; grid-template-columns:1fr 1fr; gap:16px;}
+  .contact-form .form-row.single{grid-template-columns:1fr;}
+  .contact-form input,
+  .contact-form textarea{width:100%; border:1px solid rgba(255,255,255,0.16); border-radius:8px; background:rgba(255,255,255,0.05); color:#F0F0EA; padding:14px 16px; font-size:15px;}
+  .contact-form input::placeholder,
+  .contact-form textarea::placeholder{color:#9CA193;}
+  .contact-form textarea{min-height:140px; resize:vertical;}
+  .form-status{font-size:14px; color:#C9975F; min-height:1.4em;}
+  .contact-hint{font-size:13px; color:#AEB4A9; margin-top:6px;}
+  .contact-hint a{color:#fff; text-decoration:underline;}
+
+  /* ---------- footer ---------- */
+  footer{border-top:1px solid var(--line); padding:44px 44px 34px; margin-top:20px;}
+  .footer-inner{max-width:1080px; margin:0 auto; display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:24px;}
+  .footer-brand{font-family:'Newsreader', serif; font-size:16px; color:#D7DAD1;}
+  .footer-links{display:flex; flex-wrap:wrap; gap:22px 28px;}
+  .footer-links a{font-size:13px; color:#AEB4A9; transition:color .15s;}
+  .footer-links a:hover{color:#fff;}
+  .footer-copy{max-width:1080px; margin:26px auto 0; font-size:12px; color:#6F766A; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:14px;}
+  .footer-social{display:flex; gap:16px;}
+  .footer-social a{
+    width:32px; height:32px; border:1px solid var(--line); border-radius:50%;
+    display:flex; align-items:center; justify-content:center; color:#AEB4A9; transition:color .15s, border-color .15s;
+  }
+  .footer-social a:hover{color:#fff; border-color:#7FCFC4;}
+  .footer-social svg{width:15px; height:15px; fill:currentColor;}
+
+  @media (max-width:900px){
+    .cap-grid, .steps-grid, .why-grid{grid-template-columns:1fr;}
+  }
+  @media (max-width:560px){
+    .hero h1{font-size:29px;}
+    .spec-table{padding:8px 24px;}
+    .spec-row{grid-template-columns:1fr; gap:6px;}
+    .footer-inner{flex-direction:column;}
+  }
+</style>
+</head>
+<body>
+
+<div class="topline">
+  <div class="brand">
+    <a href="/" aria-label="MedNova Lifesciences home">
+      <picture>
+        <source type="image/webp" srcset="/public/images/image.webp">
+        <img class="brand-mark" src="/public/images/image.png" alt="MedNova Lifesciences logo" width="34" height="34" decoding="async" fetchpriority="high">
+      </picture>
+    </a>
+    <span class="brand-name">MedNova Lifesciences</span>
+  </div>
+</div>
+<div class="breadcrumb">
+  <a href="index.html">Home</a><span>/</span><a href="pv.html">Pharmacovigilance</a><span>/</span><a href="safetycore.html">SafetyCore</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="eyebrow teal" style="text-align:center;">Pharmacovigilance Technology</div>
+  <h1>Enterprise-grade drug safety, built for African regulatory realities.</h1>
+  <p class="promise">MedNova SafetyCore is our ICH E2B(R3)-compliant case management platform — the same system our pharmacovigilance team uses to run ICSR intake, aggregate reporting, and regulatory submissions for clients across Nigeria and West Africa, now available as a standalone platform for sponsors and Marketing Authorization Holders who want direct visibility into their own safety data.</p>
+  <a class="cta-button" href="#safetycore-contact">Request a SafetyCore Demo</a>
+</section>
+
+<!-- PRODUCT INFORMATION -->
+<section class="spec">
+  <div class="eyebrow">Product Information</div>
+  <div class="spec-table">
+    <div class="spec-row">
+      <div class="spec-label">Type</div>
+      <div class="spec-value">Enterprise pharmacovigilance platform.</div>
+    </div>
+    <div class="spec-row">
+      <div class="spec-label">Standard</div>
+      <div class="spec-value">ICH E2B(R3) compliant.</div>
+    </div>
+    <div class="spec-row">
+      <div class="spec-label">Markets</div>
+      <div class="spec-value">Nigeria, West Africa, with alignment to NAFDAC, WHO, and international submission formats.</div>
+    </div>
+    <div class="spec-row">
+      <div class="spec-label">Architecture</div>
+      <div class="spec-value">Cloud-hosted, with on-premise available for regulated environments.</div>
+    </div>
+  </div>
+</section>
+
+<!-- CORE CAPABILITIES -->
+<section class="capabilities">
+  <div class="section-head">
+    <div class="eyebrow teal">What It Does</div>
+    <h2>Core capabilities</h2>
+    <p>A single system covering intake through submission — configured to reflect how your safety team already works.</p>
+  </div>
+  <div class="cap-grid">
+    <div class="cap-card">
+      <h4>ICSR intake, triage &amp; coding</h4>
+      <p>Case intake, triage, and MedDRA / WHO-DD coding in one workflow.</p>
+    </div>
+    <div class="cap-card">
+      <h4>Narrative writing support</h4>
+      <p>Structured tools to draft and standardize case narratives.</p>
+    </div>
+    <div class="cap-card">
+      <h4>E2B(R3) electronic submissions</h4>
+      <p>Direct electronic submission to regulatory gateways in E2B(R3) format.</p>
+    </div>
+    <div class="cap-card">
+      <h4>Aggregate reporting</h4>
+      <p>PSUR / PBRER / DSUR generation, built from your live case data.</p>
+    </div>
+    <div class="cap-card">
+      <h4>Signal detection &amp; validation</h4>
+      <p>Ongoing signal detection with a structured validation workflow.</p>
+    </div>
+    <div class="cap-card">
+      <h4>Executive dashboards</h4>
+      <p>Real-time visibility into case status and compliance tracking.</p>
+    </div>
+    <div class="cap-card">
+      <h4>QMS / SOP integration</h4>
+      <p>Reflects your existing safety governance rather than forcing a new one.</p>
+    </div>
+  </div>
+</section>
+
+<!-- WHY MEDNOVA SAFETYCORE -->
+<section class="why">
+  <div class="section-head">
+    <div class="eyebrow teal">Why MedNova SafetyCore</div>
+    <h2>Built by the team that runs your safety operations</h2>
+  </div>
+  <div class="why-grid">
+    <div class="why-item">
+      <span class="why-num">01</span>
+      <div>
+        <h4>Platform and people, aligned</h4>
+        <p>Built by the same team that runs your PV operations, so the platform and the people are already aligned rather than handed off between vendors.</p>
+      </div>
+    </div>
+    <div class="why-item">
+      <span class="why-num">02</span>
+      <div>
+        <h4>African regulatory realities, from day one</h4>
+        <p>Configured for African regulatory realities from the start, rather than adapted from a US/EU system after the fact.</p>
+      </div>
+    </div>
+    <div class="why-item">
+      <span class="why-num">03</span>
+      <div>
+        <h4>Integrated across the lifecycle</h4>
+        <p>Connected to MedNova's Regulatory Affairs and Clinical Development services, so safety data links directly to registration and trial-safety workflows instead of sitting in a separate silo.</p>
+      </div>
+    </div>
+    <div class="why-item">
+      <span class="why-num">04</span>
+      <div>
+        <h4>Flexible deployment</h4>
+        <p>From a fully managed service to a self-administered licensed instance for teams that want to run it in-house.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GETTING STARTED -->
+<section class="steps">
+  <div class="section-head">
+    <div class="eyebrow teal">Getting Started</div>
+    <h2>From demo to go-live</h2>
+  </div>
+  <div class="steps-grid">
+    <div class="step">
+      <span class="step-num">Step 1</span>
+      <h4>Request a demo</h4>
+      <p>A walkthrough with MedNova's pharmacovigilance team, showing SafetyCore configured for your product types and markets.</p>
+    </div>
+    <div class="step">
+      <span class="step-num">Step 2</span>
+      <h4>Configuration &amp; migration</h4>
+      <p>MedNova sets up your tenant, migrates existing case data, and configures workflow rules, user roles, and submission gateways.</p>
+    </div>
+    <div class="step">
+      <span class="step-num">Step 3</span>
+      <h4>Go-live &amp; ongoing support</h4>
+      <p>Your team goes live with training and documentation, backed by MedNova's existing QPPV retainer and support infrastructure.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final-cta">
+  <h2>See SafetyCore configured for your program.</h2>
+  <a class="cta-button" href="#safetycore-contact">Request a SafetyCore Demo</a>
+  <p class="cta-alt">Want the full picture first? <a href="pv.html">See our Pharmacovigilance services</a> instead.</p>
+</section>
+
+<section id="safetycore-contact" class="contact-section">
+  <div class="section-head">
+    <div class="eyebrow teal">Request a demo</div>
+    <h2>Book your SafetyCore walkthrough</h2>
+    <p>Tell us who you are and what you need from your safety platform, and we’ll follow up with a demo time and next steps.</p>
+  </div>
+  <form class="contact-form" id="safetycoreForm">
+    <div class="form-row">
+      <input type="text" name="name" placeholder="Your name" required>
+      <input type="email" name="email" placeholder="Work email" required>
+    </div>
+    <div class="form-row">
+      <input type="text" name="organization" placeholder="Organization">
+      <input type="text" name="role" placeholder="Role / title">
+    </div>
+    <div class="form-row single">
+      <textarea name="message" placeholder="Tell us about your product, safety team, or the demo focus" required></textarea>
+    </div>
+    <button type="submit" class="cta-button">Send demo request</button>
+    <p class="form-status" id="safetycoreFormStatus"></p>
+    <p class="contact-hint">Prefer sending an email? <a href="mailto:contact@mednovalife.com?subject=SafetyCore%20Demo%20Request">contact@mednovalife.com</a>.</p>
+  </form>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">MedNova Lifesciences</div>
+    <div class="footer-links">
+      <a href="regulatory.html">Regulatory Affairs</a>
+      <a href="cro.html">Clinical Development</a>
+      <a href="pv.html">Pharmacovigilance</a>
+      <a href="safetycore.html">SafetyCore</a>
+      <a href="capability-statement.html">Capability Statement</a>
+      <a href="index.html#technology">Technology</a>
+      <a href="cro.html#contact">Contact</a>
+    </div>
+  </div>
+  <div class="footer-copy">
+    <span>© 2026 MedNova Lifesciences. Lagos, Nigeria.</span>
+    <div class="footer-social">
+      <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.38-1.85 3.61 0 4.28 2.38 4.28 5.47v6.27zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45z"/></svg></a>
+      <a href="https://x.com/MedNovaLif3669" target="_blank" rel="noopener" aria-label="X (Twitter)"><svg viewBox="0 0 24 24"><path d="M18.9 2H22l-7.6 8.7L23.3 22H16.6l-5.2-6.8L5.4 22H2.3l8.1-9.3L1.7 2h6.9l4.7 6.2L18.9 2zm-1.2 18h1.7L7.4 4H5.6l12.1 16z"/></svg></a>
+      <a href="https://instagram.com/Mednovalifesciences" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 8.8a3.2 3.2 0 1 0 0 6.4 3.2 3.2 0 0 0 0-6.4zm0 5.3a2.1 2.1 0 1 1 0-4.2 2.1 2.1 0 0 1 0 4.2zm4.6-5.5a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0zM12 2c-2.72 0-3.06.01-4.13.06-1.06.05-1.79.22-2.43.47a4.9 4.9 0 0 0-1.77 1.15 4.9 4.9 0 0 0-1.15 1.77c-.25.64-.42 1.37-.47 2.43C2 8.94 2 9.28 2 12s.01 3.06.06 4.13c.05 1.06.22 1.79.47 2.43.26.66.6 1.22 1.15 1.77.55.55 1.11.9 1.77 1.15.64.25 1.37.42 2.43.47C8.94 22 9.28 22 12 22s3.06-.01 4.13-.06c1.06-.05 1.79-.22 2.43-.47a4.9 4.9 0 0 0 1.77-1.15 4.9 4.9 0 0 0 1.15-1.77c.25-.64.42-1.37.47-2.43.05-1.07.06-1.41.06-4.13s-.01-3.06-.06-4.13c-.05-1.06-.22-1.79-.47-2.43a4.9 4.9 0 0 0-1.15-1.77 4.9 4.9 0 0 0-1.77-1.15c-.64-.25-1.37-.42-2.43-.47C15.06 2.01 14.72 2 12 2zm0 1.8c2.67 0 2.99.01 4.04.06.98.04 1.51.21 1.86.34.47.18.8.4 1.15.75.35.35.57.68.75 1.15.13.35.3.88.34 1.86.05 1.05.06 1.37.06 4.04s-.01 2.99-.06 4.04c-.04.98-.21 1.51-.34 1.86-.18.47-.4.8-.75 1.15-.35.35-.68.57-1.15.75-.35.13-.88.3-1.86.34-1.05.05-1.37.06-4.04.06s-2.99-.01-4.04-.06c-.98-.04-1.51-.21-1.86-.34a3.1 3.1 0 0 1-1.15-.75 3.1 3.1 0 0 1-.75-1.15c-.13-.35-.3-.88-.34-1.86-.05-1.05-.06-1.37-.06-4.04s.01-2.99.06-4.04c.04-.98.21-1.51.34-1.86.18-.47.4-.8.75-1.15.35-.35.68-.57 1.15-.75.35-.13.88-.3 1.86-.34C9.01 3.81 9.33 3.8 12 3.8z"/></svg></a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const safetycoreForm = document.getElementById('safetycoreForm');
+  const safetycoreStatus = document.getElementById('safetycoreFormStatus');
+  if (safetycoreForm) {
+    safetycoreForm.addEventListener('submit', async function (event) {
+      event.preventDefault();
+      const button = safetycoreForm.querySelector('button[type="submit"]');
+      const formData = new FormData(safetycoreForm);
+      const name = formData.get('name')?.toString().trim();
+      const email = formData.get('email')?.toString().trim();
+      const organization = formData.get('organization')?.toString().trim() || '';
+      const role = formData.get('role')?.toString().trim() || '';
+      const message = formData.get('message')?.toString().trim();
+
+      if (!name || !email || !message) {
+        safetycoreStatus.style.color = '#C9975F';
+        safetycoreStatus.textContent = 'Please provide your name, email, and a short note about your request.';
+        return;
+      }
+
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        safetycoreStatus.style.color = '#C9975F';
+        safetycoreStatus.textContent = 'Please enter a valid email address.';
+        return;
+      }
+
+      button.disabled = true;
+      button.textContent = 'Sending...';
+      safetycoreStatus.textContent = '';
+
+      try {
+        const response = await fetch('/api/forms/pharmacovigilance', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify({
+            name,
+            email,
+            organization,
+            role,
+            projectDescription: message
+          })
+        });
+        const result = await response.json().catch(() => ({}));
+        if (!response.ok || !result.success) {
+          throw new Error(result.message || 'Unable to submit your demo request.');
+        }
+        safetycoreStatus.style.color = '#7FCFC4';
+        safetycoreStatus.textContent = "Thanks — we’ve received your request and will contact you shortly.";
+        safetycoreForm.reset();
+      } catch (error) {
+        safetycoreStatus.style.color = '#C9975F';
+        safetycoreStatus.textContent = error.message || 'Something went wrong. Please try again or email contact@mednovalife.com.';
+      } finally {
+        button.disabled = false;
+        button.textContent = 'Send demo request';
+      }
+    });
+  }
+</script>
+
+</body>
+</html>
