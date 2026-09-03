@@ -1,44 +1,43 @@
 # MedNova Lifesciences
 
-Official website:
-https://mednovalife.com
+MedNova Lifesciences provides regulatory affairs, pharmacovigilance, clinical development, medical writing, medical information, regulatory intelligence, and training & consulting for life-sciences organisations. This file is a concise machine-readable guide to the website’s canonical pages and resources.
 
-Organization:
-MedNova Lifesciences
+Primary website:
+- https://mednovalife.com/
 
-Description:
-MedNova Lifesciences is a regulatory affairs, pharmacovigilance, clinical development (CRO), medical information, medical writing, and life sciences consulting company serving pharmaceutical, biotechnology, medical device, diagnostics, and healthcare organizations across Nigeria and West Africa.
+Canonical pages:
+- https://mednovalife.com/
+- https://mednovalife.com/about/
+- https://mednovalife.com/services/
+- https://mednovalife.com/contact/
+- https://mednovalife.com/resources/
+- https://mednovalife.com/sitemap.xml
+- https://mednovalife.com/robots.txt
 
-Primary services:
+Service pages (canonical):
+- https://mednovalife.com/regulatory.html
+- https://mednovalife.com/cro.html
+- https://mednovalife.com/pv.html
+- https://mednovalife.com/medical-writing.html
+- https://mednovalife.com/medical-information.html
+- https://mednovalife.com/nafdac-registration.html
+- https://mednovalife.com/regulatory-intelligence.html
+- https://mednovalife.com/post-marketing-surveillance.html
 
-- Regulatory Affairs
-- Pharmacovigilance
-- Clinical Development
-- Medical Information
-- Medical Writing
-- Regulatory Intelligence
-- Training & Consulting
+Resources & glossary:
+- https://mednovalife.com/resources/
+- https://mednovalife.com/resources/glossary/
 
-Primary resources:
+Featured resource articles:
+- https://mednovalife.com/resources/nafdac-pharmacovigilance-requirements.html — NAFDAC Pharmacovigilance Requirements: what the Good Pharmacovigilance Practice Guidelines require (QPPV, master file, reporting, audit, compliance checklist)
 
-https://mednovalife.com/resources/
+Technical & discovery:
+- Sitemap: https://mednovalife.com/sitemap.xml
+- Robots: https://mednovalife.com/robots.txt
+- llms.txt: https://mednovalife.com/llms.txt
 
-Glossary:
+Notes:
+- Use canonical URLs only. Avoid tracking parameters and duplicate or staging URLs.
+- Do not include unverified business claims; if a capability is not present on the official site, flag it for human review.
 
-https://mednovalife.com/resources/glossary/
-
-Contact:
-
-https://mednovalife.com/contact/
-
-Preferred canonical:
-
-https://mednovalife.com/
-
-Sitemap:
-
-https://mednovalife.com/sitemap.xml
-
-Robots:
-
-https://mednovalife.com/robots.txt
+Last updated: 2026-09-03T00:00:00Z

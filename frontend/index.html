@@ -58,7 +58,7 @@
 <meta name="twitter:description" content="MedNova Lifesciences provides pharmacovigilance, regulatory affairs, and clinical development services for life sciences organizations in Nigeria and across Africa.">
 <meta name="twitter:image" content="https://mednovalife.com/public/images/image.webp">
 <title>Pharmacovigilance & Regulatory Services Nigeria | MedNova</title>
-<script type="application/ld+json" nonce="mednova-inline-2026">
+<script nonce="mednova-inline-2026" type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@graph": [
@@ -356,7 +356,7 @@
     initialize();
   })();
 </script>
-<script type="application/ld+json" nonce="mednova-inline-2026">
+<script nonce="mednova-inline-2026" type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "Organization",
@@ -365,7 +365,7 @@
   "logo": "https://mednovalife.com/public/images/image.webp"
 }
 </script>
-<script type="application/ld+json" nonce="mednova-inline-2026">
+<script nonce="mednova-inline-2026" type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "FAQPage",
@@ -665,6 +665,70 @@
       }
     }
   </style>
+  <style>
+    /* Services overview additions */
+    .services-hero{padding:56px 0 26px; text-align:center; max-width:900px; margin:0 auto 18px;}
+    .services-hero h2{font-family:'Newsreader', Georgia, serif; font-size:36px; line-height:1.12; color:var(--paper); margin-bottom:12px;}
+    .services-hero .lead{color:#C7CCC1; font-size:16px; max-width:68ch; margin:0 auto 18px;}
+    .services-hero .hero-ctas{display:flex; gap:18px; justify-content:center; align-items:center; margin-top:12px;}
+
+    .service-cards{display:grid; grid-template-columns:repeat(3,1fr); gap:20px; margin-top:28px;}
+    .svc-card{background:rgba(255,255,255,0.02); border:1px solid var(--line); border-radius:12px; padding:22px; box-shadow:0 8px 24px rgba(20,24,27,0.06); display:flex; flex-direction:column; gap:12px; transition:transform .22s ease, box-shadow .22s ease; min-height:320px;}
+    .svc-card:hover{transform:translateY(-6px); box-shadow:0 18px 48px rgba(20,24,27,0.12);}
+    .svc-icon svg{color:var(--teal);}
+    .svc-card h3{font-size:20px; color:var(--paper); margin:0;}
+    .svc-desc{color:#C7CCC1; line-height:1.6; margin:0;}
+    .svc-list{margin-top:8px; list-style:none; padding-left:0; color:#AEB4A9; display:flex; flex-direction:column; gap:6px;}
+    .svc-list li::before{content:'•'; margin-right:8px; color:var(--moss);}
+    .svc-card .enter{margin-top:auto; display:inline-flex; align-items:center; gap:10px; color:var(--paper); font-weight:600; text-decoration:none;}
+
+    .process-timeline{margin-top:42px; padding:28px 0;}
+    .timeline-list{display:flex; gap:18px; list-style:none; padding:0; margin:0; justify-content:space-between;}
+    .timeline-list li{flex:1; display:flex; gap:12px; align-items:flex-start;}
+    .step-icon{width:40px; height:40px; border-radius:50%; background:rgba(255,255,255,0.03); color:var(--paper); display:flex; align-items:center; justify-content:center; font-weight:700; border:1px solid var(--line);}
+    .step-copy strong{display:block; color:var(--paper);}
+    .step-copy p{margin:4px 0 0; color:#C7CCC1; font-size:14px;}
+
+    .expertise-grid{display:grid; grid-template-columns:1fr 360px; gap:28px; align-items:start; margin-top:36px;}
+    .expertise-copy p{color:#C7CCC1;}
+    .feature-list{list-style:none; padding:16px; margin:0; display:grid; gap:10px; background:rgba(255,255,255,0.02); border:1px solid var(--line); border-radius:10px;}
+
+    .industry-grid{margin-top:36px;}
+    .industries{display:grid; grid-template-columns:repeat(3,1fr); gap:16px;}
+    .industry-card{background:rgba(255,255,255,0.02); border:1px solid var(--line); padding:14px; border-radius:10px; display:flex; gap:12px; align-items:flex-start;}
+    .industry-emoji{font-size:24px; margin-top:2px;}
+    .industry-card h4{margin:0; color:var(--paper);}
+    .industry-card p{margin:4px 0 0; color:#C7CCC1;}
+
+    .features-grid{margin-top:36px;}
+    .features{display:grid; grid-template-columns:repeat(4,1fr); gap:16px;}
+    .feature-card{background:rgba(255,255,255,0.02); border:1px solid var(--line); padding:18px; border-radius:10px; color:#C7CCC1;}
+
+    .alternating{display:grid; grid-template-columns:1fr 1fr; gap:28px; align-items:center; margin-top:42px;}
+    .alt-graphic{max-width:420px;}
+
+    .premium-cta{margin-top:44px; text-align:center; padding:42px 24px; background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); border-radius:10px; border:1px solid var(--line);}
+    .premium-cta h3{font-size:22px; color:var(--paper); margin:0 0 12px;}
+    .premium-actions{display:flex; gap:14px; justify-content:center; align-items:center;}
+
+    /* FAQ accordion */
+    .faq-block{margin-top:40px; padding:22px 0 60px;}
+    .faq-accordion{display:grid; gap:10px;}
+    .faq-item{background:rgba(255,255,255,0.02); border:1px solid var(--line); border-radius:10px; overflow:hidden;}
+    .faq-question{width:100%; text-align:left; padding:16px 18px; background:transparent; border:0; color:var(--paper); font-weight:600; font-size:15px; cursor:pointer;}
+    .faq-question:focus{outline:2px solid #7FCFC4; outline-offset:3px;}
+    .faq-answer{padding:0 18px; max-height:0; overflow:hidden; transition:max-height .28s ease, padding .28s ease; color:#C7CCC1;}
+    .faq-item.open .faq-answer{padding:12px 18px 18px; max-height:400px;}
+
+    @media (max-width:900px){
+      .service-cards{grid-template-columns:1fr;}
+      .timeline-list{flex-direction:column;}
+      .expertise-grid{grid-template-columns:1fr;}
+      .industries{grid-template-columns:repeat(2,1fr);}
+      .features{grid-template-columns:repeat(2,1fr);}
+      .alternating{grid-template-columns:1fr;}
+    }
+  </style>
 </head>
 <body data-theme="dark">
 <a class="skip-link" href="#content">Skip to content</a>
@@ -679,8 +743,6 @@
       <span class="brand-name">MedNova Lifesciences</span>
     </a>
     <nav class="topline-nav">
-      <a href="/about/">About</a>
-      <a href="/services/">Services</a>
       <a href="/resources/">Resources</a>
       <a href="regulatory.html">Regulatory Affairs</a>
       <a href="cro.html">Clinical Development</a>
@@ -810,67 +872,9 @@
   </a>
 </div>
 
-<section class="content-block">
-  <div class="wrap">
-    <article>
-      <h2>Service overview</h2>
-      <p>MedNova offers regulatory affairs, clinical development, and pharmacovigilance services designed to support every stage of product planning, launch, and lifecycle maintenance. Our offering is intentionally broad so clients can access the right expertise without fragmenting the project across multiple vendors.</p>
-      <p>We build in regular review points and document checks to keep programmes audit-ready and to ensure every regulatory, safety, and clinical deliverable supports smooth approvals and sustainable market access.</p>
-      <ul>
-        <li><a href="regulatory.html">Regulatory Affairs</a> strategy, local registration, dossier management, and post-approval maintenance.</li>
-        <li><a href="cro.html">Clinical Development</a> planning, feasibility, monitoring, and study close-out in Nigeria and West Africa.</li>
-        <li><a href="pv.html">Pharmacovigilance</a> case processing, safety reporting, signal detection and aggregate reporting.</li>
-      </ul>
-      <h3>Regulatory expertise</h3>
-      <p>Our regulatory team combines NAFDAC knowledge with global good practice. This means we can help sponsors prepare submissions, manage product labelling, and maintain compliance across the local and regional requirements that matter for market entry. Teams preparing QPPV readiness and safety reporting often use our <a href="/compliance-checklist.html">Compliance Checklist</a>, download the NAFDAC <a href="/public/downloads/MedNova-NAFDAC-QPPV-Compliance-Checklist.pdf">Checklist PDF</a>, and leverage training and consulting support to keep regulatory, clinical, and pharmacovigilance plans aligned. Explore our <a href="/resources/glossary/medical-information.html">Medical Information</a>, <a href="/resources/glossary/medical-writing.html">Medical Writing</a>, <a href="/resources/glossary/adverse-drug-reaction.html">adverse drug reaction</a>, <a href="/resources/glossary/good-pharmacovigilance-practice.html">Good Pharmacovigilance Practice</a>, and <a href="/resources/glossary/risk-management-plan.html">Risk Management Plan</a> glossary definitions for more context.</p>
-      <h3>Industries served</h3>
-      <p>We support pharmaceuticals, biologics, combination products, medical devices, and clinical research organisations. Sponsors and marketing authorisation holders rely on us for practical guidance when they need both technical rigour and local execution.</p>
-    </article>
-  </div>
-</section>
+<!-- Services overview removed per request -->
 
-<section class="content-block">
-  <div class="wrap">
-    <article>
-      <h2>Why choose MedNova</h2>
-      <p>Clients choose MedNova because we combine local regulatory know-how with a practical, risk-aware approach to clinical development and pharmacovigilance. That means your team gets consistent guidance on submissions, safety, and trial execution from a single partner.</p>
-      <p>We focus on clarity, operational readiness, and regulatory confidence. When submissions are prepared with active input from the team handling safety, trial delivery, and dossier writing, review cycles are shorter and inspection readiness is stronger.</p>
-      <ul>
-        <li>Integrated support for <a href="regulatory.html">Regulatory Affairs</a>, <a href="cro.html">Clinical Development</a>, and <a href="pv.html">Pharmacovigilance</a>.</li>
-        <li>Hands-on guidance for NAFDAC, ethics committees, and local regulatory expectations.</li>
-        <li>Experienced local representation, documentation, and reporting aligned with global best practice.</li>
-        <li>Direct access to practical insights and learning resources through our <a href="/resources/">Resources</a> library.</li>
-      </ul>
-
-      <h2>Industries served</h2>
-      <p>We work with pharmaceutical brands, biotech sponsors, medical device developers, clinical research organisations, and health programmes that require compliant delivery in African markets. Our guidance is tailored to products across development stages, from early-phase trials to post-marketing surveillance.</p>
-      <p>Whether you need support for an investigational medicine, a local distribution application, or a new safety governance model, MedNova is positioned to support complex, regulated projects.</p>
-
-      <h2>Call to action</h2>
-      <p>Ready to align your regulatory, clinical, and safety plans? <a href="/contact/">Contact MedNova</a> to discuss your next launch, trial, or pharmacovigilance programme. Our first consultation is designed to identify the most efficient path forward.</p>
-    </article>
-  </div>
-</section>
-
-<section class="content-block">
-  <div class="wrap">
-    <article>
-      <h2>Frequently asked questions</h2>
-      <h3>How does MedNova support regulatory submissions in Nigeria?</h3>
-      <p>We support filings from dossier preparation to local regulatory engagement, including NAFDAC submissions, import permits, and labelling compliance.</p>
-      <h3>Can MedNova support clinical trials in West Africa?</h3>
-      <p>Yes. Our clinical development services include site feasibility, monitoring, investigator engagement, and local coordination for studies in Nigeria and neighbouring markets.</p>
-      <h3>What pharmacovigilance capabilities do you provide?</h3>
-      <p>Our pharmacovigilance offering includes local QPPV representation, case processing, safety reporting, signal detection, aggregate reporting, and risk management planning.</p>
-      <h3>How do you ensure consistent communications across services?</h3>
-      <p>MedNova keeps regulatory, clinical, and safety teams aligned through shared governance, standardised documentation, and ongoing project review meetings.</p>
-      <h3>Where can I learn more about your expertise?</h3>
-      <p>Review our <a href="regulatory.html">Regulatory Affairs</a>, <a href="cro.html">Clinical Development</a>, and <a href="pv.html">Pharmacovigilance</a> pages, or explore our <a href="/resources/">Resources</a> section.</p>
-      <h3>What should I expect from the first consultation?</h3>
-      <p>Expect a focused conversation about your product, timeline, and market goals, followed by practical recommendations for the next steps in compliance, trial readiness, or safety operations.</p>
-    </article>
-  </div>
-</section>
+<!-- FAQ removed per request -->
 
 <!-- SUPPORT STRIP -->
 <div class="support">
@@ -891,7 +895,7 @@
       <div class="eyebrow">Technology Enabled</div>
       <h2>Digital tools behind every engagement</h2>
       <p>We use proprietary digital tools to improve regulatory workflows, pharmacovigilance operations, and clinical trial execution — with a qualified team member reviewing every output.</p>
-      <a class="tech-strip-link" href="mailto:info@mednovalife.com">Ask how this applies to your program <span class="arrow">→</span></a>
+      <a class="tech-strip-link" href="mailto:info@mednovalife.com" target="_blank" rel="noopener noreferrer">Ask how this applies to your program <span class="arrow">→</span></a>
     </div>
     <div class="tech-strip-motif" aria-hidden="true">
       <svg viewBox="0 0 220 140" fill="none">
@@ -1079,10 +1083,10 @@
       <a href="compliance-checklist.html">Compliance Checklist</a>
       <a href="#technology">Technology</a>
       <a href="#footer">Contact</a>
-    </div>
+    <a href="/safetycore.html">SafetyCore</a></div>
   </div>
   <div class="footer-copy">
-    <span>© 2026 MedNova Lifesciences. Lagos, Nigeria.</span>
+    <span>© 2026 MedNova Lifesciences. Lagos, Nigeria. — <a href="/llms.txt">llms.txt</a></span>
     <div class="footer-social">
       <a href="https://www.linkedin.com/company/mednova-lifesciences/" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.38-1.85 3.61 0 4.28 2.38 4.28 5.47v6.27zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45z"/></svg></a>
       <a href="https://x.com/MedNovaLif3669" target="_blank" rel="noopener" aria-label="X (Twitter)"><svg viewBox="0 0 24 24"><path d="M18.9 2H22l-7.6 8.7L23.3 22H16.6l-5.2-6.8L5.4 22H2.3l8.1-9.3L1.7 2h6.9l4.7 6.2L18.9 2zm-1.2 18h1.7L7.4 4H5.6l12.1 16z"/></svg></a>
@@ -1096,5 +1100,41 @@
 
 <script defer src="/config.js"></script>
 <script nonce="mednova-inline-2026">window.DEMO_CONTEXT = 'general';</script>
+<script nonce="mednova-inline-2026">
+  (function(){
+    // FAQ accordion (single open)
+    const items = Array.from(document.querySelectorAll('.faq-item'));
+    items.forEach(item => {
+      const btn = item.querySelector('.faq-question');
+      const panel = item.querySelector('.faq-answer');
+      btn.addEventListener('click', () => {
+        const isOpen = item.classList.contains('open');
+        // close all
+        items.forEach(i => { i.classList.remove('open'); i.querySelector('.faq-question').setAttribute('aria-expanded','false'); });
+        if (!isOpen) {
+          item.classList.add('open');
+          btn.setAttribute('aria-expanded','true');
+        }
+      });
+      btn.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); btn.click(); }
+      });
+    });
+
+    // Lightweight scroll reveal for new sections
+    const toReveal = document.querySelectorAll('.svc-card, .feature-card, .industry-card, .expertise-copy, .process-timeline li');
+    toReveal.forEach(el => { el.style.opacity = '0'; el.style.transform = 'translateY(12px)'; el.style.transition = 'opacity .6s ease, transform .6s ease'; });
+    const io = new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'none';
+          obs.unobserve(entry.target);
+        }
+      });
+    }, {threshold:0.12});
+    toReveal.forEach(el => io.observe(el));
+  })();
+</script>
 </body>
 </html>

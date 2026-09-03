@@ -1,17 +1,21 @@
 import pathlib
 import re
 
-def add_nonce_to_jsonld(text):
-    pattern = re.compile(
-        r'(<script\b[^>]*\btype\s*=\s*(?:"application/ld\+json"|\'application/ld\+json\')[^>]*>)',
-        re.I,
-    )
+def add_nonce_to_inline_scripts(text):
+    pattern = re.compile(r'<script\b([^>]*)>', re.I)
 
     def repl(match):
-        open_tag = match.group(1)
-        if re.search(r'\bnonce\s*=\s*(?:"[^"]*"|\'[^\']*\')', open_tag, re.I):
-            return open_tag
-        return open_tag[:-1] + ' nonce="mednova-inline-2026">'
+        attrs = match.group(1)
+        if re.search(r'\bsrc\s*=', attrs, re.I):
+            return match.group(0)
+
+        attrs = re.sub(
+            r'\s+nonce\s*=\s*(?:"[^"]*"|\'[^\']*\')',
+            '',
+            attrs,
+            flags=re.I,
+        )
+        return f'<script nonce="mednova-inline-2026"{attrs}>'
 
     return pattern.sub(repl, text)
 
@@ -36,7 +40,7 @@ modified = []
 for path in files:
     text = path.read_text(encoding='utf-8', errors='ignore')
     new_text = text
-    new_text = add_nonce_to_jsonld(new_text)
+    new_text = add_nonce_to_inline_scripts(new_text)
     new_text = remove_inline_handlers(new_text)
     new_text = normalize_google_fonts_link(new_text)
     if new_text != text:

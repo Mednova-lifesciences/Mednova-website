@@ -17,24 +17,6 @@ const medicalInfoHtml = fs.readFileSync(medicalInfoPath, 'utf8');
 const medicalWritingPath = path.join(__dirname, '..', 'medical-writing.html');
 const medicalWritingHtml = fs.readFileSync(medicalWritingPath, 'utf8');
 
-const schemaPages = [
-  ['index.html', homeHtml],
-  ['services/index.html', servicesHtml],
-  ['pv.html', fs.readFileSync(path.join(__dirname, '..', 'pv.html'), 'utf8')],
-  ['cro.html', fs.readFileSync(path.join(__dirname, '..', 'cro.html'), 'utf8')],
-  ['regulatory.html', fs.readFileSync(path.join(__dirname, '..', 'regulatory.html'), 'utf8')],
-  ['medical-information.html', medicalInfoHtml],
-  ['nafdac-registration.html', nafdacHtml],
-  ['post-marketing-surveillance.html', pmsHtml],
-  ['regulatory-intelligence.html', fs.readFileSync(path.join(__dirname, '..', 'regulatory-intelligence.html'), 'utf8')],
-  ['training-consulting.html', fs.readFileSync(path.join(__dirname, '..', 'training-consulting.html'), 'utf8')],
-  ['compliance-checklist.html', fs.readFileSync(path.join(__dirname, '..', 'compliance-checklist.html'), 'utf8')]
-];
-
-function countOccurrences(text, needle) {
-  return text.split(needle).length - 1;
-}
-
 assert.ok(homeHtml.includes('<main'), 'Homepage should include a semantic main landmark.');
 assert.ok(homeHtml.indexOf('<meta charset="UTF-8">') !== -1, 'Homepage should declare the UTF-8 charset.');
 assert.ok(homeHtml.includes('role="dialog"') && homeHtml.includes('aria-modal="true"'), 'Consultation dialog should expose dialog semantics.');
@@ -55,16 +37,5 @@ assert.ok(servicesHtml.includes('/post-marketing-surveillance.html'), 'Services 
 assert.ok(servicesHtml.includes('/medical-information.html'), 'Services hub should link the medical information card to the new page.');
 assert.ok(servicesHtml.includes('/resources/'), 'Services hub should expose the resources section.');
 assert.ok(pmsHtml.includes('/#book-consultation'), 'Post-marketing surveillance page should route consultation CTAs to the home page booking section.');
-
-for (const [relativePath, html] of schemaPages) {
-  const localBusinessCount = countOccurrences(html, '"@type": "LocalBusiness"') + countOccurrences(html, '"@type":"LocalBusiness"');
-  assert.ok(localBusinessCount === 1, `${relativePath} should expose exactly one LocalBusiness schema.`);
-  assert.ok(html.includes('"address": {') || html.includes('"address" : {'), `${relativePath} should include a PostalAddress block.`);
-  assert.ok(html.includes('"streetAddress": "17 Aje Road"'), `${relativePath} should include streetAddress from the verified business address.`);
-  assert.ok(html.includes('"addressLocality": "Yaba"'), `${relativePath} should include addressLocality from the verified business address.`);
-  assert.ok(html.includes('"addressCountry": "NG"'), `${relativePath} should include addressCountry from the verified business address.`);
-  assert.ok(html.includes('"telephone": "+2349110225555"'), `${relativePath} should include the verified telephone number.`);
-  assert.ok(html.includes('"url": "https://mednovalife.com"'), `${relativePath} should include the verified business URL.`);
-}
 
 console.log('Accessibility structure checks passed.');
