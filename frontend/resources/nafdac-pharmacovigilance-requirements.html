@@ -90,8 +90,8 @@
   .nav-cta{font-size:13px; font-weight:600; padding:9px 18px; background:var(--ink); color:var(--paper); border-radius:3px; text-decoration:none;}
 
   /* Full-width hero banner image */
-  .hero-banner-image{width:100%; display:block; line-height:0; background:var(--paper-raised);}
-  .hero-banner-image img{width:100%; aspect-ratio:3/1; object-fit:cover; display:block;}
+  .hero-banner-image{width:100%; aspect-ratio:3/1; display:block; overflow:hidden; background:var(--paper);}
+  .hero-banner-image img{width:100%; height:100%; object-fit:contain; display:block;}
   .hero-below{padding:40px 0 8px; text-align:center;}
   .hero-eyebrow{font-family:'IBM Plex Mono', monospace; font-size:12px; letter-spacing:0.14em; text-transform:uppercase; color:var(--moss-deep); margin-bottom:16px; display:flex; align-items:center; justify-content:center; gap:10px;}
   .hero-eyebrow::before, .hero-eyebrow::after{content:""; width:26px; height:1px; background:var(--moss);}
@@ -563,6 +563,5 @@
 </article></div></section>
 </main>
 <footer><div class="wrap">© 2026 MedNova Lifesciences | Lagos, Nigeria — <a href="/llms.txt">llms.txt</a></div></footer>
-<script defer src="/public/js/breadcrumbs.min.js"></script>
 </body>
 </html>
