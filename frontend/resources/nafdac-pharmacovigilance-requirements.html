@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="A plain language breakdown of NAFDAC's pharmacovigilance guideline. What compliance teams must actually do, not just what the regulation says.">
+<meta name="description" content="A practical guide to NAFDAC's pharmacovigilance requirements: QPPV rules, the system master file, reporting duties, common compliance gaps, and a checklist.">
 <meta name="theme-color" content="#0f3d2e">
 <link rel="canonical" href="https://mednovalife.com/resources/nafdac-pharmacovigilance-requirements.html">
 <link rel="icon" href="/favicon.ico" sizes="any">
@@ -14,7 +14,7 @@
 <meta name="robots" content="index,follow,max-image-preview:large">
 <meta name="author" content="MedNova Lifesciences">
 <meta property="og:title" content="NAFDAC Pharmacovigilance Requirements: What the Official Guidelines Actually Mean | MedNova Lifesciences">
-<meta property="og:description" content="A plain language breakdown of NAFDAC's pharmacovigilance guideline. What compliance teams must actually do, not just what the regulation says.">
+<meta property="og:description" content="An in-depth guide to NAFDAC's Good Pharmacovigilance Practice Guidelines for regulatory and compliance teams in Nigeria: QPPV requirements, the Pharmacovigilance System Master File, reporting obligations, common compliance gaps, and a practical readiness checklist.">
 <meta property="og:type" content="article">
 <meta property="article:published_time" content="2026-09-03T00:00:00+01:00">
 <meta property="article:modified_time" content="2026-09-03T00:00:00+01:00">
@@ -28,7 +28,7 @@
 <meta property="og:locale" content="en_NG">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="NAFDAC Pharmacovigilance Requirements: What the Official Guidelines Actually Mean | MedNova Lifesciences">
-<meta name="twitter:description" content="A plain language breakdown of NAFDAC's pharmacovigilance guideline. What compliance teams must actually do, not just what the regulation says.">
+<meta name="twitter:description" content="An in-depth guide to NAFDAC's Good Pharmacovigilance Practice Guidelines for regulatory and compliance teams in Nigeria: QPPV requirements, the Pharmacovigilance System Master File, reporting obligations, common compliance gaps, and a practical readiness checklist.">
 <meta name="twitter:image" content="https://mednovalife.com/public/images/blog/nafdac-pharmacovigilance-requirements-banner.jpg">
 <title>NAFDAC Pharmacovigilance Requirements: What the Guidelines Mean | MedNova Lifesciences</title>
 <script nonce="mednova-inline-2026" type="application/ld+json">
@@ -46,7 +46,7 @@
     {
       "@type": "Article",
       "headline": "NAFDAC Pharmacovigilance Requirements: What the Official Guidelines Actually Mean for Your Compliance Team",
-      "description": "A plain language breakdown of NAFDAC's pharmacovigilance guideline. What compliance teams must actually do, not just what the regulation says.",
+      "description": "An in-depth guide to NAFDAC's Good Pharmacovigilance Practice Guidelines for regulatory and compliance teams in Nigeria: QPPV requirements, the Pharmacovigilance System Master File, reporting obligations, common compliance gaps, and a practical readiness checklist.",
       "image": ["https://mednovalife.com/public/images/blog/nafdac-pharmacovigilance-requirements-banner.jpg"],
       "author": {"@type": "Organization", "name": "MedNova Lifesciences", "url": "https://mednovalife.com"},
       "publisher": {"@type": "Organization", "name": "MedNova Lifesciences", "logo": {"@type": "ImageObject", "url": "https://mednovalife.com/public/images/image.webp"}},
@@ -98,15 +98,12 @@
   .navlinks a:hover{color:var(--moss-deep);}
   .nav-cta{font-size:13px; font-weight:600; padding:9px 18px; background:var(--ink); color:var(--paper); border-radius:3px; text-decoration:none;}
 
-  /* Full-width hero banner image */
-  .hero-banner-image{width:100%; aspect-ratio:3/1; display:block; overflow:hidden; background:var(--paper);}
-  .hero-banner-image img{width:100%; height:100%; object-fit:contain; display:block;}
-  .hero-below{padding:40px 0 8px; text-align:center;}
-  .hero-eyebrow{font-family:'IBM Plex Mono', monospace; font-size:12px; letter-spacing:0.14em; text-transform:uppercase; color:var(--moss-deep); margin-bottom:16px; display:flex; align-items:center; justify-content:center; gap:10px;}
+  .hero-below{padding:68px 0 44px; text-align:center; border-bottom:1px solid var(--line);}
+  .hero-eyebrow{font-family:'IBM Plex Mono', monospace; font-size:12px; letter-spacing:0.14em; text-transform:uppercase; color:var(--moss-deep); margin-bottom:18px; display:flex; align-items:center; justify-content:center; gap:10px;}
   .hero-eyebrow::before, .hero-eyebrow::after{content:""; width:26px; height:1px; background:var(--moss);}
-  .hero-below h1{font-family:'Newsreader', serif; font-weight:600; letter-spacing:-0.01em; font-size:34px; line-height:1.18; max-width:22ch; margin:0 auto; color:var(--ink);}
-  .hero-sub{margin:18px auto 0; max-width:58ch; font-size:16px; color:var(--grey); font-family:'Newsreader', serif;}
-  .hero-meta{margin:26px auto 0; display:flex; flex-wrap:wrap; justify-content:center; gap:10px;}
+  .hero-below h1{font-family:'Newsreader', serif; font-weight:600; letter-spacing:-0.01em; font-size:42px; line-height:1.16; max-width:19ch; margin:0 auto; color:var(--ink);}
+  .hero-sub{margin:20px auto 0; max-width:58ch; font-size:16.5px; color:var(--grey); font-family:'Newsreader', serif;}
+  .hero-meta{margin:28px auto 0; display:flex; flex-wrap:wrap; justify-content:center; gap:10px;}
   .hero-pill{font-size:12.5px; font-weight:500; color:var(--ink-soft); background:var(--paper-raised); border:1px solid var(--line); padding:7px 14px; border-radius:999px; display:inline-flex; align-items:center; gap:6px;}
   .hero-pill strong{color:var(--ink); font-weight:600;}
 
@@ -178,8 +175,8 @@
   .meddnova-breadcrumbs__list li:not(:last-child)::after{content:"/"; color:rgba(255,255,255,0.25);}
   .meddnova-breadcrumbs__list a{color:rgba(247,242,233,0.75); text-decoration:none;}
   footer{border-top:1px solid var(--line); padding:28px 0; font-size:13px; color:var(--grey);}
-  @media (max-width:860px){.navlinks{display:none;} .hero-banner h1{font-size:34px;} .toc ol{columns:1;}}
-  @media (max-width:640px){.wrap{padding:0 22px;} .site-header__inner{padding:16px 22px;} .hero-inner{padding:28px 0 48px;} .checklist-section{padding:24px 18px 6px;}}
+  @media (max-width:860px){.navlinks{display:none;} .hero-below h1{font-size:32px;} .toc ol{columns:1;}}
+  @media (max-width:640px){.wrap{padding:0 22px;} .site-header__inner{padding:16px 22px;} .hero-below{padding:40px 0 32px;} .checklist-section{padding:24px 18px 6px;}}
   @media (prefers-reduced-motion: reduce){html{scroll-behavior:auto;}}
 </style>
 </head>
@@ -187,9 +184,6 @@
 <header class="site-header"><div class="site-header__inner"><nav class="site-nav"><a class="brand" href="/" aria-label="MedNova Lifesciences home"><img class="brand-mark" src="/public/images/image.png" alt="MedNova Lifesciences logo" width="34" height="34"></a><div class="navlinks"><a href="/resources/">Resources</a><a href="/pv.html">Pharmacovigilance</a><a href="/contact/">Contact</a><a href="/safetycore.html">SafetyCore</a></div><a class="nav-cta" href="/contact/">Talk to us</a></nav></div></header>
 <main>
 
-<div class="hero-banner-image">
-  <img src="/public/images/blog/nafdac-pharmacovigilance-requirements-banner.jpg" alt="NAFDAC Pharmacovigilance Requirements: What the Official Guidelines Actually Mean for Your Compliance Team" width="600" height="400" fetchpriority="high">
-</div>
 <section class="hero-below">
   <div class="wrap">
     <div class="hero-eyebrow">Pharmacovigilance &middot; NAFDAC Compliance</div>
