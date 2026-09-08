@@ -30,6 +30,7 @@ Resources & glossary:
 
 Featured resource articles:
 - https://mednovalife.com/resources/nafdac-pharmacovigilance-requirements.html — NAFDAC Pharmacovigilance Requirements: what the Good Pharmacovigilance Practice Guidelines require (QPPV, master file, reporting, audit, compliance checklist)
+- https://mednovalife.com/resources/what-happens-after-reporting-adverse-event-nafdac.html — What Happens After You Report an Adverse Event to NAFDAC: ICSR validation, follow-up, signal detection, and regulatory action
 
 Technical & discovery:
 - Sitemap: https://mednovalife.com/sitemap.xml
@@ -40,4 +41,4 @@ Notes:
 - Use canonical URLs only. Avoid tracking parameters and duplicate or staging URLs.
 - Do not include unverified business claims; if a capability is not present on the official site, flag it for human review.
 
-Last updated: 2026-09-03T00:00:00Z
+Last updated: 2026-09-08T00:00:00Z
