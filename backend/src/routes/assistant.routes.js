@@ -11,36 +11,34 @@ export async function handleAssistantRequest(req, res) {
     if (question.length > API_CONFIG.maxQuestionLength) {
       return res.status(400).json({ error: 'Question is too long (max 600 characters).' });
     }
-    if (!process.env.ANTHROPIC_API_KEY) {
+    if (!process.env.OPENAI_API_KEY) {
       return res.status(500).json({ error: 'Server is not configured with an API key yet.' });
     }
 
-    const response = await fetch(API_CONFIG.anthropicUrl, {
+    const response = await fetch(API_CONFIG.openaiUrl, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'x-api-key': process.env.ANTHROPIC_API_KEY,
-        'anthropic-version': API_CONFIG.anthropicVersion
+        Authorization: `Bearer ${process.env.OPENAI_API_KEY}`
       },
       body: JSON.stringify({
-        model: process.env.ANTHROPIC_MODEL || API_CONFIG.defaultModel,
+        model: process.env.OPENAI_MODEL || API_CONFIG.defaultModel,
         max_tokens: API_CONFIG.maxTokens,
-        system: CONTEXTS[context],
-        messages: [{ role: 'user', content: question }]
+        messages: [
+          { role: 'system', content: CONTEXTS[context] },
+          { role: 'user', content: question }
+        ]
       })
     });
 
     if (!response.ok) {
       const errBody = await response.text();
-      console.error('Anthropic API error:', response.status, errBody);
+      console.error('OpenAI API error:', response.status, errBody);
       return res.status(502).json({ error: 'The assistant is temporarily unavailable.' });
     }
 
     const data = await response.json();
-    const text = (data.content || [])
-      .filter((block) => block.type === 'text')
-      .map((block) => block.text)
-      .join('\n');
+    const text = data.choices?.[0]?.message?.content || '';
 
     res.json({ text: text || 'No response received.' });
   } catch (err) {

@@ -42,9 +42,9 @@ app.use((req, res, next) => {
   next();
 });
 
-if (!process.env.ANTHROPIC_API_KEY) {
+if (!process.env.OPENAI_API_KEY) {
   console.warn(
-    '⚠️  ANTHROPIC_API_KEY is not set. The /api/assistant endpoint will fail until it is configured (see .env.example).'
+    '⚠️  OPENAI_API_KEY is not set. The /api/assistant endpoint will fail until it is configured (see .env.example).'
   );
 }
 

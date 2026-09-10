@@ -15,9 +15,8 @@ export const RATE_LIMIT_CONFIG = {
 };
 
 export const API_CONFIG = {
-  anthropicUrl: 'https://api.anthropic.com/v1/messages',
-  anthropicVersion: '2023-06-01',
-  defaultModel: 'claude-sonnet-4-6',
+  openaiUrl: 'https://api.openai.com/v1/chat/completions',
+  defaultModel: 'gpt-4o-mini',
   maxTokens: 400,
   maxQuestionLength: 600
 };
