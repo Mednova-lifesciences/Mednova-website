@@ -10,6 +10,38 @@
 
   const context = window.DEMO_CONTEXT || 'general';
 
+  function escapeHtml(str) {
+    return str
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;');
+  }
+
+  // Turns the assistant's lightly-markdown-formatted reply (**bold**,
+  // numbered/bulleted lists, paragraph breaks) into real HTML. Input is
+  // HTML-escaped first, so only the tags this function inserts can appear.
+  function formatAssistantReply(raw) {
+    const escaped = escapeHtml(raw.trim()).replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+    const blocks = escaped.split(/\n\s*\n/);
+
+    return blocks
+      .map((block) => {
+        const lines = block.split('\n').map((l) => l.trim()).filter(Boolean);
+        if (!lines.length) return '';
+
+        if (lines.every((l) => /^\d+[.)]\s+/.test(l))) {
+          const items = lines.map((l) => `<li>${l.replace(/^\d+[.)]\s+/, '')}</li>`).join('');
+          return `<ol>${items}</ol>`;
+        }
+        if (lines.every((l) => /^[-*•]\s+/.test(l))) {
+          const items = lines.map((l) => `<li>${l.replace(/^[-*•]\s+/, '')}</li>`).join('');
+          return `<ul>${items}</ul>`;
+        }
+        return `<p>${lines.join(' ')}</p>`;
+      })
+      .join('');
+  }
+
   async function askDemo(btn) {
     const question = btn.dataset.q;
     demoButtons.forEach((b) => b.classList.remove('active'));
@@ -27,7 +59,9 @@
         throw new Error(err.error || 'Request failed');
       }
       const data = await res.json();
-      demoOutput.textContent = data.text || 'No response received.';
+      demoOutput.innerHTML = data.text
+        ? formatAssistantReply(data.text)
+        : '<p>No response received.</p>';
     } catch (err) {
       demoOutput.textContent = "Couldn't reach the assistant right now — please try again shortly.";
     } finally {
