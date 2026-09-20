@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="What signal detection in pharmacovigilance is, what NAFDAC requires, and why standard statistical methods underperform on small Nigerian datasets.">
+<meta name="theme-color" content="#0f3d2e">
+<link rel="canonical" href="https://mednovalife.com/resources/signal-detection-pharmacovigilance-nigeria.html">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="manifest" href="/public/site.webmanifest">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta name="author" content="MedNova Lifesciences">
+<meta property="og:title" content="Signal Detection in Pharmacovigilance: What It Is and Why It Matters | MedNova Lifesciences">
+<meta property="og:description" content="A practical guide to signal detection in pharmacovigilance for drug safety teams in Nigeria: what a safety signal is, what NAFDAC requires, how qualitative and quantitative methods work, and why standard statistical approaches underperform on small national datasets.">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2026-09-20T00:00:00+01:00">
+<meta property="article:modified_time" content="2026-09-20T00:00:00+01:00">
+<meta property="article:author" content="MedNova Lifesciences">
+<meta property="og:url" content="https://mednovalife.com/resources/signal-detection-pharmacovigilance-nigeria.html">
+<meta property="og:image" content="https://mednovalife.com/public/images/blog/signal-detection-pharmacovigilance-banner.jpg">
+<meta property="og:image:width" content="600">
+<meta property="og:image:height" content="400">
+<meta property="og:image:alt" content="Signal Detection in Pharmacovigilance: What is it and Why it matters">
+<meta property="og:site_name" content="MedNova Lifesciences">
+<meta property="og:locale" content="en_NG">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Signal Detection in Pharmacovigilance: What It Is and Why It Matters | MedNova Lifesciences">
+<meta name="twitter:description" content="A practical guide to signal detection in pharmacovigilance for drug safety teams in Nigeria: what a safety signal is, what NAFDAC requires, how qualitative and quantitative methods work, and why standard statistical approaches underperform on small national datasets.">
+<meta name="twitter:image" content="https://mednovalife.com/public/images/blog/signal-detection-pharmacovigilance-banner.jpg">
+<title>Signal Detection in Pharmacovigilance: What It Is and Why It Matters | MedNova Lifesciences</title>
+<script nonce="mednova-inline-2026" type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://mednovalife.com/"},
+        {"@type": "ListItem", "position": 2, "name": "Resources", "item": "https://mednovalife.com/resources/"},
+        {"@type": "ListItem", "position": 3, "name": "Signal Detection in Pharmacovigilance", "item": "https://mednovalife.com/resources/signal-detection-pharmacovigilance-nigeria.html"}
+      ]
+    },
+    {
+      "@type": "Article",
+      "headline": "Signal Detection in Pharmacovigilance: What It Is and Why It Matters",
+      "description": "A practical guide to signal detection in pharmacovigilance for drug safety teams in Nigeria: what a safety signal is, what NAFDAC requires, how qualitative and quantitative methods work, and why standard statistical approaches underperform on small national datasets.",
+      "image": "https://mednovalife.com/public/images/blog/signal-detection-pharmacovigilance-banner.jpg",
+      "author": {"@type": "Organization", "name": "MedNova Lifesciences"},
+      "publisher": {"@type": "Organization", "name": "MedNova Lifesciences"},
+      "datePublished": "2026-09-20",
+      "dateModified": "2026-09-20",
+      "mainEntityOfPage": "https://mednovalife.com/resources/signal-detection-pharmacovigilance-nigeria.html"
+    },
+    {
+      "@type": "Organization",
+      "name": "MedNova Lifesciences",
+      "url": "https://mednovalife.com"
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {"@type": "Question", "name": "What is signal detection in pharmacovigilance?", "acceptedAnswer": {"@type": "Answer", "text": "Signal detection is the process of reviewing accumulated safety data to identify information suggesting a new potentially causal association between a medicine and an adverse event, or a new aspect of a known association, at a level of likelihood that justifies further investigation."}},
+        {"@type": "Question", "name": "What is a safety signal?", "acceptedAnswer": {"@type": "Answer", "text": "A safety signal is information arising from one or more sources that suggests a new potentially causal association, or a new aspect of a known association, between a medicine and an event, judged to be of sufficient likelihood to justify verification. The definition is set out in the report of CIOMS Working Group VIII."}},
+        {"@type": "Question", "name": "Does NAFDAC require signal detection?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. NAFDAC's pharmacovigilance framework requires Certificate of Registration Holders to have mechanisms for detecting and investigating safety issues at any stage of a product's life cycle, supported by written procedures describing how signal detection is performed, documented roles, documented sources and methods, documented actions on the outcome, and review of cumulative cases."}},
+        {"@type": "Question", "name": "What is the difference between a signal and an adverse drug reaction?", "acceptedAnswer": {"@type": "Answer", "text": "An adverse drug reaction concerns one patient and involves a suspected causal relationship in that case. A signal concerns a product and arises from accumulated information suggesting a new or changed causal association that warrants investigation. One case can occasionally constitute a signal, but the two are different levels of analysis."}},
+        {"@type": "Question", "name": "What methods are used for signal detection?", "acceptedAnswer": {"@type": "Answer", "text": "Two families. Qualitative methods involve trained clinical review of individual cases and case series, designated medical event lists, temporal pattern review and dechallenge and rechallenge assessment. Quantitative methods use disproportionality measures such as the Proportional Reporting Ratio, the Reporting Odds Ratio, the Information Component and the Empirical Bayes Geometric Mean."}},
+        {"@type": "Question", "name": "What is disproportionality analysis?", "acceptedAnswer": {"@type": "Answer", "text": "A statistical screen asking whether a product and an event are reported together more often than expected given how often each appears in the database overall. It measures disproportionate reporting, not disproportionate risk, and an elevated measure is a reason to look further rather than evidence of causation."}},
+        {"@type": "Question", "name": "Why do statistical signal detection methods struggle with Nigerian data?", "acceptedAnswer": {"@type": "Answer", "text": "Because they depend on large background datasets. Small case counts make every measure statistically unstable, severe and selective underreporting biases the calculations, incomplete cases dilute the analysis, inconsistent coding fragments what should be a single data point, and reliable exposure denominators are difficult to obtain. A procedure built on disproportionality alone will systematically fail to detect and will record that failure as an absence of signals."}},
+        {"@type": "Question", "name": "What should Nigerian companies do instead?", "acceptedAnswer": {"@type": "Answer", "text": "Lead with structured cumulative clinical review at a defined frequency, use a designated medical event list so that clinically significant events trigger review on a single occurrence, invest in case completeness and consistent coding, monitor safety actions taken on the same molecule in other markets, screen separately for lack of efficacy and batch clustered reports, and apply quantitative screening only where case counts make it meaningful."}},
+        {"@type": "Question", "name": "What is VigiBase and how does Nigeria contribute to it?", "acceptedAnswer": {"@type": "Answer", "text": "VigiBase is the World Health Organization global database of individual case safety reports, holding reports contributed by more than 180 member organisations of the WHO Programme for International Drug Monitoring. Nigeria has been a member since 2004, and the National Pharmacovigilance Centre manages national reports in VigiFlow and shares them with VigiBase."}},
+        {"@type": "Question", "name": "What is VigiLyze?", "acceptedAnswer": {"@type": "Answer", "text": "VigiLyze is the Uppsala Monitoring Centre's signal management application, provided free of charge to national pharmacovigilance centres in all member countries of the WHO Programme for International Drug Monitoring. It places national data in global context, allows disproportionality to be recalculated for any chosen country or group of countries, and gives access to safety information on products already in use elsewhere."}},
+        {"@type": "Question", "name": "How often should signal detection be performed?", "acceptedAnswer": {"@type": "Answer", "text": "NAFDAC requires detection to be timely and the frequency to be described in the company's written procedure rather than setting a universal interval. A common structure is immediate review for designated medical events and serious unlabelled events, monthly cumulative review by product, and a quarterly documented signal detection meeting."}},
+        {"@type": "Question", "name": "Does a single adverse event report ever constitute a signal?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. A single well documented case can constitute a signal where the event is intrinsically significant, where there is positive dechallenge and rechallenge, where a plausible mechanism exists and where alternative explanations have been excluded. No statistical method would detect such a case, which is why qualitative review cannot be dispensed with."}}
+      ]
+    }
+  ]
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Newsreader:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{--ink:#332918;--ink-soft:#5C4C33;--paper:#FFFFFF;--paper-raised:#F7F2E9;--moss:#C9975F;--moss-deep:#A9713B;--amber:#2C6E64;--line:#E4DACB;--grey:#726551;}
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--paper); color:var(--ink); font-family:'IBM Plex Sans', sans-serif; line-height:1.6;}
+  .wrap{max-width:900px; margin:0 auto; padding:0 32px;}
+  a{color:inherit;}
+  .site-header{width:100%; position:sticky; top:0; z-index:50; background:rgba(245,246,242,0.9); backdrop-filter:blur(8px); border-bottom:1px solid var(--line);}
+  .site-header__inner{padding:18px 32px;}
+  .site-nav{display:flex; align-items:center; justify-content:space-between; width:100%;}
+  .brand{display:flex; align-items:center; gap:10px; text-decoration:none; color:inherit; flex-shrink:0;}
+  .brand-mark{height:34px; width:auto;}
+  .navlinks{display:flex; gap:24px; font-size:14px; font-weight:500;}
+  .navlinks a{text-decoration:none; color:var(--ink-soft);}
+  .navlinks a:hover{color:var(--moss-deep);}
+  .nav-cta{font-size:13px; font-weight:600; padding:9px 18px; background:var(--ink); color:var(--paper); border-radius:3px; text-decoration:none;}
+
+  .hero-below{padding:68px 0 44px; text-align:center; border-bottom:1px solid var(--line);}
+  .hero-eyebrow{font-family:'IBM Plex Mono', monospace; font-size:12px; letter-spacing:0.14em; text-transform:uppercase; color:var(--moss-deep); margin-bottom:18px; display:flex; align-items:center; justify-content:center; gap:10px;}
+  .hero-eyebrow::before, .hero-eyebrow::after{content:""; width:26px; height:1px; background:var(--moss);}
+  .hero-below h1{font-family:'Newsreader', serif; font-weight:600; letter-spacing:-0.01em; font-size:40px; line-height:1.16; max-width:22ch; margin:0 auto; color:var(--ink);}
+  .hero-sub{margin:20px auto 0; max-width:58ch; font-size:16.5px; color:var(--grey); font-family:'Newsreader', serif;}
+  .hero-meta{margin:28px auto 0; display:flex; flex-wrap:wrap; justify-content:center; gap:10px;}
+  .hero-pill{font-size:12.5px; font-weight:500; color:var(--ink-soft); background:var(--paper-raised); border:1px solid var(--line); padding:7px 14px; border-radius:999px; display:inline-flex; align-items:center; gap:6px;}
+  .hero-pill strong{color:var(--ink); font-weight:600;}
+
+  section{padding:0;}
+  article{padding:48px 0 68px;}
+  h2{font-family:'Newsreader', serif; font-size:29px; font-weight:600; margin:40px 0 12px; letter-spacing:-0.005em;}
+  h3{font-family:'Newsreader', serif; font-size:21px; font-weight:600; margin:22px 0 8px;}
+  p, li{font-size:15.5px; color:var(--grey); line-height:1.78;}
+  strong{color:var(--ink);}
+  ul{margin:14px 0 16px 20px;}
+  ol{margin:14px 0 16px 22px;}
+  li{margin-bottom:6px;}
+  .lead{font-size:17px; color:var(--ink-soft); font-family:'Newsreader', serif; line-height:1.65;}
+  .byline{display:flex; flex-wrap:wrap; gap:6px 14px; font-family:'IBM Plex Mono', monospace; font-size:12px; color:var(--grey); margin:14px 0 26px; padding-bottom:22px; border-bottom:1px solid var(--line);}
+  .callout{background:var(--paper-raised); border:1px solid var(--line); border-left:3px solid var(--moss-deep); border-radius:8px; padding:20px 22px; margin:26px 0;}
+  .callout strong{display:block; font-family:'IBM Plex Mono', monospace; font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:var(--moss-deep); margin-bottom:8px;}
+
+  .toc{background:#fff; border:1px solid var(--line); border-radius:10px; padding:22px 24px; margin:30px 0 8px;}
+  .toc-title{font-family:'IBM Plex Mono', monospace; font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:var(--moss-deep); margin-bottom:12px;}
+  .toc ol{margin:0; padding-left:20px; columns:2; column-gap:28px;}
+  .toc li{font-size:13.5px; break-inside:avoid; margin-bottom:8px;}
+  .toc a{color:var(--ink-soft); text-decoration:none;}
+  .toc a:hover{color:var(--moss-deep); text-decoration:underline;}
+
+  .step-grid{display:grid; gap:14px; margin:20px 0 26px;}
+  .step-card{background:#fff; border:1px solid var(--line); border-left:3px solid var(--moss-deep); border-radius:8px; padding:16px 20px;}
+  .step-card .step-num{font-family:'IBM Plex Mono', monospace; font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:var(--moss-deep); margin-bottom:4px;}
+  .step-card h4{font-family:'Newsreader', serif; font-size:17px; font-weight:600; color:var(--ink); margin-bottom:4px;}
+  .step-card p{margin:0; font-size:14.5px;}
+
+  .card-list{display:grid; gap:10px; margin:18px 0 22px;}
+  .card-list li{list-style:none; background:var(--paper-raised); border:1px solid var(--line); border-radius:7px; padding:12px 16px; font-size:14.5px;}
+
+  .table-wrap{overflow-x:auto; margin:20px 0 26px; border:1px solid var(--line); border-radius:10px;}
+  table{border-collapse:collapse; width:100%; min-width:640px; font-size:14px;}
+  thead th{background:var(--paper-raised); color:var(--ink); font-family:'IBM Plex Mono', monospace; font-size:11px; letter-spacing:0.06em; text-transform:uppercase; text-align:left; padding:12px 16px; border-bottom:1px solid var(--line);}
+  tbody td{padding:13px 16px; border-bottom:1px solid var(--line); vertical-align:top; color:var(--ink-soft); line-height:1.6;}
+  tbody tr:last-child td{border-bottom:none;}
+  tbody td:first-child{font-weight:600; color:var(--ink);}
+  tbody tr:nth-child(even){background:rgba(247,242,233,0.4);}
+
+  .checklist-section{background:var(--paper-raised); border:1px solid var(--line); border-radius:12px; padding:30px 30px 12px; margin:28px 0;}
+  .check-group{margin-bottom:22px;}
+  .check-group h4{font-family:'IBM Plex Mono', monospace; font-size:12px; letter-spacing:0.08em; text-transform:uppercase; color:var(--moss-deep); margin-bottom:10px;}
+  .check-list{list-style:none; margin:0; display:grid; gap:8px;}
+  .check-list li{display:flex; align-items:flex-start; gap:10px; font-size:14.5px; color:var(--ink-soft); background:#fff; border:1px solid var(--line); border-radius:6px; padding:10px 12px;}
+  .check-list li::before{content:""; flex:0 0 16px; width:16px; height:16px; margin-top:2px; border:1.5px solid var(--moss-deep); border-radius:4px; background:#fff;}
+  .checklist-cta{text-align:center; padding:20px 0 8px;}
+
+  .faq-item{border-bottom:1px solid var(--line); padding:16px 0;}
+  .faq-item summary{cursor:pointer; font-family:'Newsreader', serif; font-size:17px; font-weight:600; color:var(--ink); list-style:none; display:flex; justify-content:space-between; align-items:center; gap:12px;}
+  .faq-item summary::-webkit-details-marker{display:none;}
+  .faq-item summary::after{content:"+"; font-family:'IBM Plex Sans',sans-serif; font-size:20px; color:var(--moss-deep); flex-shrink:0;}
+  .faq-item[open] summary::after{content:"\2212";}
+  .faq-item p{margin-top:10px;}
+
+  .cta-box{background:var(--paper-raised); border:1px solid var(--line); border-radius:8px; padding:24px; margin-top:36px;}
+  .cta-box h3{font-family:'Newsreader', serif; font-size:22px; margin-bottom:10px; margin-top:0;}
+  .btn{display:inline-block; margin-top:12px; padding:10px 16px; background:var(--moss-deep); color:#fff; border-radius:3px; text-decoration:none; font-weight:600;}
+  .related-list{display:grid; gap:10px; margin-top:14px;}
+  .related-list a{display:block; padding:12px 14px; border:1px solid var(--line); border-radius:6px; text-decoration:none; color:var(--ink); background:#fff;}
+  .related-list a:hover{background:var(--paper-raised); border-color:var(--moss);}
+
+  .refs-list{margin:14px 0 0 20px;}
+  .refs-list li{font-size:13.5px; color:var(--grey); margin-bottom:8px;}
+
+  footer{border-top:1px solid var(--line); padding:28px 0; font-size:13px; color:var(--grey);}
+  @media (max-width:860px){.navlinks{display:none;} .hero-below h1{font-size:30px;} .toc ol{columns:1;}}
+  @media (max-width:640px){.wrap{padding:0 22px;} .site-header__inner{padding:16px 22px;} .hero-below{padding:40px 0 32px;} .checklist-section{padding:24px 18px 6px;}}
+  @media (prefers-reduced-motion: reduce){html{scroll-behavior:auto;}}
+</style>
+</head>
+<body>
+<header class="site-header"><div class="site-header__inner"><nav class="site-nav"><a class="brand" href="/" aria-label="MedNova Lifesciences home"><img class="brand-mark" src="/public/images/image.png" alt="MedNova Lifesciences logo" width="34" height="34"></a><div class="navlinks"><a href="/resources/">Resources</a><a href="/pv.html">Pharmacovigilance</a><a href="/contact/">Contact</a><a href="/safetycore.html">SafetyCore</a></div><a class="nav-cta" href="/contact/">Talk to us</a></nav></div></header>
+<main>
+
+<section class="hero-below">
+  <div class="wrap">
+    <div class="hero-eyebrow">Pharmacovigilance &middot; Drug Safety</div>
+    <h1>Signal Detection in Pharmacovigilance: What It Is and Why It Matters</h1>
+    <p class="hero-sub">How safety signals are found, what NAFDAC requires, and why the standard statistical methods taught internationally perform poorly on Nigerian datasets.</p>
+    <div class="hero-meta">
+      <span class="hero-pill">By <strong>MedNova Lifesciences</strong></span>
+      <span class="hero-pill">Last updated: <strong>September 2026</strong></span>
+      <span class="hero-pill"><strong>~26 min</strong> read</span>
+      <span class="hero-pill">Methodology Guide</span>
+    </div>
+  </div>
+</section>
+
+<section><div class="wrap"><article>
+
+<p class="byline">Reviewed for regulatory accuracy by the MedNova pharmacovigilance and regulatory affairs team &middot; This article summarises publicly available regulatory and methodological guidance on signal detection for educational purposes. Requirements applicable to a specific company or product should be confirmed against the current NAFDAC regulations and guidelines in force.</p>
+
+<p class="lead">Signal detection is the process of reviewing accumulated safety data to identify information suggesting a new or changed causal relationship between a medicine and an adverse event, at a level of likelihood that justifies further investigation. It is what turns a pile of individual case reports into knowledge about a product. In Nigeria it is also a regulatory obligation: NAFDAC requires Certificate of Registration Holders to have mechanisms in place for detecting and investigating safety issues at any stage of a product's life cycle, supported by written procedures, documented roles, documented methods, and review of cumulative cases. This article explains what a signal is, how detection actually works, and why the standard statistical methods taught in international pharmacovigilance training perform poorly on Nigerian datasets &mdash; and what to do instead.</p>
+
+<nav class="toc" aria-label="Table of contents">
+  <div class="toc-title">In this guide</div>
+  <ol>
+    <li><a href="#what-is-signal">What is a safety signal?</a></li>
+    <li><a href="#why-matters">Why signal detection matters</a></li>
+    <li><a href="#nafdac-requires">What NAFDAC requires</a></li>
+    <li><a href="#how-it-works">How signal detection actually works</a></li>
+    <li><a href="#methods">The two families of method</a></li>
+    <li><a href="#underperform">Why standard statistics underperform on Nigerian data</a></li>
+    <li><a href="#nigerian-setting">What detection should look like in Nigeria</a></li>
+    <li><a href="#management">Signal management after detection</a></li>
+    <li><a href="#failures">Common signal detection failures</a></li>
+    <li><a href="#checklist">Readiness checklist</a></li>
+    <li><a href="#takeaways">Key takeaways</a></li>
+    <li><a href="#how-mednova-helps">How MedNova can help</a></li>
+    <li><a href="#faq">Frequently asked questions</a></li>
+    <li><a href="#references">References</a></li>
+  </ol>
+</nav>
+
+<h2 id="what-is-signal">What is a safety signal?</h2>
+<p>A safety signal is information that suggests a potential new causal association between a medicine and an event, or a new aspect of an association already known, judged to be likely enough to justify doing something about it.</p>
+<p>That definition comes from the Council for International Organizations of Medical Sciences Working Group VIII, which in 2010 published the consensus report that most regulators and companies still work from. The elements worth noticing are that a signal may arise from one source or many, that it may concern a wholly new association or a change in a known one, and that the threshold is not proof but sufficient likelihood to justify verification.</p>
+
+<h3>A signal is a hypothesis, not a finding</h3>
+<p>This is the point most commonly misunderstood inside pharmaceutical companies, and it causes two opposite errors.</p>
+<p>The first error is treating a signal as an accusation. Teams become defensive, slow to escalate, and reluctant to document, because they read a signal as an admission that their product is dangerous. It is not. It is a question that the data has raised and that the company now has an obligation to answer.</p>
+<p>The second error is treating a signal as a conclusion. A statistical association appears, and the team acts on it as though causality were settled. Most signals do not survive assessment. They are explained by the underlying disease, by concomitant medicines, by reporting artefacts, or by chance.</p>
+<div class="callout"><strong>The correct posture</strong>A signal is a hypothesis with enough support to be worth testing, and the job of the pharmacovigilance system is to test it properly and document the reasoning either way.</div>
+
+<h3>Where a signal sits in the chain of safety concepts</h3>
+<p>The terms are often used loosely. They are not interchangeable, and the distinction determines what a company must do next.</p>
+<div class="table-wrap">
+<table>
+<thead><tr><th>Term</th><th>What it means</th><th>What it obliges you to do</th></tr></thead>
+<tbody>
+<tr><td>Adverse event</td><td>Something untoward happened to a patient on treatment. No causal relationship implied.</td><td>Capture it, record the receipt date, assess validity.</td></tr>
+<tr><td>Adverse drug reaction</td><td>A suspected causal relationship exists between the product and the event.</td><td>Process, assess seriousness and expectedness, report within the applicable timeframe.</td></tr>
+<tr><td>Safety signal</td><td>Accumulated information suggests a new or changed causal association, likely enough to warrant verification.</td><td>Validate, prioritise, assess, decide on action, document the decision.</td></tr>
+<tr><td>Identified risk</td><td>A signal that assessment has substantiated with adequate evidence.</td><td>Reflect in product information, risk management plan and risk minimisation activity.</td></tr>
+<tr><td>Potential risk</td><td>An association supported by some evidence, not yet substantiated.</td><td>Record in the safety specification and plan the activity that would resolve it.</td></tr>
+</tbody>
+</table>
+</div>
+<p>MedNova's glossary entries on the <a href="/resources/glossary/adverse-drug-reaction.html">adverse drug reaction</a> and the <a href="/resources/glossary/risk-management-plan.html">Risk Management Plan</a> set out the neighbouring definitions in short form.</p>
+
+<h2 id="why-matters">Why signal detection matters</h2>
+<div class="step-grid">
+  <div class="step-card"><div class="step-num">Reason 1</div><h4>Clinical trials cannot find rare harm</h4><p>A pre-approval programme might expose a few thousand patients to a new product, for a limited period, under controlled conditions, with strict inclusion criteria. That design is well suited to demonstrating efficacy. It is structurally incapable of detecting an adverse reaction that occurs once in ten thousand exposures, or one that emerges after two years of continuous use, or one that appears only in patients with a comorbidity the trial excluded. Everything a trial cannot find is left to post-marketing surveillance to find. Signal detection is the mechanism by which it does so. Without it, a company is collecting safety data and learning nothing from it.</p></div>
+  <div class="step-card"><div class="step-num">Reason 2</div><h4>Nigerian patients are not the trial population</h4><p>Most medicines sold in Nigeria were developed and studied elsewhere, in populations that differ from Nigerian patients in genetics, comorbidity burden, nutritional status, concomitant medication use including traditional and herbal preparations, climate and storage conditions, and patterns of prescribing and self-medication. A safety profile established in European or North American trial populations is an informed starting hypothesis about how the product will behave in Nigeria. It is not a settled answer. NAFDAC's own framework recognises this: the safety specification within the risk management plan structure requires the epidemiology of the indication in Nigeria specifically, and the guidelines identify categories expected to be under active monitoring, including products developed wholly or largely outside Nigeria and products with under five years of post-marketing experience in Nigeria. Our comparison of <a href="/resources/ich-vs-nafdac-pharmacovigilance.html">ICH standards and NAFDAC requirements</a> sets out where the Nigerian framework diverges from the international baseline on exactly these points.</p></div>
+  <div class="step-card"><div class="step-num">Reason 3</div><h4>It is a regulatory obligation, not a maturity marker</h4><p>Companies frequently treat signal detection as something a pharmacovigilance department does once it has matured past basic case processing. In Nigeria that framing is incorrect. It is a named requirement, and it is one of the requirements most often found absent.</p></div>
+</div>
+
+<h2 id="nafdac-requires">What NAFDAC requires on signal detection</h2>
+<p>NAFDAC's pharmacovigilance framework requires the Certificate of Registration Holder to have mechanisms in place for signal detection and investigation. The specific expectations are unusually concrete for a regulatory instrument, and they are worth reading as a build specification. Our guide to <a href="/resources/nafdac-pharmacovigilance-requirements.html">NAFDAC pharmacovigilance requirements</a> covers the surrounding obligations chapter by chapter.</p>
+<p>The holder is expected to:</p>
+<ul>
+  <li>Have a system for detecting and investigating safety issues that may arise at any stage in the life cycle of a product, including during clinical development, manufacturing and the post-market setting, in a timely manner</li>
+  <li>Have written procedures that adequately describe how signal detection is to be performed</li>
+  <li>Clearly identify and document the roles and responsibilities of each person involved in the signal detection process</li>
+  <li>Document the source of the information, the analysis performed and the method used for signal detection</li>
+  <li>Adequately document the actions taken based on the outcome of signal detection activities</li>
+  <li>Send data regarding changes in what is known about the risks and benefits of the product to the Agency, and document that transmission</li>
+  <li>Include review of cumulative cases in safety monitoring activities so that potential safety issues can be assessed comprehensively</li>
+</ul>
+<p>Two of these deserve emphasis because they are where most companies fail an inspection. The requirement to document the method means it is not sufficient to say that the safety team reviews cases &mdash; the method must be written down and followed. And the requirement to review cumulative cases means case-by-case processing, however diligent, does not discharge the obligation.</p>
+<p>Signal detection also connects to the risk management obligation. The holder must establish a pharmacovigilance plan for collecting data relevant to the product's safety profile and for identifying risks from continuous evaluation of safety signals arising both within and outside Nigeria. Signals detected in other markets are therefore in scope for a Nigerian holder. Our breakdown of <a href="/resources/gvp-compliance-nigeria.html">GVP compliance in Nigeria</a> places this within the wider quality system.</p>
+
+<h2 id="how-it-works">How signal detection actually works</h2>
+<p>The process is the same everywhere. What differs by setting is which parts carry the weight.</p>
+<div class="step-grid">
+  <div class="step-card"><div class="step-num">Step 1</div><h4>Data accumulates</h4><p>Cases arrive from spontaneous reports, healthcare professionals, patients, literature, partners, studies and company internal sources such as medical information enquiries and product quality complaints.</p></div>
+  <div class="step-card"><div class="step-num">Step 2</div><h4>Data is made analysable</h4><p>Cases are validated, de-duplicated and coded using a standardised medical terminology so that the same clinical event reported in different words becomes the same data point.</p></div>
+  <div class="step-card"><div class="step-num">Step 3</div><h4>The dataset is screened</h4><p>This is detection proper, and it is where the qualitative and quantitative methods described below are applied.</p></div>
+  <div class="step-card"><div class="step-num">Step 4</div><h4>Candidate signals are validated</h4><p>The team checks whether the apparent association survives a first look: are the cases real, are they duplicates, is the event already described in the product information, is there a plausible alternative explanation?</p></div>
+  <div class="step-card"><div class="step-num">Step 5</div><h4>Validated signals are prioritised</h4><p>Not every signal can be assessed at once. Seriousness, strength of evidence, size of the exposed population and public health impact determine order.</p></div>
+  <div class="step-card"><div class="step-num">Step 6</div><h4>Signals are assessed</h4><p>A structured evaluation of all available evidence, including the case series, the literature, the pharmacology and any epidemiological data.</p></div>
+  <div class="step-card"><div class="step-num">Step 7</div><h4>A decision is taken and recorded</h4><p>Options run from no action with documented reasoning, through further monitoring or study, to product information changes, risk minimisation measures, safety communication or regulatory notification.</p></div>
+  <div class="step-card"><div class="step-num">Step 8</div><h4>The outcome is communicated and closed</h4><p>Data on changes to what is known about the product's risks and benefits goes to the Agency, and the decision trail is retained as evidence.</p></div>
+</div>
+<div class="callout"><strong>The most common structural failure</strong>Step three never happens. Data accumulates, cases are processed and submitted, and nobody ever screens the accumulated set.</div>
+
+<h2 id="methods">The two families of signal detection method</h2>
+<h3>Qualitative methods: clinical review</h3>
+<p>Qualitative detection means trained people reading cases and thinking about them. It is the older approach, and in small datasets it remains the more reliable one. Practical qualitative techniques include:</p>
+<ul>
+  <li><strong>Individual case review</strong> for events that are serious, unlabelled, or intrinsically alarming regardless of frequency</li>
+  <li><strong>Designated or important medical event lists</strong>, which flag events that warrant attention on a single occurrence because their clinical significance is high, such as agranulocytosis, Stevens-Johnson syndrome, hepatic failure, anaphylaxis, aplastic anaemia or torsade de pointes</li>
+  <li><strong>Case series review</strong>, reading all cases of a given event for one product together and looking for a consistent clinical picture</li>
+  <li><strong>Temporal pattern review</strong>, asking whether onset consistently follows exposure at a similar interval</li>
+  <li><strong>Dechallenge and rechallenge review</strong>, where the event resolved on stopping and recurred on restarting, which is among the strongest single-case evidence available</li>
+  <li><strong>Periodic cumulative review</strong> at a defined frequency, documented whether or not anything is found</li>
+  <li><strong>Literature surveillance</strong> for published case reports and studies involving the company's products</li>
+</ul>
+<p>A single well-documented case with positive dechallenge and rechallenge, a plausible mechanism and no alternative explanation can constitute a signal on its own. No statistical method is required, and none would detect it.</p>
+
+<h3>Quantitative methods: disproportionality analysis</h3>
+<p>Quantitative detection asks a statistical question: is this product and this event reported together more often than we would expect, given how often each is reported overall in the database? The common measures:</p>
+<div class="table-wrap">
+<table>
+<thead><tr><th>Measure</th><th>What it is</th><th>Practical note</th></tr></thead>
+<tbody>
+<tr><td>PRR &mdash; Proportional Reporting Ratio</td><td>Compares the proportion of reports for an event among reports for the product against the same proportion in the rest of the database.</td><td>Simple and widely used. Unstable when case counts are small.</td></tr>
+<tr><td>ROR &mdash; Reporting Odds Ratio</td><td>An odds ratio calculated on the same two-by-two table of reports.</td><td>Behaves better than PRR in some stratified analyses. Still unstable at low counts.</td></tr>
+<tr><td>IC &mdash; Information Component</td><td>A Bayesian measure used by the Uppsala Monitoring Centre, derived from a Bayesian Confidence Propagation Neural Network, in routine use for screening the WHO global database since 1998.</td><td>The lower bound of its credibility interval, IC025, shrinks toward zero when data is sparse, which makes it conservative and therefore safer with small datasets.</td></tr>
+<tr><td>EBGM &mdash; Empirical Bayes Geometric Mean</td><td>A Bayesian shrinkage estimator that pulls unstable estimates from small cell counts toward the null.</td><td>Designed to reduce false positives from low counts.</td></tr>
+</tbody>
+</table>
+</div>
+<div class="callout"><strong>The shared limitation</strong>All of these answer the same question. They measure disproportionate reporting, not disproportionate risk. A measure can be elevated because of stimulated reporting after media attention, because of a notoriety effect following a regulatory action, because of channelling of a product to sicker patients, or because a competitor product is under-reported. Disproportionality is a screening tool, not evidence of causation.</div>
+
+<h3>Beyond disproportionality</h3>
+<p>The Uppsala Monitoring Centre moved past pure disproportionality in 2014, adopting vigiRank as its core statistical signal detection method for analysis of the WHO global database. vigiRank is a predictive model that accounts not only for disproportionate reporting patterns but also for the completeness of the reports, their recency, their geographic spread, and whether case narratives are available. Retrospective evaluation against historical European Medicines Agency signals indicated substantial improvement over disproportionality analysis alone.</p>
+<p>The direction of travel is instructive for Nigeria. The field's own leading practitioners concluded that how good the reports are matters as much as how many there are.</p>
+
+<h2 id="underperform">Why standard statistical methods underperform on Nigerian data</h2>
+<p>International pharmacovigilance training teaches disproportionality analysis as the default. Applied to a Nigerian company's safety database, or to a single product's Nigerian case series, it will usually produce nothing, and the nothing will be misread as reassurance. There are five reasons, and they compound.</p>
+<div class="step-grid">
+  <div class="step-card"><div class="step-num">Reason 1</div><h4>The denominators are too small</h4><p>Disproportionality methods need a large background database to compute an expected value against. A company with a few dozen Nigerian cases across its portfolio has no meaningful background. Every measure will be statistically unstable, confidence and credibility intervals will be wide, and conservative measures such as IC025 will stay below the signalling threshold almost regardless of what is happening clinically.</p></div>
+  <div class="step-card"><div class="step-num">Reason 2</div><h4>Underreporting is severe and non-random</h4><p>Underreporting is the principal constraint on pharmacovigilance in every country, and it is more pronounced where reporting infrastructure is newer. An analysis of adverse event reporting before and after the Med Safety App was introduced recorded reports in the national system rising from 2,051 in the baseline period to 18,995 after deployment, with paper-based reporting falling from 98.4 percent to 15.7 percent and direct consumer reporting rising from 2.7 percent to 17.6 percent. The problem for statistics is not the volume alone. It is that underreporting is selective: serious events are more likely to be reported than mild ones, novel products more than familiar ones, hospital events more than community ones. Selective under-ascertainment biases every disproportionality measure in ways that cannot be corrected after the fact.</p></div>
+  <div class="step-card"><div class="step-num">Reason 3</div><h4>Missing data degrades every calculation</h4><p>A case without an outcome, without dates, without a batch number, or without concomitant medications can still be counted, but it cannot be interpreted. Where a large proportion of the dataset is incomplete, the statistical signal is diluted by cases that contribute a row without contributing information.</p></div>
+  <div class="step-card"><div class="step-num">Reason 4</div><h4>Coding inconsistency fragments the signal</h4><p>Disproportionality depends on the same clinical event being recorded as the same data point. Where cases are captured in free text, or coded inconsistently across staff, twenty cases of one reaction can appear in the database as twenty different reactions with a count of one each. Nothing will ever reach a signalling threshold. This is a solvable problem, and solving it is prerequisite to any quantitative work.</p></div>
+  <div class="step-card"><div class="step-num">Reason 5</div><h4>No reliable exposure denominator</h4><p>Reporting rates are not incidence rates, anywhere. But the gap is wider where distribution data, prescription data and consumption data are harder to obtain, and where informal distribution channels and self-medication mean that recorded sales volumes understate actual exposure.</p></div>
+</div>
+<p>The conclusion is not that quantitative methods are useless in Nigeria. It is that a company which builds its signal detection procedure around disproportionality analysis alone has built a procedure that will systematically fail to detect, and will document that failure as an absence of signals.</p>
+
+<h2 id="nigerian-setting">What signal detection should look like in the Nigerian setting</h2>
+<h3>Borrow global context through VigiLyze</h3>
+<p>This is the single highest-value and least-used option available to Nigerian pharmacovigilance. Nigeria has been a member of the WHO Programme for International Drug Monitoring since 2004, and the National Pharmacovigilance Centre manages national reports in VigiFlow and shares them with VigiBase, the WHO global database, which holds adverse event reports contributed by more than 180 member organisations. VigiLyze, the Uppsala Monitoring Centre's signal management application, is provided free of charge to national centres in all member countries of the Programme.</p>
+<p>What VigiLyze does that a national dataset cannot do alone is place Nigerian data in global context. It allows disproportionality to be recalculated for any chosen country or group of countries, gives access to post-marketing safety information for products that are new to the Nigerian market but already in use elsewhere, and lets a centre with a small dataset see whether the pattern it is looking at is visible globally.</p>
+<p>The practical implication for a company is not that it can log in, because the tool is provided to national centres rather than to industry. It is that the regulator has the global picture, and the company's Nigerian assessment should be constructed to be intelligible against that picture. That means coding to a standardised terminology, producing complete cases, and framing internal signal assessments in terms a regulator with global comparative data will recognise.</p>
+
+<h3>Lead with clinical review, support with statistics</h3>
+<p>In a small dataset, invert the usual order. Build the procedure around structured cumulative clinical review at a defined frequency, and use quantitative measures as a supporting check rather than the primary screen. A workable design for a mid-sized Nigerian portfolio:</p>
+<ul class="card-list">
+  <li>Immediate individual review for any case involving an event on a designated medical event list, regardless of count</li>
+  <li>Immediate review for any serious unlabelled event, regardless of count</li>
+  <li>Monthly cumulative review by product of all cases received, reading the case series rather than counting it</li>
+  <li>Quarterly structured signal detection meeting with a documented agenda, attendee list, method statement and minuted outcome, including a positive record where no signal was identified</li>
+  <li>Standing review of safety actions taken by other regulators on the same molecule, since NAFDAC's framework brings signals arising outside Nigeria into scope</li>
+  <li>Literature surveillance at a defined frequency, with the search strategy documented</li>
+  <li>Quantitative screening applied where and only where case counts make it meaningful, with the threshold and method stated in the procedure</li>
+</ul>
+<div class="callout"><strong>Document the null result</strong>Documenting a review that found nothing is not a formality. It is the evidence that the obligation was discharged, and its absence is indistinguishable from never having looked.</div>
+
+<h3>Watch for the signals Nigeria has that other markets do not</h3>
+<p>Signal detection in Nigeria has to look for a category of signal that European and North American procedures largely do not contemplate.</p>
+<div class="step-grid">
+  <div class="step-card"><div class="step-num">Nigeria-specific</div><h4>Therapeutic ineffectiveness clusters</h4><p>A run of reports of lack of efficacy for one product, particularly clustered by batch, geography or distributor, may not be a pharmacological signal at all. It may indicate a quality defect, a degraded product, or a substandard or falsified product in the supply chain. A procedure that screens only for adverse reactions will not surface it, because lack of effect is not an adverse reaction in the conventional sense.</p></div>
+  <div class="step-card"><div class="step-num">Nigeria-specific</div><h4>Batch and lot clustering</h4><p>Any event pattern that concentrates in one batch is a quality question first and a safety question second. This is why batch or lot number is the single most valuable field to chase in Nigerian follow up.</p></div>
+  <div class="step-card"><div class="step-num">Nigeria-specific</div><h4>Storage and distribution effects</h4><p>Heat stability and cold chain integrity vary across a long and fragmented distribution chain. Geographic clustering of events or of ineffectiveness reports deserves attention on that basis.</p></div>
+  <div class="step-card"><div class="step-num">Nigeria-specific</div><h4>Interactions with traditional and herbal preparations</h4><p>Concurrent use is common and frequently undisclosed unless specifically asked about. Follow up that does not ask will not find it, and a signal driven by interaction will present as an unexplained reaction to the conventional product.</p></div>
+  <div class="step-card"><div class="step-num">Nigeria-specific</div><h4>Medication error and product confusion</h4><p>Look-alike and sound-alike naming, informal dispensing and self-medication generate error patterns that are themselves signals under the NAFDAC framework, which treats harm arising from misuse, medication error and off-label use as within the scope of pharmacovigilance.</p></div>
+</div>
+<p>The substandard and falsified product question connects signal detection to NAFDAC's wider post-marketing surveillance framework, and a company that detects such a pattern has reporting obligations in that direction as well. The NAFDAC Guidelines for Post Marketing Surveillance of Medical Products set out that framework.</p>
+
+<h3>Invest in completeness before volume</h3>
+<p>If the field's own leading practitioners concluded that completeness, recency and narrative availability improve signal detection performance, the lesson for a company with a small dataset is direct. Twenty complete, well-coded, followed-up cases with outcomes and batch numbers are worth more for detection than two hundred fragmentary ones. That makes follow up a signal detection activity, not merely a case processing one. Our walkthrough of <a href="/resources/what-happens-after-reporting-adverse-event-nafdac.html">what happens after you report an adverse event to NAFDAC</a> covers why follow up determines how far a case travels.</p>
+
+<h2 id="management">Signal management after detection</h2>
+<p>Detection is one stage of a longer process, and the regulatory obligation attaches to the whole of it.</p>
+<div class="step-grid">
+  <div class="step-card"><div class="step-num">1</div><h4>Validation</h4><p>Confirm the candidate is real. Check for duplicates, confirm the cases are valid, check whether the event is already described in the product information, and consider alternative explanations. Record the decision and the reasoning.</p></div>
+  <div class="step-card"><div class="step-num">2</div><h4>Prioritisation</h4><p>Rank validated signals by seriousness, strength of evidence, size of the exposed population, preventability and public health impact. A documented prioritisation rule protects the team from the accusation that an important signal was left in a queue for arbitrary reasons.</p></div>
+  <div class="step-card"><div class="step-num">3</div><h4>Assessment</h4><p>Evaluate the full evidence base: the case series, the literature, the pharmacology, biological plausibility, any epidemiological data, and experience with the same molecule elsewhere.</p></div>
+  <div class="step-card"><div class="step-num">4</div><h4>Recommendation and action</h4><p>Options include no action with documented reasoning, continued monitoring, targeted follow up, a post-authorisation safety study, product information changes, additional risk minimisation measures, or safety communication.</p></div>
+  <div class="step-card"><div class="step-num">5</div><h4>Communication</h4><p>Data on changes to what is known about the risks and benefits of the product goes to NAFDAC, and communication to healthcare professionals or the public is handled under the Agency's framework.</p></div>
+  <div class="step-card"><div class="step-num">6</div><h4>Closure and record</h4><p>The signal is closed with a documented outcome, and the record is retained. An inspector will ask what signals you identified in the last two years and what you did about them.</p></div>
+</div>
+
+<h2 id="failures">Common signal detection failures</h2>
+<ul class="card-list">
+  <li><strong>No written procedure.</strong> The team reviews cases, but nothing describes how, by whom, at what frequency, or against what criteria. NAFDAC's framework requires the method to be documented.</li>
+  <li><strong>Case processing mistaken for signal detection.</strong> Every case handled correctly, none ever reviewed in aggregate.</li>
+  <li><strong>No record where nothing was found.</strong> Reviews happen but are not minuted, so there is no evidence they happened.</li>
+  <li><strong>Free-text capture.</strong> Uncoded data cannot be screened, quantitatively or systematically.</li>
+  <li><strong>Only looking at Nigerian data.</strong> The obligation extends to evaluating safety signals arising outside Nigeria for the same product.</li>
+  <li><strong>Statistical thresholds copied from a global procedure.</strong> Thresholds calibrated for a database of millions will never fire on a database of hundreds, and the procedure will report an absence of signals indefinitely.</li>
+  <li><strong>No escalation path.</strong> A signal is identified and there is no defined route to management, to the QPPV, or to the Agency.</li>
+  <li><strong>Ignoring lack-of-efficacy reports.</strong> In the Nigerian context these can be the earliest indication of a quality or supply chain problem.</li>
+</ul>
+
+<h2 id="checklist">Signal detection readiness checklist</h2>
+<div class="checklist-section">
+  <div class="check-group">
+    <h4>Procedure and governance</h4>
+    <ul class="check-list">
+      <li>Written signal detection procedure in place, controlled and version managed</li>
+      <li>Roles and responsibilities for each step identified and documented</li>
+      <li>Review frequency defined and adhered to</li>
+      <li>Escalation route to management, the QPPV and the Agency defined</li>
+      <li>Designated medical event list adopted and maintained</li>
+      <li>Prioritisation criteria documented</li>
+    </ul>
+  </div>
+  <div class="check-group">
+    <h4>Data quality</h4>
+    <ul class="check-list">
+      <li>Cases coded using a standardised medical terminology</li>
+      <li>Duplicate detection performed routinely</li>
+      <li>Follow up pursued for outcome, dates, batch or lot number and concomitant medicines</li>
+      <li>Completeness of the case dataset measured, not assumed</li>
+      <li>Safety database capable of producing a structured export</li>
+    </ul>
+  </div>
+  <div class="check-group">
+    <h4>Detection activity</h4>
+    <ul class="check-list">
+      <li>Cumulative case review performed by product at the defined frequency</li>
+      <li>Reviews minuted, including reviews that identified no signal</li>
+      <li>Method and data sources stated in each review record</li>
+      <li>Literature surveillance performed with a documented search strategy</li>
+      <li>Safety actions taken by other regulators on the same molecule monitored</li>
+      <li>Lack of efficacy and batch-clustered reports screened separately</li>
+      <li>Quantitative screening applied where case counts make it meaningful, with stated thresholds</li>
+    </ul>
+  </div>
+  <div class="check-group">
+    <h4>Outcome and evidence</h4>
+    <ul class="check-list">
+      <li>Validation decisions documented with reasoning</li>
+      <li>Assessments retained with the evidence considered</li>
+      <li>Actions taken documented and tracked to completion</li>
+      <li>Transmission of relevant information to NAFDAC recorded</li>
+      <li>Signal records retained and retrievable for inspection</li>
+    </ul>
+  </div>
+  <div class="checklist-cta">
+    <p>Pair this with the NAFDAC QPPV Compliance Checklist for a complete view of your pharmacovigilance system.</p>
+    <a class="btn" href="/public/downloads/MedNova-NAFDAC-QPPV-Compliance-Checklist.pdf">Download the Checklist PDF</a>
+  </div>
+</div>
+
+<h2 id="takeaways">Key takeaways</h2>
+<ul class="card-list">
+  <li>A signal is a hypothesis with enough support to justify verification &mdash; not a finding and not an accusation.</li>
+  <li>Signal detection is a named NAFDAC requirement with documented procedures, roles, methods, actions and cumulative case review, not an optional sign of a mature department.</li>
+  <li>Case processing is not signal detection. Data that is never reviewed in aggregate produces no knowledge.</li>
+  <li>Disproportionality methods underperform on small, incomplete, inconsistently coded national datasets, and an absence of statistical signals in such a dataset means very little.</li>
+  <li>In the Nigerian setting, structured clinical review of complete, well-coded cumulative cases is the primary method, with statistics as a supporting check.</li>
+  <li>Lack-of-efficacy and batch-clustered reporting deserve separate screening, because in Nigeria they can be the earliest indication of a product quality or supply chain problem.</li>
+</ul>
+
+<h2 id="how-mednova-helps">How MedNova supports signal detection and safety monitoring</h2>
+<p>MedNova Lifesciences provides pharmacovigilance services in Nigeria covering signal detection procedure design and implementation, cumulative case review, literature surveillance, risk management planning, ICSR intake and case processing, aggregate safety reporting, inspection readiness and CAPA management, and local QPPV representation for Marketing Authorisation Holders. On the regulatory side we provide regulatory affairs support in Nigeria spanning NAFDAC product registration, dossier and registration preparation, variations, renewals and lifecycle management, alongside clinical development services and training and consulting for pharmacovigilance and regulatory teams.</p>
+<p>Related reading: <a href="/resources/nafdac-pharmacovigilance-requirements.html">NAFDAC pharmacovigilance requirements</a>, <a href="/resources/gvp-compliance-nigeria.html">what GVP compliance means in Nigeria</a>, <a href="/resources/ich-vs-nafdac-pharmacovigilance.html">ICH guidelines compared with NAFDAC requirements</a>, <a href="/resources/what-happens-after-reporting-adverse-event-nafdac.html">what happens after you report an adverse event to NAFDAC</a>, the <a href="/resources/pv-readiness-guide.html">PV Readiness Guide</a> and the <a href="/resources/regulatory-affairs-primer.html">regulatory affairs primer</a>. For our full scope of work, see the <a href="/capability-statement.html">MedNova capability statement</a> or browse the <a href="/resources/">resources library</a>.</p>
+<p>Next step: download the NAFDAC QPPV Compliance Checklist, or contact our team to discuss a signal detection procedure built for your portfolio.</p>
+
+<div class="cta-box">
+<h3>Need a signal detection procedure built for your portfolio?</h3>
+<p>MedNova Lifesciences designs and implements signal detection procedures that fit Nigerian dataset realities, and supports the wider pharmacovigilance system behind them in Nigeria and across Africa.</p>
+<a class="btn" href="/contact/">Contact MedNova Lifesciences</a>
+</div>
+
+<div class="cta-box">
+<h3>Related resources</h3>
+<div class="related-list">
+  <a href="/resources/nafdac-pharmacovigilance-requirements.html">NAFDAC Pharmacovigilance Requirements</a>
+  <a href="/resources/gvp-compliance-nigeria.html">What Is GVP Compliance?</a>
+  <a href="/resources/ich-vs-nafdac-pharmacovigilance.html">ICH Guidelines vs NAFDAC Requirements</a>
+  <a href="/resources/what-happens-after-reporting-adverse-event-nafdac.html">What Happens After You Report an Adverse Event to NAFDAC?</a>
+  <a href="/pv.html">Pharmacovigilance Services</a>
+</div>
+</div>
+
+<h2 id="faq">Frequently asked questions</h2>
+
+<details class="faq-item">
+  <summary>What is signal detection in pharmacovigilance?</summary>
+  <p>Signal detection is the process of reviewing accumulated safety data to identify information suggesting a new potentially causal association between a medicine and an adverse event, or a new aspect of a known association, at a level of likelihood that justifies further investigation.</p>
+</details>
+<details class="faq-item">
+  <summary>What is a safety signal?</summary>
+  <p>A safety signal is information arising from one or more sources that suggests a new potentially causal association, or a new aspect of a known association, between a medicine and an event, judged to be of sufficient likelihood to justify verification. The definition is set out in the report of CIOMS Working Group VIII.</p>
+</details>
+<details class="faq-item">
+  <summary>Does NAFDAC require signal detection?</summary>
+  <p>Yes. NAFDAC's pharmacovigilance framework requires Certificate of Registration Holders to have mechanisms for detecting and investigating safety issues at any stage of a product's life cycle, supported by written procedures describing how signal detection is performed, documented roles, documented sources and methods, documented actions on the outcome, and review of cumulative cases.</p>
+</details>
+<details class="faq-item">
+  <summary>What is the difference between a signal and an adverse drug reaction?</summary>
+  <p>An adverse drug reaction concerns one patient and involves a suspected causal relationship in that case. A signal concerns a product and arises from accumulated information suggesting a new or changed causal association that warrants investigation. One case can occasionally constitute a signal, but the two are different levels of analysis.</p>
+</details>
+<details class="faq-item">
+  <summary>What methods are used for signal detection?</summary>
+  <p>Two families. Qualitative methods involve trained clinical review of individual cases and case series, designated medical event lists, temporal pattern review and dechallenge and rechallenge assessment. Quantitative methods use disproportionality measures such as the Proportional Reporting Ratio, the Reporting Odds Ratio, the Information Component and the Empirical Bayes Geometric Mean.</p>
+</details>
+<details class="faq-item">
+  <summary>What is disproportionality analysis?</summary>
+  <p>A statistical screen asking whether a product and an event are reported together more often than expected given how often each appears in the database overall. It measures disproportionate reporting, not disproportionate risk, and an elevated measure is a reason to look further rather than evidence of causation.</p>
+</details>
+<details class="faq-item">
+  <summary>Why do statistical signal detection methods struggle with Nigerian data?</summary>
+  <p>Because they depend on large background datasets. Small case counts make every measure statistically unstable, severe and selective underreporting biases the calculations, incomplete cases dilute the analysis, inconsistent coding fragments what should be a single data point, and reliable exposure denominators are difficult to obtain. A procedure built on disproportionality alone will systematically fail to detect and will record that failure as an absence of signals.</p>
+</details>
+<details class="faq-item">
+  <summary>What should Nigerian companies do instead?</summary>
+  <p>Lead with structured cumulative clinical review at a defined frequency, use a designated medical event list so that clinically significant events trigger review on a single occurrence, invest in case completeness and consistent coding, monitor safety actions taken on the same molecule in other markets, screen separately for lack of efficacy and batch clustered reports, and apply quantitative screening only where case counts make it meaningful.</p>
+</details>
+<details class="faq-item">
+  <summary>What is VigiBase and how does Nigeria contribute to it?</summary>
+  <p>VigiBase is the World Health Organization global database of individual case safety reports, holding reports contributed by more than 180 member organisations of the WHO Programme for International Drug Monitoring. Nigeria has been a member since 2004, and the National Pharmacovigilance Centre manages national reports in VigiFlow and shares them with VigiBase.</p>
+</details>
+<details class="faq-item">
+  <summary>What is VigiLyze?</summary>
+  <p>VigiLyze is the Uppsala Monitoring Centre's signal management application, provided free of charge to national pharmacovigilance centres in all member countries of the WHO Programme for International Drug Monitoring. It places national data in global context, allows disproportionality to be recalculated for any chosen country or group of countries, and gives access to safety information on products already in use elsewhere.</p>
+</details>
+<details class="faq-item">
+  <summary>How often should signal detection be performed?</summary>
+  <p>NAFDAC requires detection to be timely and the frequency to be described in the company's written procedure rather than setting a universal interval. A common structure is immediate review for designated medical events and serious unlabelled events, monthly cumulative review by product, and a quarterly documented signal detection meeting.</p>
+</details>
+<details class="faq-item">
+  <summary>Does a single adverse event report ever constitute a signal?</summary>
+  <p>Yes. A single well documented case can constitute a signal where the event is intrinsically significant, where there is positive dechallenge and rechallenge, where a plausible mechanism exists and where alternative explanations have been excluded. No statistical method would detect such a case, which is why qualitative review cannot be dispensed with.</p>
+</details>
+
+<h2 id="references">References</h2>
+<ol class="refs-list">
+  <li>National Agency for Food and Drug Administration and Control. NAFDAC Good Pharmacovigilance Practice Guidelines (Doc. Ref. PV/PMS-GDL-017-01). <a href="https://www.nafdac.gov.ng/wp-content/uploads/Files/Resources/Guidelines/PVG_GUIDELINES/NAFDAC-Guidelines-on-Good-Pharmacovigilance-2021.pdf" target="_blank" rel="noopener noreferrer">https://www.nafdac.gov.ng/wp-content/uploads/Files/Resources/Guidelines/PVG_GUIDELINES/NAFDAC-Guidelines-on-Good-Pharmacovigilance-2021.pdf</a></li>
+  <li>National Agency for Food and Drug Administration and Control. Good Pharmacovigilance Practice Regulations, 2021.</li>
+  <li>National Agency for Food and Drug Administration and Control. Guidelines for Post Marketing Surveillance of Medical Products in Nigeria.</li>
+  <li>National Agency for Food and Drug Administration and Control. Pharmacovigilance and Post Market Surveillance Guidelines index. Use this page to confirm the current edition of any NAFDAC document referenced above.</li>
+  <li>Council for International Organizations of Medical Sciences. Practical Aspects of Signal Detection in Pharmacovigilance: Report of CIOMS Working Group VIII, Geneva, 2010.</li>
+  <li>Council for International Organizations of Medical Sciences. Working Group VIII, Signal Detection.</li>
+  <li>Uppsala Monitoring Centre. VigiLyze: signal management and global context for national pharmacovigilance centres.</li>
+  <li>Uppsala Monitoring Centre. Operating the WHO Programme for International Drug Monitoring.</li>
+  <li>Caster O, and colleagues. vigiRank for statistical signal detection in pharmacovigilance: first results from prospective real-world use. PubMed Central PMC5575476.</li>
+  <li>Lindquist M, and colleagues. Use of triage strategies in the WHO signal-detection process. PubMed record 17604420.</li>
+  <li>Trends in Adverse Event Reporting Before and After the Introduction of the Med Safety App in Nigeria. Pharmaceutical Medicine, 2024. <a href="https://pubmed.ncbi.nlm.nih.gov/38705932/" target="_blank" rel="noopener noreferrer">PubMed record 38705932</a></li>
+  <li>Practical applications of regulatory requirements for signal detection and communications in pharmacovigilance. PubMed Central PMC7160767.</li>
+  <li>MedNova Lifesciences. Pharmacovigilance services, Nigeria and Africa. <a href="/pv.html">mednovalife.com/pv.html</a></li>
+  <li>MedNova Lifesciences. Regulatory services, Nigeria and Africa. <a href="/regulatory.html">mednovalife.com/regulatory.html</a></li>
+</ol>
+
+</article></div></section>
+</main>
+<footer><div class="wrap">© 2026 MedNova Lifesciences | Lagos, Nigeria — <a href="/llms.txt">llms.txt</a></div></footer>
+</body>
+</html>
