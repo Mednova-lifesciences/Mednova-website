@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MedNova Verify — Medicine Verification &amp; Post-Market Safety Intelligence | MedNova Lifesciences</title>
+<meta name="description" content="MedNova Verify is a medicine-verification and post-market surveillance platform for Nigeria, connecting patients, healthcare professionals, pharmacies, hospitals, manufacturers and safety teams.">
+<meta name="theme-color" content="#0f3d2e">
+<link rel="canonical" href="https://mednovalife.com/verify">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="manifest" href="/public/site.webmanifest">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta property="og:title" content="MedNova Verify — Medicine Verification for Nigeria">
+<meta property="og:description" content="Verify product registration information, report suspected falsification or quality problems, and help identify emerging medicine-safety risks.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://mednovalife.com/verify">
+<meta property="og:image" content="https://mednovalife.com/public/images/image.webp">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="/public/css/site-primary-nav.css">
+<script src="/public/js/site-primary-nav.js" defer></script>
+<style>
+  :root{
+    --ink:#14181B;
+    --ink-2:#191F1B;
+    --paper:#F6F5F1;
+    --moss:#3F6B3A;
+    --teal:#1E7F76;
+    --teal-lift:#7FCFC4;
+    --amber:#C9975F;
+    --line:#2B322D;
+    --grey:#8A9186;
+    --grey-2:#C7CCC1;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{
+    background:var(--ink); color:var(--grey-2);
+    font-family:'IBM Plex Sans','Segoe UI',Roboto,Arial,sans-serif;
+    line-height:1.6; -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;}
+
+  .topline{display:flex; align-items:center; justify-content:space-between; gap:24px; padding:26px 44px;}
+  .brand{display:flex; align-items:center; gap:10px; text-decoration:none;}
+  .brand-mark{display:block;}
+  .brand-name{font-family:'Newsreader',Georgia,serif; font-size:19px; font-weight:600; color:var(--paper);}
+
+  .breadcrumb{display:flex; align-items:center; gap:8px; padding:0 44px; margin-bottom:8px;}
+  .breadcrumb a{font-size:12.5px; color:#8A9186; text-decoration:none;}
+  .breadcrumb a:hover{color:#fff;}
+  .breadcrumb span{font-size:12.5px; color:#4E544A;}
+  .breadcrumb .crumb-static{color:#8A9186;}
+
+  .wrap{max-width:1000px; margin:0 auto; padding:0 44px;}
+  .eyebrow{
+    font-family:'IBM Plex Mono',Consolas,monospace; font-size:12px;
+    letter-spacing:0.14em; text-transform:uppercase; color:#8FA98A; margin-bottom:16px;
+  }
+  .eyebrow.amber{color:var(--amber);}
+
+  .hero{padding:48px 0 12px;}
+  .hero h1{
+    font-family:'Newsreader',Georgia,serif; font-weight:500;
+    font-size:clamp(30px,5.6vw,46px); line-height:1.14; color:var(--paper);
+    margin-bottom:18px; text-wrap:balance;
+  }
+  .hero .lede{font-size:17px; color:var(--grey-2); max-width:60ch; margin-bottom:14px;}
+  .hero p{max-width:64ch; margin-bottom:14px;}
+
+  .notice{
+    border:1px solid rgba(201,151,95,0.4); background:rgba(201,151,95,0.06);
+    border-radius:6px; padding:20px 24px; margin:36px 0 0;
+  }
+  .notice h2{
+    font-family:'IBM Plex Sans',sans-serif; font-size:15px; font-weight:600;
+    color:var(--paper); margin-bottom:8px;
+  }
+  .notice p{font-size:14.5px; max-width:66ch; margin-bottom:10px;}
+  .notice p:last-child{margin-bottom:0;}
+
+  .actions{display:flex; flex-wrap:wrap; gap:14px; margin-top:26px;}
+  .btn{
+    display:inline-block; padding:12px 22px; border-radius:4px; font-size:14px;
+    font-weight:500; text-decoration:none; border:1px solid var(--line);
+  }
+  .btn.primary{background:var(--teal); border-color:var(--teal); color:#fff;}
+  .btn.primary:hover{background:#259187;}
+  .btn.ghost{color:var(--grey-2);}
+  .btn.ghost:hover{color:#fff; border-color:var(--grey);}
+
+  section.block{padding:56px 0 0;}
+  h2.section-title{
+    font-family:'Newsreader',Georgia,serif; font-weight:500; font-size:26px;
+    color:var(--paper); margin-bottom:12px; text-wrap:balance;
+  }
+  section.block > .wrap > p{max-width:64ch; margin-bottom:14px;}
+
+  .routes{
+    display:grid; grid-template-columns:repeat(auto-fit,minmax(248px,1fr));
+    gap:1px; background:var(--line); border:1px solid var(--line);
+    margin-top:26px;
+  }
+  .route{background:var(--ink-2); padding:18px 20px;}
+  .route h3{
+    font-family:'IBM Plex Sans',sans-serif; font-size:14.5px; font-weight:600;
+    color:var(--paper); margin-bottom:5px;
+  }
+  .route p{font-size:13.5px; color:var(--grey-2); margin-bottom:10px;}
+  .route code{
+    font-family:'IBM Plex Mono',Consolas,monospace; font-size:11.5px;
+    color:var(--teal-lift); display:block; margin-bottom:8px;
+  }
+  .route .state{
+    font-family:'IBM Plex Mono',Consolas,monospace; font-size:10px;
+    letter-spacing:0.1em; text-transform:uppercase; color:var(--grey);
+    border:1px solid var(--line); border-radius:2px; padding:3px 7px;
+    display:inline-block;
+  }
+
+  .statuses{margin-top:24px; border-top:1px solid var(--line);}
+  .status{display:grid; gap:4px 20px; padding:14px 0; border-bottom:1px solid #222925;}
+  @media (min-width:680px){ .status{grid-template-columns:230px 1fr;} }
+  .status dt{
+    font-family:'IBM Plex Mono',Consolas,monospace; font-size:12px;
+    color:var(--paper); letter-spacing:0.02em;
+  }
+  .status dd{margin:0; font-size:14px; color:var(--grey-2); max-width:58ch;}
+
+  footer{
+    margin-top:72px; border-top:1px solid var(--line);
+    padding:26px 44px 56px; color:var(--grey); font-size:13px;
+  }
+  footer a{color:var(--grey-2); text-decoration:none;}
+  footer a:hover{color:#fff;}
+  .footer-inner{max-width:1000px; margin:0 auto; display:flex; flex-wrap:wrap; gap:10px 26px;}
+
+  @media (max-width:860px){
+    .topline,.breadcrumb,.wrap,footer{padding-left:20px; padding-right:20px;}
+  }
+</style>
+</head>
+<body data-theme="dark">
+
+<div class="topline">
+  <a class="brand" href="/" aria-label="MedNova Lifesciences home">
+    <img class="brand-mark" src="/public/images/image.png" alt="MedNova Lifesciences logo" width="34" height="34" decoding="async" fetchpriority="high">
+    <span class="brand-name">MedNova Lifesciences</span>
+  </a>
+  <nav class="mn-navlinks" aria-label="Primary">
+    <a href="/">Home</a>
+    <a href="/about/">About</a>
+    <div class="mn-navgroup">
+      <button class="mn-navgroup__btn" type="button" aria-expanded="false" aria-controls="mn-menu-services">Services</button>
+      <div class="mn-navgroup__menu" id="mn-menu-services">
+        <a href="/services/">All Services</a>
+        <div class="mn-navgroup__sep"></div>
+        <a href="/services/regulatory-affairs.html">Regulatory Affairs</a>
+        <a href="/services/clinical-development.html">Clinical Development</a>
+        <a href="/services/pharmacovigilance.html">Pharmacovigilance</a>
+        <a href="/services/regulatory-intelligence.html">Regulatory Intelligence</a>
+        <a href="/services/nafdac-product-registration.html">NAFDAC Product Registration</a>
+      </div>
+    </div>
+    <div class="mn-navgroup">
+      <button class="mn-navgroup__btn" type="button" aria-expanded="false" aria-controls="mn-menu-technology">Technology</button>
+      <div class="mn-navgroup__menu" id="mn-menu-technology">
+        <div class="mn-navgroup__head">MedNova platforms</div>
+        <a href="/verify">MedNova Verify<span class="mn-navgroup__sub">Medicine verification &amp; surveillance</span></a>
+        <a href="/safetycore.html">MedNova SafetyCore<span class="mn-navgroup__sub">Pharmacovigilance case management</span></a>
+      </div>
+    </div>
+    <a href="/resources/">Resources</a>
+    <a href="/contact/">Contact</a>
+  </nav>
+</div>
+
+<div class="breadcrumb">
+  <a href="/">Home</a><span>/</span><span class="crumb-static">Technology</span><span>/</span><a href="/verify">MedNova Verify</a>
+</div>
+
+<main>
+  <section class="hero">
+    <div class="wrap">
+      <p class="eyebrow">MedNova Verify</p>
+      <h1>Know what you are taking.</h1>
+      <p class="lede">Medicine verification and post-market safety intelligence for Nigeria.</p>
+      <p>Verify product registration information, report suspected falsification or quality problems, and help identify emerging medicine-safety risks — connecting patients, healthcare professionals, pharmacies, hospitals, manufacturers and safety teams on one platform.</p>
+
+      <div class="notice">
+        <h2>This platform is in development</h2>
+        <p>MedNova Verify is being built in stages. This page describes what the platform will do and which parts are coming next; the verification and reporting workflows are not yet open to the public.</p>
+        <p>For pharmacovigilance case management available today, see <a href="/safetycore.html" style="color:var(--teal-lift)">MedNova SafetyCore</a>. To discuss early access as a manufacturer, MAH, pharmacy or hospital, <a href="/contact/" style="color:var(--teal-lift)">talk to us</a>.</p>
+      </div>
+
+      <div class="actions">
+        <a class="btn primary" href="/contact/">Request early access</a>
+        <a class="btn ghost" href="/safetycore.html">Explore MedNova SafetyCore</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="wrap">
+      <p class="eyebrow">What Verify will do</p>
+      <h2 class="section-title">Seven workflows, built in sequence</h2>
+      <p>Each route below is part of the planned platform. They are listed here so the structure is public and stable; each becomes available as its build stage completes.</p>
+
+      <div class="routes">
+        <div class="route">
+          <h3>Verify a Medicine</h3>
+          <code>/verify/check</code>
+          <p>Search by NAFDAC registration number, barcode or QR code to retrieve registration information for a product.</p>
+          <span class="state">In build</span>
+        </div>
+        <div class="route">
+          <h3>Report a Safety Issue</h3>
+          <code>/verify/report-safety</code>
+          <p>Report an adverse drug reaction or other medicine safety concern, as a patient, carer or healthcare professional.</p>
+          <span class="state">Planned</span>
+        </div>
+        <div class="route">
+          <h3>Report Product Quality Issue</h3>
+          <code>/verify/report-quality</code>
+          <p>Report a suspected quality defect — damaged packaging, unexpected appearance, or a product that behaves unusually.</p>
+          <span class="state">Planned</span>
+        </div>
+        <div class="route">
+          <h3>Report Suspected Falsification</h3>
+          <code>/verify/report-falsified</code>
+          <p>Report a product you suspect is falsified, or where pack details do not match the registration record.</p>
+          <span class="state">Planned</span>
+        </div>
+        <div class="route">
+          <h3>For Manufacturers &amp; MAHs</h3>
+          <code>/verify/manufacturers</code>
+          <p>Post-market intelligence on your own products: verification activity, mismatch clusters, batch signals and open alerts.</p>
+          <span class="state">Planned</span>
+        </div>
+        <div class="route">
+          <h3>For Pharmacies &amp; Hospitals</h3>
+          <code>/verify/institutions</code>
+          <p>Institutional verification at the point of dispensing or receipt, with exportable verification history for procurement assurance.</p>
+          <span class="state">Planned</span>
+        </div>
+        <div class="route">
+          <h3>Sign In</h3>
+          <code>/verify/login</code>
+          <p>Role-based access for institutional users, manufacturer teams and MedNova safety and regulatory staff.</p>
+          <span class="state">In build</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="wrap">
+      <p class="eyebrow amber">Important</p>
+      <h2 class="section-title">What a verification result will and will not tell you</h2>
+      <p>MedNova Verify will not describe a medicine as “genuine” on the strength of a registration record alone. Matching a regulatory record and authenticating a physical pack are different things, and the platform reports them separately.</p>
+
+      <dl class="statuses">
+        <div class="status">
+          <dt>Registration Record Found</dt>
+          <dd>Matching registration information exists for the product details supplied. This does not by itself authenticate the individual physical pack in your hand.</dd>
+        </div>
+        <div class="status">
+          <dt>No Matching Record Found</dt>
+          <dd>No registration record matched the details supplied. This may indicate an unregistered product, or a data entry problem.</dd>
+        </div>
+        <div class="status">
+          <dt>Unable to Verify</dt>
+          <dd>The check could not be completed — for example because a data source was unavailable at the time of the request.</dd>
+        </div>
+        <div class="status">
+          <dt>Product Information Mismatch</dt>
+          <dd>A record was found, but one or more details on the pack differ from the registration record. Worth reporting.</dd>
+        </div>
+        <div class="status">
+          <dt>Pack Authentication Confirmed</dt>
+          <dd>Returned only where an authorised pack-authentication mechanism has confirmed that specific pack.</dd>
+        </div>
+      </dl>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <span>&copy; MedNova Lifesciences</span>
+    <a href="/">Home</a>
+    <a href="/services/">Services</a>
+    <a href="/safetycore.html">MedNova SafetyCore</a>
+    <a href="/resources/">Resources</a>
+    <a href="/contact/">Contact</a>
+  </div>
+</footer>
+
+</body>
+</html>

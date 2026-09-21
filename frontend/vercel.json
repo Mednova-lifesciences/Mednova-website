@@ -101,7 +101,8 @@
       "dest": "/$1.html",
       "status": 301
     },
-    {      "src": "^/about/index\\.html$",
+    {
+      "src": "^/about/index\\.html$",
       "dest": "/about/",
       "status": 301
     },
@@ -116,7 +117,6 @@
       "status": 301
     },
     {
-
       "src": "^/src/pages/cro\\.html$",
       "dest": "/cro.html",
       "status": 301
@@ -146,7 +146,8 @@
       "dest": "/qppv-nigeria.html",
       "status": 301
     },
-    {      "src": "^/careers/?$",
+    {
+      "src": "^/careers/?$",
       "dest": "/about/",
       "status": 301
     },
@@ -196,6 +197,15 @@
     {
       "src": "^/services/?$",
       "dest": "/services/index.html"
+    },
+    {
+      "src": "^/verify/?$",
+      "dest": "/verify/index.html"
+    },
+    {
+      "src": "^/verify/index\\.html$",
+      "dest": "/verify",
+      "status": 301
     },
     {
       "src": "^/([^/]+\\.html)$",

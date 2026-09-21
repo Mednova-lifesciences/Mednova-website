@@ -55,19 +55,38 @@
   </script>
   <link rel="stylesheet" href="/public/css/about.min.css">
   <link rel="stylesheet" href="/public/css/breadcrumbs.min.css">
+<link rel="stylesheet" href="/public/css/site-primary-nav.css">
+<script src="/public/js/site-primary-nav.js" defer></script>
 </head>
 <body data-theme="dark">
   <header class="page-topbar" aria-label="Primary">
     <a class="page-brand" href="/">MedNova Lifesciences</a>
     <nav class="page-nav" aria-label="Section navigation">
-      <a href="/">Home</a>
-      <a href="/about/" aria-current="page">About</a>
-      <a href="/services/">Services</a>
-      <a href="/cro.html">CRO</a>
-      <a href="/pv.html">Pharmacovigilance</a>
-      <a href="/regulatory.html">Regulatory Affairs</a>
-      <a href="/contact/">Contact</a>
-    </nav>
+        <a href="/">Home</a>
+        <a href="/about/">About</a>
+        <div class="mn-navgroup">
+          <button class="mn-navgroup__btn" type="button" aria-expanded="false" aria-controls="mn-menu-services">Services</button>
+          <div class="mn-navgroup__menu" id="mn-menu-services">
+            <a href="/services/">All Services</a>
+            <div class="mn-navgroup__sep"></div>
+            <a href="/services/regulatory-affairs.html">Regulatory Affairs</a>
+            <a href="/services/clinical-development.html">Clinical Development</a>
+            <a href="/services/pharmacovigilance.html">Pharmacovigilance</a>
+            <a href="/services/regulatory-intelligence.html">Regulatory Intelligence</a>
+            <a href="/services/nafdac-product-registration.html">NAFDAC Product Registration</a>
+          </div>
+        </div>
+        <div class="mn-navgroup">
+          <button class="mn-navgroup__btn" type="button" aria-expanded="false" aria-controls="mn-menu-technology">Technology</button>
+          <div class="mn-navgroup__menu" id="mn-menu-technology">
+            <div class="mn-navgroup__head">MedNova platforms</div>
+            <a href="/verify">MedNova Verify<span class="mn-navgroup__sub">Medicine verification &amp; surveillance</span></a>
+            <a href="/safetycore.html">MedNova SafetyCore<span class="mn-navgroup__sub">Pharmacovigilance case management</span></a>
+          </div>
+        </div>
+        <a href="/resources/">Resources</a>
+        <a href="/contact/">Contact</a>
+      </nav>
   </header>
   <main class="page-shell">
     <section class="hero">

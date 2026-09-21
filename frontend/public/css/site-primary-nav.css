@@ -1,0 +1,274 @@
+/* MedNova primary navigation — Services + Technology groups.
+   Deliverable 1, MedNova Verify integration brief (§13.1).
+
+   Loaded on every page. The site has 17 historical header variants with their
+   own inline CSS, so everything here is scoped under .mn-nav* and sets its own
+   colours explicitly rather than inheriting — otherwise a light-themed page
+   would render the menu as dark-on-dark. */
+
+/* Secondary in-page section nav.
+   Eight pages used to put their own section anchors (Why MedNova, FAQ,
+   Packages...) in the site header. Unifying the header displaced them, so they
+   live here instead — below the header, above the hero, where a page-level
+   nav belongs anyway. */
+.mn-sectionnav {
+  border-bottom: 1px solid #2B322D;
+  background: rgba(255, 255, 255, 0.015);
+}
+
+.mn-sectionnav__inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 22px;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 11px 44px;
+}
+
+.mn-sectionnav__label {
+  font-family: 'IBM Plex Mono', 'SFMono-Regular', Consolas, monospace;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #6F7970;
+  margin-right: 2px;
+}
+
+.mn-sectionnav a {
+  font-family: 'IBM Plex Sans', 'Segoe UI', Roboto, Arial, sans-serif;
+  font-size: 13px;
+  color: #C7CCC1;
+  text-decoration: none;
+  padding: 3px 0;
+  border-bottom: 1px solid transparent;
+  white-space: nowrap;
+}
+
+.mn-sectionnav a:hover {
+  color: #F6F5F1;
+  border-bottom-color: #C9975F;
+}
+
+.mn-sectionnav a:focus-visible {
+  outline: 2px solid #7FCFC4;
+  outline-offset: 3px;
+}
+
+@media (max-width: 860px) {
+  .mn-sectionnav__inner {
+    padding: 10px 20px;
+    gap: 4px 16px;
+  }
+  .mn-sectionnav__label {
+    width: 100%;
+    margin-bottom: 2px;
+  }
+}
+
+/* Anchor jumps shouldn't land content underneath a sticky header. */
+html {
+  scroll-padding-top: 84px;
+}
+
+/* Standalone link row, for headers that never had one (safetycore.html).
+   Pages with an existing .navlinks / .topline-nav / .page-nav keep their own. */
+.mn-navlinks {
+  display: flex;
+  align-items: center;
+  gap: 26px;
+  font-family: 'IBM Plex Sans', 'Segoe UI', Roboto, Arial, sans-serif;
+  font-size: 13.5px;
+  color: #C7CCC1;
+}
+
+.mn-navlinks > a {
+  color: #C7CCC1;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.mn-navlinks > a:hover {
+  color: #F6F5F1;
+}
+
+/* safetycore.html and /verify don't load the drawer script, so hiding this row
+   on a phone would leave them with no navigation at all. Wrap it instead. */
+@media (max-width: 860px) {
+  .mn-navlinks {
+    flex-wrap: wrap;
+    gap: 8px 18px;
+    font-size: 13px;
+  }
+}
+
+.mn-navgroup {
+  position: relative;
+  display: inline-block;
+}
+
+/* The trigger has to pass for a nav link inside 17 different headers, so it
+   inherits font and colour from whatever .navlinks/.topline-nav/.page-nav sets
+   and only resets the button chrome. */
+.mn-navgroup__btn {
+  font: inherit;
+  color: inherit;
+  letter-spacing: inherit;
+  text-transform: inherit;
+  background: none;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  line-height: inherit;
+}
+
+.mn-navgroup__btn::after {
+  content: "";
+  width: 0;
+  height: 0;
+  border-left: 3.5px solid transparent;
+  border-right: 3.5px solid transparent;
+  border-top: 4px solid currentColor;
+  opacity: 0.65;
+  transition: transform 0.18s ease;
+}
+
+.mn-navgroup__btn[aria-expanded="true"]::after {
+  transform: rotate(180deg);
+}
+
+.mn-navgroup__btn:focus-visible {
+  outline: 2px solid #7FCFC4;
+  outline-offset: 3px;
+}
+
+/* --- the menu ------------------------------------------------------------ */
+
+.mn-navgroup__menu {
+  position: absolute;
+  top: calc(100% + 12px);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  min-width: 232px;
+  padding: 7px;
+  background: #191F1B;
+  border: 1px solid #2B322D;
+  border-radius: 6px;
+  box-shadow: 0 18px 44px rgba(0, 0, 0, 0.42);
+  text-align: left;
+}
+
+/* Bridges the gap between trigger and menu so a diagonal mouse travel to the
+   first item doesn't close it. */
+.mn-navgroup__menu::before {
+  content: "";
+  position: absolute;
+  top: -12px;
+  left: 0;
+  right: 0;
+  height: 12px;
+}
+
+.mn-navgroup__menu a {
+  display: block;
+  padding: 8px 12px;
+  border-radius: 4px;
+  font-family: 'IBM Plex Sans', 'Segoe UI', Roboto, Arial, sans-serif;
+  font-size: 13.5px;
+  font-weight: 400;
+  line-height: 1.4;
+  letter-spacing: 0;
+  text-transform: none;
+  color: #C7CCC1;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.mn-navgroup__menu a:hover,
+.mn-navgroup__menu a:focus-visible {
+  background: rgba(255, 255, 255, 0.06);
+  color: #F6F5F1;
+}
+
+.mn-navgroup__menu a:focus-visible {
+  outline: 2px solid #7FCFC4;
+  outline-offset: -2px;
+}
+
+.mn-navgroup__menu a[aria-current="page"] {
+  color: #F6F5F1;
+  box-shadow: inset 2px 0 0 #C9975F;
+}
+
+/* Product entries carry a one-line descriptor; service entries don't. */
+.mn-navgroup__menu a .mn-navgroup__sub {
+  display: block;
+  font-family: 'IBM Plex Mono', 'SFMono-Regular', Consolas, monospace;
+  font-size: 10.5px;
+  letter-spacing: 0.06em;
+  color: #8A9186;
+  margin-top: 3px;
+}
+
+.mn-navgroup__menu a:hover .mn-navgroup__sub,
+.mn-navgroup__menu a:focus-visible .mn-navgroup__sub {
+  color: #9FB39A;
+}
+
+.mn-navgroup__sep {
+  height: 1px;
+  margin: 6px 8px;
+  background: #2B322D;
+}
+
+.mn-navgroup__head {
+  font-family: 'IBM Plex Mono', 'SFMono-Regular', Consolas, monospace;
+  font-size: 9.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #8A9186;
+  padding: 7px 12px 5px;
+}
+
+/* --- narrow screens ------------------------------------------------------
+   Most pages keep .navlinks as a horizontal row at every width (only 11 of 62
+   hide it below 768-860px), so the groups must stay inline here — making them
+   full-width blocks would push each onto its own line and break the header.
+   The panel is re-anchored to the right edge instead of centred, so it cannot
+   overflow the viewport on a narrow screen. */
+
+@media (max-width: 1023px) {
+  .mn-navgroup__menu {
+    left: auto;
+    right: 0;
+    transform: none;
+    min-width: 0;
+    width: max-content;
+    max-width: calc(100vw - 32px);
+  }
+
+  .mn-navgroup__menu a {
+    white-space: normal;
+  }
+}
+
+/* The unified list carries one or two more items than some headers used to.
+   A no-op where the row isn't a flex container; prevents overflow where it is. */
+@media (max-width: 860px) {
+  .navlinks,
+  .topline-nav,
+  .page-nav {
+    flex-wrap: wrap;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mn-navgroup__btn::after {
+    transition: none;
+  }
+}

@@ -63,6 +63,7 @@
   .breadcrumb a{font-size:12.5px; color:#8A9186; transition:color .15s;}
   .breadcrumb a:hover{color:#fff;}
   .breadcrumb span{font-size:12.5px; color:#4E544A;}
+  .breadcrumb .crumb-static{color:#8A9186;}
 
   /* ---------- hero ---------- */
   .hero{text-align:center; max-width:760px; padding-top:36px; padding-bottom:8px;}
@@ -188,6 +189,8 @@
     .footer-inner{flex-direction:column;}
   }
 </style>
+<link rel="stylesheet" href="/public/css/site-primary-nav.css">
+<script src="/public/js/site-primary-nav.js" defer></script>
 </head>
 <body>
 
@@ -201,9 +204,35 @@
     </a>
     <span class="brand-name">MedNova Lifesciences</span>
   </div>
+  <nav class="mn-navlinks" aria-label="Primary">
+    <a href="/">Home</a>
+    <a href="/about/">About</a>
+    <div class="mn-navgroup">
+      <button class="mn-navgroup__btn" type="button" aria-expanded="false" aria-controls="mn-menu-services">Services</button>
+      <div class="mn-navgroup__menu" id="mn-menu-services">
+        <a href="/services/">All Services</a>
+        <div class="mn-navgroup__sep"></div>
+        <a href="/services/regulatory-affairs.html">Regulatory Affairs</a>
+        <a href="/services/clinical-development.html">Clinical Development</a>
+        <a href="/services/pharmacovigilance.html">Pharmacovigilance</a>
+        <a href="/services/regulatory-intelligence.html">Regulatory Intelligence</a>
+        <a href="/services/nafdac-product-registration.html">NAFDAC Product Registration</a>
+      </div>
+    </div>
+    <div class="mn-navgroup">
+      <button class="mn-navgroup__btn" type="button" aria-expanded="false" aria-controls="mn-menu-technology">Technology</button>
+      <div class="mn-navgroup__menu" id="mn-menu-technology">
+        <div class="mn-navgroup__head">MedNova platforms</div>
+        <a href="/verify">MedNova Verify<span class="mn-navgroup__sub">Medicine verification &amp; surveillance</span></a>
+        <a href="/safetycore.html">MedNova SafetyCore<span class="mn-navgroup__sub">Pharmacovigilance case management</span></a>
+      </div>
+    </div>
+    <a href="/resources/">Resources</a>
+    <a href="/contact/">Contact</a>
+  </nav>
 </div>
 <div class="breadcrumb">
-  <a href="index.html">Home</a><span>/</span><a href="pv.html">Pharmacovigilance</a><span>/</span><a href="safetycore.html">SafetyCore</a>
+  <a href="/">Home</a><span>/</span><span class="crumb-static">Technology</span><span>/</span><a href="/safetycore.html">MedNova SafetyCore</a>
 </div>
 
 <!-- HERO -->

@@ -388,6 +388,8 @@
 }
 </script>
   <link rel="stylesheet" href="/public/css/site-responsive.min.css">
+<link rel="stylesheet" href="/public/css/site-primary-nav.css">
+<script src="/public/js/site-primary-nav.js" defer></script>
 </head>
 <body>
 
@@ -404,12 +406,31 @@
         </picture>
       </a>
       <div class="navlinks">
-        <a href="#services">Services</a>
-        <a href="#why">Why MedNova</a>
-        <a href="#industries">Industries</a>
-        <a href="compliance-checklist.html">Compliance Checklist</a>
-        <a href="capability-statement.html">Capability Statement</a>
-      <a href="/safetycore.html">SafetyCore</a></div>
+        <a href="/">Home</a>
+        <a href="/about/">About</a>
+        <div class="mn-navgroup">
+          <button class="mn-navgroup__btn" type="button" aria-expanded="false" aria-controls="mn-menu-services">Services</button>
+          <div class="mn-navgroup__menu" id="mn-menu-services">
+            <a href="/services/">All Services</a>
+            <div class="mn-navgroup__sep"></div>
+            <a href="/services/regulatory-affairs.html">Regulatory Affairs</a>
+            <a href="/services/clinical-development.html">Clinical Development</a>
+            <a href="/services/pharmacovigilance.html">Pharmacovigilance</a>
+            <a href="/services/regulatory-intelligence.html">Regulatory Intelligence</a>
+            <a href="/services/nafdac-product-registration.html">NAFDAC Product Registration</a>
+          </div>
+        </div>
+        <div class="mn-navgroup">
+          <button class="mn-navgroup__btn" type="button" aria-expanded="false" aria-controls="mn-menu-technology">Technology</button>
+          <div class="mn-navgroup__menu" id="mn-menu-technology">
+            <div class="mn-navgroup__head">MedNova platforms</div>
+            <a href="/verify">MedNova Verify<span class="mn-navgroup__sub">Medicine verification &amp; surveillance</span></a>
+            <a href="/safetycore.html">MedNova SafetyCore<span class="mn-navgroup__sub">Pharmacovigilance case management</span></a>
+          </div>
+        </div>
+        <a href="/resources/">Resources</a>
+        <a href="/contact/">Contact</a>
+      </div>
       <a class="nav-cta" href="#contact">Talk to us</a>
     </nav>
   <button class="site-nav__toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="site-nav-drawer">
@@ -419,6 +440,13 @@
   </button>
   </div>
 </header>
+<nav class="mn-sectionnav" aria-label="On this page">
+  <div class="mn-sectionnav__inner">
+    <span class="mn-sectionnav__label">On this page</span>
+    <a href="#why">Why MedNova</a>
+    <a href="#industries">Industries</a>
+  </div>
+</nav>
 
 <section class="hero">
   <div class="wrap hero-grid">
