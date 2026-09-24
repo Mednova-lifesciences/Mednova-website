@@ -83,9 +83,36 @@
 }
 </script>
 <link rel="stylesheet" href="/public/css/breadcrumbs.css">
+<link rel="stylesheet" href="/public/css/site-primary-nav.css">
+<script src="/public/js/site-primary-nav.js" defer></script>
 </head>
 <body>
-<header class="site-header"><div class="site-header__inner"><nav class="site-nav"><a class="brand" href="/"><img class="brand-mark" src="/public/images/image.png" alt="MedNova Lifesciences logo" width="34" height="34"></a><div class="navlinks"><a href="/resources/">Resources</a><a href="/services/">Services</a><a href="/contact/">Contact</a><a href="/safetycore.html">SafetyCore</a></div><a class="nav-cta" href="/contact/">Talk to us</a></nav></div></header>
+<header class="site-header"><div class="site-header__inner"><nav class="site-nav"><a class="brand" href="/"><img class="brand-mark" src="/public/images/image.png" alt="MedNova Lifesciences logo" width="34" height="34"></a><div class="navlinks">
+        <a href="/">Home</a>
+        <a href="/about/">About</a>
+        <div class="mn-navgroup">
+          <button class="mn-navgroup__btn" type="button" aria-expanded="false" aria-controls="mn-menu-services">Services</button>
+          <div class="mn-navgroup__menu" id="mn-menu-services">
+            <a href="/services/">All Services</a>
+            <div class="mn-navgroup__sep"></div>
+            <a href="/services/regulatory-affairs.html">Regulatory Affairs</a>
+            <a href="/services/clinical-development.html">Clinical Development</a>
+            <a href="/services/pharmacovigilance.html">Pharmacovigilance</a>
+            <a href="/services/regulatory-intelligence.html">Regulatory Intelligence</a>
+            <a href="/services/nafdac-product-registration.html">NAFDAC Product Registration</a>
+          </div>
+        </div>
+        <div class="mn-navgroup">
+          <button class="mn-navgroup__btn" type="button" aria-expanded="false" aria-controls="mn-menu-technology">Technology</button>
+          <div class="mn-navgroup__menu" id="mn-menu-technology">
+            <div class="mn-navgroup__head">MedNova platforms</div>
+            <a href="/verify">MedNova Verify<span class="mn-navgroup__sub">Medicine verification &amp; surveillance</span></a>
+            <a href="/safetycore.html">MedNova SafetyCore<span class="mn-navgroup__sub">Pharmacovigilance case management</span></a>
+          </div>
+        </div>
+        <a href="/resources/">Resources</a>
+        <a href="/contact/">Contact</a>
+      </div><a class="nav-cta" href="/contact/">Talk to us</a></nav></div></header>
 <main>
 <section class="hero"><div class="wrap"><div data-breadcrumbs></div><div class="eyebrow">Medical Writing</div><h1>Medical Writing Services</h1><p class="hero-sub">Clear, compliant, and audience-ready documentation for medical, clinical, and regulatory communication.</p><div class="hero-actions"><a class="btn-primary" href="/contact/">Book a Consultation</a><a class="btn-ghost" href="/resources/">Explore Resources</a></div></div></section>
 <section><div class="wrap"><div class="section-head"><div class="eyebrow">Overview</div><h2>Write with clarity, structure, and regulatory confidence</h2><p>MedNova helps teams transform technical information into polished documents that support submissions, publications, training materials, and stakeholder communication.</p></div><p style="font-size:15px; color:var(--grey); max-width:70ch;">Whether the need is a clinical study report, an investigator brochure, a scientific publication, or a regulatory-ready narrative, our approach emphasizes scientific accuracy, audience fit, and document quality from the first draft through final review.</p></div></section>

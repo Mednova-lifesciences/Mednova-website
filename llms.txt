@@ -34,6 +34,7 @@ Featured resource articles:
 - https://mednovalife.com/resources/gvp-compliance-nigeria.html — What Is GVP Compliance: a plain guide for Nigerian pharma companies covering the pharmacovigilance system, the resident QPPV, personnel, and a compliance checklist
 - https://mednovalife.com/resources/ich-vs-nafdac-pharmacovigilance.html — ICH Guidelines vs NAFDAC Requirements: a side-by-side comparison of ICH E2 pharmacovigilance standards and NAFDAC's Nigerian requirements
 - https://mednovalife.com/resources/signal-detection-pharmacovigilance-nigeria.html — Signal Detection in Pharmacovigilance: what a safety signal is, what NAFDAC requires, and why standard statistical methods underperform on Nigerian datasets
+- https://mednovalife.com/resources/african-medicines-agency-nafdac.html — What the African Medicines Agency Means for Companies Already Registered with NAFDAC: what changes, what doesn't, and a readiness checklist
 
 Technical & discovery:
 - Sitemap: https://mednovalife.com/sitemap.xml
@@ -44,4 +45,4 @@ Notes:
 - Use canonical URLs only. Avoid tracking parameters and duplicate or staging URLs.
 - Do not include unverified business claims; if a capability is not present on the official site, flag it for human review.
 
-Last updated: 2026-09-20T00:00:00Z
+Last updated: 2026-09-22T00:00:00Z

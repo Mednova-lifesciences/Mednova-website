@@ -1,0 +1,385 @@
+<title>MedNova Verify Sitemap</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+  /* MedNova Lifesciences house palette — carried over from the live site's :root
+     so this deliverable reads as MedNova, not as a generic spec document.
+     Committed dark: the production site ships <body data-theme="dark">. */
+  :root{
+    --ink:#14181B;
+    --ink-2:#191F1B;
+    --ink-3:#101413;
+    --paper:#F6F5F1;
+    --moss:#3F6B3A;
+    --teal:#1E7F76;
+    --teal-lift:#7FCFC4;
+    --amber:#C9975F;
+    --line:#2B322D;
+    --line-soft:#222925;
+    --grey:#8A9186;
+    --grey-2:#C7CCC1;
+    --sage:#8FA98A;
+    --serif:'Newsreader','Iowan Old Style','Palatino Linotype','Book Antiqua',Georgia,serif;
+    --sans:'IBM Plex Sans','Segoe UI',Roboto,Arial,sans-serif;
+    --mono:'IBM Plex Mono','SFMono-Regular',Consolas,'Liberation Mono',monospace;
+  }
+
+  *{box-sizing:border-box;}
+  body{
+    background:var(--ink);
+    color:var(--grey-2);
+    font-family:var(--sans);
+    font-size:15px;
+    line-height:1.62;
+    -webkit-font-smoothing:antialiased;
+    padding-inline:20px;
+    padding-block:0;
+    margin:0;
+  }
+  .sheet{max-width:940px; margin:0 auto; padding-block:56px 96px;}
+
+  .eyebrow{
+    font-family:var(--mono); font-size:11.5px; letter-spacing:0.14em;
+    text-transform:uppercase; color:var(--sage);
+  }
+
+  /* ---------- masthead ---------- */
+  .masthead{border-bottom:1px solid var(--line); padding-bottom:30px;}
+  .masthead .eyebrow{margin-bottom:18px;}
+  .masthead h1{
+    font-family:var(--serif); font-weight:500; font-size:clamp(30px,5.2vw,44px);
+    line-height:1.12; color:var(--paper); margin:0 0 16px; text-wrap:balance;
+  }
+  .standfirst{max-width:62ch; color:var(--grey-2); margin:0;}
+
+  .filedata{
+    display:grid; grid-template-columns:repeat(auto-fit,minmax(168px,1fr));
+    gap:1px; background:var(--line); border:1px solid var(--line);
+    margin-top:32px;
+  }
+  .filedata div{background:var(--ink-2); padding:13px 15px;}
+  .filedata dt{
+    font-family:var(--mono); font-size:10.5px; letter-spacing:0.12em;
+    text-transform:uppercase; color:var(--grey); margin:0 0 5px;
+  }
+  .filedata dd{margin:0; color:var(--paper); font-size:13.5px; line-height:1.45;}
+
+  /* ---------- sections ---------- */
+  section{margin-top:64px;}
+  h2{
+    font-family:var(--serif); font-weight:500; font-size:26px; line-height:1.2;
+    color:var(--paper); margin:12px 0 14px; text-wrap:balance;
+  }
+  h3{
+    font-family:var(--sans); font-weight:600; font-size:15px;
+    color:var(--paper); margin:30px 0 10px;
+  }
+  p{margin:0 0 15px; max-width:66ch;}
+  p:last-child{margin-bottom:0;}
+  strong{color:var(--paper); font-weight:600;}
+  code{
+    font-family:var(--mono); font-size:0.88em; color:var(--teal-lift);
+    background:rgba(127,207,196,0.07); padding:1px 5px; border-radius:2px;
+    white-space:nowrap;
+  }
+
+  /* ---------- nav before/after ---------- */
+  .navcompare{display:grid; gap:14px; margin-top:24px;}
+  @media (min-width:760px){ .navcompare{grid-template-columns:1fr 1fr; gap:18px;} }
+  .navcard{border:1px solid var(--line); background:var(--ink-2); padding:18px 18px 20px;}
+  .navcard.after{border-color:rgba(201,151,95,0.45);}
+  .navcard .eyebrow{margin-bottom:14px;}
+  .navcard.after .eyebrow{color:var(--amber);}
+  .navbar{
+    display:flex; flex-wrap:wrap; gap:7px 16px; align-items:baseline;
+    font-size:13.5px; padding-bottom:14px; border-bottom:1px solid var(--line-soft);
+  }
+  .navbar span{color:var(--grey-2); white-space:nowrap;}
+  .navbar span.flag{color:var(--amber); font-weight:600;}
+  .navbar span.drop::after{content:' \25BE'; color:var(--grey); font-size:10px;}
+  .navnote{
+    font-family:var(--mono); font-size:11px; line-height:1.6;
+    color:var(--grey); margin:12px 0 0;
+  }
+  .navcard ul{margin:12px 0 0; padding-left:17px; font-size:13px; color:var(--grey-2);}
+  .navcard li{margin-bottom:5px;}
+  .navcard li:last-child{margin-bottom:0;}
+
+  /* ---------- the tree ---------- */
+  .treewrap{
+    border:1px solid var(--line); background:var(--ink-3);
+    margin-top:26px; overflow-x:auto;
+  }
+  .tree{
+    font-family:var(--mono); font-size:12.5px; line-height:1.85;
+    color:var(--grey-2); margin:0; padding:24px 26px;
+    white-space:pre; min-width:min-content;
+  }
+  .tree b{color:var(--paper); font-weight:600;}
+  .tree .rt{color:var(--grey);}                 /* route column */
+  .tree .new{color:var(--amber);}               /* new in this deliverable */
+  .tree .hd{color:var(--teal-lift); font-weight:600;}  /* nav group heading */
+  .tree .cm{color:#5F6A61;}                     /* tree glyphs */
+
+  /* ---------- tables ---------- */
+  .tablewrap{overflow-x:auto; margin-top:22px; border:1px solid var(--line);}
+  table{border-collapse:collapse; width:100%; min-width:620px; font-size:13.5px;}
+  caption{
+    text-align:left; font-family:var(--mono); font-size:10.5px; letter-spacing:0.12em;
+    text-transform:uppercase; color:var(--grey); padding:14px 16px 0; caption-side:top;
+  }
+  th,td{padding:11px 16px; text-align:left; vertical-align:top; border-bottom:1px solid var(--line-soft);}
+  thead th{
+    font-family:var(--mono); font-size:10.5px; letter-spacing:0.1em;
+    text-transform:uppercase; color:var(--grey); font-weight:500;
+    border-bottom:1px solid var(--line);
+  }
+  tbody tr:last-child td{border-bottom:0;}
+  td code{white-space:nowrap;}
+  .rowlabel{color:var(--paper); font-weight:500;}
+
+  .pill{
+    display:inline-block; font-family:var(--mono); font-size:10px; letter-spacing:0.08em;
+    text-transform:uppercase; padding:3px 7px; border:1px solid currentColor;
+    border-radius:2px; white-space:nowrap;
+  }
+  .pill.live{color:var(--teal-lift);}
+  .pill.stub{color:var(--amber);}
+  .pill.plan{color:var(--grey);}
+
+  /* ---------- callout ---------- */
+  .callout{
+    border-left:2px solid var(--amber); background:rgba(201,151,95,0.055);
+    padding:16px 20px; margin-top:24px;
+  }
+  .callout .eyebrow{color:var(--amber); margin-bottom:8px;}
+  .callout p{font-size:14px; max-width:64ch;}
+
+  /* ---------- open items ---------- */
+  .items{list-style:none; margin:22px 0 0; padding:0; border-top:1px solid var(--line);}
+  .items li{
+    display:grid; gap:4px 18px; padding:15px 0;
+    border-bottom:1px solid var(--line-soft);
+  }
+  @media (min-width:640px){ .items li{grid-template-columns:132px 1fr;} }
+  .items .who{
+    font-family:var(--mono); font-size:10.5px; letter-spacing:0.1em;
+    text-transform:uppercase; color:var(--amber); padding-top:3px;
+  }
+  .items .who.nafdac{color:var(--teal-lift);}
+  .items .ask{margin:0; font-size:14px; max-width:60ch;}
+  .items .ask b{color:var(--paper); font-weight:600;}
+
+  footer{
+    margin-top:72px; padding-top:22px; border-top:1px solid var(--line);
+    font-family:var(--mono); font-size:11px; line-height:1.8; color:var(--grey);
+  }
+</style>
+
+<div class="sheet">
+
+  <header class="masthead">
+    <p class="eyebrow">MedNova Verify &middot; Deliverable 1 of 10 &middot; Brief §13</p>
+    <h1>Updated website sitemap: Services and Technology navigation</h1>
+    <p class="standfirst">The integration brief asks for a visible <strong>Technology</strong> navigation item rather than MedNova products buried inside service pages. This is the resulting sitemap — the top-level structure, the full <code>/verify</code> route set, and what changes on mednovalife.com to get there.</p>
+
+    <dl class="filedata">
+      <div><dt>Project owner</dt><dd>MedNova Lifesciences</dd></div>
+      <div><dt>Platform</dt><dd>MedNova Verify</dd></div>
+      <div><dt>Site</dt><dd>www.mednovalife.com</dd></div>
+      <div><dt>Pages in scope</dt><dd>61 existing + 1 new</dd></div>
+      <div><dt>Status</dt><dd>Implemented; for MedNova review</dd></div>
+    </dl>
+  </header>
+
+  <section>
+    <p class="eyebrow">The change</p>
+    <h2>One nav item moves the products out from under the services</h2>
+    <p>Today the site organises everything around the three service lines. SafetyCore is reachable, but only as a sixth link in a row of service links — it reads as another service rather than as a product. Adding <strong>Technology</strong> as a peer of <strong>Services</strong> is what makes the Verify / SafetyCore product family legible to sponsors, MAHs, institutions and regulators.</p>
+
+    <div class="navcompare">
+      <div class="navcard">
+        <p class="eyebrow">Today</p>
+        <div class="navbar">
+          <span>Services</span><span>About</span><span>Resources</span><span>Contact</span><span>SafetyCore</span>
+        </div>
+        <p class="navnote">Typical header. 17 different link sets across 61 pages.</p>
+        <ul>
+          <li>No product grouping — SafetyCore sits in the same row as service links.</li>
+          <li><code>safetycore.html</code> carries no header nav at all, and its breadcrumb files it under Pharmacovigilance.</li>
+          <li>Verify has nowhere to live.</li>
+        </ul>
+      </div>
+
+      <div class="navcard after">
+        <p class="eyebrow">Proposed</p>
+        <div class="navbar">
+          <span>Home</span><span>About</span><span class="drop">Services</span><span class="flag drop">Technology</span><span>Resources</span><span>Contact</span>
+        </div>
+        <p class="navnote">One header, all 62 pages. Technology is a new top-level item.</p>
+        <ul>
+          <li><strong>Services &#9662;</strong> — the three service lines plus the two specialist pages.</li>
+          <li><strong>Technology &#9662;</strong> — MedNova Verify, MedNova SafetyCore.</li>
+          <li>SafetyCore is repositioned as a product and stops being an orphan page.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="callout">
+      <p class="eyebrow">Naming note</p>
+      <p>Technology is a menu label, not a page. There is no <code>/technology/</code> landing page in this deliverable, because the brief specifies Technology as a navigation grouping over two named products. If MedNova later wants a product-family hub for search, that is a small addition and a separate decision.</p>
+    </div>
+  </section>
+
+  <section>
+    <p class="eyebrow">Deliverable</p>
+    <h2>Site structure</h2>
+    <p>Routes in <span style="color:var(--amber)">amber</span> are new. Everything else already exists and keeps its URL — no redirects are required by this change.</p>
+
+    <div class="treewrap"><pre class="tree"><b>mednovalife.com</b>
+<span class="cm">│</span>
+<span class="cm">├──</span> <b>Home</b>                              <span class="rt">/</span>
+<span class="cm">├──</span> <b>About</b>                             <span class="rt">/about/</span>
+<span class="cm">│</span>
+<span class="cm">├──</span> <span class="hd">SERVICES</span> <span class="cm">▾</span>                        <span class="rt">/services/</span>
+<span class="cm">│   ├──</span> Regulatory Affairs            <span class="rt">/services/regulatory-affairs.html</span>
+<span class="cm">│   ├──</span> Clinical Development          <span class="rt">/services/clinical-development.html</span>
+<span class="cm">│   ├──</span> Pharmacovigilance             <span class="rt">/services/pharmacovigilance.html</span>
+<span class="cm">│   ├──</span> Regulatory Intelligence       <span class="rt">/services/regulatory-intelligence.html</span>
+<span class="cm">│   └──</span> NAFDAC Product Registration   <span class="rt">/services/nafdac-product-registration.html</span>
+<span class="cm">│</span>
+<span class="cm">├──</span> <span class="hd">TECHNOLOGY</span> <span class="cm">▾</span>                      <span class="new">← new nav item</span>
+<span class="cm">│   │</span>
+<span class="cm">│   ├──</span> <b>MedNova Verify</b>                <span class="new">/verify</span>
+<span class="cm">│   │    </span><span class="cm">├──</span> Verify a Medicine        <span class="new">/verify/check</span>
+<span class="cm">│   │    </span><span class="cm">├──</span> Report a Safety Issue    <span class="new">/verify/report-safety</span>
+<span class="cm">│   │    </span><span class="cm">├──</span> Report Product Quality   <span class="new">/verify/report-quality</span>
+<span class="cm">│   │    </span><span class="cm">├──</span> Report Falsification     <span class="new">/verify/report-falsified</span>
+<span class="cm">│   │    </span><span class="cm">├──</span> For Manufacturers / MAHs <span class="new">/verify/manufacturers</span>
+<span class="cm">│   │    </span><span class="cm">├──</span> For Pharmacies &amp; Hospitals <span class="new">/verify/institutions</span>
+<span class="cm">│   │    </span><span class="cm">└──</span> Sign In                  <span class="new">/verify/login</span>
+<span class="cm">│   │</span>
+<span class="cm">│   └──</span> <b>MedNova SafetyCore</b>            <span class="rt">/safetycore.html</span>
+<span class="cm">│</span>
+<span class="cm">├──</span> <span class="hd">RESOURCES</span>                         <span class="rt">/resources/</span>
+<span class="cm">│   ├──</span> Glossary <span class="cm">(20 terms)</span>           <span class="rt">/resources/glossary/</span>
+<span class="cm">│   └──</span> Guides &amp; briefings <span class="cm">(18)</span>       <span class="rt">/resources/…</span>
+<span class="cm">│</span>
+<span class="cm">└──</span> <b>Contact / Book Consultation</b>       <span class="rt">/contact/</span></pre></div>
+
+    <p style="margin-top:18px">Nine further pages stay published and indexed but sit outside the primary navigation — <code>cro.html</code>, <code>pv.html</code>, <code>regulatory.html</code>, <code>capability-statement.html</code>, <code>compliance-checklist.html</code> and the four specialist pages. They are reached from in-page links and from search. This deliverable does not move them; consolidating them against <code>/services/</code> is worth a separate conversation, since several rank independently.</p>
+  </section>
+
+  <section>
+    <p class="eyebrow">Verify routes</p>
+    <h2>The eight public URLs</h2>
+    <p>These are the routes named in §3 of the brief. They are now listed in <code>sitemap.xml</code> at MedNova's instruction, so the target structure is declared up front.</p>
+
+    <div class="tablewrap">
+      <table>
+        <caption>MedNova Verify — public route set</caption>
+        <thead>
+          <tr><th>Route</th><th>Purpose</th><th>Build</th><th>State</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>/verify</code></td><td class="rowlabel">Product landing — overview and the two primary actions</td><td>Sprint 1</td><td><span class="pill stub">Stub live</span></td></tr>
+          <tr><td><code>/verify/check</code></td><td class="rowlabel">NAFDAC number, barcode and QR verification</td><td>Sprint 2</td><td><span class="pill plan">Planned</span></td></tr>
+          <tr><td><code>/verify/report-safety</code></td><td class="rowlabel">ADR and medicine safety reporting</td><td>Sprint 3</td><td><span class="pill plan">Planned</span></td></tr>
+          <tr><td><code>/verify/report-quality</code></td><td class="rowlabel">Quality defect workflow</td><td>Sprint 3</td><td><span class="pill plan">Planned</span></td></tr>
+          <tr><td><code>/verify/report-falsified</code></td><td class="rowlabel">Suspected falsified medicine / pack mismatch</td><td>Sprint 3</td><td><span class="pill plan">Planned</span></td></tr>
+          <tr><td><code>/verify/manufacturers</code></td><td class="rowlabel">MAH value proposition, dashboard preview, demo request</td><td>Sprint 4</td><td><span class="pill plan">Planned</span></td></tr>
+          <tr><td><code>/verify/institutions</code></td><td class="rowlabel">Pharmacy, hospital and distributor verification</td><td>Sprint 5</td><td><span class="pill plan">Planned</span></td></tr>
+          <tr><td><code>/verify/login</code></td><td class="rowlabel">Role-based portal access</td><td>Sprint 1</td><td><span class="pill plan">Planned</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout">
+      <p class="eyebrow">Flagged for MedNova</p>
+      <p>Seven of these eight URLs return 404 until their sprint lands. Search engines crawl declared sitemap URLs, and a run of 404s on a domain that currently ranks well for NAFDAC and pharmacovigilance terms can cost crawl budget and trust. MedNova has accepted this in order to publish the target structure now. The safer sequencing — adding each route as its page ships — remains available at any point, and the reversal is a one-line edit per route.</p>
+    </div>
+  </section>
+
+  <section>
+    <p class="eyebrow">Implementation</p>
+    <h2>What changes in the codebase</h2>
+    <p>The navigation is currently duplicated inline on every page, which is how 17 variants of the same header came to exist. Rather than add an eighteenth, the link list becomes one shared component and each page's existing header shell, brand mark and call-to-action are left untouched.</p>
+    <p>The menus ship as ordinary links in the HTML, so they are crawlable and work with JavaScript disabled; the script adds the open/close behaviour, arrow-key and Escape handling, and marks the current page. Only 11 of the 62 pages collapse their header on a phone, so the menus stay inline at every width and re-anchor to the right edge on a narrow screen rather than becoming full-width blocks.</p>
+
+    <div class="tablewrap">
+      <table>
+        <caption>Change set</caption>
+        <thead>
+          <tr><th>Change</th><th>Files</th><th>Detail</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="rowlabel">Shared nav component</td><td>2 new</td><td>One stylesheet and one script providing the Services and Technology menus, with keyboard and screen-reader support</td></tr>
+          <tr><td class="rowlabel">Canonical link set</td><td>60 edited</td><td>Inner link list replaced across all three header patterns; surrounding markup preserved</td></tr>
+          <tr><td class="rowlabel">SafetyCore de-orphaned</td><td>1 edited</td><td>Gains the standard header; breadcrumb moves from Pharmacovigilance to Technology</td></tr>
+          <tr><td class="rowlabel">Verify landing stub</td><td>1 new</td><td><code>/verify</code> resolves rather than 404s</td></tr>
+          <tr><td class="rowlabel">Section navs restored</td><td>8 edited</td><td>Pages that kept their own anchors in the header get a secondary “On this page” nav</td></tr>
+          <tr><td class="rowlabel">Routing</td><td>2 edited</td><td><code>/verify</code> resolves to the landing page; <code>/verify/index.html</code> redirects to it</td></tr>
+          <tr><td class="rowlabel">Sitemap rebuilt</td><td>3 rewritten</td><td>Generated from page canonicals — 30 URLs to 69, all three copies identical</td></tr>
+          <tr><td class="rowlabel">Markup repair</td><td>1 edited</td><td>Unclosed <code>&lt;/div&gt;</code> and <code>&lt;/footer&gt;</code> on the capability statement</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Four defects found and fixed while surveying</h3>
+    <p><strong>SafetyCore was unreachable from the header.</strong> <code>safetycore.html</code> carried no navigation at all — MedNova's existing product page could only be reached by following a link from elsewhere. It was indexed, but not navigable. It now carries the standard header, and its breadcrumb reads Home / Technology / MedNova SafetyCore instead of filing it under Pharmacovigilance.</p>
+
+    <p><strong>Half the site was missing from the sitemap.</strong> Three copies of <code>sitemap.xml</code> existed in the repository, listing 30, 54 and 10 URLs — and the one actually served was the 30. Thirty-two real pages, including most of the glossary and the resource guides, were never submitted to search at all. The sitemap is now generated from each page's own <code>&lt;link rel="canonical"&gt;</code>, so it cannot drift from the site again, and all three copies carry identical content: <strong>69 URLs</strong> — 62 live pages plus the 7 Verify routes still to be built.</p>
+
+    <p><strong>An unclosed footer on the capability statement.</strong> <code>capability-statement.html</code> was missing a <code>&lt;/div&gt;</code> and a <code>&lt;/footer&gt;</code>, leaving the page relying on browser error recovery. Closed. All 62 pages now balance.</p>
+
+    <p><strong>Eight pages lost their in-page jump links.</strong> Pages like <code>pv.html</code> and <code>cro.html</code> had been using the site header to hold their own section anchors — QPPV, Packages, Why MedNova, FAQ. Unifying the header displaced them. Each of those eight pages now carries a secondary “On this page” nav directly beneath the header, with the original labels and targets intact.</p>
+
+    <div class="callout">
+      <p class="eyebrow">Still outstanding</p>
+      <p><strong>Camera access is blocked site-wide.</strong> The <code>Permissions-Policy</code> header sets <code>camera=()</code>, which will prevent the barcode and QR scanning in §5 and §8 from working at all. The fix is narrow — <code>camera=(self)</code> on <code>/verify</code> and its sub-routes only, with every other path unchanged — but it loosens a security header, so it needs MedNova's explicit sign-off rather than being bundled into a navigation change. It is listed as an open item below.</p>
+    </div>
+  </section>
+
+  <section>
+    <p class="eyebrow">Brief §13.9</p>
+    <h2>Open items</h2>
+    <p>Decisions this deliverable surfaces but cannot settle.</p>
+
+    <ul class="items">
+      <li>
+        <span class="who">MedNova</span>
+        <p class="ask"><b>Is “Technology” the label?</b> Alternatives are “Platforms” or “Products”. It appears in the header of every page, so it is worth settling before the nav ships.</p>
+      </li>
+      <li>
+        <span class="who">MedNova</span>
+        <p class="ask"><b>Does Verify get its own subdomain later?</b> The routes here assume <code>mednovalife.com/verify</code>. Moving to <code>verify.mednovalife.com</code> after launch would mean redirects and a split SEO profile — cheaper to decide now.</p>
+      </li>
+      <li>
+        <span class="who">MedNova</span>
+        <p class="ask"><b>Nine pages sit outside the new navigation.</b> Consolidate them into <code>/services/</code>, or leave them as standalone search entry points?</p>
+      </li>
+      <li>
+        <span class="who">MedNova</span>
+        <p class="ask"><b>Approve camera access on <code>/verify</code>.</b> Scanning a barcode or QR code cannot work while <code>Permissions-Policy</code> sets <code>camera=()</code>. The proposed change is <code>camera=(self)</code> on <code>/verify</code> and its sub-routes only — same-origin, no third party, every other path untouched. Needed before Sprint 2.</p>
+      </li>
+      <li>
+        <span class="who">MedNova</span>
+        <p class="ask"><b>Delete the two unused sitemap copies?</b> Only <code>frontend/public/sitemap.xml</code> is served. The other two are now identical to it rather than contradicting it, but they remain files that look authoritative and are not.</p>
+      </li>
+      <li>
+        <span class="who nafdac">NAFDAC</span>
+        <p class="ask"><b>Public naming of the verification service.</b> Whether a MedNova-operated page may present itself as checking NAFDAC registration records, and in what words, affects the nav label, the page titles and the URLs themselves.</p>
+      </li>
+      <li>
+        <span class="who nafdac">NAFDAC</span>
+        <p class="ask"><b>Falsified-medicine reporting route.</b> Whether reports submitted at <code>/verify/report-falsified</code> are expected to reach NAFDAC directly, or through MedNova triage as §9 of the brief assumes.</p>
+      </li>
+    </ul>
+  </section>
+
+  <footer>
+    MedNova Verify — Website, Product &amp; Platform Integration Brief<br>
+    Deliverable 1 of 10 (§13). Read with §1 Executive Direction, §3 Information Architecture and §12 Build Order.<br>
+    Deliverables 2–10 — wireframes, architecture, schema, API spec, RBAC, hosting, delivery plan, prototype — follow separately.
+  </footer>
+
+</div>

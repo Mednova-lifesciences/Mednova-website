@@ -113,6 +113,8 @@
   @media (prefers-reduced-motion: reduce){html{scroll-behavior:auto;}}
 </style>
 <link rel="stylesheet" href="/public/css/site-responsive.min.css">
+<link rel="stylesheet" href="/public/css/site-primary-nav.css">
+<script src="/public/js/site-primary-nav.js" defer></script>
 </head>
 <body>
 <header class="site-header">
@@ -122,11 +124,31 @@
         <img class="brand-mark" src="/public/images/image.png" alt="MedNova Lifesciences logo" width="34" height="34" decoding="async" fetchpriority="high">
       </a>
       <div class="navlinks">
-        <a href="/services/">Services</a>
+        <a href="/">Home</a>
         <a href="/about/">About</a>
+        <div class="mn-navgroup">
+          <button class="mn-navgroup__btn" type="button" aria-expanded="false" aria-controls="mn-menu-services">Services</button>
+          <div class="mn-navgroup__menu" id="mn-menu-services">
+            <a href="/services/">All Services</a>
+            <div class="mn-navgroup__sep"></div>
+            <a href="/services/regulatory-affairs.html">Regulatory Affairs</a>
+            <a href="/services/clinical-development.html">Clinical Development</a>
+            <a href="/services/pharmacovigilance.html">Pharmacovigilance</a>
+            <a href="/services/regulatory-intelligence.html">Regulatory Intelligence</a>
+            <a href="/services/nafdac-product-registration.html">NAFDAC Product Registration</a>
+          </div>
+        </div>
+        <div class="mn-navgroup">
+          <button class="mn-navgroup__btn" type="button" aria-expanded="false" aria-controls="mn-menu-technology">Technology</button>
+          <div class="mn-navgroup__menu" id="mn-menu-technology">
+            <div class="mn-navgroup__head">MedNova platforms</div>
+            <a href="/verify">MedNova Verify<span class="mn-navgroup__sub">Medicine verification &amp; surveillance</span></a>
+            <a href="/safetycore.html">MedNova SafetyCore<span class="mn-navgroup__sub">Pharmacovigilance case management</span></a>
+          </div>
+        </div>
         <a href="/resources/">Resources</a>
         <a href="/contact/">Contact</a>
-      <a href="/safetycore.html">SafetyCore</a></div>
+      </div>
       <a class="nav-cta" href="/contact/">Talk to us</a>
     </nav>
   </div>
@@ -307,6 +329,15 @@
         </article>
         <article class="resource-card">
           <div>
+            <div class="meta">Knowledge</div>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21h18"></path><path d="M5 21V7l7-4 7 4v14"></path><path d="M9 21v-6h6v6"></path></svg>
+            <h3>AMA vs NAFDAC</h3>
+            <p>What the African Medicines Agency means for companies already registered with NAFDAC: what changes, what doesn't, and a readiness checklist.</p>
+          </div>
+          <div><span class="badge">New</span><a class="link-btn" href="/resources/african-medicines-agency-nafdac.html">Browse Articles</a></div>
+        </article>
+        <article class="resource-card">
+          <div>
             <div class="meta">Reference</div>
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 4h10"></path><path d="M7 20h10"></path><path d="M8 4v16"></path><path d="M16 4v16"></path><path d="M4 8h4"></path><path d="M16 8h4"></path></svg>
             <h3>Glossary</h3>
@@ -335,6 +366,13 @@
         <h2>Current articles and updates</h2>
       </div>
       <div class="resource-list">
+        <article class="resource-list-item">
+          <div>
+            <h3>What the African Medicines Agency Means for NAFDAC-Registered Companies</h3>
+            <p>AMA layers on top of NAFDAC registration rather than replacing it. What's changed as of September 2026, and a readiness checklist for the years ahead.</p>
+          </div>
+          <a class="link-btn" href="/resources/african-medicines-agency-nafdac.html">Read Article</a>
+        </article>
         <article class="resource-list-item">
           <div>
             <h3>Signal Detection in Pharmacovigilance</h3>

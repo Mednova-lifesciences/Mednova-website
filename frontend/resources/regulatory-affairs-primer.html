@@ -82,9 +82,36 @@
   footer{border-top:1px solid var(--line); padding:28px 0; font-size:13px; color:var(--grey);}
   @media (max-width:860px){.navlinks{display:none;} h1{font-size:34px;}}
   @media (max-width:640px){.wrap{padding:0 22px;}}</style>
+<link rel="stylesheet" href="/public/css/site-primary-nav.css">
+<script src="/public/js/site-primary-nav.js" defer></script>
 </head>
 <body>
-<header class="site-header"><div class="site-header__inner"><nav class="site-nav"><a class="brand" href="/" aria-label="MedNova Lifesciences home"><img class="brand-mark" src="/public/images/image.png" alt="MedNova Lifesciences logo" width="34" height="34"></a><div class="navlinks"><a href="/resources/">Resources</a><a href="/services/">Services</a><a href="/contact/">Contact</a><a href="/safetycore.html">SafetyCore</a></div><a class="nav-cta" href="/contact/">Talk to us</a></nav></div></header>
+<header class="site-header"><div class="site-header__inner"><nav class="site-nav"><a class="brand" href="/" aria-label="MedNova Lifesciences home"><img class="brand-mark" src="/public/images/image.png" alt="MedNova Lifesciences logo" width="34" height="34"></a><div class="navlinks">
+        <a href="/">Home</a>
+        <a href="/about/">About</a>
+        <div class="mn-navgroup">
+          <button class="mn-navgroup__btn" type="button" aria-expanded="false" aria-controls="mn-menu-services">Services</button>
+          <div class="mn-navgroup__menu" id="mn-menu-services">
+            <a href="/services/">All Services</a>
+            <div class="mn-navgroup__sep"></div>
+            <a href="/services/regulatory-affairs.html">Regulatory Affairs</a>
+            <a href="/services/clinical-development.html">Clinical Development</a>
+            <a href="/services/pharmacovigilance.html">Pharmacovigilance</a>
+            <a href="/services/regulatory-intelligence.html">Regulatory Intelligence</a>
+            <a href="/services/nafdac-product-registration.html">NAFDAC Product Registration</a>
+          </div>
+        </div>
+        <div class="mn-navgroup">
+          <button class="mn-navgroup__btn" type="button" aria-expanded="false" aria-controls="mn-menu-technology">Technology</button>
+          <div class="mn-navgroup__menu" id="mn-menu-technology">
+            <div class="mn-navgroup__head">MedNova platforms</div>
+            <a href="/verify">MedNova Verify<span class="mn-navgroup__sub">Medicine verification &amp; surveillance</span></a>
+            <a href="/safetycore.html">MedNova SafetyCore<span class="mn-navgroup__sub">Pharmacovigilance case management</span></a>
+          </div>
+        </div>
+        <a href="/resources/">Resources</a>
+        <a href="/contact/">Contact</a>
+      </div><a class="nav-cta" href="/contact/">Talk to us</a></nav></div></header>
 <main>
 <section class="hero"><div class="wrap" data-breadcrumbs></div><div class="wrap"><div class="eyebrow">Regulatory Affairs</div><h1>What Every Pharmaceutical Company Needs to Know About Regulatory Affairs</h1><p>Regulatory affairs translates scientific, manufacturing, clinical, and safety evidence into a form regulators can assess. It is a governance function that shapes market entry, lifecycle control, and commercial confidence.</p></div></section>
 <section><div class="wrap"><article>

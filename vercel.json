@@ -130,6 +130,15 @@
       "dest": "/frontend/services/index.html"
     },
     {
+      "src": "^/verify/?$",
+      "dest": "/verify/index.html"
+    },
+    {
+      "src": "^/verify/index\\.html$",
+      "dest": "/verify",
+      "status": 301
+    },
+    {
       "src": "^/capability-statement\\.html$",
       "dest": "/frontend/capability-statement.html"
     },
