@@ -1,0 +1,152 @@
+- generic [active] [ref=f2e1]:
+  - link "Skip to content" [ref=f2e2] [cursor=pointer]:
+    - /url: "#content"
+  - generic [ref=f2e4]:
+    - link "MedNova Lifesciences home" [ref=f2e5] [cursor=pointer]:
+      - /url: /
+      - img "MedNova Lifesciences logo" [ref=f2e7]
+      - generic [ref=f2e8]: MedNova Lifesciences
+    - button "Open navigation" [ref=f2e9] [cursor=pointer]
+  - main [ref=f2e13]:
+    - generic [ref=f2e14]:
+      - heading "Your Regulatory and Clinical Development Partner for Nigeria and Africa" [level=1] [ref=f2e15]
+      - paragraph [ref=f2e16]: Helping pharmaceutical, biotechnology, medical device, and nutraceutical companies navigate regulatory approvals, clinical development, and post-market safety — as one integrated partner rather than three separate vendors.
+      - paragraph [ref=f2e17]: We combine local regulatory insight with clinical execution and pharmacovigilance discipline so your project is mapped to compliance objectives from first dose through post-approval monitoring.
+      - paragraph [ref=f2e18]: Our approach is designed for teams that want fast, practical decisions without sacrificing quality. From protocol design to safety reporting, MedNova helps you move with confidence in Nigeria and across Africa.
+    - generic [ref=f2e20]:
+      - generic [ref=f2e21]:
+        - generic [ref=f2e22]: Why Africa
+        - heading "Research in Africa is changing." [level=2] [ref=f2e23]
+        - paragraph [ref=f2e24]: Africa has become one of the world's fastest-growing regions for clinical development — growing research capacity, increasing regulatory maturity, and expanding investigator networks. MedNova helps sponsors turn that opportunity into successful programs.
+        - paragraph [ref=f2e25]: Our team supports local protocol feasibility, site readiness, and regulatory submissions so the value of African trials is realized without unexpected compliance delays.
+      - generic [ref=f2e26]:
+        - generic [ref=f2e27]: Why MedNova
+        - heading "Integrated across the product lifecycle." [level=2] [ref=f2e28]
+        - paragraph [ref=f2e29]: Registration, trial operations, and drug safety, built to work together rather than change hands between vendors — so a product's journey from market authorization through post-market safety runs through one partner.
+        - paragraph [ref=f2e30]: That single-team model keeps handoffs simple and ensures pharmacovigilance, clinical, and regulatory planning are aligned with your commercial objectives.
+    - generic [ref=f2e33]: Regulatory Affairs · Clinical Development · Pharmacovigilance
+    - generic [ref=f2e35]:
+      - link "Regulatory Affairs Regulatory Affairs Product registration and market access across Nigeria and Africa. – Product registration – NAFDAC submissions – Import permits – Lifecycle management Explore Regulatory Affairs →" [ref=f2e36] [cursor=pointer]:
+        - /url: regulatory.html
+        - generic [ref=f2e44]:
+          - generic [ref=f2e45]: Regulatory Affairs
+          - heading "Regulatory Affairs" [level=2] [ref=f2e46]
+          - paragraph [ref=f2e47]: Product registration and market access across Nigeria and Africa.
+          - list [ref=f2e48]:
+            - listitem [ref=f2e49]: – Product registration
+            - listitem [ref=f2e50]: – NAFDAC submissions
+            - listitem [ref=f2e51]: – Import permits
+            - listitem [ref=f2e52]: – Lifecycle management
+          - generic [ref=f2e53]:
+            - text: Explore Regulatory Affairs
+            - generic [ref=f2e54]: →
+      - link "Clinical Development Clinical Development From feasibility and study start-up to clinical operations and close-out. – Trial start-up – Site feasibility – Monitoring – Project management Explore Clinical Development →" [ref=f2e55] [cursor=pointer]:
+        - /url: cro.html
+        - generic [ref=f2e66]:
+          - generic [ref=f2e67]: Clinical Development
+          - heading "Clinical Development" [level=2] [ref=f2e68]
+          - paragraph [ref=f2e69]: From feasibility and study start-up to clinical operations and close-out.
+          - list [ref=f2e70]:
+            - listitem [ref=f2e71]: – Trial start-up
+            - listitem [ref=f2e72]: – Site feasibility
+            - listitem [ref=f2e73]: – Monitoring
+            - listitem [ref=f2e74]: – Project management
+          - generic [ref=f2e75]:
+            - text: Explore Clinical Development
+            - generic [ref=f2e76]: →
+      - link "Drug Safety Pharmacovigilance Protecting patients through clinical trial and post-marketing safety. – Local QPPV – Case processing – Aggregate reports – Risk management Explore Pharmacovigilance →" [ref=f2e77] [cursor=pointer]:
+        - /url: pv.html
+        - generic [ref=f2e83]:
+          - generic [ref=f2e84]: Drug Safety
+          - heading "Pharmacovigilance" [level=2] [ref=f2e85]
+          - paragraph [ref=f2e86]: Protecting patients through clinical trial and post-marketing safety.
+          - list [ref=f2e87]:
+            - listitem [ref=f2e88]: – Local QPPV
+            - listitem [ref=f2e89]: – Case processing
+            - listitem [ref=f2e90]: – Aggregate reports
+            - listitem [ref=f2e91]: – Risk management
+          - generic [ref=f2e92]:
+            - text: Explore Pharmacovigilance
+            - generic [ref=f2e93]: →
+    - generic [ref=f2e94]:
+      - generic [ref=f2e95]: Every engagement is supported by
+      - generic [ref=f2e96]:
+        - generic [ref=f2e97]: Regulatory Intelligence & Medical Writing
+        - generic [ref=f2e98]: Quality Management
+        - generic [ref=f2e99]: Local Market Expertise
+        - generic [ref=f2e100]: ICH-GCP
+        - generic [ref=f2e101]: Good Pharmacovigilance Practice
+    - generic [ref=f2e102]:
+      - generic [ref=f2e104]:
+        - generic [ref=f2e105]: Technology Enabled
+        - heading "Digital tools behind every engagement" [level=2] [ref=f2e106]
+        - paragraph [ref=f2e107]: We use proprietary digital tools to improve regulatory workflows, pharmacovigilance operations, and clinical trial execution — with a qualified team member reviewing every output.
+        - link "Ask how this applies to your program →" [ref=f2e108] [cursor=pointer]:
+          - /url: mailto:info@mednovalife.com
+          - text: Ask how this applies to your program
+          - generic [ref=f2e109]: →
+      - generic [ref=f2e119]:
+        - generic [ref=f2e219]: Reasoning preview — live
+        - generic [ref=f2e120]:
+          - button "Site feasibility for a Phase 3 trial" [ref=f2e121] [cursor=pointer]
+          - button "What delays regulatory submissions?" [ref=f2e122] [cursor=pointer]
+          - button "Choosing a PV partner in Nigeria" [ref=f2e123] [cursor=pointer]
+        - generic [ref=f2e124]: "A sponsor should consider several key factors when selecting a pharmacovigilance partner in Nigeria: 1. **Regulatory Compliance**: Ensure the partner is well-versed in local regulations and has a strong relationship with the National Agency for Food and Drug Administration and Control (NAFDAC). 2. **Experience and Expertise**: Look for a partner with proven experience in the Nigerian and West African markets, including knowledge of local adverse event reporting requirements. 3. **Technology and Systems**: Evaluate their pharmacovigilance software capabilities for data management and reporting. 4. **Quality Assurance**: Ensure they have established SOPs and quality management systems in place. 5. **Communication and Support**: Assess their ability to provide timely communications and support throughout the lifecycle of drug products. Selecting a well-rounded partner will enhance drug safety monitoring and compliance."
+        - paragraph [ref=f2e125]: A genuine, working preview of the reasoning behind our process — not connected to any client's real site, case, or regulatory data, and not a substitute for a full assessment by our team.
+    - generic [aria-hidden]:
+      - dialog:
+        - generic:
+          - generic:
+            - generic: Consultation booking
+            - heading [level=2]: Want to book a consultation?
+          - button: ×
+        - generic:
+          - paragraph: Speak with one of our specialists to discuss your Clinical Development, Pharmacovigilance, or Regulatory requirements.
+          - generic:
+            - button: Book Consultation
+            - button: Maybe Later
+    - generic [ref=f2e127]:
+      - generic [ref=f2e128]:
+        - generic [ref=f2e129]: Consultation Booking
+        - heading "Book a Consultation" [level=2] [ref=f2e130]
+        - paragraph [ref=f2e131]: Schedule a consultation with one of our specialists. Select your preferred service, date, and time, and our team will confirm your appointment.
+        - generic [ref=f2e132]:
+          - button "Book Consultation" [ref=f2e133]
+          - link "Request a proposal" [ref=f2e134] [cursor=pointer]:
+            - /url: mailto:info@mednovalife.com?subject=Proposal%20request%20%E2%80%94%20MedNova%20Lifesciences
+      - generic [ref=f2e135]:
+        - generic [ref=f2e220]: Trusted partnership
+        - heading "Professional support for complex programs" [level=3] [ref=f2e136]
+        - paragraph [ref=f2e137]: Our team works closely with sponsors, CROs, and product teams across Africa to simplify regulatory, clinical, and safety planning.
+        - list [ref=f2e138]:
+          - listitem [ref=f2e139]: • Clear guidance for your next milestone
+          - listitem [ref=f2e140]: • Flexible consultation planning
+          - listitem [ref=f2e141]: • Practical next-step recommendations
+    - generic [ref=f2e198]:
+      - generic [ref=f2e199]:
+        - generic [ref=f2e200]: MedNova Lifesciences
+        - generic [ref=f2e201]:
+          - link "Compliance Checklist" [ref=f2e202] [cursor=pointer]:
+            - /url: compliance-checklist.html
+          - link "Technology" [ref=f2e203] [cursor=pointer]:
+            - /url: "#technology"
+          - link "Contact" [ref=f2e204] [cursor=pointer]:
+            - /url: "#footer"
+          - link "SafetyCore" [ref=f2e205] [cursor=pointer]:
+            - /url: /safetycore.html
+      - generic [ref=f2e206]:
+        - generic [ref=f2e207]:
+          - text: © 2026 MedNova Lifesciences. Lagos, Nigeria. —
+          - link "llms.txt" [ref=f2e208] [cursor=pointer]:
+            - /url: /llms.txt
+        - generic [ref=f2e209]:
+          - link "LinkedIn" [ref=f2e210] [cursor=pointer]:
+            - /url: https://www.linkedin.com/company/mednova-lifesciences/
+          - link "X (Twitter)" [ref=f2e213] [cursor=pointer]:
+            - /url: https://x.com/MedNovaLif3669
+          - link "Instagram" [ref=f2e216] [cursor=pointer]:
+            - /url: https://instagram.com/Mednovalifesciences
+  - complementary [aria-hidden] [ref=f2e221]:
+    - generic [ref=f2e222]:
+      - generic [ref=f2e223]: Navigate
+      - button [ref=f2e224] [cursor=pointer]: ×

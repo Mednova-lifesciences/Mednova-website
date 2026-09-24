@@ -1,0 +1,437 @@
+- generic [active] [ref=f2e1]:
+  - banner [ref=f2e2]:
+    - navigation [ref=f2e4]:
+      - link "MedNova Lifesciences home" [ref=f2e5] [cursor=pointer]:
+        - /url: /
+        - img "MedNova Lifesciences logo" [ref=f2e6]
+      - generic [ref=f2e7]:
+        - link "Resources" [ref=f2e8] [cursor=pointer]:
+          - /url: /resources/
+        - link "Pharmacovigilance" [ref=f2e9] [cursor=pointer]:
+          - /url: /pv.html
+        - link "Contact" [ref=f2e10] [cursor=pointer]:
+          - /url: /contact/
+        - link "SafetyCore" [ref=f2e11] [cursor=pointer]:
+          - /url: /safetycore.html
+      - link "Talk to us" [ref=f2e12] [cursor=pointer]:
+        - /url: /contact/
+  - main [ref=f2e13]:
+    - navigation "Breadcrumb" [ref=f2e15]:
+      - list [ref=f2e16]:
+        - listitem [ref=f2e17]:
+          - link "Home" [ref=f2e18] [cursor=pointer]:
+            - /url: /
+          - text: /
+        - listitem [ref=f2e19]:
+          - generic [ref=f2e20]: Resources
+    - 'img "NAFDAC Pharmacovigilance Requirements: What the Official Guidelines Actually Mean for Your Compliance Team" [ref=f2e22]'
+    - generic [ref=f2e24]:
+      - generic [ref=f2e25]: Pharmacovigilance · NAFDAC Compliance
+      - 'heading "NAFDAC Pharmacovigilance Requirements: What the Official Guidelines Actually Mean" [level=1] [ref=f2e26]'
+      - paragraph [ref=f2e27]: A plain language breakdown of what the guideline actually requires — not just what the regulation says.
+      - generic [ref=f2e28]:
+        - generic [ref=f2e29]:
+          - text: By
+          - strong [ref=f2e30]: MedNova Lifesciences
+        - generic [ref=f2e31]:
+          - text: "Last reviewed:"
+          - strong [ref=f2e32]: September 2026
+        - generic [ref=f2e33]:
+          - strong [ref=f2e34]: ~21 min
+          - text: read
+        - generic [ref=f2e35]: Pillar Guide
+    - article [ref=f2e38]:
+      - paragraph [ref=f2e39]: "Primary source: NAFDAC Good Pharmacovigilance Practice Guidelines (Doc. Ref. PV/PMS-GDL-017-01, effective 21 January 2021)"
+      - paragraph [ref=f2e40]:
+        - strong [ref=f2e41]: "Short answer:"
+        - text: NAFDAC pharmacovigilance requirements oblige every Certificate of Registration Holder placing a medicinal product on the Nigerian market to run a functioning pharmacovigilance system — one that collects, evaluates, documents and reports safety information about that product. Compliance is not satisfied by submitting adverse event reports alone. It requires a named and resident Qualified Person Responsible for Pharmacovigilance, a Pharmacovigilance System Master File held in Nigeria, controlled procedures, trained personnel, risk management, safety communication, audit, and records that prove all of it happened.
+      - navigation "Table of contents" [ref=f2e42]:
+        - generic [ref=f2e43]: In this guide
+        - list [ref=f2e44]:
+          - listitem [ref=f2e45]:
+            - link "What are NAFDAC pharmacovigilance requirements?" [ref=f2e46] [cursor=pointer]:
+              - /url: "#what-are"
+          - listitem [ref=f2e47]:
+            - link "Who the requirements apply to" [ref=f2e48] [cursor=pointer]:
+              - /url: "#who-applies"
+          - listitem [ref=f2e49]:
+            - link "What the guideline covers" [ref=f2e50] [cursor=pointer]:
+              - /url: "#what-it-covers"
+          - listitem [ref=f2e51]:
+            - link "The QPPV in Nigeria" [ref=f2e52] [cursor=pointer]:
+              - /url: "#qppv"
+          - listitem [ref=f2e53]:
+            - link "What a compliant team must actually do" [ref=f2e54] [cursor=pointer]:
+              - /url: "#must-do"
+          - listitem [ref=f2e55]:
+            - link "Documents you need on file" [ref=f2e56] [cursor=pointer]:
+              - /url: "#documents"
+          - listitem [ref=f2e57]:
+            - link "The biggest compliance gaps" [ref=f2e58] [cursor=pointer]:
+              - /url: "#gaps"
+          - listitem [ref=f2e59]:
+            - link "Compliance checklist" [ref=f2e60] [cursor=pointer]:
+              - /url: "#checklist"
+          - listitem [ref=f2e61]:
+            - link "4 worked examples" [ref=f2e62] [cursor=pointer]:
+              - /url: "#examples"
+          - listitem [ref=f2e63]:
+            - link "Why expectations are rising" [ref=f2e64] [cursor=pointer]:
+              - /url: "#why-rising"
+          - listitem [ref=f2e65]:
+            - link "How MedNova can help" [ref=f2e66] [cursor=pointer]:
+              - /url: "#how-mednova-helps"
+          - listitem [ref=f2e67]:
+            - link "Frequently asked questions" [ref=f2e68] [cursor=pointer]:
+              - /url: "#faq"
+          - listitem [ref=f2e69]:
+            - link "References" [ref=f2e70] [cursor=pointer]:
+              - /url: "#references"
+      - heading "What are NAFDAC pharmacovigilance requirements?" [level=2] [ref=f2e71]
+      - paragraph [ref=f2e72]: NAFDAC pharmacovigilance requirements are the obligations that Nigeria's medicines regulator places on companies responsible for products it has registered, requiring them to monitor those products for safety throughout their commercial life.
+      - paragraph [ref=f2e73]: The legal foundation sits in the NAFDAC Act, Cap N1, Laws of the Federation of Nigeria 2004, which gives the Agency authority over the manufacture, importation, exportation, distribution, advertisement, sale and use of regulated products. From that authority NAFDAC issued its Good Pharmacovigilance Practice Regulations, and the Good Pharmacovigilance Practice Guidelines set out how the Agency expects those regulations to be met in practice.
+      - paragraph [ref=f2e74]: NAFDAC's guideline defines a pharmacovigilance system as a quality system that a Certificate of Registration Holder uses to discharge its pharmacovigilance responsibilities, designed to monitor the safety of authorised products and to detect any change in their benefit to risk balance. The definitional detail matters. It is a quality system, not a mailbox. It is characterised by structures, processes and outcomes, covering organisational structure, responsibilities, procedures, resources, compliance management and record management.
+      - paragraph [ref=f2e75]: "The four quality objectives NAFDAC sets for that system are:"
+      - list [ref=f2e76]:
+        - listitem [ref=f2e77]: Complying with legal pharmacovigilance obligations
+        - listitem [ref=f2e78]: Preventing harm from adverse reactions, including harm arising from off label use, misuse, abuse, medication error or occupational exposure
+        - listitem [ref=f2e79]: Promoting safe and effective use by getting timely safety information to patients, healthcare professionals and the public
+        - listitem [ref=f2e80]: Contributing to the protection of public health
+      - paragraph [ref=f2e81]:
+        - text: If your team needs a working definition of the underlying discipline before going further, MedNova maintains a glossary entry on
+        - link "Good Pharmacovigilance Practice" [ref=f2e82] [cursor=pointer]:
+          - /url: /resources/glossary/good-pharmacovigilance-practice.html
+        - text: and on the
+        - link "adverse drug reaction" [ref=f2e83] [cursor=pointer]:
+          - /url: /resources/glossary/adverse-drug-reaction.html
+        - text: .
+      - heading "Who NAFDAC's pharmacovigilance requirements apply to" [level=2] [ref=f2e84]
+      - paragraph [ref=f2e85]: "The guideline applies to every entity authorised to place medicinal products on the Nigerian market. NAFDAC uses the term Certificate of Registration Holder, and defines it broadly: NAFDAC licence holders, individuals, public and private institutions, manufacturers, importers, and donors of medicinal products. Companies that assume pharmacovigilance obligations sit only with large multinational manufacturers are reading the scope too narrowly."
+      - paragraph [ref=f2e86]: "The guideline then names product categories where active safety monitoring is expected:"
+      - list [ref=f2e87]:
+        - listitem [ref=f2e88]: Products developed wholly or largely outside Nigeria
+        - listitem [ref=f2e89]: Products with under ten years of post marketing experience elsewhere, or under five years in Nigeria
+        - listitem [ref=f2e90]: Advanced therapeutic products such as tissue, cell or gene based products
+        - listitem [ref=f2e91]: Products subject to a risk management plan in any other country
+        - listitem [ref=f2e92]: Orphan medicinal products
+        - listitem [ref=f2e93]: Products granted accelerated or conditional approval in any country
+        - listitem [ref=f2e94]: Products intended solely for special populations such as children or the elderly
+        - listitem [ref=f2e95]: Products acting through the immune system, such as cytokines and monoclonal antibodies
+        - listitem [ref=f2e96]: Central nervous system products, including antiepileptics, antipsychotics, antidepressants and treatments for neurodegenerative disease
+        - listitem [ref=f2e97]: Any other product NAFDAC identifies on the basis of benefit to risk assessment
+      - paragraph [ref=f2e98]: NAFDAC may additionally require a Certificate of Registration Holder to follow the guideline where the Agency identifies a safety concern during post marketing surveillance. Importantly, being outside these categories does not release a company from monitoring the safety of its products. The general obligation to operate a pharmacovigilance system remains.
+      - generic [ref=f2e99]:
+        - strong [ref=f2e100]: Boundary to watch
+        - text: Safety reporting for products under clinical investigation is not governed by this guideline. Those obligations sit under NAFDAC's Good Clinical Practice Regulations. Companies running trials and marketing products in Nigeria need both frameworks running side by side, with a clear internal rule for which pathway a given case follows.
+      - heading "What the NAFDAC Good Pharmacovigilance Practice guideline covers" [level=2] [ref=f2e101]
+      - paragraph [ref=f2e102]: The guideline is organised into chapters that map onto the compliance areas an inspector will look at. Below is what each area asks of a company in operational terms.
+      - heading "1. The pharmacovigilance system" [level=3] [ref=f2e103]
+      - paragraph [ref=f2e104]: "Chapter 1 sets the foundation: sufficient competent personnel, defined managerial responsibilities, document control, adequate premises and validated IT, compliance management, and record management."
+      - paragraph [ref=f2e105]: It also names the processes NAFDAC treats as critical, among them continuous benefit to risk monitoring, risk management, ICSR collection through to timely transmission, signal detection and management, periodic safety update reporting, responding to Agency requests, and keeping product information current. Business continuity plans must exist for those critical processes, including back up arrangements for urgent information exchange with the Agency.
+      - heading "2. Quality management" [level=3] [ref=f2e106]
+      - paragraph [ref=f2e107]: Quality objectives must be documented in written policies, quality plans, quality manuals, standard operating procedures and quality records. Training plans and records must be kept and made available for audit and inspection.
+      - paragraph [ref=f2e108]: "Notably, NAFDAC extends the training expectation beyond the pharmacovigilance department: staff in clinical trials, product complaints, medical information, sales and marketing, regulatory affairs, legal and audit all need appropriate instruction, because their work can affect the safety system. Deviations must be monitored, corrective and preventive actions taken, and the effectiveness of those actions verified."
+      - heading "3. The Pharmacovigilance System Master File" [level=3] [ref=f2e109]
+      - paragraph [ref=f2e110]: Chapter 2 is where many Nigerian compliance programmes are weakest. Certificate of Registration Holders in Nigeria are required to maintain a Pharmacovigilance System Master File and to submit it when applying for a Certificate of Registration.
+      - paragraph [ref=f2e111]: The file must be located either at the Nigerian site where the main pharmacovigilance activities are performed or at the Nigerian site where the QPPV operates. Applicants and holders of listings for traditional herbal medicinal products are also required to submit one. It must remain continuously accessible to both the QPPV and the Agency.
+      - paragraph [ref=f2e112]:
+        - text: See our
+        - link "PV Readiness Guide" [ref=f2e113] [cursor=pointer]:
+          - /url: /resources/pv-readiness-guide.html
+        - text: for how governance, case handling and inspection preparedness fit together around this document.
+      - heading "4. Adverse reaction and adverse event reporting" [level=3] [ref=f2e114]
+      - paragraph [ref=f2e115]: Chapter 5 covers structures and processes for unsolicited and solicited reports, special situations, individual case safety report submission, reporting time frames and formats, validation, follow up, data management and quality management.
+      - paragraph [ref=f2e116]: "The expedited and non expedited structure is visible in NAFDAC's own performance expectations: the master file must contain figures showing the timeliness of 15 day and 90 day reporting across the previous year, alongside metrics on submission quality and periodic report timeliness."
+      - heading "5. Risk management" [level=3] [ref=f2e117]
+      - paragraph [ref=f2e118]: Chapter 3 requires the Certificate of Registration Holder to constantly monitor product risks, report results to the Agency, and take action to minimise risk and maximise benefit, including keeping company generated product information accurate and updating it promptly when new information emerges.
+      - paragraph [ref=f2e119]: "The Risk Management Plan has seven parts: product overview, safety specification, pharmacovigilance plan, plans for post authorisation efficacy studies, risk minimisation measures with an evaluation of their effectiveness, a summary, and annexes."
+      - paragraph [ref=f2e120]:
+        - text: The safety specification alone has eight elements, including the epidemiology of the indication in Nigeria specifically, populations not studied in trials, and post authorisation experience. MedNova's glossary entry on the
+        - link "Risk Management Plan" [ref=f2e121] [cursor=pointer]:
+          - /url: /resources/glossary/risk-management-plan.html
+        - text: sets out the structure in short form.
+      - heading "6. Post authorisation safety studies" [level=3] [ref=f2e122]
+      - paragraph [ref=f2e123]: Chapter 7 governs studies conducted after a product is on the market to characterise a safety concern, quantify exposure, or measure whether a risk minimisation measure is working. The QPPV is expected to be involved in protocol review and sign off, and to be aware of any such study the Agency has requested along with its results.
+      - heading "7. Safety communication" [level=3] [ref=f2e124]
+      - paragraph [ref=f2e125]: Chapter 4 addresses how safety information reaches healthcare professionals, patients and the public, including Direct Healthcare Professional Communications. Communication is a compliance obligation, not a marketing decision, and it needs its own procedure, approval route and record.
+      - heading "8. Pharmacovigilance audit" [level=3] [ref=f2e126]
+      - paragraph [ref=f2e127]: Chapter 8 requires risk based audits of both the quality system and the pharmacovigilance system, with reports issued to the management responsible for the areas audited. Audits of organisations the company has delegated tasks to must be included, because delegated activity remains part of the company's own system.
+      - paragraph [ref=f2e128]: The master file must carry a list of completed audits covering five years, plus the audit schedule. Where an audit raises a significant finding, a note stays in the master file until corrective action is demonstrably complete or independently verified.
+      - heading "The Qualified Person Responsible for Pharmacovigilance in Nigeria" [level=2] [ref=f2e129]
+      - paragraph [ref=f2e130]: NAFDAC requires the Certificate of Registration Holder to have an appropriately qualified QPPV permanently and continuously at its disposal, and to submit that person's name and contact details to the Agency. The guideline states that the QPPV should “reside and operate in Nigeria”, which rules out the common arrangement of naming a regional or head office contact and treating the Nigerian obligation as covered.
+      - paragraph [ref=f2e131]: "The specifics that decide whether an arrangement holds up under inspection:"
+      - list [ref=f2e132]:
+        - listitem [ref=f2e133]: Each pharmacovigilance system can have only one QPPV, though one QPPV may serve more than one holder or system provided every obligation can still be met
+        - listitem [ref=f2e134]: The QPPV must have skills in pharmacovigilance system management plus expertise, or access to expertise, in medicine, pharmaceutical sciences, epidemiology and biostatistics
+        - listitem [ref=f2e135]: Duties must be set out in a job description, and the reporting line shown on an organisational chart
+        - listitem [ref=f2e136]: Back up procedures must exist for the QPPV's absence, and the back up person must hold all information needed to act
+        - listitem [ref=f2e137]: The QPPV must have authority over the master file and be notified of changes to it, including changes that increase workload, new products entering the system, and transfers of significant services to a third party
+        - listitem [ref=f2e138]: The QPPV acts as the single pharmacovigilance contact point for the Agency on a 24 hour basis, and as the contact point for pharmacovigilance inspections
+        - listitem [ref=f2e139]: The role itself may be subcontracted, but the Certificate of Registration Holder retains ultimate responsibility for the completeness and accuracy of the master file and for the quality and integrity of the whole system
+      - paragraph [ref=f2e140]: Where activities are subcontracted, NAFDAC expects detailed, current written agreements describing delegation and each party's responsibilities, a description of the subcontracted services inside the master file, and a list of subcontracts in the annex. The third party may itself be inspected at the Agency's discretion.
+      - paragraph [ref=f2e141]:
+        - text: MedNova provides outsourced QPPV and local safety representation built to this standard, and covers documentation and vendor oversight in our
+        - link "QPPV Support Essentials" [ref=f2e142] [cursor=pointer]:
+          - /url: /resources/qppv-support-essentials.html
+        - text: guidance.
+      - heading "What NAFDAC expects a compliant pharmacovigilance team to actually do" [level=2] [ref=f2e143]
+      - paragraph [ref=f2e144]: "Translated out of regulatory language, a compliant team in Nigeria must be able to perform the following, repeatedly and on the record:"
+      - list [ref=f2e145]:
+        - listitem [ref=f2e146]: Receive safety information from any source, including consumers, healthcare professionals, literature, digital channels the company controls, distributors and licensing partners
+        - listitem [ref=f2e147]: Capture and document that information the day it arrives, with a traceable receipt date
+        - listitem [ref=f2e148]: Assess whether the report meets the criteria for a valid case
+        - listitem [ref=f2e149]: Follow up for missing information, and document the attempt whether or not it succeeds
+        - listitem [ref=f2e150]: Evaluate seriousness and expectedness against the reference safety information
+        - listitem [ref=f2e151]: Code the case using recognised terminology and check for duplicates
+        - listitem [ref=f2e152]: Submit reportable cases to NAFDAC inside the applicable time frame
+        - listitem [ref=f2e153]: Retain complete case records and the evidence of submission
+        - listitem [ref=f2e154]: Monitor accumulating data for emerging safety signals rather than treating cases in isolation
+        - listitem [ref=f2e155]: Escalate validated safety concerns internally and to the Agency
+        - listitem [ref=f2e156]: Maintain the Pharmacovigilance System Master File as a live document with a change logbook
+        - listitem [ref=f2e157]: Demonstrate that every person who could receive a safety report has been trained, with records to prove it
+        - listitem [ref=f2e158]: Audit the system, track corrective and preventive actions to closure, and verify that the actions worked
+      - generic [ref=f2e159]:
+        - strong [ref=f2e160]: The line that matters
+        - text: A team that can evidence all 13 is compliant. A team that can evidence the first 8 is doing case processing, which is not the same thing.
+      - heading "What documents a pharmaceutical company should have for pharmacovigilance compliance" [level=2] [ref=f2e161]
+      - paragraph [ref=f2e162]: "Inspection readiness is largely a documentation question. The following should exist, be current, and be retrievable:"
+      - list [ref=f2e163]:
+        - listitem [ref=f2e164]: Pharmacovigilance System Master File, with all annexes and a change control logbook
+        - listitem [ref=f2e165]: QPPV appointment letter, job description, curriculum vitae, contact details and documented back up arrangements
+        - listitem [ref=f2e166]: Organisational chart showing the QPPV's position and reporting line
+        - listitem [ref=f2e167]: Standard operating procedures covering case intake, validation, assessment, follow up, submission, signal management, literature monitoring, safety communication, deviation handling, CAPA, archiving and training
+        - listitem [ref=f2e168]: Training needs assessment, training plans and individual training records
+        - listitem [ref=f2e169]: Individual case safety reports with source documents and submission evidence
+        - listitem [ref=f2e170]: Aggregate reports such as PSURs or PBRERs, with their submission schedule and proof of filing
+        - listitem [ref=f2e171]: Risk management documentation, including any risk management plan and evidence that risk minimisation measures were monitored
+        - listitem [ref=f2e172]: Signal detection outputs, validation decisions and the reasoning behind them
+        - listitem [ref=f2e173]: Audit schedule, completed audit reports for the past five years, and CAPA plans with closure evidence
+        - listitem [ref=f2e174]: Safety communication records, including any Direct Healthcare Professional Communication
+        - listitem [ref=f2e175]: Pharmacovigilance agreements and safety data exchange agreements with partners, distributors and vendors
+        - listitem [ref=f2e176]: Reconciliation records between safety, quality complaint and medical information systems
+        - listitem [ref=f2e177]: Business continuity plan for critical pharmacovigilance processes
+        - listitem [ref=f2e178]: Performance indicators with actual measured results, not targets alone
+      - paragraph [ref=f2e179]: Holding a document is not the same as running a system. NAFDAC's master file requirements make this explicit. The file must contain evidence of ongoing performance monitoring, including how correct ICSR reporting is assessed and what the measured timeliness figures actually were.
+      - heading "The biggest NAFDAC pharmacovigilance compliance gaps" [level=2] [ref=f2e180]
+      - paragraph [ref=f2e181]: Across assessments of Nigerian and Africa facing pharmacovigilance systems, the same eight gaps recur.
+      - generic [ref=f2e182]:
+        - generic [ref=f2e183]:
+          - generic [ref=f2e184]: Gap 1
+          - heading "Treating pharmacovigilance as adverse event reporting" [level=4] [ref=f2e185]
+          - paragraph [ref=f2e186]: Case submission is one chapter of eight. Quality management, master file, risk management, communication and audit carry equal weight.
+        - generic [ref=f2e187]:
+          - generic [ref=f2e188]: Gap 2
+          - heading "A QPPV who is not genuinely resident or genuinely empowered" [level=4] [ref=f2e189]
+          - paragraph [ref=f2e190]: A named person with no authority over the system, no access to the safety database out of hours, and no back up arrangement does not satisfy the requirement.
+        - generic [ref=f2e191]:
+          - generic [ref=f2e192]: Gap 3
+          - heading "A master file that was written once" [level=4] [ref=f2e193]
+          - paragraph [ref=f2e194]: NAFDAC expects a live document with a logbook recording the date, the person responsible and the nature of every change.
+        - generic [ref=f2e195]:
+          - generic [ref=f2e196]: Gap 4
+          - heading "Weak follow up processes" [level=4] [ref=f2e197]
+          - paragraph [ref=f2e198]: Cases are submitted incomplete, follow up attempts are not recorded, and the file cannot show what was asked for or when.
+        - generic [ref=f2e199]:
+          - generic [ref=f2e200]: Gap 5
+          - heading "Training limited to the safety team" [level=4] [ref=f2e201]
+          - paragraph [ref=f2e202]: Sales representatives, regulatory staff and medical information handlers all receive safety information. If their training is not documented, the system has an open edge.
+        - generic [ref=f2e203]:
+          - generic [ref=f2e204]: Gap 6
+          - heading "No functioning audit and CAPA loop" [level=4] [ref=f2e205]
+          - paragraph [ref=f2e206]: Audits are scheduled but not completed, findings are not tracked to closure, and effectiveness is never verified.
+        - generic [ref=f2e207]:
+          - generic [ref=f2e208]: Gap 7
+          - heading "No signal detection" [level=4] [ref=f2e209]
+          - paragraph [ref=f2e210]: Cases are processed individually and never reviewed in aggregate, so the company learns about its own safety signal from the regulator.
+        - generic [ref=f2e211]:
+          - generic [ref=f2e212]: Gap 8
+          - heading "Unmanaged vendors and partners" [level=4] [ref=f2e213]
+          - paragraph [ref=f2e214]: Distributors, licensing partners and outsourced case processors sit inside the system's boundary. Without written agreements, defined data exchange and risk based audits of those parties, the holder carries an unquantified exposure.
+      - heading "NAFDAC pharmacovigilance compliance checklist" [level=2] [ref=f2e215]
+      - generic [ref=f2e216]:
+        - generic [ref=f2e217]:
+          - heading "System and governance" [level=4] [ref=f2e218]
+          - list [ref=f2e219]:
+            - listitem [ref=f2e220]: Pharmacovigilance responsibilities formally assigned in writing
+            - listitem [ref=f2e221]: QPPV appointed, resident in Nigeria, notified to NAFDAC
+            - listitem [ref=f2e222]: QPPV job description and organisational chart in place
+            - listitem [ref=f2e223]: Back up arrangements documented and communicated
+            - listitem [ref=f2e224]: Pharmacovigilance System Master File maintained in Nigeria and accessible
+            - listitem [ref=f2e225]: Change control logbook current
+            - listitem [ref=f2e226]: Business continuity plan covering critical processes
+        - generic [ref=f2e227]:
+          - heading "Case management" [level=4] [ref=f2e228]
+          - list [ref=f2e229]:
+            - listitem [ref=f2e230]: All intake channels identified and documented
+            - listitem [ref=f2e231]: Receipt dates recorded and traceable
+            - listitem [ref=f2e232]: Case validity assessed against defined criteria
+            - listitem [ref=f2e233]: Follow up attempted and documented
+            - listitem [ref=f2e234]: Seriousness and expectedness assessed
+            - listitem [ref=f2e235]: Duplicate detection performed
+            - listitem [ref=f2e236]: Reporting time frames monitored and measured
+            - listitem [ref=f2e237]: Submission evidence retained
+        - generic [ref=f2e238]:
+          - heading "Quality and documentation" [level=4] [ref=f2e239]
+          - list [ref=f2e240]:
+            - listitem [ref=f2e241]: Standard operating procedures controlled, current and version managed
+            - listitem [ref=f2e242]: Training needs assessed, plans issued, records retained
+            - listitem [ref=f2e243]: Non pharmacovigilance staff trained on safety information handling
+            - listitem [ref=f2e244]: Deviations documented and investigated
+            - listitem [ref=f2e245]: CAPA implemented and effectiveness verified
+            - listitem [ref=f2e246]: Audits scheduled and completed, five year list maintained
+            - listitem [ref=f2e247]: Record retention periods defined and applied
+        - generic [ref=f2e248]:
+          - heading "Safety surveillance and risk" [level=4] [ref=f2e249]
+          - list [ref=f2e250]:
+            - listitem [ref=f2e251]: Signal detection performed on a defined cycle
+            - listitem [ref=f2e252]: Signal validation decisions documented
+            - listitem [ref=f2e253]: Benefit to risk evaluation conducted and recorded
+            - listitem [ref=f2e254]: Risk minimisation activities monitored for effectiveness
+            - listitem [ref=f2e255]: Aggregate reports scheduled, produced and submitted
+            - listitem [ref=f2e256]: Literature monitored on a defined frequency
+            - listitem [ref=f2e257]: Product information kept current with new safety knowledge
+        - generic [ref=f2e258]:
+          - heading "Third parties" [level=4] [ref=f2e259]
+          - list [ref=f2e260]:
+            - listitem [ref=f2e261]: Pharmacovigilance agreements executed with all partners and vendors
+            - listitem [ref=f2e262]: Delegated activities described in the master file
+            - listitem [ref=f2e263]: List of subcontracts held in the master file annex
+            - listitem [ref=f2e264]: Risk based audits of third parties scheduled
+        - generic [ref=f2e265]:
+          - paragraph [ref=f2e266]: A downloadable version aligned to current NAFDAC expectations is available as the NAFDAC QPPV Compliance Checklist.
+          - link "Download the Checklist PDF" [ref=f2e267] [cursor=pointer]:
+            - /url: /public/downloads/MedNova-NAFDAC-QPPV-Compliance-Checklist.pdf
+      - 'heading "Regulation, interpretation, action, evidence: 4 worked examples" [level=2] [ref=f2e268]'
+      - paragraph [ref=f2e269]: The distance between what a regulation says and what a compliance team must build is where most programmes fail. Four examples.
+      - generic [ref=f2e270]:
+        - 'heading "Example 1: The resident QPPV" [level=4] [ref=f2e271]'
+        - generic [ref=f2e272]:
+          - term [ref=f2e273]: What NAFDAC says
+          - definition [ref=f2e274]: The QPPV should be permanently and continuously at the holder's disposal and should reside and operate in Nigeria, with back up procedures in place.
+          - term [ref=f2e275]: What it means
+          - definition [ref=f2e276]: A Nigerian based individual must be reachable and able to act on safety matters at any hour, including when travelling or on leave.
+          - term [ref=f2e277]: What your team should do
+          - definition [ref=f2e278]: Appoint and notify a resident QPPV, issue a job description, name a trained deputy, and publish a contact route that works outside office hours.
+          - term [ref=f2e279]: Evidence to retain
+          - definition [ref=f2e280]: Appointment letter, notification to NAFDAC, curriculum vitae, job description, organisational chart, deputy appointment, out of hours contact procedure.
+      - generic [ref=f2e281]:
+        - 'heading "Example 2: The Pharmacovigilance System Master File" [level=4] [ref=f2e282]'
+        - generic [ref=f2e283]:
+          - term [ref=f2e284]: What NAFDAC says
+          - definition [ref=f2e285]: Holders must maintain a master file and submit it during application for a Certificate of Registration, held at the Nigerian site where the main pharmacovigilance activities occur or where the QPPV operates.
+          - term [ref=f2e286]: What it means
+          - definition [ref=f2e287]: The file is the regulator's window into the system, and its physical or electronic location in Nigeria is itself a requirement.
+          - term [ref=f2e288]: What your team should do
+          - definition [ref=f2e289]: Build the file to NAFDAC's prescribed headings, populate every annex, assign an owner, and put change control around it.
+          - term [ref=f2e290]: Evidence to retain
+          - definition [ref=f2e291]: Current master file, annexes A to I, logbook entries with date, author and nature of each change, and the record of what was made available to the Agency and when.
+      - generic [ref=f2e292]:
+        - 'heading "Example 3: Reporting performance" [level=4] [ref=f2e293]'
+        - generic [ref=f2e294]:
+          - term [ref=f2e295]: What NAFDAC says
+          - definition [ref=f2e296]: The master file must explain how correct ICSR reporting is assessed and present figures showing the timeliness of 15 day and 90 day reporting across the previous year.
+          - term [ref=f2e297]: What it means
+          - definition [ref=f2e298]: The Agency expects you to be measuring your own compliance, not asserting it.
+          - term [ref=f2e299]: What your team should do
+          - definition [ref=f2e300]: Instrument the case workflow so receipt date, submission date and elapsed days are captured automatically, and review the metric monthly.
+          - term [ref=f2e301]: Evidence to retain
+          - definition [ref=f2e302]: Timeliness figures and graphs, the definition of the metric, the review record, and CAPA raised on any late submission.
+      - generic [ref=f2e303]:
+        - 'heading "Example 4: Delegated activities" [level=4] [ref=f2e304]'
+        - generic [ref=f2e305]:
+          - term [ref=f2e306]: What NAFDAC says
+          - definition [ref=f2e307]: Subcontracts must be detailed and current, delegated services described in the master file, the list of subcontracts held in the annex, and the third party may be inspected at the Agency's discretion.
+          - term [ref=f2e308]: What it means
+          - definition [ref=f2e309]: Outsourcing moves the work, never the accountability.
+          - term [ref=f2e310]: What your team should do
+          - definition [ref=f2e311]: Execute pharmacovigilance agreements defining tasks, data exchange, timelines and escalation, then audit the vendor on a risk basis.
+          - term [ref=f2e312]: Evidence to retain
+          - definition [ref=f2e313]: Signed agreements, the subcontract list, vendor audit reports, CAPA arising from those audits, and reconciliation records proving no cases were lost at the interface.
+      - paragraph [ref=f2e314]: Applied consistently across every regulatory statement, this four step pattern is the difference between a company that can describe its obligations and one that can prove it met them.
+      - heading "Why NAFDAC pharmacovigilance expectations are rising" [level=2] [ref=f2e315]
+      - paragraph [ref=f2e316]: Three developments have changed the enforcement climate.
+      - paragraph [ref=f2e317]: First, in March 2022 the World Health Organization announced that Nigeria's medicines regulator had reached Maturity Level 3, meaning a stable, well functioning and integrated regulatory system, assessed against a benchmarking tool covering more than 260 indicators including the ability to detect adverse events. NAFDAC has since sustained that status through re benchmarking.
+      - paragraph [ref=f2e318]: Second, in November 2025 NAFDAC moved from observer to full membership of the International Council for Harmonisation, placing Nigeria among a small group of national regulatory authorities applying globally harmonised standards, and increasing the likelihood that ICH E2 series expectations will shape local practice.
+      - paragraph [ref=f2e319]: Third, Nigeria's reporting base has expanded sharply. After the Med Safety App was deployed, adverse event reports recorded by the National Pharmacovigilance Centre in VigiFlow rose from 2,051 in the baseline period to 18,995, with paper based reporting falling from 98.4 percent to 15.7 percent.
+      - paragraph [ref=f2e320]: The practical implication for industry is straightforward. A regulator with better data, harmonised standards and international scrutiny asks harder questions. Companies whose systems were built for a low reporting environment will find that the environment has moved.
+      - generic [ref=f2e321]:
+        - strong [ref=f2e322]: Planning note
+        - text: The published Good Pharmacovigilance Practice Guidelines carry a stated review date of 20 January 2026. Compliance teams should confirm they are working from the current edition on NAFDAC's guidelines page before finalising procedures or submissions.
+      - heading "How MedNova supports pharmacovigilance compliance in Nigeria" [level=2] [ref=f2e323]
+      - paragraph [ref=f2e324]: If your team is assessing whether its pharmacovigilance system meets Nigerian requirements, the fastest route is a structured gap assessment against the guideline rather than a general review.
+      - list [ref=f2e325]:
+        - listitem [ref=f2e326]: Pharmacovigilance system assessment and gap analysis against NAFDAC's Good Pharmacovigilance Practice Guidelines
+        - listitem [ref=f2e327]: Outsourced QPPV and local safety representation for Marketing Authorisation Holders
+        - listitem [ref=f2e328]: Pharmacovigilance System Master File build, remediation and change control
+        - listitem [ref=f2e329]: Standard operating procedure development and documentation review
+        - listitem [ref=f2e330]: Case processing, aggregate reporting, signal detection and literature surveillance
+        - listitem [ref=f2e331]: Inspection readiness, audit support and CAPA management
+        - listitem [ref=f2e332]: Regulatory affairs support covering registration, variations, renewals and lifecycle management
+        - listitem [ref=f2e333]: Training and consulting for pharmacovigilance and regulatory teams
+      - paragraph [ref=f2e334]:
+        - text: "Next step: download the NAFDAC QPPV Compliance Checklist, run the QPPV readiness self assessment on our"
+        - link "pharmacovigilance services" [ref=f2e335] [cursor=pointer]:
+          - /url: /pv.html
+        - text: page, or request a pharmacovigilance compliance assessment from our team.
+      - generic [ref=f2e336]:
+        - heading "Strengthen your pharmacovigilance compliance" [level=3] [ref=f2e337]
+        - paragraph [ref=f2e338]: MedNova Lifesciences supports organisations with pharmacovigilance system development, outsourced QPPV representation, master file build and remediation, and inspection readiness in Nigeria and across Africa.
+        - link "Contact MedNova Lifesciences" [ref=f2e339] [cursor=pointer]:
+          - /url: /contact/
+      - generic [ref=f2e340]:
+        - heading "Related resources" [level=3] [ref=f2e341]
+        - generic [ref=f2e342]:
+          - link "Pharmacovigilance Services" [ref=f2e343] [cursor=pointer]:
+            - /url: /pv.html
+          - link "QPPV Support Essentials" [ref=f2e344] [cursor=pointer]:
+            - /url: /resources/qppv-support-essentials.html
+          - link "PV Readiness Guide" [ref=f2e345] [cursor=pointer]:
+            - /url: /resources/pv-readiness-guide.html
+          - link "Drug Safety in Nigeria" [ref=f2e346] [cursor=pointer]:
+            - /url: /resources/drug-safety-in-nigeria.html
+          - link "NAFDAC QPPV Compliance Checklist" [ref=f2e347] [cursor=pointer]:
+            - /url: /compliance-checklist.html
+      - heading "Frequently asked questions" [level=2] [ref=f2e348]
+      - group [ref=f2e349]:
+        - generic "What are NAFDAC pharmacovigilance requirements? +" [ref=f2e350] [cursor=pointer]
+      - group [ref=f2e351]:
+        - generic "Who is responsible for pharmacovigilance in Nigeria? +" [ref=f2e352] [cursor=pointer]
+      - group [ref=f2e353]:
+        - generic "Does the QPPV have to be based in Nigeria? +" [ref=f2e354] [cursor=pointer]
+      - group [ref=f2e355]:
+        - generic "What is a Pharmacovigilance System Master File? +" [ref=f2e356] [cursor=pointer]
+      - group [ref=f2e357]:
+        - generic "Do herbal medicinal products require a Pharmacovigilance System Master File? +" [ref=f2e358] [cursor=pointer]
+      - group [ref=f2e359]:
+        - generic "Does every adverse event have to be reported to NAFDAC? +" [ref=f2e360] [cursor=pointer]
+      - group [ref=f2e361]:
+        - generic "What is the difference between an adverse event and an adverse drug reaction? +" [ref=f2e362] [cursor=pointer]
+      - group [ref=f2e363]:
+        - generic "Does pharmacovigilance cover clinical trial safety reporting in Nigeria? +" [ref=f2e364] [cursor=pointer]
+      - group [ref=f2e365]:
+        - generic "Can a company outsource pharmacovigilance activities, including the QPPV role? +" [ref=f2e366] [cursor=pointer]
+      - group [ref=f2e367]:
+        - generic "How should a pharmaceutical company prepare for a NAFDAC pharmacovigilance inspection? +" [ref=f2e368] [cursor=pointer]
+      - heading "References" [level=2] [ref=f2e369]
+      - list [ref=f2e370]:
+        - listitem [ref=f2e371]:
+          - text: National Agency for Food and Drug Administration and Control. NAFDAC Good Pharmacovigilance Practice Guidelines (Doc. Ref. PV/PMS-GDL-017-01), effective 21 January 2021. Accessed September 2026.
+          - link "https://www.nafdac.gov.ng/wp-content/uploads/Files/Resources/Guidelines/PVG_GUIDELINES/NAFDAC-Guidelines-on-Good-Pharmacovigilance-2021.pdf" [ref=f2e372] [cursor=pointer]:
+            - /url: https://www.nafdac.gov.ng/wp-content/uploads/Files/Resources/Guidelines/PVG_GUIDELINES/NAFDAC-Guidelines-on-Good-Pharmacovigilance-2021.pdf
+        - listitem [ref=f2e373]: National Agency for Food and Drug Administration and Control. Guidelines for Post Marketing Surveillance in Nigeria.
+        - listitem [ref=f2e374]: National Agency for Food and Drug Administration and Control. Guidelines for Post Marketing Surveillance of Medical Products in Nigeria (Doc. Ref. PMS-GDL-016-01), effective 27 September 2024.
+        - listitem [ref=f2e375]: "National Agency for Food and Drug Administration and Control. Drugs: regulatory resources and pharmacovigilance responsibilities."
+        - listitem [ref=f2e376]: World Health Organization. Egypt and Nigeria medicines regulators achieve high maturity level in WHO classification, 30 March 2022.
+        - listitem [ref=f2e377]: "National Agency for Food and Drug Administration and Control. NAFDAC's WHO ML3 Re-Benchmarking Success: Sustaining Regulatory Excellence."
+        - listitem [ref=f2e378]: National Agency for Food and Drug Administration and Control. NAFDAC Announces a Transition from Observer Status to Full Membership of the International Council for Harmonisation.
+        - listitem [ref=f2e379]: Trends in Adverse Event Reporting Before and After the Introduction of the Med Safety App in Nigeria. Pharmaceutical Medicine, 2024. PubMed record 38705932.
+        - listitem [ref=f2e380]: National Agency for Food and Drug Administration and Control. Pharmacovigilance and Post Market Surveillance Guidelines index. Use this page to confirm the current edition of any guideline referenced above.
+        - listitem [ref=f2e381]:
+          - text: MedNova Lifesciences. Pharmacovigilance services, Nigeria and Africa.
+          - link "mednovalife.com/pv.html" [ref=f2e382] [cursor=pointer]:
+            - /url: /pv.html
+  - contentinfo [ref=f2e383]:
+    - generic [ref=f2e384]:
+      - text: © 2026 MedNova Lifesciences | Lagos, Nigeria —
+      - link "llms.txt" [ref=f2e385] [cursor=pointer]:
+        - /url: /llms.txt
