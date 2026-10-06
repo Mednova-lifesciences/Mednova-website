@@ -36,6 +36,7 @@ Featured resource articles:
 - https://mednovalife.com/resources/signal-detection-pharmacovigilance-nigeria.html — Signal Detection in Pharmacovigilance: what a safety signal is, what NAFDAC requires, and why standard statistical methods underperform on Nigerian datasets
 - https://mednovalife.com/resources/african-medicines-agency-nafdac.html — What the African Medicines Agency Means for Companies Already Registered with NAFDAC: what changes, what doesn't, and a readiness checklist
 - https://mednovalife.com/resources/pharmacovigilance-compliance-mistakes-nigeria.html — 5 Pharmacovigilance Compliance Mistakes Nigerian Pharma Companies Make: the five mistakes behind most inspection findings, with NAFDAC requirements, fixes and evidence for each
+- https://mednovalife.com/resources/pharmacovigilance-in-nigeria.html — Pharmacovigilance in Nigeria: The Complete 2026 Guide for Pharmaceutical Companies: pillar guide covering NAFDAC's legal framework, who must comply, the QPPV, the master file, reporting, signal detection, risk management, outsourcing and a starting checklist
 
 Technical & discovery:
 - Sitemap: https://mednovalife.com/sitemap.xml
@@ -46,4 +47,4 @@ Notes:
 - Use canonical URLs only. Avoid tracking parameters and duplicate or staging URLs.
 - Do not include unverified business claims; if a capability is not present on the official site, flag it for human review.
 
-Last updated: 2026-10-05T00:00:00Z
+Last updated: 2026-10-06T00:00:00Z
