@@ -28,6 +28,8 @@ const MAX_DEVICES = 10;
 const CODE_TTL_MS = 15 * 60 * 1000;
 const CODE_RESEND_MS = 60 * 1000;
 const CODE_MAX_ATTEMPTS = 5;
+const CODE_MAX_SENDS = 10;
+const CODE_WINDOW_MS = 24 * 60 * 60 * 1000;
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 const CERT_RE = /^PVCE-\d{4}-\d{5,}-[A-Z2-9]{4}$/;
@@ -122,12 +124,18 @@ async function sendCode(req, res) {
   if (row.login_code_sent_at && Date.now() - new Date(row.login_code_sent_at) < CODE_RESEND_MS) {
     throw new HttpError(429, 'A code was sent less than a minute ago. Check your inbox, or wait a minute to send another.');
   }
+  const now = new Date();
+  const windowOpen = row.login_code_window_start && now - new Date(row.login_code_window_start) < CODE_WINDOW_MS;
+  if (windowOpen && row.login_code_sends >= CODE_MAX_SENDS) {
+    throw new HttpError(429, 'Too many codes have been sent to this email today. Try again tomorrow, or contact info@mednovalife.com.');
+  }
   if (!RESEND_API_KEY || !FROM_EMAIL) throw new Error('Email is not configured (RESEND_API_KEY / FROM_EMAIL).');
   const code = String(crypto.randomInt(0, 1000000)).padStart(6, '0');
-  const now = new Date();
   await patchLearner(email, {
     login_code_hash: sha256(`${email}|${code}`), login_code_attempts: 0,
     login_code_sent_at: now.toISOString(), login_code_expires_at: new Date(+now + CODE_TTL_MS).toISOString(),
+    login_code_window_start: windowOpen ? row.login_code_window_start : now.toISOString(),
+    login_code_sends: windowOpen ? row.login_code_sends + 1 : 1,
   });
   const r = await fetch('https://api.resend.com/emails', {
     method: 'POST',
@@ -147,17 +155,18 @@ async function sendCode(req, res) {
 async function verifyCode(req, res) {
   const { email, name, tokenHash } = readIdentity(req.body);
   const code = String((req.body && req.body.code) || '').replace(/\D/g, '');
-  const row = await findLearner(email);
-  if (!row || !row.login_code_hash || new Date(row.login_code_expires_at) < new Date()) {
-    throw new HttpError(400, 'That code has expired. Send a new code.', { expired: true });
+  // Each check atomically uses up one attempt first, so parallel guesses can't exceed the limit.
+  const codeHash = await db('rpc/claim_course_code_attempt', {
+    method: 'POST',
+    body: JSON.stringify({ p_course: COURSE, p_email: email, p_max_attempts: CODE_MAX_ATTEMPTS }),
+  });
+  if (!codeHash) {
+    throw new HttpError(400, 'That code has expired or had too many incorrect attempts. Send a new code.', { expired: true });
   }
-  if (row.login_code_attempts >= CODE_MAX_ATTEMPTS) {
-    throw new HttpError(400, 'Too many incorrect attempts. Send a new code.', { expired: true });
-  }
-  if (code.length !== 6 || !safeEqual(sha256(`${email}|${code}`), row.login_code_hash)) {
-    await patchLearner(email, { login_code_attempts: row.login_code_attempts + 1 });
+  if (code.length !== 6 || !safeEqual(sha256(`${email}|${code}`), codeHash)) {
     throw new HttpError(400, 'That code is not correct. Check the email and try again.');
   }
+  const row = await findLearner(email);
   const tokens = row.token_hashes.filter(h => h !== tokenHash).concat(tokenHash).slice(-MAX_DEVICES);
   const fields = { token_hashes: tokens, login_code_hash: null, login_code_expires_at: null, login_code_attempts: 0 };
   if (!row.earned_at) fields.name = name;
