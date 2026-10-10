@@ -77,6 +77,8 @@ button { font: inherit; }
   .toc .t { display: none; }
 }
 
+.sync-note { border: 1px solid var(--bad); background: var(--bad-soft); border-radius: 8px; padding: 12px; display: flex; flex-direction: column; gap: 10px; font-size: 15px; }
+.sync-note p { margin: 0; }
 .shell.solo { grid-template-columns: minmax(0, 1fr); max-width: 980px; }
 /* Main column */
 main { min-width: 0; }
@@ -283,19 +285,33 @@ function initRuntime() {
 }
 // Answers are graded again on the server, which alone issues the certificate.
 // Unsent answers wait in progress.pending and are retried on the next sync.
+// A device the server doesn't know yet (409) joins with a 6-digit code emailed to the learner.
 let blocked = false, lastSyncOk = false, syncing = null;
+class ApiError extends Error { constructor(status, data) { super(data.error || String(status)); this.status = status; this.data = data; } }
 async function api(action, body) {
   const res = await fetch(API + "?action=" + action, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ name: learner.name, email: learner.email, token: learnerToken(), ...body }),
   });
-  if (res.status === 409) { blocked = true; throw new Error("registered elsewhere"); }
-  if (!res.ok) throw new Error(String(res.status));
-  return res.json();
+  const data = await res.json().catch(() => ({}));
+  if (res.status === 409) blocked = true;
+  if (!res.ok) throw new ApiError(res.status, data);
+  return data;
 }
-function applyServer(s) {
-  if (s && s.earnedAt && s.certId) { progress.earnedAt = s.earnedAt; progress.certId = s.certId; }
+// Server results are the record of truth, except answers still waiting to be sent.
+function mergeServer(s) {
+  if (!s) return;
+  const pending = progress.pending || {};
+  for (const [k, v] of Object.entries(s.results || {})) {
+    if (pending[k]) continue;
+    if (/^m\d+$/.test(k)) progress[k] = { done: true, score: v.score };
+    else if (k === "final") progress.final = { best: v.best, last: v.last };
+  }
+  if (s.earnedAt && s.certId) {
+    progress.earnedAt = s.earnedAt; progress.certId = s.certId;
+    progress.certName = s.certName; progress.certFinalScore = s.certFinalScore;
+  }
 }
 function syncRecord() {
   if (!learner || blocked) return Promise.resolve();
@@ -305,13 +321,15 @@ function syncRecord() {
     try {
       progress.pending = progress.pending || {};
       for (const quiz of Object.keys(progress.pending)) {
-        applyServer(await api("submit", { quiz, answers: progress.pending[quiz] }));
+        mergeServer(await api("submit", { quiz, answers: progress.pending[quiz] }));
         delete progress.pending[quiz]; save();
       }
-      applyServer(await api("sync", {})); save();
+      mergeServer(await api("sync", {})); save();
       lastSyncOk = true;
-    } catch (e) { /* offline or blocked: pending answers stay queued */ }
+    } catch (e) { /* offline or unconfirmed device: pending answers stay queued */ }
     syncing = null;
+    renderSyncNote();
+    if (document.getElementById("toc")) renderToc(currentView);
   })();
   return syncing;
 }
@@ -320,6 +338,61 @@ async function recordQuiz(quiz, answers) {
   progress.pending[quiz] = answers; save();
   await syncRecord();
   if (progress.pending[quiz]) await syncRecord();
+}
+function renderSyncNote() {
+  const box = document.getElementById("sync-note");
+  if (!box) return;
+  box.hidden = !blocked;
+  if (!blocked) return;
+  box.innerHTML = `<p>This email is already registered for the course, so your progress on this device isn't being saved yet.</p><button type="button" class="btn">Confirm it's you</button>`;
+  box.querySelector("button").addEventListener("click", () => renderCode());
+}
+
+/* ---------- confirm a new device by emailed code ---------- */
+function renderCode() {
+  const app = document.getElementById("app");
+  app.innerHTML = `
+    <div class="signin-wrap"><div class="signin">
+      <div class="brand"><div class="eyebrow">Continuing education</div><h1>Confirm it's you</h1></div>
+      <p><strong>${esc(learner.email)}</strong> is already registered for the course. To continue on this device, enter the 6-digit code we email you. Your progress and any certificate will load here.</p>
+      <p class="note" id="code-status" aria-live="polite">Sending your code…</p>
+      <form id="code-form" novalidate>
+        <div class="field"><label for="code-in">6-digit code</label><input id="code-in" inputmode="numeric" autocomplete="one-time-code" maxlength="6" pattern="[0-9]{6}" required><span class="err" id="code-err"></span></div>
+        <button class="btn" type="submit">Continue</button>
+      </form>
+      <p class="note"><button type="button" class="linkbtn" id="code-resend">Send a new code</button> · <button type="button" class="linkbtn" id="code-other">Use a different email</button></p>
+    </div></div>`;
+  const status = document.getElementById("code-status"), err = document.getElementById("code-err");
+  async function send() {
+    status.textContent = "Sending your code…";
+    try {
+      const r = await api("send-code", {});
+      status.textContent = `We sent a code to ${r.to}. It expires in 15 minutes. Check your spam folder if it hasn't arrived.`;
+    } catch (e) {
+      status.textContent = e instanceof ApiError && e.data.error ? e.data.error : "We couldn't send the code. Check your internet connection and try again.";
+    }
+  }
+  document.getElementById("code-resend").addEventListener("click", send);
+  document.getElementById("code-other").addEventListener("click", signOut);
+  document.getElementById("code-form").addEventListener("submit", async ev => {
+    ev.preventDefault();
+    const code = document.getElementById("code-in").value.replace(/\D/g, "");
+    if (code.length !== 6) { err.textContent = "Enter the 6 digits from the email."; return; }
+    err.textContent = "";
+    const btn = ev.target.querySelector("button[type=submit]");
+    btn.disabled = true;
+    try {
+      const s = await api("verify-code", { code });
+      blocked = false;
+      loadProgress(); mergeServer(s); save();
+      startCourse();
+    } catch (e) {
+      err.textContent = e instanceof ApiError && e.data.error ? e.data.error : "We couldn't check the code. Check your internet connection and try again.";
+      btn.disabled = false;
+    }
+  });
+  send();
+  document.getElementById("code-in").focus();
 }
 
 /* ---------- sign in ---------- */
@@ -334,10 +407,10 @@ function renderSignin() {
         <div class="field"><label for="signin-email">Email address</label><input id="signin-email" name="email" type="email" autocomplete="email" maxlength="120" required placeholder="you@example.com"><span class="err" id="signin-email-err"></span></div>
         <button class="btn" type="submit">Sign in and continue</button>
       </form>
-      <p class="note">Your progress is saved in this browser under your email address. MedNova Lifesciences records your name, email and course results to confirm completion and to verify your certificate.</p>
+      <p class="note">Your progress is saved in this browser under your email address. MedNova Lifesciences records your name, email and course results to confirm completion and to verify your certificate. To continue on another device, sign in there with the same email and we'll email you a code.</p>
     </div></div>`;
   const form = document.getElementById("signin-form");
-  form.addEventListener("submit", ev => {
+  form.addEventListener("submit", async ev => {
     ev.preventDefault();
     const nameIn = document.getElementById("signin-name"), emailIn = document.getElementById("signin-email");
     const name = nameIn.value.trim().replace(/\s+/g, " ");
@@ -353,11 +426,18 @@ function renderSignin() {
     if (!ok) return;
     learner = { name, email };
     lsSet(LEARNER_KEY, JSON.stringify(learner));
+    blocked = false;
+    const btn = form.querySelector("button[type=submit]");
+    btn.disabled = true; btn.textContent = "Signing in…";
+    loadProgress();
+    try { mergeServer(await api("sync", {})); save(); }
+    catch (e) { if (e instanceof ApiError && e.status === 409) return renderCode(); /* offline: continue, sync later */ }
     startCourse();
   });
 }
 function signOut() {
   lsDel(LEARNER_KEY);
+  blocked = false;
   learner = null;
   progress = {};
   renderSignin();
@@ -372,6 +452,7 @@ function startCourse() {
       <nav class="index" aria-label="Course modules">
         <div class="brand"><div class="eyebrow">Continuing education</div><h1>Pharmacovigilance CE Course</h1></div>
         <div class="who"><span>Signed in as <b>${esc(learner.name)}</b></span><button type="button" class="linkbtn" id="signout">Not you? Sign out</button></div>
+        <div class="sync-note" id="sync-note" hidden></div>
         <div class="meter"><div class="meter-bar"><div class="meter-fill" id="meter-fill"></div></div><div class="meter-text" id="meter-text"></div></div>
         <ol class="toc" id="toc"></ol>
       </nav>
@@ -542,6 +623,8 @@ async function drawCertificate() {
   try {
     await Promise.all(['700 120px "Bricolage Grotesque"', '500 72px "Bricolage Grotesque"', '44px "Atkinson Hyperlegible"', '28px "IBM Plex Mono"', '120px "Great Vibes"'].map(f => document.fonts.load(f)));
   } catch (e) {}
+  const certName = progress.certName || learner.name;
+  const certScore = progress.certFinalScore ?? finalState().best;
   const INK = "#142229", MUTED = "#546770", ACCENT = "#1d5f86", RULE = "#c9d6dc", CASE = "#2f7a68";
   const DISPLAY = '"Bricolage Grotesque", "Segoe UI", sans-serif', BODY = '"Atkinson Hyperlegible", "Segoe UI", sans-serif', MONO = '"IBM Plex Mono", monospace', SCRIPT = '"Great Vibes", "Brush Script MT", cursive';
   g.fillStyle = "#ffffff"; g.fillRect(0, 0, W, H);
@@ -560,14 +643,14 @@ async function drawCertificate() {
   const fit = (txt, weight, size, family, maxW) => { let s = size; do { g.font = `${weight} ${s}px ${family}`; s -= 2; } while (g.measureText(txt).width > maxW && s > 30); return g.font; };
   spaced("CERTIFICATE OF COMPLETION", W / 2, 300, `500 40px ${MONO}`, ACCENT, 14);
   g.font = `44px ${BODY}`; g.fillStyle = MUTED; g.fillText("This certifies that", W / 2, 440);
-  g.font = fit(learner.name, 700, 124, DISPLAY, 1900); g.fillStyle = INK; g.fillText(learner.name, W / 2, 600);
+  g.font = fit(certName, 700, 124, DISPLAY, 1900); g.fillStyle = INK; g.fillText(certName, W / 2, 600);
   g.strokeStyle = RULE; g.lineWidth = 3; g.beginPath(); g.moveTo(W / 2 - 800, 650); g.lineTo(W / 2 + 800, 650); g.stroke();
   g.font = `34px ${MONO}`; g.fillStyle = MUTED; g.fillText(learner.email, W / 2, 712);
   g.font = `44px ${BODY}`; g.fillStyle = MUTED; g.fillText("has successfully completed the", W / 2, 820);
   g.font = fit(COURSE_NAME, 500, 76, DISPLAY, 2000); g.fillStyle = INK; g.fillText(COURSE_NAME, W / 2, 930);
   g.font = `500 40px ${DISPLAY}`; g.fillStyle = MUTED;
   g.fillText(`${N} modules, including Pharmacovigilance Practice and NAFDAC Requirements`, W / 2, 1010);
-  g.fillText(`Final assessment score: ${finalState().best}%  ·  Pass mark: ${COURSE.final.passMark}%`, W / 2, 1070);
+  g.fillText(`Final assessment score: ${certScore}%  ·  Pass mark: ${COURSE.final.passMark}%`, W / 2, 1070);
   const baseY = 1440;
   const block = (x, label, value) => {
     g.font = `500 26px ${MONO}`; g.fillStyle = MUTED;
@@ -576,7 +659,7 @@ async function drawCertificate() {
     g.strokeStyle = RULE; g.lineWidth = 3; g.beginPath(); g.moveTo(x - 330, baseY + 26); g.lineTo(x + 330, baseY + 26); g.stroke();
   };
   block(560, "Date and time of completion", fmtDateTime(progress.earnedAt));
-  block(W / 2, "Certificate ID", progress.certId);
+  block(W / 2, "Certificate No.", progress.certId);
   const sx = W - 560;
   g.font = `130px ${SCRIPT}`; g.fillStyle = "#1b2f6b"; g.fillText(SIGNATORY.replace(/^Dr\.?\s+/, ""), sx, baseY - 10);
   g.strokeStyle = INK; g.lineWidth = 3; g.beginPath(); g.moveTo(sx - 330, baseY + 26); g.lineTo(sx + 330, baseY + 26); g.stroke();
@@ -596,15 +679,13 @@ async function renderCert() {
     await syncRecord();
     if (progress.earnedAt) { renderToc(CERT); return renderCert(); }
     wait.textContent = blocked
-      ? "This email address is already registered for the course in another browser, so a certificate can't be issued here. Continue in the browser you first used, or contact info@mednovalife.com."
+      ? "Your email is already registered for the course, so we need to confirm it's you before issuing your certificate on this device."
       : lastSyncOk
         ? "Your saved results don't yet meet both requirements. Retake the final assessment, or contact info@mednovalife.com if this persists."
         : "We couldn't reach MedNova Lifesciences to issue your certificate. Check your internet connection and try again.";
-    if (!blocked) {
-      const retry = el("button", { type: "button", class: "btn" }, "Try again");
-      retry.addEventListener("click", () => renderCert());
-      page.appendChild(retry);
-    }
+    const next = el("button", { type: "button", class: "btn" }, blocked ? "Confirm it's you" : "Try again");
+    next.addEventListener("click", () => blocked ? renderCode() : renderCert());
+    page.appendChild(next);
     return;
   }
   if (!progress.earnedAt) {
@@ -615,12 +696,12 @@ async function renderCert() {
     pager(page, "← Overview", OVERVIEW, d < N ? "Continue the course" : "Take the final assessment", d < N ? COURSE.modules.findIndex((_, i) => !(modState(i) && modState(i).done)) : FINAL);
     return;
   }
-  page.appendChild(el("p", {}, `Congratulations, ${esc(learner.name)}. You completed the course on <strong>${esc(fmtDateTime(progress.earnedAt))}</strong>. Download the PDF to print it or keep a copy. Anyone can confirm it is genuine with certificate ID <strong>${esc(progress.certId)}</strong> at <a href="#verify">mednovalife.com/pharmacovigilance-ce-course#verify</a>.`));
+  page.appendChild(el("p", {}, `Congratulations, ${esc(progress.certName || learner.name)}. You completed the course on <strong>${esc(fmtDateTime(progress.earnedAt))}</strong>. Download the PDF to print it or keep a copy. Anyone can confirm it is genuine with certificate number <strong>${esc(progress.certId)}</strong> at <a href="#verify">mednovalife.com/pharmacovigilance-ce-course#verify</a>.`));
   const status = el("p", { class: "note" }, "Preparing your certificate…");
   page.appendChild(status);
   const canvas = await drawCertificate();
   const png = canvas.toDataURL("image/png");
-  const img = el("img", { class: "cert-img", src: png, alt: `Certificate of completion for ${learner.name}, ${COURSE_NAME}, completed ${fmtDateTime(progress.earnedAt)}, signed by ${SIGNATORY}` });
+  const img = el("img", { class: "cert-img", src: png, alt: `Certificate of completion for ${progress.certName || learner.name}, ${COURSE_NAME}, completed ${fmtDateTime(progress.earnedAt)}, signed by ${SIGNATORY}` });
   status.replaceWith(img);
   const actions = el("div", { class: "cert-actions" });
   const pdfBtn = el("button", { type: "button", class: "btn" }, "Download PDF to print");
@@ -628,7 +709,7 @@ async function renderCert() {
   const msg = el("span", { class: "verdict-note", "aria-live": "polite" });
   actions.append(pdfBtn, pngBtn, msg);
   page.appendChild(actions);
-  const fname = `PV-CE-Certificate-${learner.name.replace(/[^A-Za-z0-9]+/g, "-").replace(/^-|-$/g, "")}`;
+  const fname = `PV-CE-Certificate-${progress.certId}-${(progress.certName || learner.name).replace(/[^A-Za-z0-9]+/g, "-").replace(/^-|-$/g, "")}`;
   if (!window.jspdf) pdfBtn.remove();
   function offer(btn, filename, data) {
     const url = URL.createObjectURL(data);
@@ -681,7 +762,7 @@ async function renderRegister() {
     if (!res.ok) throw new Error(String(res.status));
     const rows = (await res.json()).learners || [];
     if (!rows.length) { box.innerHTML = '<p class="note">No learner records yet. Records appear here when learners sign in.</p>'; return; }
-    box.innerHTML = `<p class="note">${rows.length} learner${rows.length === 1 ? "" : "s"}, ${rows.filter(r => r.earnedAt).length} certified.</p><div class="tbl"><table><thead><tr><th>Name</th><th>Email</th><th>Modules</th><th>Final</th><th>Completed</th><th>Certificate ID</th></tr></thead><tbody>${rows.map(r => `<tr><td>${esc(r.name || "")}</td><td>${esc(r.email || "")}</td><td class="num">${esc(r.modulesDone ?? 0)}/${esc(r.modulesTotal ?? N)}</td><td class="num">${r.finalBest == null ? "—" : esc(r.finalBest) + "%"}</td><td class="num">${r.earnedAt ? esc(fmtDateTime(r.earnedAt)) : "—"}</td><td class="num">${esc(r.certId || "—")}</td></tr>`).join("")}</tbody></table></div>`;
+    box.innerHTML = `<p class="note">${rows.length} learner${rows.length === 1 ? "" : "s"}, ${rows.filter(r => r.earnedAt).length} certified.</p><div class="tbl"><table><thead><tr><th>Name</th><th>Email</th><th>Modules</th><th>Final</th><th>Completed</th><th>Certificate No.</th></tr></thead><tbody>${rows.map(r => `<tr><td>${esc(r.name || "")}</td><td>${esc(r.email || "")}</td><td class="num">${esc(r.modulesDone ?? 0)}/${esc(r.modulesTotal ?? N)}</td><td class="num">${r.finalBest == null ? "—" : esc(r.finalBest) + "%"}</td><td class="num">${r.earnedAt ? esc(fmtDateTime(r.earnedAt)) : "—"}</td><td class="num">${esc(r.certId || "—")}</td></tr>`).join("")}</tbody></table></div>`;
   } catch (e) {
     box.innerHTML = '<p class="note">The register could not be loaded. Reload the page to try again.</p>';
   }
@@ -691,9 +772,9 @@ async function renderRegister() {
 function renderVerify() {
   const page = standalonePage();
   page.innerHTML = `<div class="mod-eyebrow">Certificate verification</div><h2>Verify a certificate</h2>
-    <p>Enter the certificate ID printed on a ${esc(COURSE_NAME)} certificate to confirm it was issued by MedNova Lifesciences.</p>
+    <p>Enter the certificate number printed on a ${esc(COURSE_NAME)} certificate to confirm it was issued by MedNova Lifesciences.</p>
     <form id="verify-form" novalidate>
-      <div class="field"><label for="verify-id">Certificate ID</label><input id="verify-id" type="text" maxlength="14" autocomplete="off" placeholder="PVCE-1A2B-3C4D" required><span class="err" id="verify-err"></span></div>
+      <div class="field"><label for="verify-id">Certificate number</label><input id="verify-id" type="text" maxlength="24" autocomplete="off" placeholder="PVCE-2026-00001-K7QM" required><span class="err" id="verify-err"></span></div>
       <button class="btn" type="submit">Verify</button>
     </form>
     <div id="verify-out" aria-live="polite"></div>
@@ -707,7 +788,7 @@ function renderVerify() {
     const id = document.getElementById("verify-id").value.trim().toUpperCase();
     const err = document.getElementById("verify-err"), out = document.getElementById("verify-out");
     out.innerHTML = "";
-    if (!/^PVCE-[0-9A-F]{4}-[0-9A-F]{4}$/.test(id)) { err.textContent = "Enter the ID exactly as printed, for example PVCE-1A2B-3C4D."; return; }
+    if (!/^PVCE-\d{4}-\d{5,}-[A-Z2-9]{4}$/.test(id)) { err.textContent = "Enter the number exactly as printed, for example PVCE-2026-00001-K7QM."; return; }
     err.textContent = "";
     out.innerHTML = '<p class="note">Checking…</p>';
     try {
@@ -715,7 +796,7 @@ function renderVerify() {
       if (res.status === 404) { out.innerHTML = `<p><span class="pill fail">Not found</span> No certificate with ID <strong>${esc(id)}</strong> has been issued.</p>`; return; }
       if (!res.ok) throw new Error(String(res.status));
       const r = await res.json();
-      out.innerHTML = `<p><span class="pill pass">Valid</span> Certificate <strong>${esc(id)}</strong> was issued to <strong>${esc(r.name)}</strong> on ${esc(fmtDateTime(r.earnedAt))}${r.finalBest == null ? "" : `, with a final assessment score of ${esc(r.finalBest)}%`}.</p>`;
+      out.innerHTML = `<p><span class="pill pass">Valid</span> Certificate <strong>${esc(id)}</strong> was issued to <strong>${esc(r.name)}</strong> on ${esc(fmtDateTime(r.earnedAt))}${r.finalScore == null ? "" : `, with a final assessment score of ${esc(r.finalScore)}%`}.</p>`;
     } catch (e) {
       out.innerHTML = '<p class="note">Verification is unavailable right now. Try again shortly.</p>';
     }
