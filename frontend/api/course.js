@@ -23,6 +23,7 @@ const SERVICE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY || '';
 const ADMIN_KEY = process.env.COURSE_ADMIN_KEY || '';
 const RESEND_API_KEY = process.env.RESEND_API_KEY || '';
 const FROM_EMAIL = process.env.FROM_EMAIL || '';
+const NOTIFY_EMAIL = process.env.COURSE_NOTIFY_EMAIL || '';
 
 const MAX_DEVICES = 10;
 const CODE_TTL_MS = 15 * 60 * 1000;
@@ -137,18 +138,12 @@ async function sendCode(req, res) {
     login_code_window_start: windowOpen ? row.login_code_window_start : now.toISOString(),
     login_code_sends: windowOpen ? row.login_code_sends + 1 : 1,
   });
-  const r = await fetch('https://api.resend.com/emails', {
-    method: 'POST',
-    headers: { Authorization: `Bearer ${RESEND_API_KEY}`, 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      from: `MedNova Lifesciences <${FROM_EMAIL}>`,
-      to: [email],
-      subject: `${code} is your Pharmacovigilance CE course code`,
-      text: `Your sign-in code for the MedNova Pharmacovigilance CE Course is ${code}.\n\nEnter it on the course page to continue on this device. The code expires in 15 minutes.\n\nIf you didn't try to sign in, you can ignore this email.\n\nMedNova Lifesciences\nhttps://mednovalife.com/pharmacovigilance-ce-course`,
-      html: `<div style="font-family:Arial,sans-serif;font-size:16px;line-height:1.5;color:#142229"><p>Your sign-in code for the MedNova Pharmacovigilance CE Course is:</p><p style="font-size:32px;font-weight:700;letter-spacing:6px;margin:16px 0">${code}</p><p>Enter it on the course page to continue on this device. The code expires in 15 minutes.</p><p style="color:#546770">If you didn't try to sign in, you can ignore this email.</p><p>MedNova Lifesciences<br><a href="https://mednovalife.com/pharmacovigilance-ce-course">mednovalife.com/pharmacovigilance-ce-course</a></p></div>`,
-    }),
+  await sendEmail({
+    to: [email],
+    subject: `${code} is your Pharmacovigilance CE course code`,
+    text: `Your sign-in code for the MedNova Pharmacovigilance CE Course is ${code}.\n\nEnter it on the course page to continue on this device. The code expires in 15 minutes.\n\nIf you didn't try to sign in, you can ignore this email.\n\nMedNova Lifesciences\nhttps://mednovalife.com/pharmacovigilance-ce-course`,
+    html: `<div style="font-family:Arial,sans-serif;font-size:16px;line-height:1.5;color:#142229"><p>Your sign-in code for the MedNova Pharmacovigilance CE Course is:</p><p style="font-size:32px;font-weight:700;letter-spacing:6px;margin:16px 0">${code}</p><p>Enter it on the course page to continue on this device. The code expires in 15 minutes.</p><p style="color:#546770">If you didn't try to sign in, you can ignore this email.</p><p>MedNova Lifesciences<br><a href="https://mednovalife.com/pharmacovigilance-ce-course">mednovalife.com/pharmacovigilance-ce-course</a></p></div>`,
   });
-  if (!r.ok) throw new Error(`Resend ${r.status}: ${(await r.text()).slice(0, 200)}`);
   return res.status(200).json({ sent: true, to: maskEmail(email) });
 }
 
@@ -209,11 +204,52 @@ async function submit(req, res) {
   let state = { ...row, ...update };
   // Issue the certificate the first time both requirements are met. Number, date, printed name
   // and score are fixed from then on.
+  let issuedNow = false;
   if (!row.earned_at && update.modules_done === KEY.modules && update.final_best >= KEY.passMark) {
     const [cert] = await db('rpc/issue_course_certificate', { method: 'POST', body: JSON.stringify({ p_id: row.id }) });
     state = { ...state, ...cert };
+    issuedNow = true;
+    await sendCertificateEmails(state);
   }
-  return res.status(200).json({ score, total, ...publicState(state) });
+  return res.status(200).json({ score, total, issuedNow, ...publicState(state) });
+}
+
+const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const fmtDate = iso => new Intl.DateTimeFormat('en-GB', {
+  day: 'numeric', month: 'long', year: 'numeric', hour: '2-digit', minute: '2-digit', timeZone: 'Africa/Lagos', timeZoneName: 'short',
+}).format(new Date(iso));
+
+async function sendEmail(message) {
+  const r = await fetch('https://api.resend.com/emails', {
+    method: 'POST',
+    headers: { Authorization: `Bearer ${RESEND_API_KEY}`, 'Content-Type': 'application/json' },
+    body: JSON.stringify({ from: `MedNova Lifesciences <${FROM_EMAIL}>`, ...message }),
+  });
+  if (!r.ok) throw new Error(`Resend ${r.status}: ${(await r.text()).slice(0, 200)}`);
+}
+
+// The certificate is already issued and saved; an email failure is logged, never surfaced.
+async function sendCertificateEmails(s) {
+  if (!RESEND_API_KEY || !FROM_EMAIL) return;
+  const when = fmtDate(s.earned_at);
+  const verifyUrl = 'https://mednovalife.com/pharmacovigilance-ce-course#verify';
+  const courseUrl = 'https://mednovalife.com/pharmacovigilance-ce-course#certificate';
+  const jobs = [sendEmail({
+    to: [s.email],
+    subject: `Your certificate of completion: ${s.cert_id}`,
+    text: `Congratulations, ${s.cert_name}.\n\nYou have completed the MedNova Pharmacovigilance Continuing Education Course Series.\n\nCertificate number: ${s.cert_id}\nCompleted: ${when}\nFinal assessment score: ${s.cert_final_score}%\n\nDownload or print your certificate: ${courseUrl}\n(Sign in with this email address. On a new device we'll email you a code.)\n\nAnyone can confirm your certificate is genuine by entering its number at ${verifyUrl}\n\nMedNova Lifesciences`,
+    html: `<div style="font-family:Arial,sans-serif;font-size:16px;line-height:1.5;color:#142229;max-width:560px"><p>Congratulations, ${esc(s.cert_name)}.</p><p>You have completed the <strong>MedNova Pharmacovigilance Continuing Education Course Series</strong>.</p><table style="border-collapse:collapse;margin:16px 0"><tr><td style="padding:4px 16px 4px 0;color:#546770">Certificate number</td><td style="padding:4px 0;font-family:monospace;font-size:17px"><strong>${esc(s.cert_id)}</strong></td></tr><tr><td style="padding:4px 16px 4px 0;color:#546770">Completed</td><td style="padding:4px 0">${esc(when)}</td></tr><tr><td style="padding:4px 16px 4px 0;color:#546770">Final assessment</td><td style="padding:4px 0">${esc(s.cert_final_score)}%</td></tr></table><p><a href="${courseUrl}" style="display:inline-block;background:#1d5f86;color:#fff;padding:10px 18px;border-radius:6px;text-decoration:none">Download your certificate</a></p><p style="color:#546770;font-size:14px">Sign in with this email address. On a new device we'll email you a code.</p><p>Anyone can confirm your certificate is genuine by entering its number at <a href="${verifyUrl}">mednovalife.com/pharmacovigilance-ce-course#verify</a>.</p><p>MedNova Lifesciences</p></div>`,
+  })];
+  if (NOTIFY_EMAIL) {
+    jobs.push(sendEmail({
+      to: [NOTIFY_EMAIL],
+      subject: `PV CE certificate issued: ${s.cert_name} (${s.cert_id})`,
+      text: `A Pharmacovigilance CE course certificate was issued.\n\nName: ${s.cert_name}\nEmail: ${s.email}\nCertificate number: ${s.cert_id}\nCompleted: ${when}\nFinal assessment score: ${s.cert_final_score}%\n\nFull register: https://mednovalife.com/pharmacovigilance-ce-course#register`,
+    }));
+  }
+  for (const r of await Promise.allSettled(jobs)) {
+    if (r.status === 'rejected') console.error('[course] certificate email failed:', r.reason && r.reason.message);
+  }
 }
 
 async function verify(req, res) {
