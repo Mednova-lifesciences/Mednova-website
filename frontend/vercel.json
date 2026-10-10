@@ -24,6 +24,15 @@
     {
       "src": "public/**",
       "use": "@vercel/static"
+    },
+    {
+      "src": "api/course.js",
+      "use": "@vercel/node",
+      "config": {
+        "includeFiles": [
+          "api/course-key.json"
+        ]
+      }
     }
   ],
   "routes": [
@@ -40,6 +49,14 @@
         "Cross-Origin-Resource-Policy": "cross-origin"
       },
       "continue": true
+    },
+    {
+      "src": "^/api/course/?$",
+      "dest": "/api/course.js"
+    },
+    {
+      "src": "^/pharmacovigilance-ce-course/?$",
+      "dest": "/pharmacovigilance-ce-course.html"
     },
     {
       "src": "^/robots\\.txt$",

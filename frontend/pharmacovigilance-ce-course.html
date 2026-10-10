@@ -259,15 +259,6 @@ function tracks() {
   });
   return out;
 }
-async function checkEarned() {
-  if (earned() && !progress.earnedAt) {
-    progress.earnedAt = new Date().toISOString();
-    const h = (await digest("cert|" + learner.email.toLowerCase() + "|" + progress.earnedAt)).toUpperCase();
-    progress.certId = `PVCE-${h.slice(0, 4)}-${h.slice(4, 8)}`;
-    save();
-  }
-}
-
 /* ---------- completion register (MedNova API -> Supabase) ---------- */
 const API = "/api/course";
 const TOKEN_PREFIX = "pv-ce-token:";
@@ -275,7 +266,7 @@ const ADMIN_STORE = "pv-ce-admin-key";
 const ssGet = k => { try { return sessionStorage.getItem(k); } catch (e) { return null; } };
 const ssSet = (k, v) => { try { sessionStorage.setItem(k, v); } catch (e) {} };
 const ssDel = k => { try { sessionStorage.removeItem(k); } catch (e) {} };
-let isOwner = false, dbWritable = true;
+let isOwner = false;
 function learnerToken() {
   const k = TOKEN_PREFIX + learner.email.toLowerCase();
   let t = lsGet(k);
@@ -290,27 +281,45 @@ function initRuntime() {
   const hash = (location.hash || "").replace("#", "");
   isOwner = !!ssGet(ADMIN_STORE) || hash === "register";
 }
-let syncing = false, syncAgain = false;
-async function syncRecord() {
-  if (!learner || !dbWritable) return;
-  if (syncing) { syncAgain = true; return; }
-  syncing = true;
-  const f = finalState();
-  try {
-    const res = await fetch(API + "?action=sync", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        name: learner.name, email: learner.email, token: learnerToken(),
-        modulesDone: doneCount(), modulesTotal: N,
-        finalBest: f ? f.best : null,
-        earnedAt: progress.earnedAt || null, certId: progress.certId || null,
-      }),
-    });
-    if (res.status === 409 || res.status === 400) dbWritable = false;
-  } catch (e) { /* offline: the next save retries */ }
-  syncing = false;
-  if (syncAgain) { syncAgain = false; syncRecord(); }
+// Answers are graded again on the server, which alone issues the certificate.
+// Unsent answers wait in progress.pending and are retried on the next sync.
+let blocked = false, lastSyncOk = false, syncing = null;
+async function api(action, body) {
+  const res = await fetch(API + "?action=" + action, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ name: learner.name, email: learner.email, token: learnerToken(), ...body }),
+  });
+  if (res.status === 409) { blocked = true; throw new Error("registered elsewhere"); }
+  if (!res.ok) throw new Error(String(res.status));
+  return res.json();
+}
+function applyServer(s) {
+  if (s && s.earnedAt && s.certId) { progress.earnedAt = s.earnedAt; progress.certId = s.certId; }
+}
+function syncRecord() {
+  if (!learner || blocked) return Promise.resolve();
+  if (syncing) return syncing;
+  syncing = (async () => {
+    lastSyncOk = false;
+    try {
+      progress.pending = progress.pending || {};
+      for (const quiz of Object.keys(progress.pending)) {
+        applyServer(await api("submit", { quiz, answers: progress.pending[quiz] }));
+        delete progress.pending[quiz]; save();
+      }
+      applyServer(await api("sync", {})); save();
+      lastSyncOk = true;
+    } catch (e) { /* offline or blocked: pending answers stay queued */ }
+    syncing = null;
+  })();
+  return syncing;
+}
+async function recordQuiz(quiz, answers) {
+  progress.pending = progress.pending || {};
+  progress.pending[quiz] = answers; save();
+  await syncRecord();
+  if (progress.pending[quiz]) await syncRecord();
 }
 
 /* ---------- sign in ---------- */
@@ -486,9 +495,9 @@ function renderModule(i) {
   page.appendChild(renderQuiz(m.quiz, {
     intro: `${m.quiz.length} questions. Choose one answer for each question and select <strong>Check answer</strong>. Each answer is marked right or wrong once it is checked.`,
     wrongNote: "Review the module content and examples, then retake the check.",
-    async onDone(score) {
+    async onDone(score, answers) {
       progress["m" + i] = { done: true, score }; save();
-      await checkEarned(); renderToc(i); syncRecord();
+      await recordQuiz("m" + i, answers); renderToc(i);
       return `<div><div class="verdict-note">Knowledge check complete</div><strong>${score} of ${m.quiz.length} correct</strong></div>`;
     },
     retakeLabel: "Retake knowledge check",
@@ -510,11 +519,11 @@ function renderFinal() {
   page.appendChild(renderQuiz(F.quiz, {
     intro: "Choose one answer for each question and select <strong>Check answer</strong>.",
     wrongNote: "",
-    async onDone(score) {
+    async onDone(score, answers) {
       const pct = Math.round(score / F.quiz.length * 100);
       const prev = finalState();
       progress.final = { best: Math.max(pct, prev ? prev.best : 0), last: pct };
-      save(); await checkEarned(); renderToc(FINAL); syncRecord();
+      save(); await recordQuiz("final", answers); renderToc(FINAL);
       const pass = pct >= F.passMark;
       return `<div><div class="verdict-note">Final assessment complete</div><strong>${score} of ${F.quiz.length} correct · ${pct}%</strong> <span class="pill ${pass ? "pass" : "fail"}">${pass ? "Passed" : "Below pass mark"}</span></div>`;
     },
@@ -581,8 +590,25 @@ async function renderCert() {
   const page = pageShell();
   const d = doneCount(), f = finalState();
   page.innerHTML = `<div class="mod-eyebrow">Certificate of completion</div><h2>Your certificate</h2>`;
+  if (!progress.earnedAt && earned()) {
+    const wait = el("p", { class: "note", "aria-live": "polite" }, "You have met both requirements. Confirming your results with MedNova Lifesciences…");
+    page.appendChild(wait);
+    await syncRecord();
+    if (progress.earnedAt) { renderToc(CERT); return renderCert(); }
+    wait.textContent = blocked
+      ? "This email address is already registered for the course in another browser, so a certificate can't be issued here. Continue in the browser you first used, or contact info@mednovalife.com."
+      : lastSyncOk
+        ? "Your saved results don't yet meet both requirements. Retake the final assessment, or contact info@mednovalife.com if this persists."
+        : "We couldn't reach MedNova Lifesciences to issue your certificate. Check your internet connection and try again.";
+    if (!blocked) {
+      const retry = el("button", { type: "button", class: "btn" }, "Try again");
+      retry.addEventListener("click", () => renderCert());
+      page.appendChild(retry);
+    }
+    return;
+  }
   if (!progress.earnedAt) {
-    page.appendChild(el("p", {}, "Your certificate is issued automatically, with the date and time, as soon as both requirements are met:"));
+    page.appendChild(el("p", {}, "Your certificate is issued automatically, with the date and time, as soon as both requirements are met and your results are saved:"));
     page.appendChild(el("ul", { class: "req" }, `
       <li><span class="mark ${d === N ? "ok" : "no"}">${d === N ? "✓" : "○"}</span><span>Complete all ${N} knowledge checks (${d} of ${N} done)</span></li>
       <li><span class="mark ${finalPassed() ? "ok" : "no"}">${finalPassed() ? "✓" : "○"}</span><span>Score ${COURSE.final.passMark}% or more on the final assessment (${f ? `best so far ${f.best}%` : "not taken yet"})</span></li>`));
@@ -700,13 +726,13 @@ function renderVerify() {
 function renderQuiz(quiz, opts) {
   const wrap = el("div", { class: "quiz" });
   wrap.appendChild(el("p", { class: "quiz-intro" }, opts.intro));
-  const results = {};
+  const results = {}, answers = {};
   const scoreBox = el("div", { class: "score", hidden: "" });
   async function finish() {
     if (Object.keys(results).length < quiz.length) return;
     const score = Object.values(results).filter(Boolean).length;
     scoreBox.hidden = false;
-    scoreBox.innerHTML = await opts.onDone(score);
+    scoreBox.innerHTML = await opts.onDone(score, answers);
     const actions = el("div", { class: "q-foot" });
     const retake = el("button", { type: "button", class: "btn ghost" }, opts.retakeLabel);
     retake.addEventListener("click", () => { const fresh = renderQuiz(quiz, opts); wrap.replaceWith(fresh); fresh.scrollIntoView({ block: "start" }); });
@@ -742,6 +768,7 @@ function renderQuiz(quiz, opts) {
       try { ok = await isCorrect(q, order[Number(picked.value)]); }
       catch (e) { out.innerHTML = `<span class="verdict wrong">This browser could not check the answer. Open the course in an up-to-date browser.</span>`; btn.disabled = false; return; }
       results[q.id] = ok;
+      answers[q.id] = order[Number(picked.value)];
       fs.querySelectorAll("input").forEach(inp => { inp.disabled = true; });
       box.classList.add("locked", ok ? "right" : "wrong");
       picked.closest(".opt").classList.add(ok ? "picked-right" : "picked-wrong");
