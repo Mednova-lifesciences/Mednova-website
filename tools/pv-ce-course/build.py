@@ -821,6 +821,12 @@ sub('<!-- Google tag (gtag.js) -->',
     '<script nonce="mednova-inline-2026" type="application/ld+json">' + json.dumps(course_ld) + '</script>\n'
     '<!-- Google tag (gtag.js) -->')
 
+# ---- document structure: the exported source closes <head> on line 1, which left the title, meta and
+# Open Graph tags in <body>. WhatsApp only reads tags in <head>, so end the head after the course styles.
+sub('<meta charset=utf8>', '<meta charset="utf-8">')
+sub('</style></head><body>\n<title>', '</style>\n<title>')
+sub('</style>\n\n<div id="app"></div>', '</style>\n</head>\n<body>\n<div id="app"></div>')
+
 # ---- answer key for server-side grading (frontend/api/course-key.json) ----
 line = next(l for l in h.split('\n') if l.startswith('const COURSE = '))
 course = json.loads(line[len('const COURSE = '):].rstrip().rstrip(';'))
