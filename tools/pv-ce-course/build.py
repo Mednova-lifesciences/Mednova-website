@@ -19,6 +19,7 @@ ROOT = pathlib.Path(__file__).resolve().parents[2]
 src = sys.argv[1] if len(sys.argv) > 1 else ROOT / 'tools/pv-ce-course/source/Pharmacovigilance_CE_Course.html'
 dst = sys.argv[2] if len(sys.argv) > 2 else ROOT / 'frontend/pharmacovigilance-ce-course.html'
 KEY_OUT = ROOT / 'frontend/api/course-key.json'
+CONTENT_OUT = ROOT / 'frontend/api/course-content.json'
 import re
 h = open(src, encoding='utf-8').read()
 
@@ -783,15 +784,17 @@ sub('Last updated 10 October 2026.', 'Last updated 11 October 2026.')
 sub('  g.font = `34px ${MONO}`; g.fillStyle = MUTED; g.fillText(learner.email, W / 2, 712);\n', '')
 
 # ---- site icons, social sharing (Open Graph / Twitter) and structured data, as on the rest of the site ----
-OG_TITLE = 'Free Pharmacovigilance CE Course with Certificate | MedNova Lifesciences'
-OG_DESC = ('Free online pharmacovigilance continuing education course: 17 modules on drug safety foundations, '
-           'company PV practice and NAFDAC requirements, with knowledge checks, a final assessment and a verifiable certificate of completion.')
+OG_TITLE = 'Pharmacovigilance CE Course with Certificate | MedNova Lifesciences'
+OG_DESC = ('Online pharmacovigilance continuing education course: 17 modules on drug safety foundations, '
+           'company PV practice and NAFDAC requirements, with knowledge checks, a final assessment and a verifiable '
+           'certificate of completion. Start with Module 1 free.')
 # Kept small (JPEG, ~60 KB): WhatsApp drops preview images near its ~300 KB limit.
-OG_IMAGE = 'https://mednovalife.com/public/images/course/pv-ce-course-share.jpg'
+OG_IMAGE = 'https://mednovalife.com/public/images/course/pv-ce-course-share-2.jpg'
 URL = 'https://mednovalife.com/pharmacovigilance-ce-course'
 course_ld = {
     '@context': 'https://schema.org', '@type': 'Course', 'name': 'Pharmacovigilance Continuing Education Course Series',
-    'description': OG_DESC, 'url': URL, 'inLanguage': 'en', 'isAccessibleForFree': True,
+    'description': OG_DESC, 'url': URL, 'inLanguage': 'en', 'isAccessibleForFree': False,
+    'offers': {'@type': 'Offer', 'category': 'Paid', 'price': 19999, 'priceCurrency': 'NGN', 'url': URL},
     'educationalCredentialAwarded': 'Certificate of completion',
     'provider': {'@type': 'Organization', 'name': 'MedNova Lifesciences', 'url': 'https://mednovalife.com'},
 }
@@ -811,15 +814,442 @@ sub('<!-- Google tag (gtag.js) -->',
     f'<meta property="og:image:secure_url" content="{OG_IMAGE}">\n'
     '<meta property="og:image:type" content="image/jpeg">\n'
     '<meta property="og:image:width" content="1200">\n<meta property="og:image:height" content="630">\n'
-    '<meta property="og:image:alt" content="MedNova Lifesciences Pharmacovigilance CE Course: free, 17 modules, final assessment, verifiable certificate">\n'
+    '<meta property="og:image:alt" content="MedNova Lifesciences Pharmacovigilance CE Course: Module 1 free, 17 modules, final assessment, verifiable certificate">\n'
     '<meta property="og:site_name" content="MedNova Lifesciences">\n'
     '<meta name="twitter:card" content="summary_large_image">\n'
     f'<meta name="twitter:title" content="{OG_TITLE}">\n'
     f'<meta name="twitter:description" content="{OG_DESC}">\n'
     f'<meta name="twitter:image" content="{OG_IMAGE}">\n'
-    '<meta name="twitter:image:alt" content="MedNova Lifesciences Pharmacovigilance CE Course: free, 17 modules, final assessment, verifiable certificate">\n'
+    '<meta name="twitter:image:alt" content="MedNova Lifesciences Pharmacovigilance CE Course: Module 1 free, 17 modules, final assessment, verifiable certificate">\n'
     '<script nonce="mednova-inline-2026" type="application/ld+json">' + json.dumps(course_ld) + '</script>\n'
     '<!-- Google tag (gtag.js) -->')
+
+# ---- paid access: Module 1 is a free preview; content comes from the server, module by module ----
+# The page keeps only the course outline (COURSE, rewritten at the end of this script); module content and
+# quizzes are in frontend/api/course-content.json and sent by /api/course?action=content to learners with access.
+sub('async function isCorrect(q, text) { return (await digest(COURSE.salt + "|" + q.id + "|" + text)) === q.h; }',
+    'let quizSalt = "";  // sent with each module\'s content\n'
+    'async function isCorrect(q, text) { return (await digest(quizSalt + "|" + q.id + "|" + text)) === q.h; }')
+sub('COURSE.modules[i].quiz.length', 'COURSE.modules[i].quizLen', count=2)
+sub('of ${m.quiz.length} correct', 'of ${m.quizLen} correct', count=2)
+sub('COURSE.final.quiz.length', 'COURSE.final.count', count=2)
+sub('${F.quiz.length} questions drawn from all', '${F.count} questions drawn from all')
+sub('function earned() { return doneCount() === N && finalPassed(); }',
+    '''function earned() { return doneCount() === N && finalPassed(); }
+// Paid access (the server decides; progress.access mirrors it). Module 1 is a free preview.
+const FREE_MODULES = 1;
+const ENROL = -5;
+function enrolled() { return !!(progress.access && progress.access.enrolled); }
+function needsEnrol(i) { return i >= FREE_MODULES && !enrolled(); }
+const priceText = () => "₦" + Number((progress.access && progress.access.price && progress.access.price.amount) || 19999).toLocaleString("en-NG");''')
+sub('  if (s.issuedNow) track("course_certificate_issued"',
+    '  if (s.enrolled !== undefined) {\n'
+    '    progress.access = { enrolled: !!s.enrolled, type: s.access, sponsor: s.sponsor, paymentsOpen: !!s.paymentsOpen, price: s.price };\n'
+    '  }\n'
+    '  if (s.issuedNow) track("course_certificate_issued"')
+
+# content loading (cached for this page visit only)
+sub('async function recordQuiz(quiz, answers) {',
+    '''const contentCache = {};
+async function loadContent(key) {
+  if (!contentCache[key]) {
+    const r = await api("content", { module: key });
+    if (r.salt) quizSalt = r.salt;
+    contentCache[key] = r;
+  }
+  return contentCache[key];
+}
+async function recordQuiz(quiz, answers) {''')
+
+# sidebar and overview: enrol entry, padlocks on paid modules
+sub('      const st = !modUnlocked(i) ? LOCK', '      const st = !modUnlocked(i) || needsEnrol(i) ? LOCK')
+sub('current, !finalUnlocked() ? LOCK : f ?', 'current, !finalUnlocked() || !enrolled() ? LOCK : f ?')
+sub('  toc.appendChild(tocButton("Start here", "··", OVERVIEW, current));\n',
+    '  toc.appendChild(tocButton("Start here", "··", OVERVIEW, current));\n'
+    '  if (!enrolled()) toc.appendChild(tocButton("Enrol in the full course", "₦", ENROL, current));\n')
+sub('  else if (idx === REG) renderRegister();\n', '  else if (idx === REG) renderRegister();\n  else if (idx === ENROL) renderEnrolPage();\n')
+sub('  if (hash === "certificate") start = CERT;\n', '  if (hash === "certificate") start = CERT;\n  if (hash === "enrol") start = ENROL;\n')
+sub('        : !modUnlocked(i) ? ["", "Locked"]\n',
+    '        : needsEnrol(i) ? ["", "Full course · enrol to unlock"]\n        : !modUnlocked(i) ? ["", "Locked"]\n')
+sub('always confirm against the current version from NAFDAC before applying them.</p>`;\n',
+    'always confirm against the current version from NAFDAC before applying them.</p>`;\n'
+    '  if (!enrolled()) page.appendChild(enrolCallout());\n')
+
+# module page: free preview, enrol page for paid modules, content from the server
+start = h.index('function renderModule(i) {')
+end = h.index('function renderFinal() {')
+old_module = h[start:end]
+render_body = old_module[old_module.index('  page.innerHTML = `\n    <div class="mod-eyebrow">'):]
+h = h[:start] + r'''async function renderModule(i) {
+  let m = COURSE.modules[i];
+  const page = pageShell();
+  if (needsEnrol(i)) return renderEnrol(page, `Module ${i + 1} is part of the full course.`);
+  if (!modUnlocked(i)) {
+    const f = firstUnpassed();
+    return renderLocked(page, `${esc(m.track)} · Module ${pad(i + 1)} of ${N}`, m.title,
+      `Pass the Module ${f + 1} knowledge check to unlock this module. Modules unlock in order, and each knowledge check needs ${MODULE_PASS_PCT}% to pass.`, f);
+  }
+  page.innerHTML = `<div class="mod-eyebrow">${esc(m.track)} · Module ${pad(i + 1)} of ${N}</div><h2>${m.title}</h2><p class="note" aria-live="polite">Loading the module…</p>`;
+  let c;
+  try { c = await loadContent(i); }
+  catch (e) {
+    if (currentView !== i) return;
+    if (e instanceof ApiError && e.data.state) { mergeServer(e.data.state); save(); renderToc(i); return renderModule(i); }
+    if (e instanceof ApiError && e.status === 409) { renderSyncNote(); page.querySelector(".note").textContent = "Confirm your email address to open this module. Use the button in the course menu."; return; }
+    page.querySelector(".note").textContent = "We couldn't load this module. Check your internet connection, then try again.";
+    const retry = el("button", { type: "button", class: "btn" }, "Try again");
+    retry.addEventListener("click", () => renderModule(i));
+    page.appendChild(retry);
+    return;
+  }
+  if (currentView !== i) return;
+  m = { ...m, ...c.module };
+''' + render_body + h[end:]
+sub('    intro: `${m.quiz.length} questions. Choose one answer', '    intro: `${m.quizLen} questions. Choose one answer')
+sub('      const next = i < N - 1 ? `Module ${i + 2} is unlocked.` : "The final assessment is unlocked.";',
+    '      const next = i < N - 1 ? (needsEnrol(i + 1) ? `Enrol in the full course to continue with Module ${i + 2}.` : `Module ${i + 2} is unlocked.`) : "The final assessment is unlocked.";')
+sub('const prev = modState(i), need = passScore(i), total = m.quiz.length, pass', 'const prev = modState(i), need = passScore(i), total = m.quizLen, pass')
+
+# final assessment: needs access; questions come from the server
+sub('function renderFinal() {\n  const page = pageShell();\n  const F = COURSE.final, f = finalState();\n  page.innerHTML = `<div class="mod-eyebrow">Assessment</div><h2>Final assessment</h2>`;\n',
+    'async function renderFinal() {\n  const page = pageShell();\n  const F = COURSE.final, f = finalState();\n'
+    '  if (!enrolled()) return renderEnrol(page, "The final assessment and certificate are part of the full course.");\n'
+    '  page.innerHTML = `<div class="mod-eyebrow">Assessment</div><h2>Final assessment</h2>`;\n')
+sub('''  page.appendChild(renderExam(F.quiz));
+  pager(page, `← Module ${N}`, N - 1, null);
+}''', '''  const loading = el("p", { class: "note", "aria-live": "polite" }, "Loading the assessment…");
+  page.appendChild(loading);
+  let quiz;
+  try { quiz = (await loadContent("final")).quiz; }
+  catch (e) {
+    if (currentView !== FINAL) return;
+    if (e instanceof ApiError && e.data.state) { mergeServer(e.data.state); save(); renderToc(FINAL); return renderFinal(); }
+    loading.textContent = "We couldn't load the assessment. Check your internet connection, then try again.";
+    return;
+  }
+  if (currentView !== FINAL) return;
+  loading.remove();
+  page.appendChild(renderExam(quiz));
+  pager(page, `← Module ${N}`, N - 1, null);
+}''')
+
+# enrol page, payment return, partner codes, course terms
+start = h.index('/* ---------- certificate ---------- */')
+h = h[:start] + r'''/* ---------- enrolment: Paystack payment or partner code ---------- */
+function enrolCallout() {
+  const box = el("div", { class: "enrol-callout" });
+  box.innerHTML = `<p><strong>You're on the free preview:</strong> the course overview and Module 1. Enrol for ${esc(priceText())}, once, for lifetime access to all ${N} modules, the final assessment and your certificate.</p>`;
+  const b = el("button", { type: "button", class: "btn" }, "Enrol in the full course");
+  b.addEventListener("click", () => go(ENROL));
+  box.appendChild(b);
+  return box;
+}
+function renderEnrolPage() { renderEnrol(pageShell(), ""); }
+function renderEnrol(page, reason) {
+  showingLocked = true;
+  const a = progress.access || {};
+  page.innerHTML = `<div class="mod-eyebrow">Enrol</div><h2>Unlock the full course</h2>
+    <p>${reason ? esc(reason) + " " : ""}You're on the free preview: the course overview and Module 1.</p>
+    <div class="enrol-card">
+      <div class="enrol-price"><strong>${esc(priceText())}</strong><span>one payment · lifetime access</span></div>
+      <ul>
+        <li>All ${N} modules, with knowledge checks</li>
+        <li>The final assessment</li>
+        <li>A certificate of completion with a number anyone can verify</li>
+        <li>Lifetime access, on any device</li>
+      </ul>
+      <div class="field check"><label for="enrol-terms"><input id="enrol-terms" type="checkbox"> <span>I agree to the <a href="#terms" target="_blank" rel="noopener">course terms</a>, including that payments are non-refundable.</span></label></div>
+      <div class="q-foot"><button type="button" class="btn" id="enrol-pay">Pay ${esc(priceText())}</button></div>
+      <p class="note" id="enrol-msg" aria-live="polite">${a.paymentsOpen ? "Payments are processed securely by Paystack: card, bank transfer or USSD." : "Online payment opens soon. To enrol now, email <a href=\"mailto:info@mednovalife.com\">info@mednovalife.com</a>."}</p>
+    </div>
+    <h3>Have a partner code?</h3>
+    <form id="redeem-form" class="enrol-code" novalidate>
+      <div class="field"><label for="partner-code">Partner code</label><input id="partner-code" type="text" autocomplete="off" autocapitalize="characters" maxlength="40"><span class="err" id="partner-code-err"></span></div>
+      <div class="q-foot"><button type="submit" class="btn ghost">Apply code</button></div>
+    </form>
+    <p class="note">If your organisation has enrolled you, your course unlocks when you sign in with the email address they registered. Questions: <a href="mailto:info@mednovalife.com">info@mednovalife.com</a>.</p>`;
+  const pay = page.querySelector("#enrol-pay"), msg = page.querySelector("#enrol-msg"), terms = page.querySelector("#enrol-terms");
+  if (!a.paymentsOpen) pay.disabled = true;
+  pay.addEventListener("click", async () => {
+    if (!terms.checked) { msg.textContent = "Tick the box to agree to the course terms first."; terms.focus(); return; }
+    pay.disabled = true; msg.textContent = "Taking you to Paystack…";
+    try {
+      const r = await api("checkout", {});
+      if (r.alreadyEnrolled) { mergeServer(r); save(); renderToc(currentView); return go(currentView === ENROL ? OVERVIEW : currentView); }
+      track("begin_checkout", { currency: "NGN", value: (a.price && a.price.amount) || 19999 });
+      location.href = r.url;
+    } catch (e) {
+      pay.disabled = false;
+      msg.textContent = e instanceof ApiError && e.status === 409 ? "Confirm your email address first: use the button in the course menu."
+        : e instanceof ApiError && e.status < 500 && e.data.error ? e.data.error
+        : "We couldn't start the payment. Check your internet connection, then try again.";
+      if (e instanceof ApiError && e.status === 409) renderSyncNote();
+    }
+  });
+  page.querySelector("#redeem-form").addEventListener("submit", async ev => {
+    ev.preventDefault();
+    const input = page.querySelector("#partner-code"), err = page.querySelector("#partner-code-err");
+    const code = input.value.trim().toUpperCase();
+    if (!/^[A-Z0-9-]{4,40}$/.test(code)) { err.textContent = "Enter the code exactly as you received it."; input.focus(); return; }
+    err.textContent = "Checking…";
+    try {
+      const s = await api("redeem", { code });
+      mergeServer(s); save();
+      track("course_code_redeemed");
+      renderToc(currentView);
+      renderWelcome(`Your partner code worked${s.sponsor ? `: your place is sponsored by ${esc(s.sponsor)}` : ""}. The full course is unlocked.`);
+    } catch (e) {
+      err.textContent = e instanceof ApiError && e.status === 409 ? "Confirm your email address first: use the button in the course menu."
+        : e instanceof ApiError && e.data.error ? e.data.error : "We couldn't check the code. Check your internet connection, then try again.";
+      if (e instanceof ApiError && e.status === 409) renderSyncNote();
+    }
+  });
+}
+function renderWelcome(message) {
+  const page = pageShell();
+  page.innerHTML = `<div class="mod-eyebrow">Enrolled</div><h2>Welcome to the full course</h2>
+    <div class="score" role="status"><div><div class="verdict-note">Enrolment confirmed</div><strong>Lifetime access</strong> <span class="pill pass">Unlocked</span></div><p>${message}</p></div>`;
+  const next = firstUnpassed();
+  pager(page, "← Overview", OVERVIEW, next < 0 ? "Final assessment →" : `Continue with Module ${next + 1} →`, next < 0 ? FINAL : next);
+}
+// Back from Paystack (?reference=…): the server checks the payment with Paystack before unlocking.
+async function confirmPaymentReturn(reference) {
+  const page = pageShell();
+  page.innerHTML = `<div class="mod-eyebrow">Payment</div><h2>Confirming your payment</h2><p class="note" aria-live="polite">Checking your payment with Paystack…</p>`;
+  const note = page.querySelector(".note");
+  for (let attempt = 0; attempt < 4; attempt++) {
+    try {
+      const s = await api("confirm-payment", { reference });
+      mergeServer(s); save(); renderToc(currentView);
+      if (s.paymentStatus === "success" || s.enrolled && s.access) {
+        track("purchase", { currency: "NGN", value: (s.price && s.price.amount) || 19999 });
+        return renderWelcome("Payment received. Thank you. We've emailed you a confirmation.");
+      }
+      if (s.paymentStatus === "failed" || s.paymentStatus === "abandoned") {
+        page.querySelector("h2").textContent = "Payment not completed";
+        note.textContent = "The payment didn't go through, and you haven't been charged for it. You can try again.";
+        return pager(page, "← Overview", OVERVIEW, "Try again", ENROL);
+      }
+    } catch (e) {
+      if (e instanceof ApiError && e.status === 409) { renderSyncNote(); note.textContent = "Confirm your email address on this device to finish: use the button in the course menu."; return; }
+    }
+    await new Promise(r => setTimeout(r, 3000));
+  }
+  note.textContent = "We haven't received confirmation from Paystack yet. If you were charged, your course unlocks automatically within a few minutes; reload this page then. If it doesn't, email info@mednovalife.com with your payment reference: " + reference + ".";
+}
+
+/* ---------- course terms (public) ---------- */
+function renderTerms() {
+  const page = standalonePage();
+  page.classList.add("privacy");
+  page.innerHTML = `<div class="mod-eyebrow">Terms</div><h2>Course terms</h2>
+    <p>These terms apply to the ${esc(COURSE_NAME)} offered by MedNova Lifesciences Ltd at mednovalife.com.</p>
+    <h3>Price and access</h3>
+    <ul>
+      <li>The course overview and Module 1 are free. The full course costs ₦19,999, paid once.</li>
+      <li>Payment gives you lifetime access to all ${N} modules, the final assessment and a certificate of completion when you pass, on any device where you sign in with the same email address.</li>
+      <li>Access is personal to the email address that enrolled and can't be transferred or shared.</li>
+    </ul>
+    <h3>Payment</h3>
+    <ul>
+      <li>Payments are processed by Paystack. MedNova Lifesciences never sees or stores your card or bank details.</li>
+      <li><strong>All payments are final and non-refundable.</strong> Try Module 1 free before you pay to make sure the course is right for you.</li>
+      <li>If you were charged but your course didn't unlock, email info@mednovalife.com with your payment reference and we'll sort it out.</li>
+    </ul>
+    <h3>Sponsored places and partner codes</h3>
+    <ul>
+      <li>An organisation can pay for its staff or members. MedNova may register them directly, or give the organisation a partner code with a set number of places.</li>
+      <li>A partner code unlocks the course for one learner per place, until its places run out or it expires. Partner codes have no cash value.</li>
+    </ul>
+    <h3>Certificates</h3>
+    <p>A certificate is issued when you pass all ${N} knowledge checks and score ${COURSE.final.passMark}% or more on the final assessment. The certificate records the course completed; it isn't a licence or regulatory qualification.</p>
+    <p>Questions: <a href="mailto:info@mednovalife.com">info@mednovalife.com</a>. See also the <a href="#privacy">course privacy notice</a>.</p>
+    <p class="note">Last updated 11 October 2026.</p>
+    <p><a href="#" id="terms-back">Go to the course</a></p>`;
+  document.getElementById("terms-back").addEventListener("click", ev => {
+    ev.preventDefault(); history.replaceState(null, "", location.pathname);
+    if (learner) startCourse(); else renderSignin();
+  });
+}
+
+''' + h[start:]
+sub('else if (bootHash === "privacy") renderPrivacy();',
+    'else if (bootHash === "privacy") renderPrivacy();\nelse if (bootHash === "terms") renderTerms();')
+sub('else if (location.hash === "#privacy") renderPrivacy(); });',
+    'else if (location.hash === "#privacy") renderPrivacy(); else if (location.hash === "#terms") renderTerms(); });')
+sub('else if (learner) startCourse(); else renderSignin();\n',
+    '''else if (learner) {
+  // Back from Paystack: ?trxref=…&reference=… is added to the course URL.
+  const payRef = new URLSearchParams(location.search).get("reference");
+  if (payRef) history.replaceState(null, "", location.pathname);
+  startCourse();
+  if (payRef) confirmPaymentReturn(payRef);
+} else renderSignin();
+''')
+
+# register: access column, sponsored learners, partner codes
+sub('    const rows = (await res.json()).learners || [];\n'
+    '    if (!rows.length) { box.innerHTML = \'<p class="note">No learner records yet. Records appear here when learners sign in.</p>\'; return; }',
+    '    const regData = await res.json();\n'
+    '    const rows = regData.learners || [];\n'
+    '    if (!rows.length) { box.innerHTML = \'<p class="note">No learner records yet. Records appear here when learners sign in or you add them below.</p>\'; renderAdminTools(page, regData.paymentRequired); return; }')
+sub('<th>Name</th><th>Email</th><th>Modules</th>', '<th>Name</th><th>Email</th><th>Access</th><th>Modules</th>')
+sub('<td>${esc(r.email || "")}</td><td class="num">${esc(r.', '<td>${esc(r.email || "")}</td><td>${esc(accessLabel(r))}</td><td class="num">${esc(r.')
+sub('colspan="6">No learners match', 'colspan="7">No learners match')
+sub('[r.name, r.email, r.certId]', '[r.name, r.email, r.certId, r.sponsor, r.code, r.paymentRef]')
+sub('const head = ["Name", "Email", ', 'const head = ["Name", "Email", "Access", "Sponsor", "Payment reference", "Partner code", "Signed in", ')
+sub('matches().map(r => [r.name, r.email, ', 'matches().map(r => [r.name, r.email, r.access || "preview", r.sponsor, r.paymentRef, r.code, r.signedIn ? "yes" : "no", ')
+sub('    draw();\n  } catch (e) {', '    draw();\n    renderAdminTools(page, regData.paymentRequired);\n  } catch (e) {')
+start = h.index('/* ---------- course privacy notice (public) ---------- */')
+h = h[:start] + r'''/* ---------- administrator: access, sponsored learners, partner codes ---------- */
+async function adminApi(action, method, body) {
+  const r = await fetch(API + "?action=" + action, {
+    method, headers: { Authorization: "Bearer " + ssGet(ADMIN_STORE), "Content-Type": "application/json" },
+    body: body ? JSON.stringify(body) : undefined,
+  });
+  const d = await r.json().catch(() => ({}));
+  if (!r.ok) throw new ApiError(r.status, d);
+  return d;
+}
+function accessLabel(r) {
+  const base = r.access === "paid" ? "Paid" : r.access === "sponsored" ? `Sponsored${r.sponsor ? " · " + r.sponsor : ""}`
+    : r.access === "early" ? "Early access" : "Free preview";
+  return r.signedIn ? base : base + " (not signed in yet)";
+}
+const adminErr = (e, fallback) => e instanceof ApiError && e.data.error ? e.data.error : fallback;
+function renderAdminTools(page, paymentRequired) {
+  const box = el("section", { class: "adm" });
+  box.innerHTML = `<h3>Course access</h3>
+    <p class="note">${paymentRequired
+      ? "Payments are switched on. Beyond Module 1, learners need to pay, be added as sponsored learners or use a partner code."
+      : "Payments are switched off, so every signed-in learner has the full course. Sponsored learners and partner codes added now keep working when payments are switched on."}</p>
+    <h3>Add sponsored learners</h3>
+    <p class="note">Sponsored learners skip payment. Their course unlocks when they sign in with the email you add. One learner per line: full name, a comma, then email.</p>
+    <form id="adm-add" novalidate>
+      <div class="row">
+        <div class="field"><label for="adm-sponsor">Sponsor or partner</label><input id="adm-sponsor" type="text" maxlength="120" placeholder="e.g. Acme Pharma Ltd"></div>
+        <div class="field"><label for="adm-note">Note (optional)</label><input id="adm-note" type="text" maxlength="500"></div>
+      </div>
+      <div class="field"><label for="adm-list">Learners</label><textarea id="adm-list" placeholder="Adaeze Okafor, adaeze@example.com&#10;Tunde Bello, tunde@example.com"></textarea></div>
+      <div class="field check"><label for="adm-invite"><input id="adm-invite" type="checkbox" checked> <span>Email each learner an invitation with the course link</span></label></div>
+      <div class="q-foot"><button class="btn" type="submit">Add learners</button></div>
+      <div id="adm-add-out" class="note" aria-live="polite"></div>
+    </form>
+    <h3>Partner codes</h3>
+    <p class="note">A code unlocks the course for one learner per place. Give it to the partner; learners enter it on the enrol page.</p>
+    <form id="adm-code" novalidate>
+      <div class="row">
+        <div class="field"><label for="code-sponsor">Sponsor or partner</label><input id="code-sponsor" type="text" maxlength="120"></div>
+        <div class="field"><label for="code-seats">Places</label><input id="code-seats" type="number" min="1" max="10000" value="10"></div>
+        <div class="field"><label for="code-expires">Expires (optional)</label><input id="code-expires" type="date"></div>
+        <div class="field"><label for="code-custom">Custom code (optional)</label><input id="code-custom" type="text" maxlength="40" placeholder="Leave blank to generate one"></div>
+      </div>
+      <div class="q-foot"><button class="btn" type="submit">Create code</button></div>
+      <div id="adm-code-out" class="note" aria-live="polite"></div>
+    </form>
+    <div class="tbl"><table><thead><tr><th>Code</th><th>Sponsor</th><th>Places used</th><th>Expires</th><th>Status</th><th></th></tr></thead><tbody id="codes-body"><tr><td colspan="6">Loading…</td></tr></tbody></table></div>
+    <h3>Remove access</h3>
+    <p class="note">For mistakes, for example a sponsored learner added with the wrong email. Progress and certificates are kept.</p>
+    <form id="adm-revoke" novalidate>
+      <div class="field"><label for="revoke-email">Learner's email</label><input id="revoke-email" type="text" autocomplete="off"></div>
+      <div class="field check"><label for="revoke-ok"><input id="revoke-ok" type="checkbox"> <span>Yes, remove this learner's access to the full course</span></label></div>
+      <div class="q-foot"><button class="btn ghost" type="submit">Remove access</button></div>
+      <div id="adm-revoke-out" class="note" aria-live="polite"></div>
+    </form>`;
+  page.appendChild(box);
+  const q = s => box.querySelector(s);
+  const reloadButton = () => { const b = el("button", { type: "button", class: "btn ghost" }, "Reload the register"); b.addEventListener("click", () => renderRegister()); return b; };
+
+  q("#adm-add").addEventListener("submit", async ev => {
+    ev.preventDefault();
+    const out = q("#adm-add-out"), sponsor = q("#adm-sponsor").value.trim();
+    const learners = q("#adm-list").value.split(/\r?\n/).map(s => s.trim()).filter(Boolean).map(line => {
+      const m = /^(.*?)[,;\t]\s*([^\s,;]+@[^\s,;]+)$/.exec(line);
+      return m ? { name: m[1].trim(), email: m[2] } : { name: "", email: line };
+    });
+    if (!sponsor) { out.textContent = "Enter the sponsor or partner name."; q("#adm-sponsor").focus(); return; }
+    if (!learners.length) { out.textContent = "Add at least one learner: full name, a comma, then email."; q("#adm-list").focus(); return; }
+    out.textContent = "Adding…";
+    try {
+      const r = await adminApi("admin-add", "POST", { sponsor, note: q("#adm-note").value, invite: q("#adm-invite").checked, learners });
+      out.innerHTML = `<ul>${r.results.map(x => `<li>${esc(x.email || "(blank)")}: ${esc(x.result)}</li>`).join("")}</ul>`;
+      out.appendChild(reloadButton());
+    } catch (e) { out.textContent = adminErr(e, "Couldn't add the learners. Try again."); }
+  });
+
+  async function loadCodes() {
+    const body = q("#codes-body");
+    try {
+      const { codes } = await adminApi("admin-codes", "GET");
+      body.innerHTML = codes.length ? "" : '<tr><td colspan="6">No partner codes yet.</td></tr>';
+      for (const c of codes) {
+        const expired = c.expires_at && new Date(c.expires_at) < new Date();
+        const status = !c.active ? "Switched off" : expired ? "Expired" : c.used >= c.seats ? "All places used" : "Active";
+        const tr = el("tr", {}, `<td class="num">${esc(c.code)}</td><td>${esc(c.sponsor)}</td><td class="num">${esc(c.used)} of ${esc(c.seats)}</td><td class="num">${c.expires_at ? esc(fmtDateTime(c.expires_at)) : "—"}</td><td>${esc(status)}</td><td></td>`);
+        const b = el("button", { type: "button", class: "linkbtn" }, c.active ? "Switch off" : "Switch on");
+        b.addEventListener("click", async () => {
+          b.disabled = true;
+          try { await adminApi("admin-codes", "POST", { op: "set-active", code: c.code, active: !c.active }); loadCodes(); }
+          catch (e) { b.disabled = false; q("#adm-code-out").textContent = adminErr(e, "Couldn't change the code. Try again."); }
+        });
+        tr.lastChild.appendChild(b);
+        body.appendChild(tr);
+      }
+    } catch (e) { body.innerHTML = '<tr><td colspan="6">Partner codes could not be loaded. Reload the page to try again.</td></tr>'; }
+  }
+  loadCodes();
+
+  q("#adm-code").addEventListener("submit", async ev => {
+    ev.preventDefault();
+    const out = q("#adm-code-out"), sponsor = q("#code-sponsor").value.trim(), seats = Number(q("#code-seats").value);
+    const expires = q("#code-expires").value;
+    if (!sponsor) { out.textContent = "Enter the sponsor or partner name."; q("#code-sponsor").focus(); return; }
+    if (!Number.isInteger(seats) || seats < 1) { out.textContent = "Enter the number of places."; q("#code-seats").focus(); return; }
+    out.textContent = "Creating…";
+    try {
+      // An expiry date runs to the end of that day, Lagos time.
+      const r = await adminApi("admin-codes", "POST", { sponsor, seats, code: q("#code-custom").value.trim(), expiresAt: expires ? expires + "T23:59:59+01:00" : null });
+      out.innerHTML = `Created <strong>${esc(r.code.code)}</strong> for ${esc(r.code.sponsor)}, ${esc(r.code.seats)} place${r.code.seats === 1 ? "" : "s"}. Send this code to the partner.`;
+      q("#adm-code").reset(); q("#code-seats").value = "10";
+      loadCodes();
+    } catch (e) { out.textContent = adminErr(e, "Couldn't create the code. Try again."); }
+  });
+
+  q("#adm-revoke").addEventListener("submit", async ev => {
+    ev.preventDefault();
+    const out = q("#adm-revoke-out"), email = q("#revoke-email").value.trim();
+    if (!email) { out.textContent = "Enter the learner's email."; return; }
+    if (!q("#revoke-ok").checked) { out.textContent = "Tick the box to confirm."; return; }
+    out.textContent = "Removing…";
+    try { await adminApi("admin-revoke", "POST", { email }); out.textContent = `Access removed for ${email}.`; out.appendChild(reloadButton()); q("#adm-revoke").reset(); }
+    catch (e) { out.textContent = adminErr(e, "Couldn't remove access. Try again."); }
+  });
+}
+
+''' + h[start:]
+
+# privacy notice: payments
+sub('<li>Your certificate details: certificate number',
+    '<li>If you pay for the course: the payment reference, amount, date and status, from Paystack. We never see or store your card or bank details. If an organisation sponsors your place, its name.</li>\n      <li>Your certificate details: certificate number')
+sub('We use these service providers to run it: Vercel (website hosting), Supabase (database, hosted in the European Union), Resend (email delivery) and Google Analytics (usage statistics).',
+    'We use these service providers to run it: Vercel (website hosting), Supabase (database, hosted in the European Union), Resend (email delivery), Paystack (payments) and Google Analytics (usage statistics).')
+sub('<li>To issue your certificate and email it to you.</li>', '<li>To take your payment, or record your sponsored place, and to issue your certificate and email it to you.</li>')
+
+# styles
+sub('.cert-name { border:',
+    '.enrol-callout, .enrol-card { border: 1px solid var(--accent); border-radius: 8px; padding: 16px 20px; display: flex; flex-direction: column; gap: 12px; align-items: flex-start; }\n'
+    '.enrol-callout p, .enrol-card p, .enrol-card ul { margin: 0; }\n'
+    '.enrol-card ul { padding-left: 22px; display: flex; flex-direction: column; gap: 6px; }\n'
+    '.enrol-price { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 12px; }\n'
+    '.enrol-price strong { font-family: var(--font-display); font-size: 36px; }\n'
+    '.enrol-price span { color: var(--muted); }\n'
+    '.enrol-code { display: flex; flex-direction: column; gap: 8px; max-width: 420px; }\n'
+    '.enrol-code .field { margin: 0; }\n'
+    '.adm { border-top: 1px solid var(--rule); padding-top: 16px; margin-top: 8px; display: flex; flex-direction: column; gap: 12px; }\n'
+    '.adm textarea, .adm input[type=text], .adm input[type=number], .adm input[type=date] { font: inherit; padding: 10px 12px; border: 1px solid var(--rule); border-radius: 6px; background: var(--surface); color: var(--ink); width: 100%; box-sizing: border-box; }\n'
+    '.adm textarea { min-height: 120px; }\n'
+    '.adm .row { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr)); gap: 10px; }\n'
+    '.cert-name { border:')
 
 # ---- document structure: the exported source closes <head> on line 1, which left the title, meta and
 # Open Graph tags in <body>. WhatsApp only reads tags in <head>, so end the head after the course styles.
@@ -836,13 +1266,25 @@ for i, m in enumerate(course['modules']):
 key['quizzes']['final'] = [{'id': q['id'], 'h': q['h']} for q in course['final']['quiz']]
 pathlib.Path(KEY_OUT).write_text(json.dumps(key, indent=1) + '\n', encoding='utf-8', newline='\n')
 
-# The final assessment is marked only by the server, so its answer hashes are left out of the page.
-for q in course['final']['quiz']:
-    del q['h']
-h = h.replace(line, 'const COURSE = ' + json.dumps(course, ensure_ascii=False).replace('</', '<\\/') + ';', 1)
-assert '"h"' not in json.dumps(course['final']), 'final assessment answers left in the page'
+# ---- course content for the server (frontend/api/course-content.json); the page keeps only the outline ----
+# Module content and quizzes are sent by /api/course?action=content to learners with access. Final
+# assessment questions go without answer hashes: only the server marks the final assessment.
+HEAVY = ('objectives', 'content', 'takeaways', 'sources', 'quiz')
+content_out = {
+    'salt': course['salt'],
+    'modules': [{k: m[k] for k in HEAVY if k in m} for m in course['modules']],
+    'final': {'quiz': [{k: v for k, v in q.items() if k != 'h'} for q in course['final']['quiz']]},
+}
+pathlib.Path(CONTENT_OUT).write_text(json.dumps(content_out, ensure_ascii=False) + '\n', encoding='utf-8', newline='\n')
+outline = {
+    'modules': [{**{k: v for k, v in m.items() if k not in HEAVY}, 'quizLen': len(m['quiz'])} for m in course['modules']],
+    'final': {'passMark': course['final']['passMark'], 'count': len(course['final']['quiz'])},
+}
+h = h.replace(line, 'const COURSE = ' + json.dumps(outline, ensure_ascii=False).replace('</', '<\\/') + ';', 1)
+page_course = json.dumps(outline)
+assert '"h"' not in page_course and '"content"' not in page_course and 'salt' not in page_course, 'course content left in the page'
 
 assert 'window.claude' not in h, 'leftover window.claude reference'
 assert 'cdnjs' not in h
 open(dst, 'w', encoding='utf-8', newline='\n').write(h)
-print(f'wrote {dst} ({len(h):,} bytes) and {KEY_OUT}')
+print(f'wrote {dst} ({len(h):,} bytes), {KEY_OUT} and {CONTENT_OUT}')
