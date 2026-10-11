@@ -786,7 +786,8 @@ sub('  g.font = `34px ${MONO}`; g.fillStyle = MUTED; g.fillText(learner.email, W
 OG_TITLE = 'Free Pharmacovigilance CE Course with Certificate | MedNova Lifesciences'
 OG_DESC = ('Free online pharmacovigilance continuing education course: 17 modules on drug safety foundations, '
            'company PV practice and NAFDAC requirements, with knowledge checks, a final assessment and a verifiable certificate of completion.')
-OG_IMAGE = 'https://mednovalife.com/public/images/course/pv-ce-course-og.png'
+# Kept small (JPEG, ~60 KB): WhatsApp drops preview images near its ~300 KB limit.
+OG_IMAGE = 'https://mednovalife.com/public/images/course/pv-ce-course-share.jpg'
 URL = 'https://mednovalife.com/pharmacovigilance-ce-course'
 course_ld = {
     '@context': 'https://schema.org', '@type': 'Course', 'name': 'Pharmacovigilance Continuing Education Course Series',
@@ -807,6 +808,8 @@ sub('<!-- Google tag (gtag.js) -->',
     '<meta property="og:type" content="website">\n'
     f'<meta property="og:url" content="{URL}">\n'
     f'<meta property="og:image" content="{OG_IMAGE}">\n'
+    f'<meta property="og:image:secure_url" content="{OG_IMAGE}">\n'
+    '<meta property="og:image:type" content="image/jpeg">\n'
     '<meta property="og:image:width" content="1200">\n<meta property="og:image:height" content="630">\n'
     '<meta property="og:image:alt" content="MedNova Lifesciences Pharmacovigilance CE Course: free, 17 modules, final assessment, verifiable certificate">\n'
     '<meta property="og:site_name" content="MedNova Lifesciences">\n'
@@ -814,6 +817,7 @@ sub('<!-- Google tag (gtag.js) -->',
     f'<meta name="twitter:title" content="{OG_TITLE}">\n'
     f'<meta name="twitter:description" content="{OG_DESC}">\n'
     f'<meta name="twitter:image" content="{OG_IMAGE}">\n'
+    '<meta name="twitter:image:alt" content="MedNova Lifesciences Pharmacovigilance CE Course: free, 17 modules, final assessment, verifiable certificate">\n'
     '<script nonce="mednova-inline-2026" type="application/ld+json">' + json.dumps(course_ld) + '</script>\n'
     '<!-- Google tag (gtag.js) -->')
 
