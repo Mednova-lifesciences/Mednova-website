@@ -839,7 +839,6 @@ async function drawCertificate() {
   g.font = `44px ${BODY}`; g.fillStyle = MUTED; g.fillText("This certifies that", W / 2, 440);
   g.font = fit(certName, 700, 124, DISPLAY, 1900); g.fillStyle = INK; g.fillText(certName, W / 2, 600);
   g.strokeStyle = RULE; g.lineWidth = 3; g.beginPath(); g.moveTo(W / 2 - 800, 650); g.lineTo(W / 2 + 800, 650); g.stroke();
-  g.font = `34px ${MONO}`; g.fillStyle = MUTED; g.fillText(learner.email, W / 2, 712);
   g.font = `44px ${BODY}`; g.fillStyle = MUTED; g.fillText("has successfully completed the", W / 2, 820);
   g.font = fit(COURSE_NAME, 500, 76, DISPLAY, 2000); g.fillStyle = INK; g.fillText(COURSE_NAME, W / 2, 930);
   g.font = `500 40px ${DISPLAY}`; g.fillStyle = MUTED;

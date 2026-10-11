@@ -777,6 +777,9 @@ sub('your score on each knowledge check and on the final assessment, and when yo
     'your score on each knowledge check and on the final assessment, when you last took the final assessment, and when you completed the course.')
 sub('Last updated 10 October 2026.', 'Last updated 11 October 2026.')
 
+# ---- certificate: no email address (certificates are shared publicly) ----
+sub('  g.font = `34px ${MONO}`; g.fillStyle = MUTED; g.fillText(learner.email, W / 2, 712);\n', '')
+
 # ---- site icons, social sharing (Open Graph / Twitter) and structured data, as on the rest of the site ----
 OG_TITLE = 'Free Pharmacovigilance CE Course with Certificate | MedNova Lifesciences'
 OG_DESC = ('Free online pharmacovigilance continuing education course: 17 modules on drug safety foundations, '
