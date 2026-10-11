@@ -564,6 +564,17 @@ sub('''      for (const quiz of Object.keys(progress.pending)) {
         delete progress.pending[quiz]; save();
       }''')
 
+# a locked page drawn from this device's saved progress redraws once the server's results arrive
+# (e.g. on a new phone, where the server knows modules this browser hasn't seen yet)
+sub('let currentView = OVERVIEW;', 'let currentView = OVERVIEW, showingLocked = false;')
+sub('''function pageShell() {
+  const main = document.getElementById("main");''', '''function pageShell() {
+  showingLocked = false;
+  const main = document.getElementById("main");''')
+sub('    if (document.getElementById("toc")) renderToc(currentView);\n',
+    '    if (document.getElementById("toc")) renderToc(currentView);\n'
+    '    if (showingLocked && document.getElementById("toc")) go(currentView);\n')
+
 # sidebar: pass/fail per module, padlocks on locked steps
 sub('''      const s = modState(i);
       const st = s && s.done ? `<span class="st done">${s.score}/${COURSE.modules[i].quiz.length}</span>` : "";''',
@@ -605,6 +616,7 @@ sub('''  const next = COURSE.modules.findIndex((_, i) => !(modState(i) && modSta
 sub('''function renderModule(i) {
   const m = COURSE.modules[i];
   const page = pageShell();''', '''function renderLocked(page, eyebrow, title, message, target) {
+  showingLocked = true;
   page.innerHTML = `<div class="mod-eyebrow">${eyebrow}</div><h2>${title}</h2>
     <p><span class="pill todo"><span aria-hidden="true">🔒</span> Locked</span></p><p>${message}</p>`;
   pager(page, "← Overview", OVERVIEW, `Go to Module ${target + 1}`, target);

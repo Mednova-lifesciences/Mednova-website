@@ -397,6 +397,7 @@ function syncRecord() {
     syncing = null;
     renderSyncNote();
     if (document.getElementById("toc")) renderToc(currentView);
+    if (showingLocked && document.getElementById("toc")) go(currentView);
   })();
   return syncing;
 }
@@ -517,7 +518,7 @@ function signOut() {
 }
 
 /* ---------- course shell ---------- */
-let currentView = OVERVIEW;
+let currentView = OVERVIEW, showingLocked = false;
 function startCourse() {
   loadProgress();
   document.getElementById("app").innerHTML = `
@@ -594,6 +595,7 @@ function go(idx) {
   window.scrollTo(0, 0);
 }
 function pageShell() {
+  showingLocked = false;
   const main = document.getElementById("main");
   main.innerHTML = "";
   const page = el("article", { class: "page" });
@@ -640,6 +642,7 @@ function renderIntro() {
 }
 
 function renderLocked(page, eyebrow, title, message, target) {
+  showingLocked = true;
   page.innerHTML = `<div class="mod-eyebrow">${eyebrow}</div><h2>${title}</h2>
     <p><span class="pill todo"><span aria-hidden="true">🔒</span> Locked</span></p><p>${message}</p>`;
   pager(page, "← Overview", OVERVIEW, `Go to Module ${target + 1}`, target);
