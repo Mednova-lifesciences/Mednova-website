@@ -520,6 +520,214 @@ sub('async function drawCertificate() {',
     '}\n'
     'async function drawCertificate() {')
 
+# ---- pass marks, modules unlock in order, final assessment marked only on submit with a 24-hour wait ----
+# The server (frontend/api/course.js) enforces the same rules; these steps make the page show them.
+sub('''function doneCount() { return COURSE.modules.filter((_, i) => modState(i) && modState(i).done).length; }
+function finalState() { return progress.final || null; }''',
+    '''// Each knowledge check is passed at MODULE_PASS_PCT, and modules unlock in order. The final assessment
+// unlocks once every check is passed; after a failed attempt it stays locked until progress.final.retryAt.
+const MODULE_PASS_PCT = 60;
+const FINAL_WAIT_HOURS = 24;
+function passScore(i) { return Math.ceil(COURSE.modules[i].quiz.length * MODULE_PASS_PCT / 100); }
+function modPassed(i) { const s = modState(i); return !!(s && s.done && s.score >= passScore(i)); }
+function doneCount() { return COURSE.modules.filter((_, i) => modPassed(i)).length; }
+function firstUnpassed() { return COURSE.modules.findIndex((_, i) => !modPassed(i)); }
+function modUnlocked(i) { const f = firstUnpassed(); return f < 0 || i <= f; }
+function finalUnlocked() { return doneCount() === N; }
+function finalState() { return progress.final || null; }
+function finalRetryAt() { const f = finalState(); return f && f.retryAt && new Date(f.retryAt) > new Date() ? f.retryAt : null; }''')
+
+# server results are the record of truth: drop local results the server didn't accept
+sub('''  for (const [k, v] of Object.entries(s.results || {})) {
+    if (pending[k]) continue;
+    if (/^m\\d+$/.test(k)) progress[k] = { done: true, score: v.score };
+    else if (k === "final") progress.final = { best: v.best, last: v.last };
+  }''', '''  const results = s.results || {};
+  for (const k of [...COURSE.modules.map((_, i) => "m" + i), "final"]) {
+    if (pending[k]) continue;
+    const v = results[k];
+    if (!v) delete progress[k];
+    else if (k === "final") progress.final = { best: v.best, last: v.last, retryAt: v.retryAt || null };
+    else progress[k] = { done: true, score: v.score };
+  }''')
+sub('''      for (const quiz of Object.keys(progress.pending)) {
+        mergeServer(await api("submit", { quiz, answers: progress.pending[quiz] }));
+        delete progress.pending[quiz]; save();
+      }''', '''      for (const quiz of Object.keys(progress.pending)) {
+        try { mergeServer(await api("submit", { quiz, answers: progress.pending[quiz] })); }
+        catch (e) {
+          // Refused for good (locked, already passed, waiting): drop it. Offline or unconfirmed: keep it queued.
+          if (!(e instanceof ApiError) || e.status === 409 || e.status >= 500) throw e;
+          delete progress.pending[quiz];
+          mergeServer(e.data.state);
+        }
+        delete progress.pending[quiz]; save();
+      }''')
+
+# sidebar: pass/fail per module, padlocks on locked steps
+sub('''      const s = modState(i);
+      const st = s && s.done ? `<span class="st done">${s.score}/${COURSE.modules[i].quiz.length}</span>` : "";''',
+    '''      const s = modState(i);
+      const st = !modUnlocked(i) ? LOCK
+        : s && s.done ? `<span class="st ${modPassed(i) ? "done" : "fail"}">${s.score}/${COURSE.modules[i].quiz.length}</span>` : "";''')
+sub('''  toc.appendChild(tocButton("Final assessment", "FA", FINAL, current, f ? `<span class="st ${finalPassed() ? "done" : ""}">${f.best}%</span>` : ""));''',
+    '''  toc.appendChild(tocButton("Final assessment", "FA", FINAL, current, !finalUnlocked() ? LOCK : f ? `<span class="st ${finalPassed() ? "done" : "fail"}">${f.best}%</span>` : ""));''')
+sub('function renderToc(current) {',
+    'const LOCK = \'<span class="st lock"><span aria-hidden="true">🔒</span><span class="sr-only">Locked</span></span>\';\n'
+    'function renderToc(current) {')
+sub('${d} of ${N} knowledge checks completed', '${d} of ${N} knowledge checks passed')
+sub('.toc .st.done { color: var(--ok); }',
+    '.toc .st.done { color: var(--ok); }\n.toc .st.fail { color: var(--bad); }\n.toc button[aria-current="true"] .st.fail { color: inherit; }\n'
+    '.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }\n'
+    '.summary-grid .s.fail { color: var(--bad); }\n'
+    '.score p { flex-basis: 100%; margin: 0; }\n.score p strong { font-family: inherit; font-size: inherit; }\n'
+    '.quiz .q-foot.submit { flex-wrap: wrap; }')
+
+# overview
+sub('''      <li>Work through the modules in order. Part 1 builds the foundations; Part 2 applies them to company PV practice and NAFDAC requirements in Nigeria.</li>
+      <li>Answer the knowledge check at the end of each module. Each answer is marked right or wrong as soon as you check it. If you miss a question, reread the module and retake the check.</li>
+      <li>When every knowledge check is complete, take the final assessment. A score of ${COURSE.final.passMark}% or more issues your certificate automatically, dated and timed, ready to download and print.</li>''',
+    '''      <li>Work through the modules in order. Part 1 builds the foundations; Part 2 applies them to company PV practice and NAFDAC requirements in Nigeria.</li>
+      <li>Pass the knowledge check at the end of each module to unlock the next one. You need ${MODULE_PASS_PCT}% to pass (3 of 5 or 5 of 8). Each answer is marked right or wrong as soon as you check it. If you don't pass, reread the module and retake the check as often as you need. Your best score counts.</li>
+      <li>When every knowledge check is passed, the final assessment unlocks. Answer all ${COURSE.final.quiz.length} questions and submit to see your score. A score of ${COURSE.final.passMark}% or more issues your certificate automatically, dated and timed, ready to download and print. If you score below ${COURSE.final.passMark}%, you can retake it after ${FINAL_WAIT_HOURS} hours.</li>''')
+sub('''      b.innerHTML = `<span class="n">Module ${pad(i + 1)}</span><span>${m.short}</span><span class="s ${s && s.done ? "done" : ""}">${s && s.done ? `Completed · ${s.score} of ${m.quiz.length} correct` : "Not started"}</span>`;''',
+    '''      const [cls, label] = modPassed(i) ? ["done", `Passed · ${s.score} of ${m.quiz.length} correct`]
+        : !modUnlocked(i) ? ["", "Locked"]
+        : s && s.done ? ["fail", `Not passed yet · ${s.score} of ${m.quiz.length} correct`] : ["", "Not started"];
+      b.innerHTML = `<span class="n">Module ${pad(i + 1)}</span><span>${m.short}</span><span class="s ${cls}">${label}</span>`;''')
+sub('''  const next = COURSE.modules.findIndex((_, i) => !(modState(i) && modState(i).done));
+  pager(page, null, null,''', '''  const next = firstUnpassed();
+  pager(page, null, null,''')
+
+# module page: locked until the previous check is passed; pass/fail message after the check
+sub('''function renderModule(i) {
+  const m = COURSE.modules[i];
+  const page = pageShell();''', '''function renderLocked(page, eyebrow, title, message, target) {
+  page.innerHTML = `<div class="mod-eyebrow">${eyebrow}</div><h2>${title}</h2>
+    <p><span class="pill todo"><span aria-hidden="true">🔒</span> Locked</span></p><p>${message}</p>`;
+  pager(page, "← Overview", OVERVIEW, `Go to Module ${target + 1}`, target);
+}
+function renderModule(i) {
+  const m = COURSE.modules[i];
+  const page = pageShell();
+  if (!modUnlocked(i)) {
+    const f = firstUnpassed();
+    return renderLocked(page, `${esc(m.track)} · Module ${pad(i + 1)} of ${N}`, m.title,
+      `Pass the Module ${f + 1} knowledge check to unlock this module. Modules unlock in order, and each knowledge check needs ${MODULE_PASS_PCT}% to pass.`, f);
+  }''')
+sub('''    wrongNote: "Review the module content and examples, then retake the check.",
+    async onDone(score, answers) {
+      progress["m" + i] = { done: true, score }; save();
+      track("course_module_complete", { module_number: i + 1, score, total: m.quiz.length });
+      await recordQuiz("m" + i, answers); renderToc(i);
+      return `<div><div class="verdict-note">Knowledge check complete</div><strong>${score} of ${m.quiz.length} correct</strong></div>`;
+    },''', '''    wrongNote: "Review the module content and examples, then retake the check.",
+    async onDone(score, answers) {
+      const prev = modState(i), need = passScore(i), total = m.quiz.length, pass = score >= need;
+      progress["m" + i] = { done: true, score: Math.max(score, prev && prev.done ? prev.score : 0) }; save();
+      track("course_module_complete", { module_number: i + 1, score, total, passed: pass });
+      await recordQuiz("m" + i, answers); renderToc(i);
+      const next = i < N - 1 ? `Module ${i + 2} is unlocked.` : "The final assessment is unlocked.";
+      if (pass) return `<div><div class="verdict-note">Knowledge check passed</div><strong>${score} of ${total} correct</strong> <span class="pill pass">Passed</span></div><p>Well done. You needed ${need} of ${total} to pass. ${next}</p>`;
+      if (modPassed(i)) return `<div><div class="verdict-note">Knowledge check complete</div><strong>${score} of ${total} correct</strong> <span class="pill fail">Below pass mark</span></div><p>Your best score of ${modState(i).score} of ${total} still counts, so this module stays passed. ${next}</p>`;
+      return `<div><div class="verdict-note">Knowledge check not passed</div><strong>${score} of ${total} correct</strong> <span class="pill fail">Not passed</span></div><p>You need ${need} of ${total} to pass and unlock ${i < N - 1 ? `Module ${i + 2}` : "the final assessment"}. Review the module content and examples, then retake the check.</p>`;
+    },''')
+
+# final assessment: unlocked by passing every module; answers marked only as a total on submit;
+# a failed attempt locks it for 24 hours; no retakes after passing
+start = h.index('function renderFinal() {')
+end = h.index('/* ---------- certificate ---------- */')
+h = h[:start] + r'''function renderFinal() {
+  const page = pageShell();
+  const F = COURSE.final, f = finalState();
+  page.innerHTML = `<div class="mod-eyebrow">Assessment</div><h2>Final assessment</h2>`;
+  if (!finalUnlocked()) {
+    const nx = firstUnpassed();
+    return renderLocked(page, "Assessment", "Final assessment",
+      `The final assessment unlocks when you have passed all ${N} knowledge checks. You have passed ${doneCount()} of ${N}.`, nx);
+  }
+  if (finalPassed()) {
+    page.appendChild(el("div", { class: "score", role: "status" }, `<div><div class="verdict-note">Final assessment passed</div><strong>You scored ${f.best}%</strong> <span class="pill pass">Passed</span></div>
+      <p>Congratulations. The pass mark for the certificate is ${F.passMark}%, and you passed. ${progress.earnedAt ? "Your certificate is ready." : "Your certificate is being issued."}</p>`));
+    pager(page, `← Module ${N}`, N - 1, progress.earnedAt ? "View your certificate →" : "Certificate →", CERT);
+    return;
+  }
+  const retryAt = finalRetryAt();
+  if (f && retryAt) {
+    page.appendChild(el("div", { class: "score", role: "status" }, `<div><div class="verdict-note">Final assessment not passed</div><strong>You scored ${f.last}%</strong> <span class="pill fail">Below pass mark</span></div>
+      <p>You need ${F.passMark}% or more for the certificate. You can retake the assessment from <strong>${esc(fmtDateTime(retryAt))}</strong>. Use the time to review the modules.</p>`));
+    pager(page, "← Review the modules", OVERVIEW, null);
+    return;
+  }
+  page.appendChild(el("p", {}, `${F.quiz.length} questions drawn from all ${N} modules. Answer every question, then submit. You'll see your total score when you submit; individual answers aren't marked. The pass mark is ${F.passMark}%. If you score below it, you can retake the assessment after ${FINAL_WAIT_HOURS} hours.`));
+  if (f) page.appendChild(el("p", { class: "note" }, `Your last attempt scored ${f.last}%.`));
+  page.appendChild(renderExam(F.quiz));
+  pager(page, `← Module ${N}`, N - 1, null);
+}
+
+// Final assessment form: nothing is marked in the browser. The server grades the whole attempt.
+function renderExam(quiz) {
+  const form = el("form", { class: "quiz", novalidate: "" });
+  const answers = {};
+  quiz.forEach((q, qi) => {
+    const box = el("div", { class: "q" });
+    const fs = el("fieldset");
+    fs.appendChild(el("legend", {}, `<span class="qn">${qi + 1}.</span>${q.q}`));
+    const order = q.tf ? q.o : shuffled(q.o);
+    const name = `${q.id}-${Math.random().toString(36).slice(2, 7)}`;
+    order.forEach((text, oi) => {
+      const id = `${name}-${oi}`;
+      const lab = el("label", { class: "opt", for: id });
+      lab.appendChild(el("input", { type: "radio", name, id, value: String(oi) }));
+      lab.appendChild(el("span", {}, text));
+      fs.appendChild(lab);
+    });
+    fs.addEventListener("change", () => { const p = fs.querySelector("input:checked"); if (p) answers[q.id] = order[Number(p.value)]; });
+    box.appendChild(fs);
+    form.appendChild(box);
+  });
+  const foot = el("div", { class: "q-foot submit" });
+  const btn = el("button", { type: "submit", class: "btn" }, "Submit assessment");
+  const out = el("p", { class: "note", "aria-live": "polite" });
+  foot.append(btn, out);
+  form.appendChild(foot);
+  form.addEventListener("submit", async ev => {
+    ev.preventDefault();
+    const missing = quiz.findIndex(q => !(q.id in answers));
+    if (missing >= 0) {
+      out.textContent = `Answer every question before you submit. Question ${missing + 1} has no answer yet.`;
+      form.querySelectorAll("fieldset")[missing].querySelector("input").focus();
+      return;
+    }
+    btn.disabled = true; out.textContent = "Submitting your answers…";
+    try {
+      const s = await api("submit", { quiz: "final", answers });
+      const pct = Math.round(s.score / s.total * 100);
+      track("course_final_assessment", { score_percent: pct, passed: pct >= COURSE.final.passMark });
+      mergeServer(s); save();
+      go(FINAL);
+    } catch (e) {
+      btn.disabled = false;
+      if (e instanceof ApiError && e.status === 409) { renderSyncNote(); out.textContent = "Confirm it's you before you submit. Use the button in the course menu. Your answers stay selected."; return; }
+      if (e instanceof ApiError && e.data.state) { mergeServer(e.data.state); save(); go(FINAL); return; }
+      out.textContent = e instanceof ApiError && e.status < 500 && e.data.error ? e.data.error
+        : "We couldn't submit your answers. Check your internet connection and try again. Your answers stay selected.";
+    }
+  });
+  return form;
+}
+
+''' + h[end:]
+
+# certificate requirements
+sub('<span>Complete all ${N} knowledge checks (${d} of ${N} done)</span>',
+    '<span>Pass all ${N} knowledge checks with ${MODULE_PASS_PCT}% or more (${d} of ${N} passed)</span>')
+sub('d < N ? COURSE.modules.findIndex((_, i) => !(modState(i) && modState(i).done)) : FINAL);', 'd < N ? firstUnpassed() : FINAL);')
+
+# privacy notice: the final assessment wait uses the time of the last attempt
+sub('your score on each knowledge check and on the final assessment, and when you completed the course.',
+    'your score on each knowledge check and on the final assessment, when you last took the final assessment, and when you completed the course.')
+sub('Last updated 10 October 2026.', 'Last updated 11 October 2026.')
 
 # ---- answer key for server-side grading (frontend/api/course-key.json) ----
 line = next(l for l in h.split('\n') if l.startswith('const COURSE = '))
@@ -529,6 +737,12 @@ for i, m in enumerate(course['modules']):
     key['quizzes'][f'm{i}'] = [{'id': q['id'], 'h': q['h']} for q in m['quiz']]
 key['quizzes']['final'] = [{'id': q['id'], 'h': q['h']} for q in course['final']['quiz']]
 pathlib.Path(KEY_OUT).write_text(json.dumps(key, indent=1) + '\n', encoding='utf-8', newline='\n')
+
+# The final assessment is marked only by the server, so its answer hashes are left out of the page.
+for q in course['final']['quiz']:
+    del q['h']
+h = h.replace(line, 'const COURSE = ' + json.dumps(course, ensure_ascii=False).replace('</', '<\\/') + ';', 1)
+assert '"h"' not in json.dumps(course['final']), 'final assessment answers left in the page'
 
 assert 'window.claude' not in h, 'leftover window.claude reference'
 assert 'cdnjs' not in h

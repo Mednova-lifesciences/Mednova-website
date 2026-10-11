@@ -11,6 +11,7 @@
 //   POST /api/course?action=send-code          email a sign-in code to a registered address
 //   POST /api/course?action=verify-code        add this device to the learner record
 //   POST /api/course?action=submit             grade one knowledge check or the final assessment
+//                                              (pass marks, unlock order and the final assessment wait apply)
 //   GET  /api/course?action=verify&id=PVCE-…   public certificate check (name, date, score)
 //   GET  /api/course?action=register           completion register (Authorization: Bearer COURSE_ADMIN_KEY)
 
@@ -106,8 +107,11 @@ async function loadLearner(body) {
   }
   // The name can be corrected until the certificate is issued; after that it is fixed.
   if (row.name !== name && !row.earned_at) {
-    await patchLearner(email, { name });
-    row.name = name;
+    const [updated] = await db(`course_learners?${learnerFilter(email)}`, {
+      method: 'PATCH', headers: { Prefer: 'return=representation' },
+      body: JSON.stringify({ name, updated_at: new Date().toISOString() }),
+    });
+    return updated;
   }
   return row;
 }
@@ -181,27 +185,54 @@ function grade(quizKey, answers) {
   return { score, total: quiz.length };
 }
 
+// A knowledge check is passed at MODULE_PASS_PCT, and modules unlock in order. The final assessment
+// unlocks once every module is passed, and a failed attempt locks it for FINAL_WAIT_MS.
+const MODULE_PASS_PCT = 60;
+const FINAL_WAIT_MS = 24 * 60 * 60 * 1000;
+const passScore = quizKey => Math.ceil(KEY.quizzes[quizKey].length * MODULE_PASS_PCT / 100);
+const modulePassed = (results, i) => !!(results[`m${i}`] && results[`m${i}`].score >= passScore(`m${i}`));
+const passedCount = results => Array.from({ length: KEY.modules }, (_, i) => modulePassed(results, i)).filter(Boolean).length;
+
 async function submit(req, res) {
   const b = req.body && typeof req.body === 'object' ? req.body : {};
   const quizKey = String(b.quiz || '');
   const { score, total } = grade(quizKey, b.answers);
   const row = await loadLearner(b);
+  const refuse = (status, message) => { throw new HttpError(status, message, { state: publicState(row) }); };
 
   const results = { ...(row.results || {}) };
   if (quizKey === 'final') {
+    const prev = results.final;
+    if (passedCount(results) < KEY.modules) refuse(403, `Pass all ${KEY.modules} knowledge checks to unlock the final assessment.`);
+    if (prev && prev.best >= KEY.passMark) refuse(400, 'You have already passed the final assessment.');
+    if (prev && prev.retryAt && new Date(prev.retryAt) > new Date()) {
+      refuse(429, `You can retake the final assessment from ${fmtDate(prev.retryAt)}.`);
+    }
     const pct = Math.round(score / total * 100);
-    results.final = { best: Math.max(pct, results.final ? results.final.best : 0), last: pct };
+    results.final = { best: Math.max(pct, prev ? prev.best : 0), last: pct, lastAt: new Date().toISOString() };
+    if (pct < KEY.passMark) results.final.retryAt = new Date(Date.now() + FINAL_WAIT_MS).toISOString();
   } else {
-    results[quizKey] = { score };
+    const i = Number(quizKey.slice(1));
+    for (let j = 0; j < i; j++) {
+      if (!modulePassed(results, j)) refuse(403, `Pass the Module ${j + 1} knowledge check to unlock this module.`);
+    }
+    // The best score counts, so a weaker retake never un-passes a module.
+    const prev = results[quizKey];
+    results[quizKey] = { score: Math.max(score, prev ? prev.score : 0), last: score };
   }
   const update = {
     results,
-    modules_done: Object.keys(results).filter(k => /^m\d+$/.test(k)).length,
+    modules_done: passedCount(results),
     modules_total: KEY.modules,
     final_best: results.final ? results.final.best : null,
   };
-  await patchLearner(row.email, update);
-  let state = { ...row, ...update };
+  // Only save over the version we read, so two submissions at once can't skip the final assessment wait.
+  const saved = await db(`course_learners?${learnerFilter(row.email)}&updated_at=eq.${encodeURIComponent(row.updated_at)}`, {
+    method: 'PATCH', headers: { Prefer: 'return=representation' },
+    body: JSON.stringify({ ...update, updated_at: new Date().toISOString() }),
+  });
+  if (!saved.length) throw new HttpError(503, 'Another submission was being saved at the same time. Try again.');
+  let state = saved[0];
   // Issue the certificate the first time both requirements are met. Number, date, printed name
   // and score are fixed from then on.
   let issuedNow = false;

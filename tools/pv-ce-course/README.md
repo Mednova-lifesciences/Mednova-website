@@ -36,6 +36,17 @@ source. Don't remove it.
 Changing questions after people have started: learners keep the scores already recorded. Changing the **number** of
 modules changes what "all knowledge checks complete" means, so check the register before doing that.
 
+## Pass marks, unlock order and the final assessment wait
+
+- Each knowledge check is passed at 60% (3 of 5, 5 of 8). The best score counts, and learners can retake checks
+  straight away. Module N unlocks only when Module N−1 is passed.
+- The final assessment unlocks when all knowledge checks are passed. It is marked only by the server: its answer
+  hashes are left out of the page, and learners see only their total score. Pass mark 80%.
+- A failed final assessment locks it for 24 hours (`results.final.retryAt`). After passing there are no retakes.
+- The server (`frontend/api/course.js`: `MODULE_PASS_PCT`, `FINAL_WAIT_MS`) enforces all of this. The page
+  (`MODULE_PASS_PCT`, `FINAL_WAIT_HOURS`, set in `build.py`) only displays it, so change both together.
+- To let a learner retake the final assessment early, remove `retryAt` from `results.final` on their row in Supabase.
+
 ## Signature on certificates
 
 Certificates show the signatory's name in script lettering. To use a real signature, save a scan as a PNG with a
