@@ -765,6 +765,41 @@ sub('your score on each knowledge check and on the final assessment, and when yo
     'your score on each knowledge check and on the final assessment, when you last took the final assessment, and when you completed the course.')
 sub('Last updated 10 October 2026.', 'Last updated 11 October 2026.')
 
+# ---- site icons, social sharing (Open Graph / Twitter) and structured data, as on the rest of the site ----
+OG_TITLE = 'Free Pharmacovigilance CE Course with Certificate | MedNova Lifesciences'
+OG_DESC = ('Free online pharmacovigilance continuing education course: 17 modules on drug safety foundations, '
+           'company PV practice and NAFDAC requirements, with knowledge checks, a final assessment and a verifiable certificate of completion.')
+OG_IMAGE = 'https://mednovalife.com/public/images/course/pv-ce-course-og.png'
+URL = 'https://mednovalife.com/pharmacovigilance-ce-course'
+course_ld = {
+    '@context': 'https://schema.org', '@type': 'Course', 'name': 'Pharmacovigilance Continuing Education Course Series',
+    'description': OG_DESC, 'url': URL, 'inLanguage': 'en', 'isAccessibleForFree': True,
+    'educationalCredentialAwarded': 'Certificate of completion',
+    'provider': {'@type': 'Organization', 'name': 'MedNova Lifesciences', 'url': 'https://mednovalife.com'},
+}
+sub('<!-- Google tag (gtag.js) -->',
+    '<meta name="theme-color" content="#0f3d2e">\n'
+    '<meta name="robots" content="index,follow,max-image-preview:large">\n'
+    '<link rel="icon" href="/favicon.ico" sizes="any">\n'
+    '<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">\n'
+    '<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">\n'
+    '<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">\n'
+    '<link rel="manifest" href="/public/site.webmanifest">\n'
+    f'<meta property="og:title" content="{OG_TITLE}">\n'
+    f'<meta property="og:description" content="{OG_DESC}">\n'
+    '<meta property="og:type" content="website">\n'
+    f'<meta property="og:url" content="{URL}">\n'
+    f'<meta property="og:image" content="{OG_IMAGE}">\n'
+    '<meta property="og:image:width" content="1200">\n<meta property="og:image:height" content="630">\n'
+    '<meta property="og:image:alt" content="MedNova Lifesciences Pharmacovigilance CE Course: free, 17 modules, final assessment, verifiable certificate">\n'
+    '<meta property="og:site_name" content="MedNova Lifesciences">\n'
+    '<meta name="twitter:card" content="summary_large_image">\n'
+    f'<meta name="twitter:title" content="{OG_TITLE}">\n'
+    f'<meta name="twitter:description" content="{OG_DESC}">\n'
+    f'<meta name="twitter:image" content="{OG_IMAGE}">\n'
+    '<script nonce="mednova-inline-2026" type="application/ld+json">' + json.dumps(course_ld) + '</script>\n'
+    '<!-- Google tag (gtag.js) -->')
+
 # ---- answer key for server-side grading (frontend/api/course-key.json) ----
 line = next(l for l in h.split('\n') if l.startswith('const COURSE = '))
 course = json.loads(line[len('const COURSE = '):].rstrip().rstrip(';'))
