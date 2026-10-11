@@ -124,17 +124,19 @@ function renderSyncNote() {
   if (!box) return;
   box.hidden = !blocked;
   if (!blocked) return;
-  box.innerHTML = `<p>This email is already registered for the course, so your progress on this device isn't being saved yet.</p><button type="button" class="btn">Confirm it's you</button>`;
+  box.innerHTML = `<p>Your progress on this device isn't being saved yet. Confirm your email address with a code to save it.</p><button type="button" class="btn">Confirm your email</button>`;
   box.querySelector("button").addEventListener("click", () => renderCode());
 }
 
-/* ---------- confirm a new device by emailed code ---------- */
-function renderCode() {
+/* ---------- confirm the email (first sign-in) or a new device by emailed code ---------- */
+function renderCode(isNew) {
   const app = document.getElementById("app");
   app.innerHTML = `
     <div class="signin-wrap"><div class="signin">
-      <div class="brand"><div class="eyebrow">Continuing education</div><h1>Confirm it's you</h1></div>
-      <p><strong>${esc(learner.email)}</strong> is already registered for the course. To continue on this device, enter the 6-digit code we email you. Your progress and any certificate will load here.</p>
+      <div class="brand"><div class="eyebrow">Continuing education</div><h1>${isNew ? "Confirm your email" : "Confirm it's you"}</h1></div>
+      <p>${isNew
+        ? `To start the course, enter the 6-digit code we email to <strong>${esc(learner.email)}</strong>. This confirms the email address is yours, so only you can sign in to your course record and receive your certificate.`
+        : `<strong>${esc(learner.email)}</strong> is already registered for the course. To continue on this device, enter the 6-digit code we email you. Your progress and any certificate will load here.`}</p>
       <p class="note" id="code-status" aria-live="polite">Sending your code…</p>
       <form id="code-form" novalidate>
         <div class="field"><label for="code-in">6-digit code</label><input id="code-in" inputmode="numeric" autocomplete="one-time-code" maxlength="6" pattern="[0-9]{6}" required><span class="err" id="code-err"></span></div>
@@ -310,7 +312,7 @@ sub('''  if (!progress.earnedAt) {
     await syncRecord();
     if (progress.earnedAt) { renderToc(CERT); return renderCert(); }
     wait.textContent = blocked
-      ? "Your email is already registered for the course, so we need to confirm it's you before issuing your certificate on this device."
+      ? "We need to confirm your email address with a code before issuing your certificate on this device."
       : lastSyncOk
         ? "Your saved results don't yet meet both requirements. Retake the final assessment, or contact info@mednovalife.com if this persists."
         : "We couldn't reach MedNova Lifesciences to issue your certificate. Check your internet connection and try again.";
@@ -335,13 +337,13 @@ sub('''    learner = { name, email };
     btn.disabled = true; btn.textContent = "Signing in…";
     loadProgress();
     try { mergeServer(await api("sync", {})); save(); }
-    catch (e) { if (e instanceof ApiError && e.status === 409) return renderCode(); /* offline: continue, sync later */ }
+    catch (e) { if (e instanceof ApiError && e.status === 409) return renderCode(e.data.newLearner); /* offline: continue, sync later */ }
     startCourse();''')
 sub('function signOut() {\n  lsDel(LEARNER_KEY);', 'function signOut() {\n  lsDel(LEARNER_KEY);\n  blocked = false;')
 sub('<div class="meter"><div class="meter-bar">',
     '<div class="sync-note" id="sync-note" hidden></div>\n        <div class="meter"><div class="meter-bar">')
 sub('MedNova Lifesciences records your name, email and course results to confirm completion and to verify your certificate.</p>',
-    "MedNova Lifesciences records your name, email and course results to confirm completion and to verify your certificate. To continue on another device, sign in there with the same email and we'll email you a code.</p>")
+    "MedNova Lifesciences records your name, email and course results to confirm completion and to verify your certificate. We'll email you a 6-digit code to confirm your email address, and again when you sign in on another device.</p>")
 sub('/* Main column */', '.sync-note { border: 1px solid var(--bad); background: var(--bad-soft); border-radius: 8px; padding: 12px; display: flex; flex-direction: column; gap: 10px; font-size: 15px; }\n.sync-note p { margin: 0; }\n/* Main column */')
 
 # ---- certificate: printed name, score and number come from the issued record ----
@@ -395,8 +397,8 @@ sub('const API = "/api/course";',
 sub('  if (s.earnedAt && s.certId) {\n    progress.earnedAt',
     '  if (s.issuedNow) track("course_certificate_issued", { score_percent: s.certFinalScore });\n'
     '  if (s.earnedAt && s.certId) {\n    progress.earnedAt')
-sub('    catch (e) { if (e instanceof ApiError && e.status === 409) return renderCode(); /* offline: continue, sync later */ }\n    startCourse();',
-    '    catch (e) { if (e instanceof ApiError && e.status === 409) return renderCode(); /* offline: continue, sync later */ }\n'
+sub('    catch (e) { if (e instanceof ApiError && e.status === 409) return renderCode(e.data.newLearner); /* offline: continue, sync later */ }\n    startCourse();',
+    '    catch (e) { if (e instanceof ApiError && e.status === 409) return renderCode(e.data.newLearner); /* offline: continue, sync later */ }\n'
     '    track("course_sign_in");\n    startCourse();')
 sub('      loadProgress(); mergeServer(s); save();\n      startCourse();',
     '      loadProgress(); mergeServer(s); save();\n      track("course_device_confirmed");\n      startCourse();')
@@ -436,7 +438,7 @@ function renderPrivacy() {
       <li>Your full name and email address, as you enter them when you sign in.</li>
       <li>Your course results: your score on each knowledge check and on the final assessment, and when you completed the course. We mark the answers you submit but don't keep them.</li>
       <li>Your certificate details: certificate number, the name printed on it, date and time of completion, and final score.</li>
-      <li>A random identifier for each device you sign in on, and short-lived sign-in codes we email you when you add a new device.</li>
+      <li>A random identifier for each device you sign in on, and short-lived sign-in codes we email you to confirm your email address and when you add a new device.</li>
       <li>Anonymous usage statistics through Google Analytics, such as pages viewed and modules completed. We don't send your name, email or certificate number to Google.</li>
     </ul>
     <h3>Why we use it</h3>

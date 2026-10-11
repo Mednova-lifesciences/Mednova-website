@@ -4,12 +4,12 @@
 // which never leaves the server. Quizzes are graded here and certificates are issued here
 // (by the issue_course_certificate database function); the browser only submits answers.
 //
-// Each browser holds a random device token. The first device to sign in with an email owns the
-// record; any other device joins by entering a 6-digit code emailed to that address.
+// Each browser holds a random device token. Every device, the first one included, joins the learner
+// record by entering a 6-digit code emailed to that address, so every record's email is confirmed.
 //
-//   POST /api/course?action=sync               create or load the learner record
-//   POST /api/course?action=send-code          email a sign-in code to a registered address
-//   POST /api/course?action=verify-code        add this device to the learner record
+//   POST /api/course?action=sync               load the learner record for a confirmed device
+//   POST /api/course?action=send-code          email a sign-in code (starts the record on first sign-in)
+//   POST /api/course?action=verify-code        confirm the email and add this device to the record
 //   POST /api/course?action=submit             grade one knowledge check or the final assessment
 //                                              (pass marks, unlock order and the final assessment wait apply)
 //   GET  /api/course?action=verify&id=PVCE-…   public certificate check (name, date, score)
@@ -89,21 +89,18 @@ function readIdentity(body) {
 
 const findLearner = async email => (await db(`course_learners?${learnerFilter(email)}&select=*`))[0] || null;
 
-// Loads the learner record for a signed-in device, creating it on the very first sign-in.
-// A device the record doesn't know gets a 409 telling the page to ask for an emailed code.
+// Loads the learner record for a signed-in device. Every device, including the first one for an
+// email, must be confirmed with a code sent to that email: an unknown device gets a 409 telling the
+// page to ask for the code, and newLearner says whether the email has a confirmed record yet.
 async function loadLearner(body) {
   const { email, name, tokenHash } = readIdentity(body);
   const row = await findLearner(email);
-  if (!row) {
-    const [created] = await db('course_learners', {
-      method: 'POST',
-      headers: { Prefer: 'return=representation' },
-      body: JSON.stringify({ course: COURSE, email, name, token_hashes: [tokenHash], modules_total: KEY.modules, results: {} }),
-    });
-    return created;
-  }
-  if (!row.token_hashes.some(h => safeEqual(h, tokenHash))) {
-    throw new HttpError(409, 'This email is already registered for the course. Confirm it is you with a code sent to your email.', { needsCode: true });
+  if (!row || !row.token_hashes.some(h => safeEqual(h, tokenHash))) {
+    const newLearner = !row || !row.token_hashes.length;
+    throw new HttpError(409, newLearner
+      ? 'Confirm your email address with the code we send you to start the course.'
+      : 'This email is already registered for the course. Confirm it is you with a code sent to your email.',
+    { needsCode: true, newLearner });
   }
   // The name can be corrected until the certificate is issued; after that it is fixed.
   if (row.name !== name && !row.earned_at) {
@@ -123,9 +120,14 @@ async function sync(req, res) {
 const maskEmail = e => e.replace(/^(.)(.*)(@.*)$/, (_, a, mid, d) => a + '*'.repeat(Math.min(mid.length, 6)) + d);
 
 async function sendCode(req, res) {
-  const { email } = readIdentity(req.body);
+  const { email, name } = readIdentity(req.body);
+  // A first sign-in gets an unconfirmed record (no devices) that holds the code; verify-code confirms it.
+  await db('course_learners?on_conflict=course,email', {
+    method: 'POST',
+    headers: { Prefer: 'resolution=ignore-duplicates,return=minimal' },
+    body: JSON.stringify({ course: COURSE, email, name, token_hashes: [], modules_total: KEY.modules, results: {} }),
+  });
   const row = await findLearner(email);
-  if (!row) throw new HttpError(404, 'No course record for this email yet. Sign in to start the course.');
   if (row.login_code_sent_at && Date.now() - new Date(row.login_code_sent_at) < CODE_RESEND_MS) {
     throw new HttpError(429, 'A code was sent less than a minute ago. Check your inbox, or wait a minute to send another.');
   }
@@ -300,7 +302,8 @@ async function register(req, res) {
   if (!ADMIN_KEY || !key || !safeEqual(sha256(key), sha256(ADMIN_KEY))) {
     return res.status(401).json({ error: 'Incorrect administrator key.' });
   }
-  const rows = await db(`course_learners?course=eq.${COURSE}&select=name,email,modules_done,modules_total,final_best,earned_at,cert_id,cert_name,updated_at&order=updated_at.desc&limit=1000`);
+  // Only confirmed learners (at least one confirmed device); unconfirmed sign-ups are left out.
+  const rows = await db(`course_learners?course=eq.${COURSE}&token_hashes=neq.{}&select=name,email,modules_done,modules_total,final_best,earned_at,cert_id,cert_name,updated_at&order=updated_at.desc&limit=1000`);
   return res.status(200).json({
     learners: rows.map(r => ({
       name: r.cert_name || r.name, email: r.email, modulesDone: r.modules_done, modulesTotal: r.modules_total,
