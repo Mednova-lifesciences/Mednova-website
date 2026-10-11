@@ -581,7 +581,9 @@ sub('.toc .st.done { color: var(--ok); }',
     '.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }\n'
     '.summary-grid .s.fail { color: var(--bad); }\n'
     '.score p { flex-basis: 100%; margin: 0; }\n.score p strong { font-family: inherit; font-size: inherit; }\n'
-    '.quiz .q-foot.submit { flex-wrap: wrap; }')
+    '.quiz .q-foot.submit { flex-wrap: wrap; }\n'
+    '.cert-name { border: 1px solid var(--accent); border-radius: 8px; padding: 16px 20px; display: flex; flex-direction: column; gap: 12px; }\n'
+    '.cert-name p { margin: 0; }\n.cert-name .field { margin: 0; }')
 
 # overview
 sub('''      <li>Work through the modules in order. Part 1 builds the foundations; Part 2 applies them to company PV practice and NAFDAC requirements in Nigeria.</li>
@@ -686,6 +688,34 @@ function renderExam(quiz) {
     box.appendChild(fs);
     form.appendChild(box);
   });
+  // The name is printed on the certificate and fixed once it is issued, so the learner confirms it here.
+  const nameBox = el("div", { class: "cert-name" });
+  const drawName = editing => {
+    nameBox.innerHTML = editing
+      ? `<div class="field"><label for="cert-name-in">Full name for your certificate</label><input id="cert-name-in" type="text" autocomplete="name" maxlength="80" value="${esc(learner.name)}"><span class="err" id="cert-name-err"></span></div>
+         <div class="q-foot"><button type="button" class="btn" id="cert-name-save">Save name</button><button type="button" class="btn ghost" id="cert-name-cancel">Cancel</button></div>`
+      : `<p>Your certificate will be issued to: <strong>${esc(learner.name)}</strong> <button type="button" class="linkbtn" id="cert-name-edit">Change</button></p>
+         <div class="field check"><label for="cert-name-ok"><input id="cert-name-ok" type="checkbox"> <span>This is my name exactly as it should appear on my certificate. I understand it can't be changed after the certificate is issued.</span></label></div>`;
+    if (!editing) {
+      nameBox.querySelector("#cert-name-edit").addEventListener("click", () => { drawName(true); nameBox.querySelector("#cert-name-in").focus(); });
+      return;
+    }
+    nameBox.querySelector("#cert-name-cancel").addEventListener("click", () => drawName(false));
+    nameBox.querySelector("#cert-name-save").addEventListener("click", async () => {
+      const name = nameBox.querySelector("#cert-name-in").value.trim().replace(/\s+/g, " ");
+      const err = nameBox.querySelector("#cert-name-err");
+      if (name.length < 3 || !/\s/.test(name)) { err.textContent = "Enter your full name (first name and surname)."; return; }
+      learner.name = name;
+      lsSet(LEARNER_KEY, JSON.stringify(learner));
+      const who = document.querySelector(".who b");
+      if (who) who.textContent = name;
+      drawName(false);
+      nameBox.querySelector("#cert-name-ok").focus();
+      syncRecord(); // the new name is also sent with the submission
+    });
+  };
+  drawName(false);
+  form.appendChild(nameBox);
   const foot = el("div", { class: "q-foot submit" });
   const btn = el("button", { type: "submit", class: "btn" }, "Submit assessment");
   const out = el("p", { class: "note", "aria-live": "polite" });
@@ -697,6 +727,12 @@ function renderExam(quiz) {
     if (missing >= 0) {
       out.textContent = `Answer every question before you submit. Question ${missing + 1} has no answer yet.`;
       form.querySelectorAll("fieldset")[missing].querySelector("input").focus();
+      return;
+    }
+    const nameOk = nameBox.querySelector("#cert-name-ok");
+    if (!nameOk || !nameOk.checked) {
+      out.textContent = nameOk ? "Confirm the name for your certificate before you submit." : "Save the name for your certificate before you submit.";
+      (nameOk || nameBox.querySelector("input")).focus();
       return;
     }
     btn.disabled = true; out.textContent = "Submitting your answers…";
