@@ -392,8 +392,8 @@
       <input type="email" name="email" placeholder="Work email" required>
     </div>
     <div class="form-row">
-      <input type="text" name="organization" placeholder="Organization">
-      <input type="text" name="role" placeholder="Role / title">
+      <input type="text" name="organization" placeholder="Organization" required>
+      <input type="text" name="role" placeholder="Role / title" required>
     </div>
     <div class="form-row single">
       <textarea name="message" placeholder="Tell us about your product, safety team, or the demo focus" required></textarea>
@@ -429,7 +429,8 @@
     <span class="social"><a href="https://www.linkedin.com/company/mednova-lifesciences/">LinkedIn</a><a href="https://x.com/MedNovaLif3669">X</a><a href="https://instagram.com/Mednovalifesciences">Instagram</a><a href="/llms.txt">llms.txt</a></span></div>
 </div></footer>
 
-<script>
+<script src="/config.js"></script>
+<script nonce="mednova-inline-2026">
   const safetycoreForm = document.getElementById('safetycoreForm');
   const safetycoreStatus = document.getElementById('safetycoreFormStatus');
   if (safetycoreForm) {
@@ -443,9 +444,9 @@
       const role = formData.get('role')?.toString().trim() || '';
       const message = formData.get('message')?.toString().trim();
 
-      if (!name || !email || !message) {
+      if (!name || !email || !organization || !role || !message) {
         safetycoreStatus.style.color = '#C9975F';
-        safetycoreStatus.textContent = 'Please provide your name, email, and a short note about your request.';
+        safetycoreStatus.textContent = 'Please complete all the fields.';
         return;
       }
 
@@ -460,7 +461,7 @@
       safetycoreStatus.textContent = '';
 
       try {
-        const response = await fetch('/api/forms/pharmacovigilance', {
+        const response = await fetch(window.getApiUrl('/api/forms/pharmacovigilance'), {
           method: 'POST',
           headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
           body: JSON.stringify({

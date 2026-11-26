@@ -185,3 +185,5 @@ td{color:var(--muted)}
 [hidden]{display:none!important}
 @media (max-width:860px){#content .section>.wrap{grid-template-columns:1fr!important}}
 .foot-grid{grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
+.badge{justify-self:start}
+.stack:has(>.badge){align-content:start}

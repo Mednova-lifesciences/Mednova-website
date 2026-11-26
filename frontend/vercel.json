@@ -221,6 +221,15 @@
       "dest": "/technology/index.html"
     },
     {
+      "src": "^/(resources|resources/glossary)$",
+      "status": 301,
+      "dest": "/$1/"
+    },
+    {
+      "src": "^/(resources|resources/glossary)/$",
+      "dest": "/$1/index.html"
+    },
+    {
       "src": "^/verify/?$",
       "dest": "/verify/index.html"
     },

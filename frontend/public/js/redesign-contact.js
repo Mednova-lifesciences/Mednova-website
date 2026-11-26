@@ -45,6 +45,13 @@
       return;
     }
 
+    var phone = value('phone').replace(/[\s().-]/g, '');
+    if (!/^\+?[0-9]{7,14}$/.test(phone)) {
+      show('Please enter a valid phone number.');
+      fields.phone.focus();
+      return;
+    }
+
     button.disabled = true;
     show('Sending your enquiry...');
 
@@ -55,7 +62,7 @@
         formType: 'consultation',
         fullName: value('name'),
         email: value('email'),
-        phone: value('phone'),
+        phone: phone,
         organization: value('organisation'),
         country: value('country'),
         preferredService: fields.service.options[fields.service.selectedIndex].text,
