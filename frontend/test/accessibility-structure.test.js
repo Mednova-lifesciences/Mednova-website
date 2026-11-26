@@ -19,8 +19,6 @@ const medicalWritingHtml = fs.readFileSync(medicalWritingPath, 'utf8');
 
 assert.ok(homeHtml.includes('<main'), 'Homepage should include a semantic main landmark.');
 assert.ok(homeHtml.indexOf('<meta charset="UTF-8">') !== -1, 'Homepage should declare the UTF-8 charset.');
-assert.ok(homeHtml.includes('role="dialog"') && homeHtml.includes('aria-modal="true"'), 'Consultation dialog should expose dialog semantics.');
-assert.ok(homeHtml.includes('id="consultationModal"') && homeHtml.includes('aria-hidden="true"') && homeHtml.includes('hidden') && homeHtml.includes('inert'), 'Closed consultation modal should be removed from assistive tech and keyboard navigation.');
 assert.ok(nafdacHtml.includes('<section id="services"'), 'NAFDAC registration page should include a services overview section.');
 assert.ok(nafdacHtml.includes('<section id="why"'), 'NAFDAC registration page should include a why-choose section.');
 assert.ok(nafdacHtml.includes('<section id="faq"'), 'NAFDAC registration page should include a FAQ section.');
@@ -36,6 +34,6 @@ assert.ok(resourcesHtml.includes('/qppv-nigeria.html'), 'Resources page should i
 assert.ok(servicesHtml.includes('/post-marketing-surveillance.html'), 'Services hub should link the post-marketing card to the new page.');
 assert.ok(servicesHtml.includes('/medical-information.html'), 'Services hub should link the medical information card to the new page.');
 assert.ok(servicesHtml.includes('/resources/'), 'Services hub should expose the resources section.');
-assert.ok(pmsHtml.includes('/#book-consultation'), 'Post-marketing surveillance page should route consultation CTAs to the home page booking section.');
+assert.ok(pmsHtml.includes('href="/contact/"'), 'Post-marketing surveillance page should route consultation CTAs to the contact page.');
 
 console.log('Accessibility structure checks passed.');

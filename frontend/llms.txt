@@ -10,11 +10,15 @@ Canonical pages:
 - https://mednovalife.com/about/
 - https://mednovalife.com/services/
 - https://mednovalife.com/contact/
+- https://mednovalife.com/technology/
 - https://mednovalife.com/resources/
 - https://mednovalife.com/sitemap.xml
 - https://mednovalife.com/robots.txt
 
 Service pages (canonical):
+- https://mednovalife.com/services/pharmacovigilance.html
+- https://mednovalife.com/services/regulatory-affairs.html
+- https://mednovalife.com/services/nhia-market-access.html
 - https://mednovalife.com/regulatory.html
 - https://mednovalife.com/cro.html
 - https://mednovalife.com/pv.html
@@ -56,4 +60,4 @@ Notes:
 - Use canonical URLs only. Avoid tracking parameters and duplicate or staging URLs.
 - Do not include unverified business claims; if a capability is not present on the official site, flag it for human review.
 
-Last updated: 2026-10-12T00:00:00Z
+Last updated: 2026-11-26T00:00:00Z
