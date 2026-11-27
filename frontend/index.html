@@ -2,1165 +2,167 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<!-- Google Analytics is intentionally delayed until the page is idle or the user begins interacting to preserve the initial render path while keeping analytics enabled. -->
-<script nonce="mednova-inline-2026">
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){window.dataLayer.push(arguments);}
-  function loadAnalytics() {
-    if (window.__mednovaAnalyticsLoaded) return;
-    window.__mednovaAnalyticsLoaded = true;
-    const script = document.createElement('script');
-    script.async = true;
-    script.src = 'https://www.googletagmanager.com/gtag/js?id=G-70L73W3SD6';
-    script.setAttribute('data-analytics', 'true');
-    document.head.appendChild(script);
-    gtag('js', new Date());
-    gtag('config', 'G-70L73W3SD6');
-  }
-  function scheduleAnalytics() {
-    if (window.__mednovaAnalyticsScheduled) return;
-    window.__mednovaAnalyticsScheduled = true;
-    const loadLater = () => {
-      if (document.hidden) return;
-      window.setTimeout(loadAnalytics, 10000);
-    };
-    if ('requestIdleCallback' in window) {
-      window.requestIdleCallback(loadLater, { timeout: 12000 });
-    } else {
-      window.setTimeout(loadLater, 3000);
-    }
-  }
-  window.addEventListener('visibilitychange', () => {
-    if (document.visibilityState === 'visible') scheduleAnalytics();
-  }, { once: true });
-  window.addEventListener('pointerdown', scheduleAnalytics, { once: true, passive: true });
-  window.addEventListener('keydown', scheduleAnalytics, { once: true });
-  window.addEventListener('scroll', scheduleAnalytics, { once: true, passive: true });
-</script>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="MedNova Lifesciences provides pharmacovigilance, drug safety, regulatory consulting, and clinical development services for life sciences organizations in Nigeria and across Africa.">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>MedNova Lifesciences | Pharmacovigilance, NAFDAC and NHIA Market Access</title>
+<meta name="description" content="Pharmacovigilance, NAFDAC regulatory affairs and NHIA market access for Nigeria and West Africa.">
 <meta name="theme-color" content="#0f3d2e">
-<link rel="canonical" href="https://mednovalife.com/">
-  <link rel="icon" href="/public/favicon.ico" sizes="any">
-  <link rel="icon" type="image/png" sizes="16x16" href="/public/favicon-16x16.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/public/favicon-32x32.png">
-  <link rel="apple-touch-icon" sizes="180x180" href="/public/apple-touch-icon.png">
-<link rel="manifest" href="/public/site.webmanifest">
 <meta name="robots" content="index,follow,max-image-preview:large">
-<meta property="og:title" content="Pharmacovigilance, Regulatory & Clinical Development Services in Nigeria | MedNova Lifesciences">
-<meta property="og:description" content="MedNova Lifesciences provides pharmacovigilance, regulatory affairs, and clinical development services for life sciences organizations in Nigeria and across Africa.">
+<link rel="canonical" href="https://mednovalife.com/">
+<link rel="icon" href="/public/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="16x16" href="/public/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/public/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/public/apple-touch-icon.png">
+<link rel="manifest" href="/public/site.webmanifest">
+<meta property="og:title" content="MedNova Lifesciences | Pharmacovigilance, NAFDAC and NHIA Market Access">
+<meta property="og:description" content="Pharmacovigilance, NAFDAC regulatory affairs and NHIA market access for Nigeria and West Africa.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://mednovalife.com/">
 <meta property="og:image" content="https://mednovalife.com/public/images/image.webp">
 <meta property="og:site_name" content="MedNova Lifesciences">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Pharmacovigilance, Regulatory & Clinical Development Services in Nigeria | MedNova Lifesciences">
-<meta name="twitter:description" content="MedNova Lifesciences provides pharmacovigilance, regulatory affairs, and clinical development services for life sciences organizations in Nigeria and across Africa.">
+<meta name="twitter:title" content="MedNova Lifesciences | Pharmacovigilance, NAFDAC and NHIA Market Access">
+<meta name="twitter:description" content="Pharmacovigilance, NAFDAC regulatory affairs and NHIA market access for Nigeria and West Africa.">
 <meta name="twitter:image" content="https://mednovalife.com/public/images/image.webp">
-<title>Pharmacovigilance & Regulatory Services Nigeria | MedNova</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&display=swap">
+<link rel="stylesheet" href="/public/css/redesign.css">
 <script nonce="mednova-inline-2026" type="application/ld+json">
 {
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "Organization",
-      "@id": "https://mednovalife.com/#organization",
-      "name": "MedNova Lifesciences",
-      "url": "https://mednovalife.com/",
-      "logo": "https://mednovalife.com/public/images/image.webp",
-      "description": "MedNova Lifesciences provides regulatory affairs, pharmacovigilance, and clinical development support for life sciences organizations in Nigeria and Africa.",
-      "sameAs": ["https://www.linkedin.com/"],
-      "contactPoint": {
-        "@type": "ContactPoint",
-        "contactType": "customer service",
-        "email": "info@mednovalife.com"
-      }
-    },
-    {
-      "@type": "Service",
-      "@id": "https://mednovalife.com/#service",
-      "name": "Regulatory and Pharmacovigilance Consulting",
-      "provider": {"@id": "https://mednovalife.com/#organization"},
-      "serviceType": "Life sciences consulting",
-      "areaServed": "Nigeria and Africa",
-      "url": "https://mednovalife.com/"
-    }
-  ]
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "Organization",
+   "@id": "https://mednovalife.com/#organization",
+   "name": "MedNova Lifesciences",
+   "url": "https://mednovalife.com/",
+   "logo": "https://mednovalife.com/public/images/image.webp",
+   "email": "info@mednovalife.com",
+   "telephone": "+2349110225555",
+   "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "17 Aje Road",
+    "addressLocality": "Yaba",
+    "addressRegion": "Lagos",
+    "addressCountry": "NG"
+   },
+   "sameAs": [
+    "https://www.linkedin.com/company/mednova-lifesciences/",
+    "https://x.com/MedNovaLif3669",
+    "https://instagram.com/Mednovalifesciences"
+   ]
+  },
+  {
+   "@type": "WebPage",
+   "@id": "https://mednovalife.com/#webpage",
+   "url": "https://mednovalife.com/",
+   "name": "MedNova Lifesciences | Pharmacovigilance, NAFDAC and NHIA Market Access",
+   "description": "Pharmacovigilance, NAFDAC regulatory affairs and NHIA market access for Nigeria and West Africa.",
+   "about": {
+    "@id": "https://mednovalife.com/#organization"
+   }
+  }
+ ]
 }
 </script>
-
-<style>
-  :root{
-    --ink:#14181B;
-    --ink-2:#191F1B;
-    --paper:#F6F5F1;
-    --moss:#3F6B3A;
-    --teal:#1E7F76;
-    --amber:#C9975F;
-    --line:#2B322D;
-    --grey:#8A9186;
-  }
-  *{box-sizing:border-box; margin:0; padding:0;}
-  body{background:var(--ink); color:var(--paper); font-family:'IBM Plex Sans', 'Segoe UI', Roboto, Arial, sans-serif; -webkit-font-smoothing:antialiased;}
-  a{color:inherit; text-decoration:none;}
-
-  section{max-width:1080px; margin:0 auto; padding:0 44px;}
-  .eyebrow{
-    font-family:'IBM Plex Mono', 'SFMono-Regular', Consolas, 'Liberation Mono', monospace; font-size:12px; letter-spacing:0.14em; text-transform:uppercase;
-    color:#8FA98A; margin-bottom:16px;
-  }
-
-  /* ---------- header ---------- */
-  .topline{width:100%; display:flex; align-items:center; justify-content:space-between; padding:26px 0;}
-  .topline-inner{width:100%; display:flex; align-items:center; justify-content:space-between; gap:24px;}
-  .brand{display:flex; align-items:center; gap:10px; color:var(--paper); text-decoration:none; flex-shrink:0;}
-  .brand:hover .brand-name,
-  .brand:focus-visible .brand-name{color:#fff;}
-  .brand:focus-visible{outline:2px solid #7FCFC4; outline-offset:4px; border-radius:8px;}
-  .brand-mark{height:34px; width:auto; display:block; object-fit:contain; padding:0; border-radius:0; background:none;}
-  .brand-name{font-family:'Newsreader', 'Iowan Old Style', 'Palatino Linotype', 'Book Antiqua', Georgia, serif; font-size:19px; font-weight:600; color:var(--paper); line-height:1.2; margin:0;}
-  .topline-nav{display:flex; align-items:center; gap:20px; flex-wrap:nowrap; white-space:nowrap;}
-  .topline-nav a{font-size:13.5px; color:#D7DAD1; transition:color .15s;}
-  .topline-nav a:hover{color:#fff;}
-  .topline .tag{font-family:'IBM Plex Mono', 'SFMono-Regular', Consolas, 'Liberation Mono', monospace; font-size:11.5px; color:#9BA39A; letter-spacing:0.06em;}
-
-  /* ---------- hero ---------- */
-  .hero{text-align:center; max-width:760px; padding-top:40px; padding-bottom:8px;}
-  .hero h1{
-    font-family:'Newsreader', 'Iowan Old Style', 'Palatino Linotype', 'Book Antiqua', Georgia, serif; font-weight:500; font-size:42px; line-height:1.16;
-    letter-spacing:-0.01em; color:#fff;
-  }
-  .hero .promise{
-    margin-top:22px; font-size:16.5px; line-height:1.7; color:#C7CCC1; max-width:60ch; margin-left:auto; margin-right:auto;
-  }
-
-  /* ---------- why africa / why mednova (twin narrative) ---------- */
-  .narrative{margin-top:80px;}
-  .narrative-grid{
-    display:grid; grid-template-columns:1fr 1fr; gap:56px;
-    border-top:1px solid var(--line); padding-top:44px;
-  }
-  .narrative h2, .narrative h3{font-family:'Newsreader', 'Iowan Old Style', 'Palatino Linotype', 'Book Antiqua', Georgia, serif; font-weight:500; font-size:21px; color:#fff; margin-bottom:12px;}
-  .narrative p{font-size:14px; line-height:1.65; color:#AEB4A9;}
-
-  /* ---------- connector above split ---------- */
-  .connector{
-    max-width:1080px; margin:70px auto 0; padding:0 44px;
-    display:flex; align-items:center; gap:18px;
-  }
-  .connector .rule{flex:1; height:1px; background:var(--line);}
-  .connector .label{
-    font-family:'IBM Plex Mono', 'SFMono-Regular', Consolas, 'Liberation Mono', monospace; font-size:11.5px; letter-spacing:0.1em; text-transform:uppercase;
-    color:#7FCFC4; white-space:nowrap;
-  }
-
-  /* ---------- split ---------- */
-  .split{display:grid; grid-template-columns:1fr 1fr 1fr; margin-top:0;}
-  .panel{position:relative; display:flex; flex-direction:column; justify-content:flex-end; padding:44px 36px; overflow:hidden; min-height:380px;}
-  .panel.reg{background:linear-gradient(160deg, #3A2E17 0%, #1F1707 100%);}
-  .panel.cro{background:linear-gradient(160deg, #24361F 0%, #16210F 100%);}
-  .panel.pv{background:linear-gradient(160deg, #123330 0%, #0B1F1D 100%);}
-  .panel-motif{position:absolute; inset:0; z-index:0;}
-  .panel-motif svg{width:100%; height:100%;}
-  .panel-inner{position:relative; z-index:2;}
-  .panel-kicker{
-    font-family:'IBM Plex Mono', 'SFMono-Regular', Consolas, 'Liberation Mono', monospace; font-size:12px; letter-spacing:0.14em; text-transform:uppercase;
-    margin-bottom:16px; display:flex; align-items:center; gap:10px;
-  }
-  .panel.reg .panel-kicker{color:#E3B67F;}
-  .panel.cro .panel-kicker{color:#9FCB96;}
-  .panel.pv .panel-kicker{color:#7FCFC4;}
-  .panel-kicker::before{content:""; width:22px; height:1px; background:currentColor;}
-  .panel h2{font-family:'Newsreader', 'Iowan Old Style', 'Palatino Linotype', 'Book Antiqua', Georgia, serif; font-weight:500; font-size:28px; line-height:1.1; color:#fff; max-width:12ch;}
-  .panel p{margin-top:14px; font-size:14px; line-height:1.55; color:#C7CCC1; max-width:32ch;}
-  .panel .service-list{list-style:none; margin-top:16px; display:flex; flex-direction:column; gap:6px;}
-  .panel .service-list li{font-size:12.5px; color:#AEB4A9; padding-left:13px; position:relative; line-height:1.5;}
-  .panel .service-list li::before{content:"–"; position:absolute; left:0; color:#8A9186;}
-  .panel .enter{
-    margin-top:28px; display:inline-flex; align-items:center; gap:10px;
-    font-size:14.5px; font-weight:600; color:#fff;
-    border-bottom:1px solid rgba(255,255,255,0.35); padding-bottom:4px; width:fit-content;
-    transition:gap .2s, border-color .2s;
-  }
-  .panel:hover .enter{gap:16px; border-color:#fff;}
-  .panel .arrow{transition:transform .2s; display:inline-block;}
-  .panel:hover .arrow{transform:translateX(3px);}
-
-  /* ---------- support strip (beneath split) ---------- */
-  .support{
-    border-top:1px solid var(--line); border-bottom:1px solid var(--line);
-    padding:40px 44px; text-align:center;
-  }
-  .support .lead{
-    font-family:'IBM Plex Mono', 'SFMono-Regular', Consolas, 'Liberation Mono', monospace; font-size:12px; letter-spacing:0.1em; text-transform:uppercase;
-    color:#8A9186; margin-bottom:20px;
-  }
-  .support-list{display:flex; flex-wrap:wrap; justify-content:center; gap:12px; max-width:760px; margin:0 auto;}
-  .support-chip{
-    font-size:13.5px; color:#D7DAD1; border:1px solid var(--line); padding:10px 20px; border-radius:20px;
-  }
-
-  /* ---------- final cta ---------- */
-  .final-cta{padding-top:96px; padding-bottom:70px; text-align:center;}
-  .final-cta h2{font-family:'Newsreader', 'Iowan Old Style', 'Palatino Linotype', 'Book Antiqua', Georgia, serif; font-weight:500; font-size:32px; color:#fff; max-width:22ch; margin:0 auto;}
-
-  /* ---------- technology strip ---------- */
-  .tech-strip{padding-top:88px; padding-bottom:10px;}
-  .tech-strip-inner{
-    display:grid; grid-template-columns:1fr 220px; gap:48px; align-items:center;
-    border:1px solid var(--line); border-radius:10px; padding:40px 44px;
-    background:rgba(255,255,255,0.03);
-  }
-  .tech-strip h2{font-family:'Newsreader', 'Iowan Old Style', 'Palatino Linotype', 'Book Antiqua', Georgia, serif; font-weight:500; font-size:26px; color:#fff; letter-spacing:-0.01em; margin-bottom:12px;}
-  .tech-strip p{font-size:14.5px; line-height:1.7; color:#AEB4A9; max-width:62ch;}
-  .tech-strip-link{
-    margin-top:22px; display:inline-flex; align-items:center; gap:10px;
-    font-size:14px; font-weight:600; color:#fff;
-    border-bottom:1px solid rgba(255,255,255,0.35); padding-bottom:4px;
-    transition:gap .2s, border-color .2s;
-  }
-  .tech-strip-link:hover{gap:16px; border-color:#fff;}
-  .tech-strip-motif svg{width:100%; height:auto; display:block;}
-  @media (max-width:700px){
-    .tech-strip-inner{grid-template-columns:1fr; gap:28px; padding:32px 28px;}
-    .tech-strip-motif{max-width:200px;}
-  }
-
-  .cta-button{
-    display:inline-flex; align-items:center; gap:10px; margin-top:28px;
-    background:#fff; color:var(--ink); font-weight:600; font-size:14.5px;
-    padding:15px 28px; border-radius:3px; transition:transform .2s;
-  }
-  .cta-button:hover{transform:translateY(-2px);}
-  .cta-alt{margin-top:18px; font-size:13px; color:#8A9186;}
-  .cta-alt a{color:#D7DAD1; border-bottom:1px solid var(--line); padding-bottom:1px;}
-  .cta-alt a:hover{color:#fff;}
-
-  .skip-link{
-    position:absolute; left:16px; top:-48px; z-index:1200;
-    padding:10px 14px; border-radius:999px; background:#fff; color:#14181b;
-    font-weight:700; text-decoration:none;
-  }
-  .skip-link:focus{top:16px; outline:2px solid #7FCFC4; outline-offset:4px;}
-
-  .support, .tech-strip, .consultation-booking-section, footer{
-    content-visibility:auto;
-    contain-intrinsic-size:800px 1400px;
-  }
-
-  @media (prefers-reduced-motion: reduce){
-    html{scroll-behavior:auto;}
-    *, *::before, *::after{
-      animation-duration:0.01ms !important;
-      animation-iteration-count:1 !important;
-      transition-duration:0.01ms !important;
-      scroll-behavior:auto !important;
-    }
-  }
-
-  /* ---------- footer ---------- */
-  footer{border-top:1px solid var(--line); padding:44px 44px 34px; margin-top:20px;}
-  .footer-inner{max-width:1080px; margin:0 auto; display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:24px;}
-  .footer-brand{font-family:'Newsreader', 'Iowan Old Style', 'Palatino Linotype', 'Book Antiqua', Georgia, serif; font-size:16px; color:#F0F3EC;}
-  .footer-links{display:flex; flex-wrap:wrap; gap:22px 28px;}
-  .footer-links a{font-size:13px; color:#D4DAD0; transition:color .15s;}
-  .footer-links a:hover{color:#fff;}
-  .footer-copy{max-width:1080px; margin:26px auto 0; font-size:12px; color:#E8EEE3; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:14px;}
-  .footer-social{display:flex; gap:16px;}
-  .footer-social a{
-    width:32px; height:32px; border:1px solid var(--line); border-radius:50%;
-    display:flex; align-items:center; justify-content:center; color:#D4DAD0; transition:color .15s, border-color .15s;
-  }
-  .footer-social a:hover{color:#fff; border-color:#7FCFC4;}
-  .footer-social svg{width:15px; height:15px; fill:currentColor;}
-
-  @media (max-width:900px){
-    .narrative-grid{grid-template-columns:1fr; gap:34px;}
-    .split{grid-template-columns:1fr;}
-  }
-  @media (min-width:901px) and (max-width:1100px){
-    .panel h2{font-size:24px;}
-  }
-  @media (max-width:560px){
-    .hero h1{font-size:30px;}
-    .footer-inner{flex-direction:column;}
-    .connector{flex-direction:column; gap:14px; padding:0 24px;}
-    .connector .rule{width:100%; flex:none;}
-    .connector .rule:last-of-type{display:none;}
-    .connector .label{white-space:normal; text-align:center; letter-spacing:0.06em; font-size:11px; line-height:1.7;}
-  }
-</style>
-<script nonce="mednova-inline-2026">
-  (function () {
-    function loadLazyAssets() {
-      if (!document.head) return;
-
-      if (!document.getElementById('mednova-demo-css')) {
-        const demoCss = document.createElement('link');
-        demoCss.id = 'mednova-demo-css';
-        demoCss.rel = 'stylesheet';
-        demoCss.href = '/public/css/demo-widget.css';
-        document.head.appendChild(demoCss);
-      }
-
-      if (!document.getElementById('mednova-booking-css')) {
-        const bookingCss = document.createElement('link');
-        bookingCss.id = 'mednova-booking-css';
-        bookingCss.rel = 'stylesheet';
-        bookingCss.href = '/public/css/consultation-booking.css';
-        document.head.appendChild(bookingCss);
-      }
-
-      if (!document.getElementById('mednova-demo-js')) {
-        const demoJs = document.createElement('script');
-        demoJs.id = 'mednova-demo-js';
-        demoJs.src = '/public/js/demo-widget.js';
-        demoJs.defer = true;
-        document.body.appendChild(demoJs);
-      }
-
-      if (!document.getElementById('mednova-booking-js')) {
-        const bookingJs = document.createElement('script');
-        bookingJs.id = 'mednova-booking-js';
-        bookingJs.src = '/public/js/consultation-booking.js';
-        bookingJs.defer = true;
-        document.body.appendChild(bookingJs);
-      }
-
-      if (!document.getElementById('mednova-nav-js')) {
-        const navJs = document.createElement('script');
-        navJs.id = 'mednova-nav-js';
-        navJs.src = '/public/js/site-nav.js';
-        navJs.defer = true;
-        document.body.appendChild(navJs);
-      }
-    }
-
-    function scheduleAssets() {
-      if (window.__mednovaAssetsScheduled) return;
-      window.__mednovaAssetsScheduled = true;
-      if ('requestIdleCallback' in window) {
-        window.requestIdleCallback(loadLazyAssets, { timeout: 3000 });
-      } else {
-        window.setTimeout(loadLazyAssets, 1800);
-      }
-    }
-
-    function initialize() {
-      if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', scheduleAssets, { once: true });
-        return;
-      }
-      scheduleAssets();
-    }
-
-    window.addEventListener('scroll', scheduleAssets, { once: true, passive: true });
-    window.addEventListener('pointerdown', scheduleAssets, { once: true, passive: true });
-    window.addEventListener('keydown', scheduleAssets, { once: true });
-    initialize();
-  })();
-</script>
-<script nonce="mednova-inline-2026" type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  "name": "MedNova Lifesciences",
-  "url": "https://mednovalife.com",
-  "logo": "https://mednovalife.com/public/images/image.webp"
-}
-</script>
-<script nonce="mednova-inline-2026" type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "What services does MedNova provide?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "MedNova provides regulatory affairs, clinical development, and pharmacovigilance support for life sciences organizations in Nigeria and across Africa."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Do you support NAFDAC submissions and local regulatory filings?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes. We support NAFDAC submissions, product registration strategy, labelling review, and local compliance obligations for regional market access."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Can MedNova support clinical trials in Nigeria?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes. Our clinical development services include feasibility assessment, site readiness, monitoring, and local coordination for trials in Nigeria and West Africa."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "What does MedNova offer for pharmacovigilance and drug safety?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "We provide pharmacovigilance case processing, signal detection, aggregate reporting, QPPV representation, and safety governance support."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "How can I use MedNova resources while planning a program?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Use MedNova resources to review regulatory terminology, prepare compliance documentation, and align trial plans with safety and market access requirements."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "What should I expect from the first consultation?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "The first consultation focuses on your project scope, timeline, and operational needs, and it identifies the next steps for regulatory, clinical, or pharmacovigilance support."
-      }
-    }
-  ]
-}
-</script>
-  <style>
-    :root {
-      --content-max-width: 1180px;
-      --content-padding-mobile: 16px;
-      --content-padding-tablet: 24px;
-      --content-padding-desktop: 32px;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      overflow-x: hidden;
-    }
-
-    body.nav-open {
-      overflow: hidden;
-    }
-
-    .wrap,
-    .site-header__inner,
-    .topline-inner,
-    .content-shell,
-    .hero-card,
-    .info-grid,
-    .narrative-grid,
-    .connector,
-    .split,
-    .info-card {
-      width: min(100%, var(--content-max-width));
-      margin-inline: auto;
-      box-sizing: border-box;
-      padding-inline: var(--content-padding-mobile);
-    }
-
-    @media (min-width: 768px) {
-      .wrap,
-      .site-header__inner,
-      .topline-inner,
-      .content-shell,
-      .hero-card,
-      .info-grid,
-      .narrative-grid,
-      .connector,
-      .split,
-      .info-card {
-        padding-inline: var(--content-padding-tablet);
-      }
-    }
-
-    @media (min-width: 1024px) {
-      .wrap,
-      .site-header__inner,
-      .topline-inner,
-      .content-shell,
-      .hero-card,
-      .info-grid,
-      .narrative-grid,
-      .connector,
-      .split,
-      .info-card {
-        padding-inline: var(--content-padding-desktop);
-      }
-    }
-
-    .site-nav__toggle {
-      display: none;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-      gap: 4px;
-      width: 46px;
-      height: 46px;
-      border: 1px solid rgba(20, 24, 27, 0.14);
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.96);
-      color: #14181b;
-      cursor: pointer;
-      padding: 0;
-      transition: transform 180ms ease, box-shadow 180ms ease, background-color 180ms ease;
-      box-shadow: 0 8px 24px rgba(20, 24, 27, 0.08);
-    }
-
-    .site-nav__toggle:hover,
-    .site-nav__toggle:focus-visible {
-      transform: translateY(-1px);
-      box-shadow: 0 12px 28px rgba(20, 24, 27, 0.12);
-    }
-
-    .site-nav__toggle span {
-      display: block;
-      width: 18px;
-      height: 2px;
-      border-radius: 999px;
-      background: currentColor;
-      transition: transform 240ms ease, opacity 180ms ease;
-    }
-
-    .site-nav__toggle.is-open span:nth-child(1) {
-      transform: translateY(6px) rotate(45deg);
-    }
-
-    .site-nav__toggle.is-open span:nth-child(2) {
-      opacity: 0;
-    }
-
-    .site-nav__toggle.is-open span:nth-child(3) {
-      transform: translateY(-6px) rotate(-45deg);
-    }
-
-    .site-nav__overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(8, 12, 10, 0.64);
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 260ms ease;
-      z-index: 980;
-    }
-
-    .site-nav__overlay.is-visible {
-      opacity: 1;
-      pointer-events: auto;
-    }
-
-    .site-nav__drawer {
-      position: fixed;
-      top: 0;
-      right: 0;
-      width: min(84vw, 320px);
-      height: 100dvh;
-      display: flex;
-      flex-direction: column;
-      gap: 18px;
-      padding: 24px 20px 28px;
-      background: linear-gradient(180deg, #f8f4eb 0%, #efe7dc 100%);
-      box-shadow: -12px 0 36px rgba(8, 12, 10, 0.18);
-      transform: translateX(100%);
-      transition: transform 280ms cubic-bezier(0.22, 1, 0.36, 1);
-      z-index: 1000;
-      overflow-y: auto;
-    }
-
-    .site-nav__drawer.is-open {
-      transform: translateX(0);
-    }
-
-    .site-nav__drawer-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-      margin-bottom: 8px;
-    }
-
-    .site-nav__drawer-title {
-      font-size: 0.95rem;
-      font-weight: 700;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: #1e7f76;
-    }
-
-    .site-nav__drawer-close {
-      width: 40px;
-      height: 40px;
-      border: 0;
-      border-radius: 50%;
-      background: rgba(20, 24, 27, 0.08);
-      color: #14181b;
-      cursor: pointer;
-    }
-
-    .site-nav__drawer-links {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-
-    .site-nav__drawer-links a,
-    .site-nav__drawer-links button {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      width: 100%;
-      padding: 12px 14px;
-      border-radius: 14px;
-      color: #14181b;
-      text-decoration: none;
-      font-weight: 600;
-      letter-spacing: 0.01em;
-      background: rgba(255, 255, 255, 0.7);
-      border: 1px solid rgba(20, 24, 27, 0.08);
-      transition: transform 160ms ease, background-color 160ms ease;
-    }
-
-    .site-nav__drawer-links a:hover,
-    .site-nav__drawer-links a:focus-visible,
-    .site-nav__drawer-links button:hover,
-    .site-nav__drawer-links button:focus-visible {
-      transform: translateX(2px);
-      background: rgba(255, 255, 255, 0.94);
-    }
-
-    .site-nav__drawer-links a[aria-current="page"] {
-      background: rgba(30, 127, 118, 0.14);
-      color: #145f58;
-    }
-
-    @media (max-width: 1023px) {
-      .site-nav__toggle {
-        display: inline-flex;
-      }
-
-      .site-nav .navlinks,
-      .site-nav .nav-cta,
-      .site-nav .cta,
-      .topline-nav {
-        display: none !important;
-      }
-
-      .site-header__inner,
-      .topline-inner {
-        padding-inline: var(--content-padding-mobile);
-      }
-
-      .site-nav,
-      .topline {
-        gap: 12px;
-      }
-
-      .topline .brand {
-        margin-right: auto;
-      }
-    }
-
-    @media (min-width: 1024px) {
-      .site-nav__overlay,
-      .site-nav__drawer {
-        display: none !important;
-      }
-    }
-  </style>
-  <style>
-    /* Services overview additions */
-    .services-hero{padding:56px 0 26px; text-align:center; max-width:900px; margin:0 auto 18px;}
-    .services-hero h2{font-family:'Newsreader', Georgia, serif; font-size:36px; line-height:1.12; color:var(--paper); margin-bottom:12px;}
-    .services-hero .lead{color:#C7CCC1; font-size:16px; max-width:68ch; margin:0 auto 18px;}
-    .services-hero .hero-ctas{display:flex; gap:18px; justify-content:center; align-items:center; margin-top:12px;}
-
-    .service-cards{display:grid; grid-template-columns:repeat(3,1fr); gap:20px; margin-top:28px;}
-    .svc-card{background:rgba(255,255,255,0.02); border:1px solid var(--line); border-radius:12px; padding:22px; box-shadow:0 8px 24px rgba(20,24,27,0.06); display:flex; flex-direction:column; gap:12px; transition:transform .22s ease, box-shadow .22s ease; min-height:320px;}
-    .svc-card:hover{transform:translateY(-6px); box-shadow:0 18px 48px rgba(20,24,27,0.12);}
-    .svc-icon svg{color:var(--teal);}
-    .svc-card h3{font-size:20px; color:var(--paper); margin:0;}
-    .svc-desc{color:#C7CCC1; line-height:1.6; margin:0;}
-    .svc-list{margin-top:8px; list-style:none; padding-left:0; color:#AEB4A9; display:flex; flex-direction:column; gap:6px;}
-    .svc-list li::before{content:'•'; margin-right:8px; color:var(--moss);}
-    .svc-card .enter{margin-top:auto; display:inline-flex; align-items:center; gap:10px; color:var(--paper); font-weight:600; text-decoration:none;}
-
-    .process-timeline{margin-top:42px; padding:28px 0;}
-    .timeline-list{display:flex; gap:18px; list-style:none; padding:0; margin:0; justify-content:space-between;}
-    .timeline-list li{flex:1; display:flex; gap:12px; align-items:flex-start;}
-    .step-icon{width:40px; height:40px; border-radius:50%; background:rgba(255,255,255,0.03); color:var(--paper); display:flex; align-items:center; justify-content:center; font-weight:700; border:1px solid var(--line);}
-    .step-copy strong{display:block; color:var(--paper);}
-    .step-copy p{margin:4px 0 0; color:#C7CCC1; font-size:14px;}
-
-    .expertise-grid{display:grid; grid-template-columns:1fr 360px; gap:28px; align-items:start; margin-top:36px;}
-    .expertise-copy p{color:#C7CCC1;}
-    .feature-list{list-style:none; padding:16px; margin:0; display:grid; gap:10px; background:rgba(255,255,255,0.02); border:1px solid var(--line); border-radius:10px;}
-
-    .industry-grid{margin-top:36px;}
-    .industries{display:grid; grid-template-columns:repeat(3,1fr); gap:16px;}
-    .industry-card{background:rgba(255,255,255,0.02); border:1px solid var(--line); padding:14px; border-radius:10px; display:flex; gap:12px; align-items:flex-start;}
-    .industry-emoji{font-size:24px; margin-top:2px;}
-    .industry-card h4{margin:0; color:var(--paper);}
-    .industry-card p{margin:4px 0 0; color:#C7CCC1;}
-
-    .features-grid{margin-top:36px;}
-    .features{display:grid; grid-template-columns:repeat(4,1fr); gap:16px;}
-    .feature-card{background:rgba(255,255,255,0.02); border:1px solid var(--line); padding:18px; border-radius:10px; color:#C7CCC1;}
-
-    .alternating{display:grid; grid-template-columns:1fr 1fr; gap:28px; align-items:center; margin-top:42px;}
-    .alt-graphic{max-width:420px;}
-
-    .premium-cta{margin-top:44px; text-align:center; padding:42px 24px; background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); border-radius:10px; border:1px solid var(--line);}
-    .premium-cta h3{font-size:22px; color:var(--paper); margin:0 0 12px;}
-    .premium-actions{display:flex; gap:14px; justify-content:center; align-items:center;}
-
-    /* FAQ accordion */
-    .faq-block{margin-top:40px; padding:22px 0 60px;}
-    .faq-accordion{display:grid; gap:10px;}
-    .faq-item{background:rgba(255,255,255,0.02); border:1px solid var(--line); border-radius:10px; overflow:hidden;}
-    .faq-question{width:100%; text-align:left; padding:16px 18px; background:transparent; border:0; color:var(--paper); font-weight:600; font-size:15px; cursor:pointer;}
-    .faq-question:focus{outline:2px solid #7FCFC4; outline-offset:3px;}
-    .faq-answer{padding:0 18px; max-height:0; overflow:hidden; transition:max-height .28s ease, padding .28s ease; color:#C7CCC1;}
-    .faq-item.open .faq-answer{padding:12px 18px 18px; max-height:400px;}
-
-    @media (max-width:900px){
-      .service-cards{grid-template-columns:1fr;}
-      .timeline-list{flex-direction:column;}
-      .expertise-grid{grid-template-columns:1fr;}
-      .industries{grid-template-columns:repeat(2,1fr);}
-      .features{grid-template-columns:repeat(2,1fr);}
-      .alternating{grid-template-columns:1fr;}
-    }
-  </style>
-<link rel="stylesheet" href="/public/css/site-primary-nav.css">
-<script src="/public/js/site-primary-nav.js" defer></script>
+<script src="/public/js/analytics-bootstrap.js" defer></script>
 </head>
-<body data-theme="dark">
-<a class="skip-link" href="#content">Skip to content</a>
-
-<div class="topline">
-  <div class="topline-inner">
-    <a class="brand" href="/" aria-label="MedNova Lifesciences home">
-      <picture>
-        <source type="image/webp" srcset="/public/images/index1-68.webp">
-        <img class="brand-mark" src="/public/images/index1.webp" alt="MedNova Lifesciences logo" width="34" height="34" decoding="async" fetchpriority="high">
-      </picture>
-      <span class="brand-name">MedNova Lifesciences</span>
-    </a>
-    <nav class="topline-nav">
-        <a href="/">Home</a>
-        <a href="/about/">About</a>
-        <div class="mn-navgroup">
-          <button class="mn-navgroup__btn" type="button" aria-expanded="false" aria-controls="mn-menu-services">Services</button>
-          <div class="mn-navgroup__menu" id="mn-menu-services">
-            <a href="/services/">All Services</a>
-            <div class="mn-navgroup__sep"></div>
-            <a href="/services/regulatory-affairs.html">Regulatory Affairs</a>
-            <a href="/services/clinical-development.html">Clinical Development</a>
-            <a href="/services/pharmacovigilance.html">Pharmacovigilance</a>
-            <a href="/services/regulatory-intelligence.html">Regulatory Intelligence</a>
-            <a href="/services/nafdac-product-registration.html">NAFDAC Product Registration</a>
-            <div class="mn-navgroup__sep"></div>
-            <a href="/pharmacovigilance-ce-course">PV CE Course<span class="mn-navgroup__sub">Continuing education with certificate</span></a>
-          </div>
-        </div>
-        <div class="mn-navgroup">
-          <button class="mn-navgroup__btn" type="button" aria-expanded="false" aria-controls="mn-menu-technology">Technology</button>
-          <div class="mn-navgroup__menu" id="mn-menu-technology">
-            <div class="mn-navgroup__head">MedNova platforms</div>
-            <a href="/verify">MedNova Verify<span class="mn-navgroup__sub">Medicine verification &amp; surveillance</span></a>
-            <a href="/safetycore.html">MedNova SafetyCore<span class="mn-navgroup__sub">Pharmacovigilance case management</span></a>
-          </div>
-        </div>
-        <a href="/resources/">Resources</a>
-        <a href="/contact/">Contact</a>
-      </nav>
-  <button class="site-nav__toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="site-nav-drawer">
-    <span></span>
-    <span></span>
-    <span></span>
-  </button>
-  </div>
-</div>
-
+<body>
+<a class="skip" href="#content">Skip to content</a>
+<header class="site-header"><div class="wrap">
+  <a class="brand" href="/"><img src="/public/images/index1.webp" alt="MedNova logo"><span>MedNova Lifesciences</span></a>
+  <nav class="nav" aria-label="Main">
+      <a href="/" aria-current="page">Home</a><a href="/about/">About</a>
+      <div class="dd"><button type="button" aria-haspopup="true">Services</button><div class="dd-menu"><a href="/services/pharmacovigilance.html">Pharmacovigilance<small>Local QPPV, case processing, PSURs, signals</small></a><a href="/services/regulatory-affairs.html">Regulatory Affairs<small>NAFDAC registration, permits, lifecycle, intelligence</small></a><a href="/services/nhia-market-access.html">NHIA Market Access<small>HTA evidence and submissions for NHIA coverage</small></a><a href="/services/">All services<small>Including clinical study support and training</small></a></div></div>
+      <div class="dd"><button type="button" aria-haspopup="true">Technology</button><div class="dd-menu"><a href="/technology/#pv-assist">PV Assist<small>Our pharmacovigilance review platform</small></a><a href="/safetycore.html">MedNova SafetyCore<small>Pharmacovigilance case management</small></a><a href="/technology/#verify">MedNova Verify<small>Medicine verification, coming soon</small></a></div></div>
+      <a href="/pharmacovigilance-ce-course">PV Course</a><a href="/resources/">Resources</a>
+      <a class="btn primary" href="/contact/">Book a consultation</a>
+    </nav><details class="menu-toggle"><summary>Menu</summary><div class="mobile-nav">
+      <a href="/">Home</a><a href="/about/">About</a>
+      <div class="group">Services</div><a href="/services/pharmacovigilance.html">Pharmacovigilance</a><a href="/services/regulatory-affairs.html">Regulatory Affairs</a><a href="/services/nhia-market-access.html">NHIA Market Access</a><a href="/services/">All services</a><div class="group">Technology</div><a href="/technology/#pv-assist">PV Assist</a><a href="/safetycore.html">MedNova SafetyCore</a><a href="/technology/#verify">MedNova Verify</a>
+      <div class="group">Learn</div><a href="/pharmacovigilance-ce-course">PV CE Course</a><a href="/resources/">Resources</a>
+      <a href="/contact/">Contact and consultations</a></div></details>
+</div></header>
 <main id="content">
-<div data-breadcrumbs></div>
-<!-- HERO -->
-<section class="hero">
-  <h1>Your Regulatory and Clinical Development Partner for Nigeria and Africa</h1>
-  <p class="promise">Helping pharmaceutical, biotechnology, medical device, and nutraceutical companies navigate regulatory approvals, clinical development, and post-market safety — as one integrated partner rather than three separate vendors.</p>
-  <p class="promise">We combine local regulatory insight with clinical execution and pharmacovigilance discipline so your project is mapped to compliance objectives from first dose through post-approval monitoring.</p>
-  <p class="promise">Our approach is designed for teams that want fast, practical decisions without sacrificing quality. From protocol design to safety reporting, MedNova helps you move with confidence in Nigeria and across Africa.</p>
-</section>
+<section class="hero"><div class="wrap stack">
+  <span class="eyebrow teal">Pharmacovigilance · Regulatory · Market access</span>
+  <h1>From NAFDAC requirements to NHIA market access</h1>
+  <p class="lede">MedNova helps life sciences companies manage product safety and registration in Nigeria, then build the local evidence needed to support NHIA coverage submissions.</p>
+  <div class="btn-row"><a class="btn primary" href="/contact/">Book a consultation</a><a class="btn" href="/services/pharmacovigilance.html">Need a local QPPV?</a></div>
+</div></section>
 
-<!-- WHY AFRICA / WHY MEDNOVA -->
-<section class="narrative">
-  <div class="narrative-grid">
-    <div>
-      <div class="eyebrow">Why Africa</div>
-      <h2>Research in Africa is changing.</h2>
-      <p>Africa has become one of the world's fastest-growing regions for clinical development — growing research capacity, increasing regulatory maturity, and expanding investigator networks. MedNova helps sponsors turn that opportunity into successful programs.</p>
-      <p>Our team supports local protocol feasibility, site readiness, and regulatory submissions so the value of African trials is realized without unexpected compliance delays.</p>
-    </div>
-    <div>
-      <div class="eyebrow">Why MedNova</div>
-      <h2>Integrated across the product lifecycle.</h2>
-      <p>Registration, trial operations, and drug safety, built to work together rather than change hands between vendors — so a product's journey from market authorization through post-market safety runs through one partner.</p>
-      <p>That single-team model keeps handoffs simple and ensures pharmacovigilance, clinical, and regulatory planning are aligned with your commercial objectives.</p>
-    </div>
+<section class="section" style="padding-top:0"><div class="wrap">
+  <div class="panels">
+    <a class="panel teal" href="/services/pharmacovigilance.html">
+      <span class="eyebrow teal">Drug safety</span><h3>Pharmacovigilance</h3>
+      <p>Keep marketed products compliant with NAFDAC safety requirements, without building a full PV department.</p>
+      <ul><li>Local QPPV and deputy cover</li><li>ICSR case processing</li><li>PSURs and PBRERs</li><li>Signal detection and literature monitoring</li></ul>
+      <span class="link-arrow">Explore pharmacovigilance →</span></a>
+    <a class="panel amber" href="/services/regulatory-affairs.html">
+      <span class="eyebrow amber">Regulatory affairs</span><h3>Regulatory Affairs</h3>
+      <p>Register products with NAFDAC and keep them registered, with a clear view of rule changes.</p>
+      <ul><li>NAFDAC product registration</li><li>Import permits</li><li>Renewals and variations</li><li>Regulatory intelligence</li></ul>
+      <span class="link-arrow">Explore regulatory affairs →</span></a>
+    <a class="panel olive" href="/services/nhia-market-access.html">
+      <span class="eyebrow olive">New · Market access</span><h3>NHIA Market Access</h3>
+      <p>Local HTA submission support that connects evidence planning, economic analysis and regulatory know-how.</p>
+      <ul><li>Readiness review against NHIA requirements</li><li>Nigerian cost and quality-of-life evidence</li><li>Cost-effectiveness and budget impact analysis</li><li>Submission and appraisal support</li></ul>
+      <span class="link-arrow">Explore NHIA market access →</span></a>
   </div>
-</section>
+  <p class="strip-label">Every engagement is supported by</p>
+  <div class="strip"><span>Good Pharmacovigilance Practice</span><span>ICH-GCP</span><span>Quality management</span><span>Medical writing</span><span>Local market knowledge</span></div>
+</div></section>
 
-<!-- CONNECTOR -->
-<div class="connector" aria-hidden="true">
-  <span class="rule"></span>
-  <span class="label">Regulatory Affairs · Clinical Development · Pharmacovigilance</span>
-  <span class="rule"></span>
-</div>
-
-<!-- SPLIT -->
-<div class="split">
-  <a class="panel reg" href="regulatory.html">
-    <div class="panel-motif">
-      <svg viewBox="0 0 500 500" preserveAspectRatio="xMidYMid slice">
-        <g stroke="#C9975F" stroke-width="1" opacity="0.35">
-          <rect x="150" y="90" width="70" height="90" rx="4" fill="none"/>
-          <rect x="260" y="140" width="70" height="90" rx="4" fill="none"/>
-          <rect x="90" y="230" width="70" height="90" rx="4" fill="none"/>
-          <path d="M185,180 L295,140 M185,180 L125,230" fill="none" stroke-dasharray="3 5"/>
-        </g>
-      </svg>
-    </div>
-    <div class="panel-inner">
-      <div class="panel-kicker">Regulatory Affairs</div>
-      <h2>Regulatory Affairs</h2>
-      <p>Product registration and market access across Nigeria and Africa.</p>
-      <ul class="service-list">
-        <li>Product registration</li>
-        <li>NAFDAC submissions</li>
-        <li>Import permits</li>
-        <li>Lifecycle management</li>
-      </ul>
-      <span class="enter">Explore Regulatory Affairs <span class="arrow">→</span></span>
-    </div>
-  </a>
-
-  <a class="panel cro" href="cro.html">
-    <div class="panel-motif">
-      <svg viewBox="0 0 500 500" preserveAspectRatio="xMidYMid slice">
-        <g stroke="#3F6B3A" stroke-width="1" opacity="0.35">
-          <circle cx="120" cy="140" r="4" fill="#3F6B3A"/>
-          <circle cx="260" cy="90" r="3" fill="#3F6B3A"/>
-          <circle cx="340" cy="200" r="5" fill="#3F6B3A"/>
-          <circle cx="400" cy="120" r="3" fill="#3F6B3A"/>
-          <circle cx="180" cy="230" r="3" fill="#3F6B3A"/>
-          <path d="M120,140 L260,90 L340,200 L400,120" fill="none" stroke-dasharray="3 5"/>
-          <path d="M120,140 L180,230 L340,200" fill="none" stroke-dasharray="3 5"/>
-        </g>
-      </svg>
-    </div>
-    <div class="panel-inner">
-      <div class="panel-kicker">Clinical Development</div>
-      <h2>Clinical Development</h2>
-      <p>From feasibility and study start-up to clinical operations and close-out.</p>
-      <ul class="service-list">
-        <li>Trial start-up</li>
-        <li>Site feasibility</li>
-        <li>Monitoring</li>
-        <li>Project management</li>
-      </ul>
-      <span class="enter">Explore Clinical Development <span class="arrow">→</span></span>
-    </div>
-  </a>
-
-  <a class="panel pv" href="pv.html">
-    <div class="panel-motif">
-      <svg viewBox="0 0 500 500" preserveAspectRatio="xMidYMid slice">
-        <g stroke="#1E7F76" stroke-width="1.5" opacity="0.4" fill="none">
-          <path d="M0,340 L60,335 L110,342 L160,310 L210,318 L260,255 L310,270 L360,190 L410,215 L460,150 L500,175"/>
-        </g>
-        <circle cx="360" cy="190" r="5" fill="#C97A2B" opacity="0.7"/>
-      </svg>
-    </div>
-    <div class="panel-inner">
-      <div class="panel-kicker">Drug Safety</div>
-      <h2>Pharmacovigilance</h2>
-      <p>Protecting patients through clinical trial and post-marketing safety.</p>
-      <ul class="service-list">
-        <li>Local QPPV</li>
-        <li>Case processing</li>
-        <li>Aggregate reports</li>
-        <li>Risk management</li>
-      </ul>
-      <span class="enter">Explore Pharmacovigilance <span class="arrow">→</span></span>
-    </div>
-  </a>
-</div>
-
-<!-- Services overview removed per request -->
-
-<!-- FAQ removed per request -->
-
-<!-- SUPPORT STRIP -->
-<div class="support">
-  <div class="lead">Every engagement is supported by</div>
-  <div class="support-list">
-    <span class="support-chip">Regulatory Intelligence &amp; Medical Writing</span>
-    <span class="support-chip">Quality Management</span>
-    <span class="support-chip">Local Market Expertise</span>
-    <span class="support-chip">ICH-GCP</span>
-    <span class="support-chip">Good Pharmacovigilance Practice</span>
+<section class="section"><div class="wrap grid-2">
+  <div class="stack"><span class="eyebrow">Why MedNova</span><h2>Local NHIA evidence, connected to product safety and regulation</h2></div>
+  <div class="prose">
+    <p>Health economics firms can model value; market-access advisers can shape launch strategy. MedNova brings those capabilities into the Nigerian product lifecycle: NAFDAC registration, pharmacovigilance and NHIA submission support coordinated by one Lagos-based team.</p>
+    <p>For HTA submissions, our health economist partner leads the economic models while MedNova coordinates evidence planning, local study support, writing and filing. This gives manufacturers a practical local interface without implying that MedNova is the decision-maker: NHIA independently appraises submissions and makes coverage decisions.</p>
+    <a class="link-arrow" href="/about/">About MedNova →</a>
   </div>
-</div>
+</div></section>
 
-<!-- TECHNOLOGY ENABLED -->
-<section class="tech-strip" id="technology">
-  <div class="tech-strip-inner">
-    <div class="tech-strip-copy">
-      <div class="eyebrow">Technology Enabled</div>
-      <h2>Digital tools behind every engagement</h2>
-      <p>We use proprietary digital tools to improve regulatory workflows, pharmacovigilance operations, and clinical trial execution — with a qualified team member reviewing every output.</p>
-      <a class="tech-strip-link" href="mailto:info@mednovalife.com" target="_blank" rel="noopener noreferrer">Ask how this applies to your program <span class="arrow">→</span></a>
-    </div>
-    <div class="tech-strip-motif" aria-hidden="true">
-      <svg viewBox="0 0 220 140" fill="none">
-        <g stroke="#1E7F76" stroke-width="1" opacity="0.55">
-          <rect x="10" y="20" width="54" height="34" rx="4"/>
-          <rect x="10" y="86" width="54" height="34" rx="4"/>
-          <rect x="156" y="53" width="54" height="34" rx="4"/>
-          <path d="M64,37 C100,37 110,70 156,70" stroke-dasharray="3 5"/>
-          <path d="M64,103 C100,103 110,70 156,70" stroke-dasharray="3 5"/>
-        </g>
-        <circle cx="156" cy="70" r="3" fill="#C9975F"/>
-      </svg>
-    </div>
+<section class="section" id="technology"><div class="wrap">
+  <div class="feature">
+    <div class="stack"><span class="eyebrow teal">Technology</span><h2>PV Assist</h2>
+      <p class="lede">Our pharmacovigilance team works with PV Assist, MedNova's own review platform. It handles the checking work that slows safety teams down, and a qualified person reviews every output before it leaves us.</p>
+      <a class="link-arrow" href="/technology/#pv-assist">How PV Assist works →</a></div>
+    <ul class="checks"><li>Line-listing quality checks</li><li>Seriousness detection and coding suggestions</li><li>Signal screening</li><li>E2B(R3) file preparation and review</li><li>PSUR section review</li></ul>
   </div>
+</div></section>
 
-  <div class="demo-box" id="demoBox">
-    <span class="demo-label">Reasoning preview — live</span>
-    <div class="demo-questions" id="demoQuestions">
-      <button class="demo-q-btn" data-q="What should I consider for site feasibility for a Phase 3 hypertension trial in Lagos?">Site feasibility for a Phase 3 trial</button>
-      <button class="demo-q-btn" data-q="What typically delays regulatory submissions in West Africa?">What delays regulatory submissions?</button>
-      <button class="demo-q-btn" data-q="What should a sponsor look for in a pharmacovigilance partner in Nigeria?">Choosing a PV partner in Nigeria</button>
-    </div>
-    <div class="demo-output" id="demoOutput">Select a question above to see a live response.</div>
-    <p class="demo-note">A genuine, working preview of the reasoning behind our process — not connected to any client's real site, case, or regulatory data, and not a substitute for a full assessment by our team.</p>
+<section class="section"><div class="wrap grid-2">
+  <div class="stack"><span class="eyebrow">Learn</span><h2>Pharmacovigilance CE Course</h2>
+    <p class="lede">An online course in drug safety foundations, company PV practice and NAFDAC requirements, with knowledge checks and a certificate of completion. Module 1 is free.</p>
+    <div class="btn-row"><a class="btn" href="/pharmacovigilance-ce-course">Start the course</a></div></div>
+  <div class="stack"><span class="eyebrow">Free tool</span><h2>NAFDAC QPPV Compliance Checklist</h2>
+    <p class="lede">Check your pharmacovigilance set-up against NAFDAC's QPPV expectations before an inspection does it for you.</p>
+    <div class="btn-row"><a class="btn" href="/compliance-checklist.html">Open the checklist</a></div></div>
+</div></section>
+<section class="cta-band"><div class="wrap"><div class="stack"><h2>Talk to us about your product</h2><p class="lede">Tell us what you need to register, monitor or get covered. We reply to new enquiries within one business day.</p></div>
+<div class="btn-row"><a class="btn primary" href="/contact/">Book a consultation</a></div></div></section></main>
+<footer class="site-footer"><div class="wrap">
+  <div class="foot-grid">
+    <div class="stack" style="gap:12px"><a class="brand" href="/"><span>MedNova Lifesciences</span></a>
+      <p>Pharmacovigilance, regulatory affairs and NHIA market access for Nigeria and West Africa.</p>
+      <p>17 Aje Road, Lagos, Nigeria<br><a href="mailto:info@mednovalife.com">info@mednovalife.com</a></p></div>
+    <div><h4>Services</h4><ul>
+      <li><a href="/services/pharmacovigilance.html">Pharmacovigilance</a></li>
+      <li><a href="/services/regulatory-affairs.html">Regulatory Affairs</a></li>
+      <li><a href="/services/nhia-market-access.html">NHIA Market Access</a></li>
+      <li><a href="/services/#more">Clinical study support</a></li></ul></div>
+    <div><h4>More services</h4><ul><li><a href="/services/clinical-development.html">Clinical Development</a></li><li><a href="/services/regulatory-intelligence.html">Regulatory Intelligence</a></li><li><a href="/services/nafdac-product-registration.html">NAFDAC Product Registration</a></li><li><a href="/post-marketing-surveillance.html">Post-Marketing Surveillance</a></li><li><a href="/medical-information.html">Medical Information</a></li><li><a href="/medical-writing.html">Medical Writing</a></li><li><a href="/training-consulting.html">Training and Consulting</a></li></ul></div>
+    <div><h4>Company</h4><ul>
+      <li><a href="/about/">About</a></li>
+      <li><a href="/technology/">Technology</a></li>
+      <li><a href="/contact/">Contact</a></li></ul></div>
+    <div><h4>Learn</h4><ul>
+      <li><a href="/pharmacovigilance-ce-course">PV CE Course</a></li>
+      <li><a href="/compliance-checklist.html">QPPV Compliance Checklist</a></li>
+      <li><a href="/resources/">Resources</a></li>
+      <li><a href="/resources/glossary/">Glossary</a></li></ul></div>
   </div>
-</section>
-
-<!-- CONSULTATION BOOKING -->
-<div class="consultation-modal-overlay" id="consultationModal" aria-hidden="true" inert hidden>
-  <div class="consultation-modal" role="dialog" aria-modal="true" aria-labelledby="consultationModalTitle" aria-describedby="consultationModalDescription">
-    <div class="consultation-modal__header">
-      <div>
-        <div class="consultation-modal__eyebrow">Consultation booking</div>
-        <h2 class="consultation-modal__title" id="consultationModalTitle">Want to book a consultation?</h2>
-      </div>
-      <button class="consultation-modal__close" type="button" aria-label="Close dialog" data-close-modal>×</button>
-    </div>
-    <div class="consultation-modal__body">
-      <p class="consultation-modal__text" id="consultationModalDescription">Speak with one of our specialists to discuss your Clinical Development, Pharmacovigilance, or Regulatory requirements.</p>
-      <div class="consultation-modal__actions">
-        <button class="cta-button" type="button" data-open-consultation>Book Consultation</button>
-        <button class="button-secondary" type="button" data-close-modal>Maybe Later</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<section class="consultation-booking-section" id="book-consultation">
-  <div class="consultation-booking-shell">
-    <div class="consultation-booking-copy">
-      <div class="eyebrow">Consultation Booking</div>
-      <h2>Book a Consultation</h2>
-      <p>Schedule a consultation with one of our specialists. Select your preferred service, date, and time, and our team will confirm your appointment.</p>
-      <div class="consultation-booking-actions">
-        <button class="cta-button" type="button" data-open-consultation>Book Consultation</button>
-        <a class="button-secondary" href="mailto:info@mednovalife.com?subject=Proposal%20request%20%E2%80%94%20MedNova%20Lifesciences">Request a proposal</a>
-      </div>
-    </div>
-    <div class="consultation-booking-card">
-      <span class="consultation-chip">Trusted partnership</span>
-      <h3>Professional support for complex programs</h3>
-      <p>Our team works closely with sponsors, CROs, and product teams across Africa to simplify regulatory, clinical, and safety planning.</p>
-      <ul class="consultation-benefits">
-        <li>Clear guidance for your next milestone</li>
-        <li>Flexible consultation planning</li>
-        <li>Practical next-step recommendations</li>
-      </ul>
-    </div>
-  </div>
-
-  <div class="consultation-form-card is-hidden" id="consultationFormCard">
-    <form class="consultation-form" id="consultationForm" novalidate>
-      <div class="consultation-form__grid">
-        <div class="field">
-          <label for="consultationName">Full Name *</label>
-          <input id="consultationName" name="fullName" type="text" required>
-          <p class="validation-message" id="fullNameError" role="alert"></p>
-        </div>
-        <div class="field">
-          <label for="consultationEmail">Email Address *</label>
-          <input id="consultationEmail" name="email" type="email" required>
-          <p class="validation-message" id="emailError" role="alert"></p>
-        </div>
-        <div class="field">
-          <label for="consultationPhone">Phone Number *</label>
-          <input id="consultationPhone" name="phone" type="tel" required>
-          <p class="validation-message" id="phoneError" role="alert"></p>
-        </div>
-        <div class="field">
-          <label for="consultationOrganization">Organization / Company *</label>
-          <input id="consultationOrganization" name="organization" type="text" required>
-          <p class="validation-message" id="organizationError" role="alert"></p>
-        </div>
-        <div class="field">
-          <label for="consultationJobTitle">Job Title (Optional)</label>
-          <input id="consultationJobTitle" name="jobTitle" type="text">
-        </div>
-        <div class="field">
-          <label for="consultationGender">Gender</label>
-          <select id="consultationGender" name="gender">
-            <option value="">Prefer not to say</option>
-            <option value="Female">Female</option>
-            <option value="Male">Male</option>
-            <option value="Non-binary">Non-binary</option>
-            <option value="Other">Other</option>
-          </select>
-        </div>
-        <div class="field">
-          <label for="consultationCountry">Country</label>
-          <input id="consultationCountry" name="country" type="text">
-        </div>
-        <div class="field">
-          <label for="consultationService">Preferred Service *</label>
-          <select id="consultationService" name="service" required>
-            <option value="">Select a service</option>
-            <option value="Clinical Development">Clinical Development</option>
-            <option value="Pharmacovigilance">Pharmacovigilance</option>
-            <option value="Regulatory Services">Regulatory Services</option>
-            <option value="General Consultation">General Consultation</option>
-          </select>
-          <p class="validation-message" id="serviceError" role="alert"></p>
-        </div>
-        <div class="field">
-          <label for="consultationDate">Preferred Consultation Date *</label>
-          <input id="consultationDate" name="date" type="date" required>
-          <p class="validation-message" id="dateError" role="alert"></p>
-        </div>
-      </div>
-
-      <div class="field">
-        <label>Preferred Consultation Time *</label>
-        <div class="time-slot-group" role="group" aria-label="Preferred consultation time">
-          <button class="time-slot" type="button" data-time="10:00 AM">10:00 AM</button>
-          <button class="time-slot" type="button" data-time="11:00 AM">11:00 AM</button>
-          <button class="time-slot" type="button" data-time="12:00 PM">12:00 PM</button>
-          <button class="time-slot" type="button" data-time="1:00 PM">1:00 PM</button>
-          <button class="time-slot" type="button" data-time="2:00 PM">2:00 PM</button>
-          <button class="time-slot" type="button" data-time="3:00 PM">3:00 PM</button>
-          <button class="time-slot" type="button" data-time="4:00 PM">4:00 PM</button>
-          <button class="time-slot" type="button" data-time="5:00 PM">5:00 PM</button>
-        </div>
-        <p class="validation-message" id="timeError" role="alert"></p>
-      </div>
-
-      <div class="field">
-        <label for="consultationReason">Reason for Consultation *</label>
-        <textarea id="consultationReason" name="reason" placeholder="Briefly describe what you would like to discuss." required></textarea>
-        <p class="validation-message" id="reasonError" role="alert"></p>
-      </div>
-
-      <div class="field">
-        <label for="consultationNotes">Additional Notes (Optional)</label>
-        <textarea id="consultationNotes" name="notes" placeholder="Add any additional context for the team."></textarea>
-      </div>
-
-      <div class="form-actions">
-        <button class="cta-button submit-button" type="submit" id="consultationSubmit">Submit Consultation Request</button>
-        <button class="button-secondary" type="button" data-open-consultation>Review booking details</button>
-      </div>
-    </form>
-  </div>
-
-  <div class="consultation-confirmation" id="consultationConfirmation" aria-live="polite">
-    <div class="confirmation-icon" aria-hidden="true">✓</div>
-    <h3>Consultation Request Submitted</h3>
-    <p>Thank you for choosing MedNova Lifesciences. Your consultation request has been received successfully. Our team will review your request and contact you shortly to confirm your appointment.</p>
-    <div class="confirmation-summary">
-      <div><strong>Name:</strong> <span id="confirmationName"></span></div>
-      <div><strong>Preferred Service:</strong> <span id="confirmationService"></span></div>
-      <div><strong>Selected Date:</strong> <span id="confirmationDate"></span></div>
-      <div><strong>Selected Time:</strong> <span id="confirmationTime"></span></div>
-      <div><strong>Email Address:</strong> <span id="confirmationEmail"></span></div>
-    </div>
-    <div class="confirmation-actions">
-      <button class="cta-button" type="button" id="bookAnotherConsultation">Book Another Consultation</button>
-      <button class="button-secondary" type="button" id="returnHome">Return to Homepage</button>
-    </div>
-  </div>
-</section>
-
-<footer id="footer">
-  <div class="footer-inner">
-    <div class="footer-brand">MedNova Lifesciences</div>
-    <div class="footer-links">
-      <a href="compliance-checklist.html">Compliance Checklist</a>
-      <a href="#technology">Technology</a>
-      <a href="#footer">Contact</a>
-    <a href="/safetycore.html">SafetyCore</a></div>
-  </div>
-  <div class="footer-copy">
-    <span>© 2026 MedNova Lifesciences. Lagos, Nigeria. — <a href="/llms.txt">llms.txt</a></span>
-    <div class="footer-social">
-      <a href="https://www.linkedin.com/company/mednova-lifesciences/" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.38-1.85 3.61 0 4.28 2.38 4.28 5.47v6.27zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45z"/></svg></a>
-      <a href="https://x.com/MedNovaLif3669" target="_blank" rel="noopener" aria-label="X (Twitter)"><svg viewBox="0 0 24 24"><path d="M18.9 2H22l-7.6 8.7L23.3 22H16.6l-5.2-6.8L5.4 22H2.3l8.1-9.3L1.7 2h6.9l4.7 6.2L18.9 2zm-1.2 18h1.7L7.4 4H5.6l12.1 16z"/></svg></a>
-      <a href="https://instagram.com/Mednovalifesciences" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 8.8a3.2 3.2 0 1 0 0 6.4 3.2 3.2 0 0 0 0-6.4zm0 5.3a2.1 2.1 0 1 1 0-4.2 2.1 2.1 0 0 1 0 4.2zm4.6-5.5a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0zM12 2c-2.72 0-3.06.01-4.13.06-1.06.05-1.79.22-2.43.47a4.9 4.9 0 0 0-1.77 1.15 4.9 4.9 0 0 0-1.15 1.77c-.25.64-.42 1.37-.47 2.43C2 8.94 2 9.28 2 12s.01 3.06.06 4.13c.05 1.06.22 1.79.47 2.43.26.66.6 1.22 1.15 1.77.55.55 1.11.9 1.77 1.15.64.25 1.37.42 2.43.47C8.94 22 9.28 22 12 22s3.06-.01 4.13-.06c1.06-.05 1.79-.22 2.43-.47a4.9 4.9 0 0 0 1.77-1.15 4.9 4.9 0 0 0 1.15-1.77c.25-.64.42-1.37.47-2.43.05-1.07.06-1.41.06-4.13s-.01-3.06-.06-4.13c-.05-1.06-.22-1.79-.47-2.43a4.9 4.9 0 0 0-1.15-1.77 4.9 4.9 0 0 0-1.77-1.15c-.64-.25-1.37-.42-2.43-.47C15.06 2.01 14.72 2 12 2zm0 1.8c2.67 0 2.99.01 4.04.06.98.04 1.51.21 1.86.34.47.18.8.4 1.15.75.35.35.57.68.75 1.15.13.35.3.88.34 1.86.05 1.05.06 1.37.06 4.04s-.01 2.99-.06 4.04c-.04.98-.21 1.51-.34 1.86-.18.47-.4.8-.75 1.15-.35.35-.68.57-1.15.75-.35.13-.88.3-1.86.34-1.05.05-1.37.06-4.04.06s-2.99-.01-4.04-.06c-.98-.04-1.51-.21-1.86-.34a3.1 3.1 0 0 1-1.15-.75 3.1 3.1 0 0 1-.75-1.15c-.13-.35-.3-.88-.34-1.86-.05-1.05-.06-1.37-.06-4.04s.01-2.99.06-4.04c.04-.98.21-1.51.34-1.86.18-.47.4-.8.75-1.15.35-.35.68-.57 1.15-.75.35-.13.88-.3 1.86-.34C9.01 3.81 9.33 3.8 12 3.8z"/></svg></a>
-    </div>
-  </div>
-</footer>
-</main>
-
-
-
-<script defer src="/config.js"></script>
-<script nonce="mednova-inline-2026">window.DEMO_CONTEXT = 'general';</script>
-<script nonce="mednova-inline-2026">
-  (function(){
-    // FAQ accordion (single open)
-    const items = Array.from(document.querySelectorAll('.faq-item'));
-    items.forEach(item => {
-      const btn = item.querySelector('.faq-question');
-      const panel = item.querySelector('.faq-answer');
-      btn.addEventListener('click', () => {
-        const isOpen = item.classList.contains('open');
-        // close all
-        items.forEach(i => { i.classList.remove('open'); i.querySelector('.faq-question').setAttribute('aria-expanded','false'); });
-        if (!isOpen) {
-          item.classList.add('open');
-          btn.setAttribute('aria-expanded','true');
-        }
-      });
-      btn.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); btn.click(); }
-      });
-    });
-
-    // Lightweight scroll reveal for new sections
-    const toReveal = document.querySelectorAll('.svc-card, .feature-card, .industry-card, .expertise-copy, .process-timeline li');
-    toReveal.forEach(el => { el.style.opacity = '0'; el.style.transform = 'translateY(12px)'; el.style.transition = 'opacity .6s ease, transform .6s ease'; });
-    const io = new IntersectionObserver((entries, obs) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.style.opacity = '1';
-          entry.target.style.transform = 'none';
-          obs.unobserve(entry.target);
-        }
-      });
-    }, {threshold:0.12});
-    toReveal.forEach(el => io.observe(el));
-  })();
-</script>
+  <div class="foot-base"><span>© 2026 MedNova Lifesciences. Lagos, Nigeria.</span>
+    <span class="social"><a href="https://www.linkedin.com/company/mednova-lifesciences/">LinkedIn</a><a href="https://x.com/MedNovaLif3669">X</a><a href="https://instagram.com/Mednovalifesciences">Instagram</a><a href="/llms.txt">llms.txt</a></span></div>
+</div></footer>
 </body>
 </html>

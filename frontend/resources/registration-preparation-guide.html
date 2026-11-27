@@ -88,36 +88,24 @@
   @media (max-width:640px){.wrap{padding:0 22px;}}</style>
 <link rel="stylesheet" href="/public/css/site-primary-nav.css">
 <script src="/public/js/site-primary-nav.js" defer></script>
+<link rel="stylesheet" href="/public/css/redesign-footer.css">
+<link rel="stylesheet" href="/public/css/redesign-header.css">
 </head>
 <body>
-<header class="site-header"><div class="site-header__inner"><nav class="site-nav"><a class="brand" href="/" aria-label="MedNova Lifesciences home"><img class="brand-mark" src="/public/images/image.png" alt="MedNova Lifesciences logo" width="34" height="34"></a><div class="navlinks">
-        <a href="/">Home</a>
-        <a href="/about/">About</a>
-        <div class="mn-navgroup">
-          <button class="mn-navgroup__btn" type="button" aria-expanded="false" aria-controls="mn-menu-services">Services</button>
-          <div class="mn-navgroup__menu" id="mn-menu-services">
-            <a href="/services/">All Services</a>
-            <div class="mn-navgroup__sep"></div>
-            <a href="/services/regulatory-affairs.html">Regulatory Affairs</a>
-            <a href="/services/clinical-development.html">Clinical Development</a>
-            <a href="/services/pharmacovigilance.html">Pharmacovigilance</a>
-            <a href="/services/regulatory-intelligence.html">Regulatory Intelligence</a>
-            <a href="/services/nafdac-product-registration.html">NAFDAC Product Registration</a>
-            <div class="mn-navgroup__sep"></div>
-            <a href="/pharmacovigilance-ce-course">PV CE Course<span class="mn-navgroup__sub">Continuing education with certificate</span></a>
-          </div>
-        </div>
-        <div class="mn-navgroup">
-          <button class="mn-navgroup__btn" type="button" aria-expanded="false" aria-controls="mn-menu-technology">Technology</button>
-          <div class="mn-navgroup__menu" id="mn-menu-technology">
-            <div class="mn-navgroup__head">MedNova platforms</div>
-            <a href="/verify">MedNova Verify<span class="mn-navgroup__sub">Medicine verification &amp; surveillance</span></a>
-            <a href="/safetycore.html">MedNova SafetyCore<span class="mn-navgroup__sub">Pharmacovigilance case management</span></a>
-          </div>
-        </div>
-        <a href="/resources/">Resources</a>
-        <a href="/contact/">Contact</a>
-      </div><a class="nav-cta" href="/contact/">Talk to us</a></nav></div></header>
+<header class="mnh"><div class="mnh-wrap">
+  <a class="mnh-brand" href="/"><img src="/public/images/index1.webp" alt="MedNova logo"><span>MedNova Lifesciences</span></a>
+  <nav class="mnh-nav" aria-label="Main">
+      <a href="/">Home</a><a href="/about/">About</a>
+      <div class="mnh-dd"><button type="button" aria-haspopup="true">Services</button><div class="mnh-dd-menu"><a href="/services/pharmacovigilance.html">Pharmacovigilance<small>Local QPPV, case processing, PSURs, signals</small></a><a href="/services/regulatory-affairs.html">Regulatory Affairs<small>NAFDAC registration, permits, lifecycle, intelligence</small></a><a href="/services/nhia-market-access.html">NHIA Market Access<small>HTA evidence and submissions for NHIA coverage</small></a><a href="/services/">All services<small>Including clinical study support and training</small></a></div></div>
+      <div class="mnh-dd"><button type="button" aria-haspopup="true">Technology</button><div class="mnh-dd-menu"><a href="/technology/#pv-assist">PV Assist<small>Our pharmacovigilance review platform</small></a><a href="/safetycore.html">MedNova SafetyCore<small>Pharmacovigilance case management</small></a><a href="/technology/#verify">MedNova Verify<small>Medicine verification, coming soon</small></a></div></div>
+      <a href="/pharmacovigilance-ce-course">PV Course</a><a href="/resources/">Resources</a>
+      <a class="mnh-btn" href="/contact/">Book a consultation</a>
+    </nav><details class="mnh-toggle"><summary>Menu</summary><div class="mnh-mobile">
+      <a href="/">Home</a><a href="/about/">About</a>
+      <div class="mnh-group">Services</div><a href="/services/pharmacovigilance.html">Pharmacovigilance</a><a href="/services/regulatory-affairs.html">Regulatory Affairs</a><a href="/services/nhia-market-access.html">NHIA Market Access</a><a href="/services/">All services</a><div class="mnh-group">Technology</div><a href="/technology/#pv-assist">PV Assist</a><a href="/safetycore.html">MedNova SafetyCore</a><a href="/technology/#verify">MedNova Verify</a>
+      <div class="mnh-group">Learn</div><a href="/pharmacovigilance-ce-course">PV CE Course</a><a href="/resources/">Resources</a>
+      <a href="/contact/">Contact and consultations</a></div></details>
+</div></header>
 <main>
 <section class="hero"><div class="wrap" data-breadcrumbs></div><div class="wrap"><div class="eyebrow">NAFDAC Registration</div><h1>NAFDAC Registration Preparation Guide</h1><p>Preparation is the part of the NAFDAC journey that determines whether a submission is ready, defensible, and aligned with local regulatory expectations from the start.</p></div></section>
 <section><div class="wrap"><article>
@@ -170,7 +158,30 @@
 
 <section><div class="wrap"><div class="callout"><strong>Practical next step:</strong> For teams that want to turn this guidance into action, MedNova offers <a href="/training-consulting.html">training and consulting</a> and a downloadable <a href="/public/downloads/MedNova-NAFDAC-QPPV-Compliance-Checklist.pdf">checklist PDF</a> that help connect regulatory readiness, safety, and documentation practices.</div></div></section>
 </main>
-<footer><div class="wrap">© 2026 MedNova Lifesciences | Lagos, Nigeria — <a href="/llms.txt">llms.txt</a></div></footer>
+<footer class="mnf"><div class="wrap">
+  <div class="foot-grid">
+    <div><a class="brand" href="/"><span>MedNova Lifesciences</span></a>
+      <p>Pharmacovigilance, regulatory affairs and NHIA market access for Nigeria and West Africa.</p>
+      <p>17 Aje Road, Lagos, Nigeria<br><a href="mailto:info@mednovalife.com">info@mednovalife.com</a></p></div>
+    <div><h4>Services</h4><ul>
+      <li><a href="/services/pharmacovigilance.html">Pharmacovigilance</a></li>
+      <li><a href="/services/regulatory-affairs.html">Regulatory Affairs</a></li>
+      <li><a href="/services/nhia-market-access.html">NHIA Market Access</a></li>
+      <li><a href="/services/#more">Clinical study support</a></li></ul></div>
+    <div><h4>More services</h4><ul><li><a href="/services/clinical-development.html">Clinical Development</a></li><li><a href="/services/regulatory-intelligence.html">Regulatory Intelligence</a></li><li><a href="/services/nafdac-product-registration.html">NAFDAC Product Registration</a></li><li><a href="/post-marketing-surveillance.html">Post-Marketing Surveillance</a></li><li><a href="/medical-information.html">Medical Information</a></li><li><a href="/medical-writing.html">Medical Writing</a></li><li><a href="/training-consulting.html">Training and Consulting</a></li></ul></div>
+    <div><h4>Company</h4><ul>
+      <li><a href="/about/">About</a></li>
+      <li><a href="/technology/">Technology</a></li>
+      <li><a href="/contact/">Contact</a></li></ul></div>
+    <div><h4>Learn</h4><ul>
+      <li><a href="/pharmacovigilance-ce-course">PV CE Course</a></li>
+      <li><a href="/compliance-checklist.html">QPPV Compliance Checklist</a></li>
+      <li><a href="/resources/">Resources</a></li>
+      <li><a href="/resources/glossary/">Glossary</a></li></ul></div>
+  </div>
+  <div class="foot-base"><span>© 2026 MedNova Lifesciences. Lagos, Nigeria.</span>
+    <span class="social"><a href="https://www.linkedin.com/company/mednova-lifesciences/">LinkedIn</a><a href="https://x.com/MedNovaLif3669">X</a><a href="https://instagram.com/Mednovalifesciences">Instagram</a><a href="/llms.txt">llms.txt</a></span></div>
+</div></footer>
 <script defer src="/public/js/breadcrumbs.min.js"></script>
 </body>
 </html>

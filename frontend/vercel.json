@@ -105,7 +105,7 @@
       "status": 301
     },
     {
-      "src": "^/(about|contact|services)/index\\.html$",
+      "src": "^/(about|contact|services|technology)/index\\.html$",
       "dest": "/$1/",
       "status": 301
     },
@@ -215,6 +215,19 @@
     {
       "src": "^/services/?$",
       "dest": "/services/index.html"
+    },
+    {
+      "src": "^/technology/?$",
+      "dest": "/technology/index.html"
+    },
+    {
+      "src": "^/(resources|resources/glossary)$",
+      "status": 301,
+      "dest": "/$1/"
+    },
+    {
+      "src": "^/(resources|resources/glossary)/$",
+      "dest": "/$1/index.html"
     },
     {
       "src": "^/verify/?$",
