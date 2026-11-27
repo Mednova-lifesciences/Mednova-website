@@ -230,6 +230,11 @@
       "dest": "/$1/index.html"
     },
     {
+      "src": "^/safetycore(\\.html)?$",
+      "status": 301,
+      "dest": "/pv-assist.html"
+    },
+    {
       "src": "^/verify/?$",
       "dest": "/verify/index.html"
     },
