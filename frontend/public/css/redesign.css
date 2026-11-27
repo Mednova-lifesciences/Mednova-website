@@ -187,3 +187,6 @@ td{color:var(--muted)}
 .foot-grid{grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
 .badge{justify-self:start}
 .stack:has(>.badge){align-content:start}
+
+/* Phones: logo only in the top bar */
+@media (max-width:760px){.site-header .brand span{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}}

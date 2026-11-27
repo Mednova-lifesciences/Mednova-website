@@ -272,3 +272,7 @@ html {
     transition: none;
   }
 }
+
+/* Phones: logo only in the top bar */
+@media (max-width:760px){.brand .brand-name{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}}
+@media (max-width:760px){.brand:has(.brand-name){margin-right:14px}}
